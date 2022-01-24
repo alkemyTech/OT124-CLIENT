@@ -1,5 +1,5 @@
 import axios from 'axios'
-const SERVER_DOMAIN = process.env.HOST;
+const SERVER_DOMAIN = process.env.HOST || "http://localhost:3001";
 const AuthorizationToken = "crazytokenexample";
 const getFun = () => {
     return {
@@ -27,7 +27,7 @@ function handleError(err) {
 const getSomething = async (type) => {
     return async function (dispatch) {
         try {
-            const response = await axios.get(`${SERVER_DOMAIN}${url}`, getFun());
+            const response = await axios.get(`${SERVER_DOMAIN}`, getFun());
             dispatch({
                 type,
                 payload:response
@@ -40,7 +40,7 @@ const getSomething = async (type) => {
 };
 const postSomething = async (type,body) => {
     try {
-        const response = await axios.post(`${SERVER_DOMAIN}${url}`, postFun(body));
+        const response = await axios.post(`${SERVER_DOMAIN}`, postFun(body));
         dispatch({
             type,
             payload:response
