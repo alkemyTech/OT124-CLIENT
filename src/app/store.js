@@ -9,10 +9,11 @@ import thunk from "redux-thunk";
 //
 var store = createStore(reducer, applyMiddleware(thunk))
 
-
+// i let both options here
 export default configureStore({
   reducer: {
     counter: counterReducer,
   },
 });
 export default store;
+
