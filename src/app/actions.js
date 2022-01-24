@@ -1,14 +1,14 @@
 import axios from 'axios'
 const SERVER_DOMAIN = process.env.HOST;
 const AuthorizationToken = "crazytokenexample";
-const getHeaders = () => {
+const getFun = () => {
     return {
         headers: {
             Authorization: AuthorizationHeader,
         }
     };
 };
-const postSomething = (body) => {
+const postFun = (body) => {
     return {
         headers: {
             Authorization: AuthorizationHeader,
@@ -27,7 +27,7 @@ function handleError(err) {
 const getSomething = async (type) => {
     return async function (dispatch) {
         try {
-            const response = await axios.get(`${SERVER_DOMAIN}${url}`, getHeaders());
+            const response = await axios.get(`${SERVER_DOMAIN}${url}`, getFun());
             dispatch({
                 type,
                 payload:response
@@ -40,7 +40,7 @@ const getSomething = async (type) => {
 };
 const postSomething = async (type,body) => {
     try {
-        const response = await axios.post(`${SERVER_DOMAIN}${url}`, postSomething(body));
+        const response = await axios.post(`${SERVER_DOMAIN}${url}`, postFun(body));
         dispatch({
             type,
             payload:response
