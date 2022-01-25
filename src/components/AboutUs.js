@@ -1,6 +1,6 @@
 import React from "react";
 
-function OboutUs(props) {
+function AboutUs(props) {
   return (
     <div className="Home">
       <div>
@@ -10,4 +10,4 @@ function OboutUs(props) {
   );
 }
 
-export default OboutUs;
+export default AboutUs;

@@ -1,18 +1,17 @@
 import React from "react";
-import Home from "./componets/Home";
-import OboutUs from "./componets/OboutUs";
-import { Router, Route, Routes } from "react-router";
+import Home from "./components/Home";
+import AboutUs from "./components/AboutUs";
+import Layout from "./components/Layout";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route path="/nosotros" element={<OboutUs />} />
-        </Routes>
-      </Router>
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="/nosotros" element={<AboutUs />} />
+      </Route>
+    </Routes>
   );
 }
 
