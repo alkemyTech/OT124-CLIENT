@@ -11,7 +11,7 @@ export default function Footer() {
             <li>Novedades</li>
           </ul>
           <img
-            className="px-5 h-20 md:h-40"
+            className="px-5 h-20 md:h-40 md:px-10"
             src="images/logo-somos-mas.png"
             alt="logo-somos-mas"
           />
