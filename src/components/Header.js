@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Header() {
+export default function Header() {
     const navItems = [
         <Link className='mr-6 text-sky-500' to='/inicio'>Inicio</Link>, 
         <Link className='mr-6 text-sky-500' to='/nosotros'>Nosotros</Link>,
@@ -14,7 +14,7 @@ function Header() {
 
     return (
         <header className='flex items-center py-1.5'>
-            <img className='ml-4 mr-8' width='100' src='https://cdn.worldvectorlogo.com/logos/free-logo.svg' alt='logo' />
+            <img className='ml-4 mr-8' width='100' src='https://drive.google.com/uc?export=view&id=1-j70Zmn2B1-0T_67JHJbNLKkI9sACMNi' alt='logo' />
             <nav>
                 {
                     navItems
@@ -27,5 +27,3 @@ function Header() {
         </header>
     );
 }
-
-export default Header;
