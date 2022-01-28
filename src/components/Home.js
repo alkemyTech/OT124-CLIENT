@@ -1,14 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "./Footer";
+import Spinner from "./Spinner";
+
 
 function Home(props) {
+
+  //SPINNER USAGE EXAMPLE-------------------------------------------------------------
+  const url = "https://baconipsum.com/api/?type=meat-and-filler";
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState();
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    const res = await fetch(url);
+    const data = await res.json();
+    setData(data);
+    setIsLoading(false);
+  };
+  //-----------------------------------------------------------------------------------
   return (
-    <div className="Home">
-      <div>
-        <p>This is the HOME!!!</p>       
-      </div>
-      <Footer />
-    </div>
+    <>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <div className="Home">
+          <div>
+            <p>Nuestro objetivo:</p>
+            <p>{data}</p>
+          </div>
+          <Footer />
+        </div>
+      )}
+    </>
   );
 }
 
