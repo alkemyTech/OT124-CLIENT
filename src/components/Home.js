@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Footer from "./Footer";
 import Spinner from "./Spinner";
+import SweetAlert from "./SweetAlert";
 
 
 function Home(props) {
@@ -28,7 +29,8 @@ function Home(props) {
         <div className="Home">
           <div>
             <p>Nuestro objetivo:</p>
-            <p>{data}</p>
+            <p>{data}</p>            
+            <SweetAlert title="Eliminar" text="Esta seguro que desea eliminar?" textDelete="Eliminado con exito"/>
           </div>
           <Footer />
         </div>
