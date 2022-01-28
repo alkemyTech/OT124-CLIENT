@@ -16,7 +16,7 @@ export default function LoginForm() {
     field:
       "bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none",
     button:
-      " bg-gray-700 text-white font-bold py-2 mt-2 px-4 w-full rounded hover:bg-gray-600",
+      "bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white border border-sky-500 hover:border-transparent rounded py-2 mt-2 px-4 w-full",
     errorMsg: "text-red-500 text-sm",
   };
 
