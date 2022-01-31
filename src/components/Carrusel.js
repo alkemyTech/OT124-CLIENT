@@ -15,12 +15,12 @@ let seeder = [
 function Carrusel() {
   return( 
   <div className='flex justify-center w-full'>
-    <div className=' w-1/2'>
+    <div className=' w-3/4'>
     <Carousel autoFocus={true} >
     {seeder.map(e => {
       return(
         <div>
-        <img src={e.imgUrl} className='max-h-96' />
+        <img src={e.imgUrl} className='max-h-[35rem]' />
         <p className="legend">{e.text}</p>
           </div>
       )
