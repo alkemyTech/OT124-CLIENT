@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Footer from "./Footer";
 import Spinner from "./Spinner";
 
+import React from "react";
+import Carrusel from "./Carrusel";
 
 function Home(props) {
 
@@ -29,6 +31,7 @@ function Home(props) {
           <div>
             <p>Nuestro objetivo:</p>
             <p>{data}</p>
+            <Carrusel></Carrusel>
           </div>
           <Footer />
         </div>
