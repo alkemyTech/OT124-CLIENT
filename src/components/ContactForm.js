@@ -1,5 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import React from "react";
 
 const styles = {
     field: "w-full border-b-4 border-[#9ac9fb] my-2 p-2 outline-none", 
