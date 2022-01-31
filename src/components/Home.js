@@ -17,7 +17,7 @@ function Home(props) {
 
   return (
     <div className="Home flex flex-col justify-center items-center text-center">
-      <div>
+
         <Carrusel />
 
         <h1 className='text-2xl'>{welcome}</h1>
@@ -25,10 +25,14 @@ function Home(props) {
         <section className='mt-16'>
           <h2 className='pb-10 text-xl'>Últimas novedades</h2>
           <div className='flex gap-9'>
-            <Box />
-            <Box />
-            <Box />
-            <Box />
+            <div className='flex gap-9 flex-col md:flex-row'>
+              <Box />
+              <Box />
+            </div>
+            <div className='flex gap-9 flex-col md:flex-row'>
+              <Box />
+              <Box />
+            </div>
           </div>
           <div className='flex mt-12 items-center'>
             <div className='pl-6'>
@@ -42,13 +46,17 @@ function Home(props) {
         <section className='mt-24'>
           <h2 className='pb-10 text-xl'>Testimonios</h2>
           <div className='flex gap-9'>
-            <Box />
-            <Box />
-            <Box />
-            <Box />
+            <div className='flex gap-9 flex-col md:flex-row'>
+              <Box />
+              <Box />
+            </div>
+            <div className='flex gap-9 flex-col md:flex-row'>
+              <Box />
+              <Box />
+            </div>
           </div>
         </section>
-      </div>
+
     </div>
   );
 }
