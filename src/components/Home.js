@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import Carrusel from "./Carrusel";
 
 function Box() {
   const styles = {
@@ -17,7 +18,7 @@ function Home(props) {
   return (
     <div className="Home flex flex-col justify-center items-center text-center">
       <div>
-        {/*ToDo: <Slider />*/}
+        <Carrusel />
 
         <h1 className='text-2xl'>{welcome}</h1>
 
