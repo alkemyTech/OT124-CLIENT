@@ -9,12 +9,12 @@ import ContactUs from "./pages/ContactUs";
 function App() {
   return (
     <Routes>
-      
+      <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="/nosotros" element={<AboutUs />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contacto" element={<ContactUs />} />
-      
+      </Route>
     </Routes>
   );
 }
