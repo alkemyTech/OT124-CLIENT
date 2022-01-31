@@ -17,7 +17,7 @@ function SweetAlert(props) {
           icon: "success",
           timer: "2000",
         });
-      } else{
+      } else {
         Swal.fire("No se guardaron los cambios", "", "info");
       }
     });
@@ -25,7 +25,6 @@ function SweetAlert(props) {
 
   return (
     <div>
-      <br />
       <button onClick={() => showAlert()}>Mostar alerta</button>
     </div>
   );
