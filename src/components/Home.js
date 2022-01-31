@@ -6,7 +6,6 @@ import React from "react";
 import Carrusel from "./Carrusel";
 
 function Home(props) {
-
   //SPINNER USAGE EXAMPLE-------------------------------------------------------------
   const url = "https://baconipsum.com/api/?type=meat-and-filler";
   const [isLoading, setIsLoading] = useState(true);
@@ -33,7 +32,6 @@ function Home(props) {
             <p>{data}</p>
             <Carrusel></Carrusel>
           </div>
-          <Footer />
         </div>
       )}
     </>

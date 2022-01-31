@@ -7,7 +7,7 @@ function AboutUs(props) {
       <div>
         <p>Hello!, we are an ....</p>
       </div>
-      <Footer />
+      
     </div>
   );
 }
