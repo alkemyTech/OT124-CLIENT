@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { logIn } from "../services/auth";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().required("Required").email("Invalid email").max(255),
@@ -24,9 +25,10 @@ export default function LoginForm() {
     <Formik
       initialValues={{ email: "", password: "" }}
       validationSchema={LoginSchema}
-      onSubmit={(values) => {
-        // Send values
-        console.log(values);
+      onSubmit={async (values) => {
+        const { email, password } = values;
+        const res = await logIn(email, password);
+        console.log(res);
       }}
     >
       {({ errors, touched }) => (
