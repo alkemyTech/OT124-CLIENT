@@ -1,3 +1,7 @@
+import React, { useState, useEffect } from "react";
+import Footer from "./Footer";
+import Spinner from "./Spinner";
+
 import React from "react";
 import { Link } from 'react-router-dom';
 import Carrusel from "./Carrusel";
