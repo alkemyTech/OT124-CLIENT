@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import { signUp } from "../services/auth";
 
 const registerSchema = yup.object().shape({
   name: yup.string().required("Obligatorio"),
@@ -15,6 +17,8 @@ const registerSchema = yup.object().shape({
 
 export default function SignUpForm() {
   const [formData, setFormData] = useState({});
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const navigate = useNavigate();
 
   const styles = {
     label: "block text-gray-700 text-sm font-bold pt-2 pb-1",
@@ -29,11 +33,16 @@ export default function SignUpForm() {
     <Formik
       initialValues={{ name: "", surname: "", email: "", password: "" }}
       validationSchema={registerSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          console.log(values);
+      onSubmit={async (values, { setSubmitting }) => {
+        setShowErrorMessage(false);
+        const { name, surname, email, password } = values;
+        const res = await signUp(name, surname, email, password);
+        if (res.status != 200) {
+          setShowErrorMessage(true);
           setSubmitting(false);
-        }, 400);
+        } else {
+          navigate("/");
+        }
       }}
     >
       {({ isSubmitting }) => (
@@ -100,6 +109,8 @@ export default function SignUpForm() {
           >
             Registrarme
           </button>
+
+          {showErrorMessage && <span className={styles.errorMsg}>Error</span>}
         </Form>
       )}
     </Formik>

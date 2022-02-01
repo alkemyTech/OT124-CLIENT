@@ -34,12 +34,11 @@ export default function LoginForm() {
         setShowErrorMessage(false);
         const { email, password } = values;
         const res = await logIn(email, password);
-        if (res.token) {
-          navigate("/");
-          setSubmitting(false);
-        } else {
+        if (res.status != 200) {
           setShowErrorMessage(true);
           setSubmitting(false);
+        } else {
+          navigate("/");
         }
       }}
     >
