@@ -30,52 +30,67 @@ export default function LoginForm() {
     <Formik
       initialValues={{ email: "", password: "" }}
       validationSchema={LoginSchema}
-      onSubmit={async (values) => {
+      onSubmit={async (values, { setSubmitting }) => {
+        setShowErrorMessage(false);
         const { email, password } = values;
         const res = await logIn(email, password);
         if (res.token) {
           navigate("/");
+          setSubmitting(false);
         } else {
           setShowErrorMessage(true);
+          setSubmitting(false);
         }
       }}
     >
-      <Form className="grid w-80">
-        <label className={styles.label} htmlFor="email">
-          Email
-        </label>
-        <Field
-          className={styles.field}
-          autoComplete="off"
-          id="email"
-          name="email"
-          type="email"
-        />
-        <ErrorMessage className={styles.errorMsg} component="a" name="email" />
+      {({ isSubmitting }) => (
+        <Form className="grid w-80">
+          <label className={styles.label} htmlFor="email">
+            Email
+          </label>
+          <Field
+            className={styles.field}
+            autoComplete="off"
+            id="email"
+            name="email"
+            type="email"
+          />
+          <ErrorMessage
+            className={styles.errorMsg}
+            component="a"
+            name="email"
+          />
 
-        <label className={styles.label} htmlFor="password">
-          Password
-        </label>
-        <Field
-          className={styles.field}
-          id="password"
-          name="password"
-          type="password"
-        />
-        <ErrorMessage
-          className={styles.errorMsg}
-          component="a"
-          name="password"
-        />
+          <label className={styles.label} htmlFor="password">
+            Contraseña
+          </label>
+          <Field
+            className={styles.field}
+            id="password"
+            name="password"
+            type="password"
+          />
+          <ErrorMessage
+            className={styles.errorMsg}
+            component="a"
+            name="password"
+          />
 
-        <button className={styles.button} type="submit">
-          Log In
-        </button>
+          <button
+            className={styles.button}
+            type="submit"
+            disabled={isSubmitting}
+          >
+            Log In
+          </button>
 
-        {showErrorMessage && (
-          <span>El mail o la contraseña son incorrectos</span>
-        )}
-      </Form>
+          {showErrorMessage && (
+            <span className={styles.errorMsg}>
+              El email o la contraseña son incorrectos
+            </span>
+          )}
+        </Form>
+      )}
     </Formik>
   );
 }
