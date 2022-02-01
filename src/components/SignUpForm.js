@@ -16,7 +16,6 @@ const registerSchema = yup.object().shape({
 });
 
 export default function SignUpForm() {
-  const [formData, setFormData] = useState({});
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const navigate = useNavigate();
 
@@ -50,7 +49,13 @@ export default function SignUpForm() {
           <label className={styles.label} htmlFor="name">
             Nombre
           </label>
-          <Field className={styles.field} type="text" id="name" name="name" />
+          <Field
+            autoComplete="off"
+            className={styles.field}
+            type="text"
+            id="name"
+            name="name"
+          />
           <ErrorMessage
             className={styles.errorMsg}
             name="name"
@@ -61,6 +66,7 @@ export default function SignUpForm() {
             Apellido
           </label>
           <Field
+            autoComplete="off"
             className={styles.field}
             type="text"
             id="surname"
@@ -76,6 +82,7 @@ export default function SignUpForm() {
             Email
           </label>
           <Field
+            autoComplete="off"
             id="email"
             className={styles.field}
             type="email"
@@ -91,6 +98,7 @@ export default function SignUpForm() {
             Contraseña
           </label>
           <Field
+            autoComplete="off"
             id="password"
             className={styles.field}
             type="password"
