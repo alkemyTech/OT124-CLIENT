@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { logIn } from "../services/auth";
+import { useNavigate } from "react-router-dom";
 
 const LoginSchema = Yup.object().shape({
-  email: Yup.string().required("Required").email("Invalid email").max(255),
+  email: Yup.string().required("Obligatorio").email("Email invalido").max(255),
   password: Yup.string()
-    .min(6, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
+    .min(6, "Muy corta!")
+    .max(50, "Muy larga!")
+    .required("Obligatorio"),
 });
 
 export default function LoginForm() {
+  const navigate = useNavigate();
+
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
+
   const styles = {
     label: "block text-gray-700 text-sm font-bold pt-2 pb-1",
     field:
@@ -28,51 +33,49 @@ export default function LoginForm() {
       onSubmit={async (values) => {
         const { email, password } = values;
         const res = await logIn(email, password);
-        console.log(res);
+        if (res.token) {
+          navigate("/");
+        } else {
+          setShowErrorMessage(true);
+        }
       }}
     >
-      {({ errors, touched }) => (
-        <Form className="grid w-80">
-          <label className={styles.label} htmlFor="email">
-            Email
-          </label>
-          <Field
-            className={styles.field}
-            autocomplete="off"
-            id="email"
-            name="email"
-            type="email"
-          />
-          {errors.email && touched.email ? (
-            <ErrorMessage
-              className={styles.errorMsg}
-              component="a"
-              name="email"
-            />
-          ) : null}
+      <Form className="grid w-80">
+        <label className={styles.label} htmlFor="email">
+          Email
+        </label>
+        <Field
+          className={styles.field}
+          autoComplete="off"
+          id="email"
+          name="email"
+          type="email"
+        />
+        <ErrorMessage className={styles.errorMsg} component="a" name="email" />
 
-          <label className={styles.label} htmlFor="password">
-            Password
-          </label>
-          <Field
-            className={styles.field}
-            id="password"
-            name="password"
-            type="password"
-          />
-          {errors.password && touched.password ? (
-            <ErrorMessage
-              className={styles.errorMsg}
-              component="a"
-              name="password"
-            />
-          ) : null}
+        <label className={styles.label} htmlFor="password">
+          Password
+        </label>
+        <Field
+          className={styles.field}
+          id="password"
+          name="password"
+          type="password"
+        />
+        <ErrorMessage
+          className={styles.errorMsg}
+          component="a"
+          name="password"
+        />
 
-          <button className={styles.button} type="submit">
-            Log In
-          </button>
-        </Form>
-      )}
+        <button className={styles.button} type="submit">
+          Log In
+        </button>
+
+        {showErrorMessage && (
+          <span>El mail o la contraseña son incorrectos</span>
+        )}
+      </Form>
     </Formik>
   );
 }

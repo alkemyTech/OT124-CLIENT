@@ -1,5 +1,5 @@
 import axios from "axios";
-import API_BASE_URL from "./index";
+import { API_BASE_URL } from "./index";
 
 const baseURL = `${API_BASE_URL}/api/v1/auth/login`;
 
