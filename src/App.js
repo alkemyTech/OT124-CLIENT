@@ -1,10 +1,13 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
+
 import Home from "./components/Home";
 import AboutUs from "./components/AboutUs";
 import Layout from "./components/Layout";
+
 import Login from "./pages/Login";
-import { Route, Routes } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
+import Profile from "./pages/Profile"
 
 function App() {
   return (
@@ -14,6 +17,7 @@ function App() {
         <Route path="/nosotros" element={<AboutUs />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contacto" element={<ContactUs />} />
+        <Route path="/profile" element={<Profile />} />
       </Route>
     </Routes>
   );
