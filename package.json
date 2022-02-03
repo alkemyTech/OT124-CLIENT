@@ -16,7 +16,7 @@
     "react-responsive-carousel": "^3.2.22",
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
-    "react-scripts": "^3.0.1",
+    "react-scripts": "5.0.0",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
     "slick-carousel": "^1.8.1",
@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",
-    "postcss": "^8.4.5",
-    "tailwindcss": "^3.0.16"
+    "postcss": "^8.4.6",
+    "tailwindcss": "^3.0.18"
   }
 }
