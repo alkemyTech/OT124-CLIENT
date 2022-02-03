@@ -1,5 +1,16 @@
 import React from "react";
+import BackofficeAdminLayout from "../components/BackofficeAdminLayout";
+import BackofficeUserLayout from "../components/BackofficeUserLayout";
 
 export default function Backoffice() {
-  return <div></div>;
+  // Mockup data
+  // Get user role from token
+  const role = "admin";
+
+  return (
+    <div>
+      {role === "admin" && <BackofficeAdminLayout />}
+      {role === "user" && <BackofficeUserLayout />}
+    </div>
+  );
 }
