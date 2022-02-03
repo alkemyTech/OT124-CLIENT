@@ -8,7 +8,7 @@ export default function Backoffice() {
   const role = "admin";
 
   return (
-    <div>
+    <div className="flex justify-center">
       {role === "admin" && <BackofficeAdminLayout />}
       {role === "user" && <BackofficeUserLayout />}
     </div>

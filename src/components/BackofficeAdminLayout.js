@@ -46,7 +46,7 @@ export default function BackofficeAdminLayout() {
   ];
 
   return (
-    <div className="flex flex-wrap justify-center gap-5">
+    <div className="flex flex-wrap justify-center gap-5 max-w-screen-lg">
       {items.map((item) => {
         return (
           <BackofficeCard
