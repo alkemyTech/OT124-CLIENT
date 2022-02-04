@@ -38,10 +38,10 @@ export default function SignUpForm() {
     const { name, surname, email, password } = values;
 
     const res = await signUp(name, surname, email, password);
-    if (res.status === 200) {
+
+    if (res.status === 201) {
       navigate("/");
     } else {
-      console.log(res.response.data.errors);
       setShowErrorMessage(getErrorMessage(res.response.data.errors));
       setSubmitting(false);
     }

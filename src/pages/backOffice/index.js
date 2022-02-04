@@ -5,7 +5,7 @@ import BackofficeUserLayout from "../../components/BackofficeUserLayout";
 export default function BackofficeHome() {
   // Mockup data
   // Get user role from token
-  const role = "user";
+  const role = "admin";
 
   return (
     <div className="flex justify-center">
