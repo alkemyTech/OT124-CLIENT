@@ -1,11 +1,12 @@
 import React from "react";
 import BackofficeCard from "./BackofficeCard";
+import profileIcon from "../img/icons/profile.png";
 
 export default function BackofficeUserLayout() {
   const items = [
     {
       title: "Mi perfil",
-      image: "/icons/profile.png",
+      image: profileIcon,
       navlink: "/mi-perfil",
     },
   ];

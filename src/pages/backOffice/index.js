@@ -2,7 +2,7 @@ import React from "react";
 import BackofficeAdminLayout from "../../components/BackofficeAdminLayout";
 import BackofficeUserLayout from "../../components/BackofficeUserLayout";
 
-export default function Backoffice() {
+export default function BackofficeHome() {
   // Mockup data
   // Get user role from token
   const role = "user";

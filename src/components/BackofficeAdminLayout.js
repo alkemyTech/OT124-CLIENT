@@ -1,46 +1,54 @@
 import React from "react";
 import BackofficeCard from "./BackofficeCard";
+import activitiesIcon from "../img/icons/activities.png";
+import categoriesIcon from "../img/icons/categories.png";
+import membersIcon from "../img/icons/members.png";
+import newsIcon from "../img/icons/news.png";
+import organizationIcon from "../img/icons/organization.png";
+import slidesIcon from "../img/icons/slides.png";
+import testimonialsIcon from "../img/icons/testimonials.png";
+import usersIcon from "../img/icons/users.png";
 
 export default function BackofficeAdminLayout() {
   const items = [
     {
       title: "Actividades",
-      image: "/icons/activities.png",
+      image: activitiesIcon,
       navlink: "/actividades",
     },
     {
       title: "Categorías",
-      image: "/icons/categories.png",
+      image: categoriesIcon,
       navlink: "/categorias",
     },
     {
       title: "Miembros",
-      image: "/icons/members.png",
+      image: membersIcon,
       navlink: "/miembros",
     },
     {
       title: "Novedades",
-      image: "/icons/news.png",
+      image: newsIcon,
       navlink: "/novedades",
     },
     {
       title: "Organización",
-      image: "/icons/organization.png",
+      image: organizationIcon,
       navlink: "/organizacion",
     },
     {
       title: "Slides",
-      image: "/icons/slides.png",
+      image: slidesIcon,
       navlink: "/slides",
     },
     {
       title: "Testimonios",
-      image: "/icons/testimonials.png",
+      image: testimonialsIcon,
       navlink: "/testimonios",
     },
     {
       title: "Usuarios",
-      image: "/icons/users.png",
+      image: usersIcon,
       navlink: "/usuarios",
     },
   ];
