@@ -3,6 +3,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { logIn } from "../services/auth";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logIn as logInAction } from "../features/authSlice";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().required("Obligatorio").email("Email invalido").max(255),
@@ -14,8 +16,41 @@ const LoginSchema = Yup.object().shape({
 
 export default function LoginForm() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState();
+
+  function getErrorMessage(errorMessage) {
+    let message;
+    switch (errorMessage) {
+      case "User does not exist": {
+        message = "El usuario no existe";
+        break;
+      }
+      case "Password invalid": {
+        message = "La constraseña es incorrecta";
+        break;
+      }
+      default: {
+        message = "Algo salió mal";
+      }
+    }
+    return message;
+  }
+
+  async function handleSubmit(values, { setSubmitting }) {
+    setShowErrorMessage();
+    const { email, password } = values;
+    const res = await logIn(email, password);
+
+    if (res.status == 200) {
+      await dispatch(logInAction());
+      navigate("/");
+    } else {
+      setShowErrorMessage(getErrorMessage(res.response.data.errors));
+      setSubmitting(false);
+    }
+  }
 
   const styles = {
     label: "block text-gray-700 text-sm font-bold pt-2 pb-1",
@@ -30,17 +65,7 @@ export default function LoginForm() {
     <Formik
       initialValues={{ email: "", password: "" }}
       validationSchema={LoginSchema}
-      onSubmit={async (values, { setSubmitting }) => {
-        setShowErrorMessage(false);
-        const { email, password } = values;
-        const res = await logIn(email, password);
-        if (res.status != 200) {
-          setShowErrorMessage(true);
-          setSubmitting(false);
-        } else {
-          navigate("/");
-        }
-      }}
+      onSubmit={handleSubmit}
     >
       {({ isSubmitting }) => (
         <Form className="grid w-80">
@@ -59,7 +84,6 @@ export default function LoginForm() {
             component="a"
             name="email"
           />
-
           <label className={styles.label} htmlFor="password">
             Contraseña
           </label>
@@ -74,7 +98,6 @@ export default function LoginForm() {
             component="a"
             name="password"
           />
-
           <button
             className={styles.button}
             type="submit"
@@ -84,9 +107,7 @@ export default function LoginForm() {
           </button>
 
           {showErrorMessage && (
-            <span className={styles.errorMsg}>
-              El email o la contraseña son incorrectos
-            </span>
+            <span className={styles.errorMsg}>{showErrorMessage}</span>
           )}
         </Form>
       )}

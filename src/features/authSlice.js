@@ -16,7 +16,6 @@ export const authSlice = createSlice({
       state.userData = null;
     },
     logIn: (state) => {
-      localStorage.setItem("isLoggedIn", true);
       state.isLoggedIn = true;
     },
   },
@@ -25,5 +24,6 @@ export const authSlice = createSlice({
 export const { setUserData, deleteUserData, logIn } = authSlice.actions;
 
 export const selectUserData = (state) => state.auth.userData;
+export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 
 export default authSlice.reducer;
