@@ -4,7 +4,6 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: {
     userData: null,
-    isLoggedIn: false,
   },
   reducers: {
     setUserData: (state, action) => {
@@ -18,7 +17,7 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setUserData, deleteUserData, logIn } = authSlice.actions;
+export const { setUserData, deleteUserData } = authSlice.actions;
 
 export const selectUserData = (state) => state.auth.userData;
 
