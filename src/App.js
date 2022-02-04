@@ -18,7 +18,6 @@ function App() {
         <Route path="contacto" element={<ContactUs />} />
         <Route path="backoffice" element={<Backoffice />}>
           <Route index element={<BackofficeHome />} />
-          <Route path="contacto" element={<ContactUs />} />
         </Route>
       </Route>
     </Routes>
