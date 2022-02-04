@@ -11,11 +11,11 @@ export default function Profile() {
             <h3 className="font-bold text-3x1 row-start-1 row-end-2 text-center self-center">{popUp.operation}</h3>
             {popUp.operation === "Editadar datos" ? 
             <form className=" grid gap-2 p-1 flex-col row-start-2 row-end-3 grid-cols-2">
-              <label className=" md:w-1/2 md:justify-self-end justify-self-center" >Nombre</label>
-              <input placeholder="First name" className="text-black p-1 md:w-1/2 bg-slate-100"></input>
-              <label className=" md:w-1/2 md:justify-self-end justify-self-center">Apellido</label>
+              <label htmlFor="name" className=" md:w-1/2 md:justify-self-end justify-self-center" >Nombre</label>
+              <input placeholder="First name" className=" text-black p-1 md:w-1/2 bg-slate-100"></input>
+              <label htmlFor="subname" className=" md:w-1/2 md:justify-self-end justify-self-center">Apellido</label>
               <input placeholder="Last name" className="text-black p-1 md:w-1/2 bg-slate-100"></input>
-              <label className=" md:w-1/2 md:justify-self-end justify-self-center">Email</label>
+              <label htmlFor="email" className=" md:w-1/2 md:justify-self-end justify-self-center">Email</label>
               <input placeholder="example@email.com" className="text-black p-1 md:w-1/2 bg-slate-100"></input>
             </form> 
             : null}
@@ -30,8 +30,8 @@ export default function Profile() {
               <div class=" flex justify-center items-center row-start-1 row-end-3 -space-x-1 overflow-hidden"> 
                 <img class=" shadow-md inline-block h-16 w-16 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt=""></img>
               </div>
-                <h2 className=" col-start-2 col-end-3 row-start-1 row-end-2 font-bold text-2xl">Apellido Nombre </h2>
-                <h3 className=" col-start-2 col-end-3 row-start-2 row-end-3 font-bold text-3x1">myemailisimportant@gmail.com</h3>
+                <h2 className=" col-start-2 col-end-3 row-start-1 row-end-2 font-bold text-xl">Apellido Nombre </h2>
+                <h3 className=" col-start-2 col-end-3 row-start-2 row-end-3 text-sm">myemailisimportant@gmail.com</h3>
               </div>
               <div className="grid gap-2 grid-cols-2 row-start-3 row-end-4 col-start-1 col-end-3 justify-items-center items-center">
             {popUp.visible ? null :
