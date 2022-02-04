@@ -3,8 +3,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { logIn } from "../services/auth";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { logIn as logInAction } from "../features/authSlice";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().required("Obligatorio").email("Email invalido").max(255),
@@ -16,7 +14,6 @@ const LoginSchema = Yup.object().shape({
 
 export default function LoginForm() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const [showErrorMessage, setShowErrorMessage] = useState();
 
@@ -44,7 +41,6 @@ export default function LoginForm() {
     const res = await logIn(email, password);
 
     if (res.status == 200) {
-      await dispatch(logInAction());
       navigate("/");
     } else {
       setShowErrorMessage(getErrorMessage(res.response.data.errors));

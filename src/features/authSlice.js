@@ -15,15 +15,11 @@ export const authSlice = createSlice({
       localStorage.removeItem("token");
       state.userData = null;
     },
-    logIn: (state) => {
-      state.isLoggedIn = true;
-    },
   },
 });
 
 export const { setUserData, deleteUserData, logIn } = authSlice.actions;
 
 export const selectUserData = (state) => state.auth.userData;
-export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 
 export default authSlice.reducer;
