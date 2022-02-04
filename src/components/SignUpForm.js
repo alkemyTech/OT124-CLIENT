@@ -16,8 +16,36 @@ const registerSchema = yup.object().shape({
 });
 
 export default function SignUpForm() {
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
   const navigate = useNavigate();
+  const [showErrorMessage, setShowErrorMessage] = useState();
+
+  function getErrorMessage(errorMessage) {
+    let message;
+    switch (errorMessage) {
+      case "User already exists": {
+        message = "Ya existe un usuario con ese email";
+        break;
+      }
+      default: {
+        message = "Algo salió mal";
+      }
+    }
+    return message;
+  }
+
+  async function handleSubmit(values, { setSubmitting }) {
+    setShowErrorMessage();
+    const { name, surname, email, password } = values;
+
+    const res = await signUp(name, surname, email, password);
+    if (res.status === 200) {
+      navigate("/");
+    } else {
+      console.log(res.response.data.errors);
+      setShowErrorMessage(getErrorMessage(res.response.data.errors));
+      setSubmitting(false);
+    }
+  }
 
   const styles = {
     label: "block text-gray-700 text-sm font-bold pt-2 pb-1",
@@ -25,27 +53,17 @@ export default function SignUpForm() {
       "bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none",
     button:
       "bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white border border-sky-500 hover:border-transparent rounded py-2 mt-2 px-4 w-full",
-    errorMsg: "text-red-500 text-sm",
+    errorMsg: "text-red-500 text-sm text-center",
   };
 
   return (
     <Formik
       initialValues={{ name: "", surname: "", email: "", password: "" }}
       validationSchema={registerSchema}
-      onSubmit={async (values, { setSubmitting }) => {
-        setShowErrorMessage(false);
-        const { name, surname, email, password } = values;
-        const res = await signUp(name, surname, email, password);
-        if (res.status != 200) {
-          setShowErrorMessage(true);
-          setSubmitting(false);
-        } else {
-          navigate("/");
-        }
-      }}
+      onSubmit={handleSubmit}
     >
       {({ isSubmitting }) => (
-        <Form>
+        <Form className="w-96">
           <label className={styles.label} htmlFor="name">
             Nombre
           </label>
@@ -118,7 +136,9 @@ export default function SignUpForm() {
             Registrarme
           </button>
 
-          {showErrorMessage && <span className={styles.errorMsg}>Error</span>}
+          {showErrorMessage && (
+            <div className={styles.errorMsg}>{showErrorMessage}</div>
+          )}
         </Form>
       )}
     </Formik>

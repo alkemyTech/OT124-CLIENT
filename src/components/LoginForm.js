@@ -40,7 +40,7 @@ export default function LoginForm() {
     const { email, password } = values;
     const res = await logIn(email, password);
 
-    if (res.status == 200) {
+    if (res.status === 200) {
       navigate("/");
     } else {
       setShowErrorMessage(getErrorMessage(res.response.data.errors));
@@ -54,7 +54,7 @@ export default function LoginForm() {
       "bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none",
     button:
       "bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white border border-sky-500 hover:border-transparent rounded py-2 mt-2 px-4 w-full",
-    errorMsg: "text-red-500 text-sm",
+    errorMsg: "text-red-500 text-sm text-center",
   };
 
   return (
@@ -103,7 +103,7 @@ export default function LoginForm() {
           </button>
 
           {showErrorMessage && (
-            <span className={styles.errorMsg}>{showErrorMessage}</span>
+            <div className={styles.errorMsg}>{showErrorMessage}</div>
           )}
         </Form>
       )}
