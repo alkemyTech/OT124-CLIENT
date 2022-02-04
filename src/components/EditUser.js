@@ -17,7 +17,7 @@ export default function ContactForm (props){
     
 
     const initialValues = {
-        name: "",
+        first_name: "",
         last_name: "",
         roleId: "",
         
@@ -26,7 +26,7 @@ export default function ContactForm (props){
       
 
     const validationSchema = Yup.object({
-        name: Yup.string().required("Por favor ingresa el nuevo nombre"),
+        first_name: Yup.string().required("Por favor ingresa el nuevo nombre"),
         last_name: Yup.string().required("Por favor ingresa el nuevo apellido"),
         roleId: Yup.number()
         .required("El ID es requerido")
@@ -46,8 +46,8 @@ export default function ContactForm (props){
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
             <Form className=" container mx-auto px-5" >
                         <div className=" w-full">
-                            <Field className={`${styles.field} h-16`} name="name" placeholder="Nombre" type="text" />
-                            <ErrorMessage component={ErrorComponent} name="name" />
+                            <Field className={`${styles.field} h-16`} name="first_name" placeholder="Nombre" type="text" />
+                            <ErrorMessage component={ErrorComponent} name="first_name" />
                         </div>
                         <div className="w-full">
                             <Field className={`${styles.field} h-16`} name="last_name" placeholder="Apellido" type="text" />
