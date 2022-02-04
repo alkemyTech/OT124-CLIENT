@@ -20,13 +20,8 @@ export default function Footer() {
             Novedades
           </Link>
           <img
-<<<<<<< HEAD
-            className="h-20 md:h-40"
-            src="images/logo-somos-mas.png"
-=======
             className="px-5 h-20 md:h-40 md:px-20"
             src={logo}
->>>>>>> d9a701e3b61be035facdb3c3a16edfa7d7d172f5
             alt="logo-somos-mas"
           />
           <Link className="text-sky-500" to="/testimonios">
