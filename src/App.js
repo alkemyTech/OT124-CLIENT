@@ -6,6 +6,7 @@ import EditUser from "./components/EditUser";
 import Login from "./pages/Login";
 import { Route, Routes } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
+import Categories from "./pages/backOffice/categories/Categories";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Route path="/nosotros" element={<AboutUs />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contacto" element={<ContactUs />} />
-        <Route path="/editUser" element={<EditUser />} />
+        <Route path='/backoffice/categories' element={<Categories/>} /> 
       </Route>
     </Routes>
   );
