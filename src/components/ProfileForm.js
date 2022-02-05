@@ -1,64 +1,94 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom"
+import { updateProfile } from "../services/Profile";
 
 const ProfileSchema = Yup.object().shape({
-    name: Yup.string().required("Required*"),
-    subname: Yup.string().required("Required*"),
-    email: Yup.string().required("Required*").email("Invalid email*").max(255),
+    firstname: Yup.string().required("Obligatorio*"),
+    lastname: Yup.string().required("Obligatorio*"),
+    email: Yup.string().required("Obligatorio*").email("Datos ingresados no son validos*").max(255),
   });
 
 export default function ProfileForm({popUp, setPopUp}) {
+
+    const navigate = useNavigate();
+    const [showErrMsg, setShowErrMsg] = useState();
     
+    function getErrMsg(errMsg) {
+        let message;
+        switch (errMsg) {
+          case "Email already exist": {
+            message = "El email ingresado ya existe";
+            break;
+          }
+          default: {
+            message = "Algo salió mal, intentelo más tarde";
+          }
+        }
+        return message;
+      }
+
+      async function handleSubmit(values, { setSubmitting }) {
+        setShowErrMsg();
+        const { firstname, lastname, email } = values;
+        const res = await updateProfile(firstname, lastname, email);
+    
+        if (res.status === 200) {
+          navigate("/profile");
+        } else {
+            setShowErrMsg(getErrMsg(res.response.data.errors));
+            setSubmitting(false);
+        }
+      }
+
+
     return (
     <Formik
-        initialValues={{ name: "", subname: "", email: "" }}
+        initialValues={{ firstname: "", lastname: "", email: "" }}
         validationSchema={ProfileSchema}
-        onSubmit={(values) => {
-            // Send values
-            console.log(values);
-        }}
+        onSubmit={handleSubmit}
     >
         {({ errors, touched }) => (
             <Form className=" grid gap-4 p-1 flex-col row-start-2 row-end-4 grid-cols-2">
                 
-                    <label htmlFor="name" className=" md:w-1/2 md:justify-self-end justify-self-center" >Nombre</label>
+                    <label htmlFor="firstname" className=" md:w-1/2 md:justify-self-end justify-self-center" >Nombre</label>
                     <Field
                         className="text-black p-1 md:w-1/2 bg-slate-100"
-                        placeholder="First name"
+                        placeholder="Nombre"
                         autocomplete="off"
-                        id="name"
-                        name="name"
-                        type="name"
+                        id="firstname"
+                        name="firstname"
+                        type="firstname"
                     />
                     {errors.name && touched.name ? (
                         <ErrorMessage
                             className="text-red-500 text-sm absolute ml-24"
                             component="a"
-                            name="name"
+                            name="firstname"
                         />
                     ) : null}
                     
-                    <label htmlFor="subname" className=" md:w-1/2 md:justify-self-end justify-self-center">Apellido</label>
+                    <label htmlFor="lastname" className=" md:w-1/2 md:justify-self-end justify-self-center">Apellido</label>
                     <Field
                         className="text-black p-1 md:w-1/2 bg-slate-100"
-                        placeholder="Last name"
+                        placeholder="Apellido"
                         autocomplete="off"
-                        id="subname"
-                        name="subname"
-                        type="subname"
+                        id="lastname"
+                        name="lastname"
+                        type="lastname"
                     />
                     {errors.name && touched.name ? (
                         <ErrorMessage
                             className="text-red-500 text-sm absolute mt-12 ml-24"
                             component="a"
-                            name="subname"
+                            name="lastname"
                         />
                     ) : null}
                     <label htmlFor="email" className=" md:w-1/2 md:justify-self-end justify-self-center">Email</label>
                     <Field
                         className="text-black p-1 md:w-1/2 bg-slate-100"
-                        placeholder="myemail@domain.com"
+                        placeholder="miemail@dominio.com"
                         autocomplete="off"
                         id="email"
                         name="email"
@@ -71,7 +101,7 @@ export default function ProfileForm({popUp, setPopUp}) {
                             name="email"
                         />
                     ) : null}
-                    <button type="submit" onClick={() => setPopUp({visible:false, operation: "Null"})} className=" mt-4 col-start-1 col-end-3 max-w-fit md:max-w-fit h-12 p-2 justify-self-center  border rounded border-sky-500 font-semibold hover:text-white hover:bg-sky-500 text-sky-500">CONFIRMAR</button>
+                    <button disabled={isSubmitting} type="submit" onClick={() => setPopUp({visible:false, operation: "Null"})} className=" mt-4 col-start-1 col-end-3 max-w-fit md:max-w-fit h-12 p-2 justify-self-center  border rounded border-sky-500 font-semibold hover:text-white hover:bg-sky-500 text-sky-500">CONFIRMAR</button>
                 
             </Form>
         )}

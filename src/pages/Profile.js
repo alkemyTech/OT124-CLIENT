@@ -1,9 +1,21 @@
 import React, { useState } from "react";
 import ProfileForm from "../components/ProfileForm";
+import { profileDelete } from "../services/Profile";
 
 export default function Profile() {
 
     const [popUp, setPopUp] = useState({visible: false, operation: "null"})
+
+    async function handleDelete() {
+
+      const res = await profileDelete(firstname, lastname, email);
+  
+      if (res.status === 200) {
+        navigate("/register");
+      } else {
+          console.log("Error 500")
+      }
+    }
 
 
   return (
@@ -19,7 +31,7 @@ export default function Profile() {
               <button onClick={() => setPopUp({visible:false, operation: "Null"})} className=" text-sm absolute max-w-fit h-12 border rounded p-2 border-red-500 font-semibold hover:text-white hover:bg-red-500 text-red-500">CANCELAR</button>
               <div className="grid grid-cols-2 w-1/2 justify-self-center row-start-3 row-end-4">
                 
-                <button onClick={() => setPopUp({visible:false, operation: "Null"})} className=" col-start-1 col-end-3 justify-self-center max-w-fit p-2 h-12 border rounded border-sky-500 font-semibold hover:text-white hover:bg-sky-500 text-sky-500">CONFIRMAR</button>
+                <button onClick={() => handleDelete()} className=" col-start-1 col-end-3 justify-self-center max-w-fit p-2 h-12 border rounded border-sky-500 font-semibold hover:text-white hover:bg-sky-500 text-sky-500">CONFIRMAR</button>
               </div>
             </>
             }
