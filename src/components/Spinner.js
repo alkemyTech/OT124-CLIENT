@@ -4,7 +4,7 @@ import "../../node_modules/react-loader-spinner/dist/loader/css/react-spinner-lo
 
 function Spinner(props) {
   return (
-    <div align='center'>
+    <div>
       <TailSpin color="#00BFFF" height={100} width={100}/>
     </div>
   );
