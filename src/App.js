@@ -5,9 +5,9 @@ import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import { Route, Routes } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
-import Categories from "./pages/backOffice/categories/Categories";
 import Backoffice from "./components/Backoffice";
 import BackofficeHome from "./pages/backoffice";
+import BackofficeCategories from "./pages/backOffice/categories/BackofficeCategories";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
         <Route path="contacto" element={<ContactUs />} />
         <Route path="backoffice" element={<Backoffice />}>
           <Route index element={<BackofficeHome />} />
-          <Route path="categories" element={<Categories/>} /> 
+          <Route path="categories" element={<BackofficeCategories />} /> 
         </Route>
       </Route>
     </Routes>
