@@ -19,7 +19,7 @@ export default function BackOfficeUserLayout() {
             key={item.title}
             title={item.title}
             image={item.image}
-            navlink={"/backOffice" + item.navlink}
+            navlink={"/backoffice" + item.navlink}
           />
         );
       })}
