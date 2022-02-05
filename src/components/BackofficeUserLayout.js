@@ -1,8 +1,8 @@
 import React from "react";
-import BackofficeCard from "./BackofficeCard";
+import BackOfficeCard from "./BackOfficeCard";
 import profileIcon from "../img/icons/profile.png";
 
-export default function BackofficeUserLayout() {
+export default function BackOfficeUserLayout() {
   const items = [
     {
       title: "Mi perfil",
@@ -15,11 +15,11 @@ export default function BackofficeUserLayout() {
     <div className="flex flex-wrap justify-center gap-5">
       {items.map((item) => {
         return (
-          <BackofficeCard
+          <BackOfficeCard
             key={item.title}
             title={item.title}
             image={item.image}
-            navlink={"/backoffice" + item.navlink}
+            navlink={"/backOffice" + item.navlink}
           />
         );
       })}
