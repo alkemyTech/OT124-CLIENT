@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import { Route, Routes } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
+import BackofficeCategories from "./pages/backOffice/categories/BackofficeCategories";
 import BackOffice from "./components/BackOffice";
 import BackOfficeHome from "./pages/backOffice";
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="signup" element={<SignUp />} />
         <Route path="backoffice" element={<BackOffice />}>
           <Route index element={<BackOfficeHome />} />
+          <Route path="categories" element={<BackofficeCategories />} /> 
         </Route>
       </Route>
     </Routes>
