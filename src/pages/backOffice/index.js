@@ -1,16 +1,16 @@
 import React from "react";
-import BackOfficeAdminLayout from "../../components/BackOfficeAdminLayout";
-import BackOfficeUserLayout from "../../components/BackOfficeUserLayout";
+import BackofficeAdminLayout from "../../components/BackOfficeAdminLayout";
+import BackofficeUserLayout from "../../components/BackOfficeUserLayout";
 
-export default function BackOfficeHome() {
+export default function BackofficeHome() {
   // Mockup data
   // Get user role from token
   const role = "admin";
 
   return (
     <div className="flex justify-center">
-      {role === "admin" && <BackOfficeAdminLayout />}
-      {role === "user" && <BackOfficeUserLayout />}
+      {role === "admin" && <BackofficeAdminLayout />}
+      {role === "user" && <BackofficeUserLayout />}
     </div>
   );
 }
