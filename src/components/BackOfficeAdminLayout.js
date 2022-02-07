@@ -61,7 +61,7 @@ export default function BackOfficeAdminLayout() {
             key={item.title}
             title={item.title}
             image={item.image}
-            navlink={"/backOffice" + item.navlink}
+            navlink={"/backoffice" + item.navlink}
           />
         );
       })}
