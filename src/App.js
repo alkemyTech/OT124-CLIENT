@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
 import Backoffice from "./components/Backoffice";
 import BackofficeHome from "./pages/backoffice";
+import BackofficeNews from "./pages/backoffice/news";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="signup" element={<SignUp />} />
         <Route path="backoffice" element={<Backoffice />}>
           <Route index element={<BackofficeHome />} />
+          <Route path="novedades" element={<BackofficeNews />} />
         </Route>
       </Route>
     </Routes>
