@@ -15,6 +15,13 @@ function EditOrganization() {
         error: " text-red-500 text-lg",
         send: "text-red-500 text-lg bg-red-300	rounded-md	scroll-p-2 border-b-4 border-red-800"
     }
+    const FILE_SIZE = 10000000; // Bytes (5MB)
+  const SUPPORTED_FORMATS = [
+    "image/jpg",
+    "image/jpeg",
+    "image/gif",
+    "image/png",
+  ];
 
     const ErrorComponent = (props) => <p className={styles.error} >{props.children}</p>;
     //const [sender,setSender]= useState(false)

@@ -1,5 +1,5 @@
 import React from "react";
-import BackofficeAdminLayout from "../../components/BackofficeAdminLayout";
+import BackofficeAdminLayout from '../../components/BackOfficeAdminLayout'
 import BackofficeUserLayout from "../../components/BackofficeUserLayout";
 
 export default function BackofficeHome() {
