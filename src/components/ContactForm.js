@@ -2,6 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import React from "react";
 
+
 const styles = {
     field: "w-full border-b-4 border-[#9ac9fb] my-2 p-2 outline-none", 
     button: "bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white border border-sky-500 hover:border-transparent rounded py-2 mt-2 px-4 w-96",
@@ -32,6 +33,7 @@ export default function ContactForm (props){
       const onSubmit = (values, { resetForm }) => {
         console.log(values)
         resetForm();
+        
       }
 
     return (

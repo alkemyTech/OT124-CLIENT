@@ -8,6 +8,8 @@ import { Route, Routes } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
 import BackOffice from "./components/BackOffice";
 import BackOfficeHome from "./pages/backOffice";
+import Organization from "./pages/backOffice/organization/Organization";
+import EditOrganization from "./pages/backOffice/organization/EditOrganization";
 
 function App() {
   return (
@@ -20,6 +22,10 @@ function App() {
         <Route path="signup" element={<SignUp />} />
         <Route path="backoffice" element={<BackOffice />}>
           <Route index element={<BackOfficeHome />} />
+          <Route path="organizacion" element={<Organization />}>
+          </Route>
+          <Route path="edit-organization/:id" element={<EditOrganization />}>
+          </Route>
         </Route>
       </Route>
     </Routes>
