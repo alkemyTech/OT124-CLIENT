@@ -9,7 +9,7 @@ import { Route, Routes } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
 import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
 import Backoffice from "./components/Backoffice";
-import BackofficeHome from "./pages/Backoffice";
+import BackofficeHome from "./pages/backoffice";
 import CUNewsForm from "./components/CUNewsForm";
 
 function App() {
