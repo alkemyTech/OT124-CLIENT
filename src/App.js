@@ -6,13 +6,11 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import { Route, Routes } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
-import BackOffice from "./components/BackOffice";
+import BackOffice from './pages/backOffice/index'
 import BackOfficeHome from "./pages/backOffice";
 import Organization from "./pages/backOffice/organization/Organization";
 import EditOrganization from "./pages/backOffice/organization/EditOrganization";
-import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
-import Backoffice from "./components/Backoffice";
-import BackofficeHome from "./pages/backoffice";
+import BackofficeCategories from './pages/backOffice/categories/BackofficeCategories'
 import CUNewsForm from "./components/CUNewsForm";
 
 function App() {
