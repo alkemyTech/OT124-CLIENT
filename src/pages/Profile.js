@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import ProfileForm from "../components/ProfileForm";
 import { profileDelete } from "../services/Profile";
+import { useNavigate } from "react-router-dom"
 
 export default function Profile() {
 
+    const navigate = useNavigate();
     const [popUp, setPopUp] = useState({visible: false, operation: "null"})
 
     async function handleDelete() {
 
-      const res = await profileDelete(firstname, lastname, email);
+      const res = await profileDelete();
   
       if (res.status === 200) {
         navigate("/register");

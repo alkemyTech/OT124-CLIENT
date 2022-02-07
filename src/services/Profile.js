@@ -11,10 +11,15 @@ export async function profileUpdate(firstname, lastname, email) {
     .catch((error) => error);
 }
 
-export async function profileDelete(email) {
+export async function profileDelete() {
     return await axios
       .delete(`${API_BASE_URL}/api/v1/users/deleteUser`, { // `${API_BASE_URL}/api/v1/user|profile/`
-        email
+        // Pedir email del token
       })
       .catch((error) => error);
+  }
+
+  export default {
+    profileUpdate,
+    profileDelete
   }

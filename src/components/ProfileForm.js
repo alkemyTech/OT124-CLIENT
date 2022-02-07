@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom"
-import { updateProfile } from "../services/Profile";
+import { profileUpdate } from "../services/Profile";
 
 const ProfileSchema = Yup.object().shape({
     firstname: Yup.string().required("Obligatorio*"),
@@ -32,7 +32,7 @@ export default function ProfileForm({popUp, setPopUp}) {
       async function handleSubmit(values, { setSubmitting }) {
         setShowErrMsg();
         const { firstname, lastname, email } = values;
-        const res = await updateProfile(firstname, lastname, email);
+        const res = await profileUpdate(firstname, lastname, email);
     
         if (res.status === 200) {
           navigate("/profile");
@@ -101,7 +101,7 @@ export default function ProfileForm({popUp, setPopUp}) {
                             name="email"
                         />
                     ) : null}
-                    <button disabled={isSubmitting} type="submit" onClick={() => setPopUp({visible:false, operation: "Null"})} className=" mt-4 col-start-1 col-end-3 max-w-fit md:max-w-fit h-12 p-2 justify-self-center  border rounded border-sky-500 font-semibold hover:text-white hover:bg-sky-500 text-sky-500">CONFIRMAR</button>
+                    <button type="submit" onClick={() => setPopUp({visible:false, operation: "Null"})} className=" mt-4 col-start-1 col-end-3 max-w-fit md:max-w-fit h-12 p-2 justify-self-center  border rounded border-sky-500 font-semibold hover:text-white hover:bg-sky-500 text-sky-500">CONFIRMAR</button>
                 
             </Form>
         )}
