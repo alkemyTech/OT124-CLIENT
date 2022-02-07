@@ -17,7 +17,7 @@ function App() {
         <Route path="/nosotros" element={<AboutUs />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contacto" element={<ContactUs />} />
-        <Route path="/miperfil" element={<Profile />} />
+        <Route path="/mi-perfil" element={<Profile />} />
       </Route>
     </Routes>
   );
