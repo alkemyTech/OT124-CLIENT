@@ -7321,10 +7321,10 @@
     "prop-types" "^15.6.2"
     "scheduler" "^0.19.1"
 
-"react-dropzone@^12.0.1":
-  "integrity" "sha512-E//nFCJfb8eDZ0zI9bOZ/v+8DOwK+7IY76Fv8u8ogfqX/d/K+32EWkFQ2+O9kF8XfUAyGtSA4cKvCjW4o78Qgg=="
-  "resolved" "https://registry.npmjs.org/react-dropzone/-/react-dropzone-12.0.1.tgz"
-  "version" "12.0.1"
+"react-dropzone@^11.7.0":
+  "integrity" "sha512-zxCMwhfPy1olUEbw3FLNPLhAm/HnaYH5aELIEglRbqabizKAdHs0h+WuyOpmA+v1JXn0++fpQDdNfUagWt5hJQ=="
+  "resolved" "https://registry.npmjs.org/react-dropzone/-/react-dropzone-11.7.1.tgz"
+  "version" "11.7.1"
   dependencies:
     "attr-accept" "^2.2.2"
     "file-selector" "^0.4.0"
@@ -7417,7 +7417,7 @@
   dependencies:
     "history" "^5.2.0"
 
-"react-scripts@5.0.0":
+"react-scripts@^5.0.0":
   "integrity" "sha512-3i0L2CyIlROz7mxETEdfif6Sfhh9Lfpzi10CtcGs1emDQStmZfWjJbAIMtRD0opVUjQuFWqHZyRZ9PPzKCFxWg=="
   "resolved" "https://registry.npmjs.org/react-scripts/-/react-scripts-5.0.0.tgz"
   "version" "5.0.0"
