@@ -13,7 +13,7 @@ const ErrorComponent = (props) => (
   <p className={styles.error}>{props.children}</p>
 );
 
-export default function ContactForm(props) {
+export default function EditByUserForm(props) {
   const initialValues = {
     first_name: "",
     last_name: "",
