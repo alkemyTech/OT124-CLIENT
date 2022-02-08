@@ -16,6 +16,7 @@ export async function Organization(id) {
             })
            
         } catch (err) {
+            console.error(err)
             return handleError(err);
         }
     }

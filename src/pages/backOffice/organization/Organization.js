@@ -6,7 +6,7 @@ function Organization() {
     {
       title: "editar organización",
       image: organizationIcon,
-      navlink: "/edit-organization",
+      navlink: "/editar-organizacion",
     },
   ];
 
@@ -14,15 +14,13 @@ function Organization() {
     <div className="flex flex-wrap justify-center gap-5">
       {items.map((item) => {
         return (
-          <div>
-          <h1>aaaaaaa</h1>
-          {/* <BackOfficeCard
+          <BackOfficeCard
             key={item.title}
             title={item.title}
             image={item.image}
             navlink={"/backoffice" + item.navlink}
-          /> */}
-          </div>
+          />
+
         );
       })}
     </div>
