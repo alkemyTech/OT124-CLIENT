@@ -6,3 +6,10 @@ body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
 }
+
+@media (min-width: 1024px) {
+  #navbar {
+    display: flex !important;
+    flex-direction: row !important;
+  }
+}

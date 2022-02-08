@@ -1,75 +1,61 @@
-import React from 'react';
+import React, { useState, Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate, NavLink } from 'react-router-dom';
 import { deleteUserData } from '../features/authSlice';
 
 export default function Header() {
+    const [ hamburguerOpened, setHamburguerOpened ] = useState(false);
     const dispach = useDispatch()
     const history = useNavigate()
-    let activeClassName = "mr-6 text-slate-300";
-    let desactiveClassName = "mr-6 text-sky-500";
+    let activeClassName = "mr-6 text-slate-300 ";
+    let desactiveClassName = "mr-6 text-sky-500 ";
+    const a = 'block mt-4 lg:inline-block lg:mt-0 hover:text-black mr-4';
+
     const navItems = [
-        <NavLink exact to='/' className={({ isActive }) => isActive ? activeClassName : desactiveClassName}>Inicio</NavLink >,
-        <NavLink className={({ isActive }) => isActive ? activeClassName : desactiveClassName} to='/nosotros'>Nosotros</NavLink >,
-        <NavLink className={({ isActive }) => isActive ? activeClassName : desactiveClassName} to='/actividades'>Actividades</NavLink >,
-        <NavLink className={({ isActive }) => isActive ? activeClassName : desactiveClassName} to='/novedades'>Novedades</NavLink >,
-        <NavLink className={({ isActive }) => isActive ? activeClassName : desactiveClassName} to='/testimonios'>Testimonios</NavLink >,
-        <NavLink className={({ isActive }) => isActive ? activeClassName : desactiveClassName} exact to='/contacto'>Contacto</NavLink >,
-        <NavLink className={({ isActive }) => isActive ? activeClassName : desactiveClassName} to='/contribuye'>Contribuye</NavLink >
+        <NavLink exact to='/' className={({ isActive }) => isActive ? activeClassName + a : desactiveClassName + a}>Inicio</NavLink >,
+        <NavLink className={({ isActive }) => isActive ? activeClassName + a : desactiveClassName + a} to='/nosotros'>Nosotros</NavLink >,
+        <NavLink className={({ isActive }) => isActive ? activeClassName + a : desactiveClassName + a} to='/actividades'>Actividades</NavLink >,
+        <NavLink className={({ isActive }) => isActive ? activeClassName + a : desactiveClassName + a} to='/novedades'>Novedades</NavLink >,
+        <NavLink className={({ isActive }) => isActive ? activeClassName + a : desactiveClassName + a} to='/testimonios'>Testimonios</NavLink >,
+        <NavLink className={({ isActive }) => isActive ? activeClassName + a : desactiveClassName + a} exact to='/contacto'>Contacto</NavLink >,
+        <NavLink className={({ isActive }) => isActive ? activeClassName + a : desactiveClassName + a} to='/contribuye'>Contribuye</NavLink >
     ];
 
-    const userData = 's'
+    const openHamburguerMenu = () => {
+      setHamburguerOpened(prevState => !prevState);
+    }
+
+    const userData = ''
     const handleCloseSesion = () => {
         dispach(deleteUserData())
         history('/')
     }
     return (
-    <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
-  <div class="flex items-center flex-shrink-0 text-white mr-6">
-    <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
-    <span class="font-semibold text-xl tracking-tight">Tailwind CSS</span>
-  </div>
-  <div class="block lg:hidden">
-    <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
-      <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-    </button>
-  </div>
-  <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-    <div class="text-sm lg:flex-grow">
-      <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-        Docs
-      </a>
-      <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-        Examples
-      </a>
-      <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
-        Blog
-      </a>
-    </div>
-    <div>
-      <button class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Cerrar sesion</button>
-    </div>
-  </div>
-</nav>
+      <nav class="flex items-center justify-between flex-wrap p-6">
+        <img className='ml-4 mr-8' width='100' src='https://drive.google.com/uc?export=view&id=1-j70Zmn2B1-0T_67JHJbNLKkI9sACMNi' alt='logo' />
+        <div class="block lg:hidden">
+          <button onClick={openHamburguerMenu} class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400">
+            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+          </button>
+        </div>
+        
+        <div style={{display: hamburguerOpened ? 'flex' : 'none'}} id='navbar' class="w-full block flex-grow lg:flex lg:items-center lg:w-auto flex-col">
+          <div class="text-sm lg:flex-grow">
+            {
+              navItems
+            }
+          </div>
+          <div>
+            {!userData ?
+              <Fragment>
+                <button className='inline-block text-sm px-4 py-2 leading-none border rounded text-sky-500 border-sky-500 mt-4 lg:mt-0 bg-transparent hover:bg-sky-500 text-sky-500 hover:border-transparent hover:text-white'>Log in</button>
+                <button className='inline-block text-sm px-4 py-2 leading-none border rounded text-white border-sky-500 mt-4 lg:mt-0 bg-sky-500 hover:bg-sky-700'>Registrate</button>
+              </Fragment>
+              :
+              <button onClick={handleCloseSesion} class="inline-block text-sm px-4 py-2 leading-none border rounded text-sky-500 border-sky-500 mt-4 lg:mt-0">Cerrar sesion</button>
+            }
+          </div>
+        </div>
+      </nav>
     );
 }
-
-{/* <header className='flex items-center py-1.5'>
-            <img className='ml-4 mr-8' width='100' src='https://drive.google.com/uc?export=view&id=1-j70Zmn2B1-0T_67JHJbNLKkI9sACMNi' alt='logo' />
-            <nav>
-                {
-                    navItems
-                }
-            </nav>
-            <div className='flex ml-32'>
-                {!userData ?
-                    <>
-                        <button className='bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white py-1.5 px-6 border border-sky-500 hover:border-transparent rounded mr-3'>Log in</button>
-                        <button className='bg-sky-500 hover:bg-sky-700 text-white font-bold py-1.5 px-6 rounded'>Registrate</button>
-                    </>
-                    :
-                    <button onClick={handleCloseSesion} className='bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white py-1.5 px-6 border border-sky-500 hover:border-transparent rounded mr-3'>Cerrar Sesion</button>
-                }
-
-            </div>
-            </header> */}
