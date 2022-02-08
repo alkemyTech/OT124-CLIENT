@@ -4,7 +4,7 @@ import BackofficeUserLayout from "../../components/BackOfficeUserLayout";
 
 export default function BackofficeHome() {
   // Mockup data
-  // Get user role from token
+  // Get user role from token - Where is token though?
   const role = "admin";
 
   return (
