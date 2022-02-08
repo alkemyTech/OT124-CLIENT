@@ -11,6 +11,7 @@ import BackofficeHome from "./pages/backoffice";
 import BackOfficeActivities from "./pages/backoffice/actividades/BackofficeActivities";
 import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
 import ContactUs from "./pages/ContactUs";
+import EditUser from "./components/EditUser";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 
