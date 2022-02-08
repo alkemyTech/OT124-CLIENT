@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import React, { useState } from "react";
-import { logIn } from "../services/auth";
+import { getNew } from "../services/new";
 
 
 export default function NewsCollection() {
@@ -11,7 +11,7 @@ export default function NewsCollection() {
 
     useEffect (() => { 
         async function getNewById() {
-            const res = await searchId(newsID)
+            const res = await getNew(newsID)
             setResData(res.data)
         }
     }, []);

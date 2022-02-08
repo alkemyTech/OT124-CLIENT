@@ -1,31 +1,29 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { logIn } from "../services/auth";
 import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import { signUp } from "../services/auth";
 
-const LoginSchema = Yup.object().shape({
-  email: Yup.string().required("Obligatorio").email("Email invalido").max(255),
-  password: Yup.string()
+const registerSchema = yup.object().shape({
+  name: yup.string().required("Obligatorio"),
+  surname: yup.string().required("Obligatorio"),
+  email: yup.string().required("Obligatorio").email("Email invalido").max(255),
+  password: yup
+    .string()
+    .required("Obligatorio")
     .min(6, "Muy corta!")
-    .max(50, "Muy larga!")
-    .required("Obligatorio"),
+    .max(50, "Muy larga!"),
 });
 
-export default function LoginForm() {
+export default function SignUpForm() {
   const navigate = useNavigate();
-
   const [showErrorMessage, setShowErrorMessage] = useState();
 
   function getErrorMessage(errorMessage) {
     let message;
     switch (errorMessage) {
-      case "User does not exist": {
-        message = "El usuario no existe";
-        break;
-      }
-      case "Password invalid": {
-        message = "La constraseña es incorrecta";
+      case "User already exists": {
+        message = "Ya existe un usuario con ese email";
         break;
       }
       default: {
@@ -37,10 +35,11 @@ export default function LoginForm() {
 
   async function handleSubmit(values, { setSubmitting }) {
     setShowErrorMessage();
-    const { email, password } = values;
-    const res = await logIn(email, password);
+    const { name, surname, email, password } = values;
 
-    if (res.status === 200) {
+    const res = await signUp(name, surname, email, password);
+
+    if (res.status === 201) {
       navigate("/");
     } else {
       setShowErrorMessage(getErrorMessage(res.response.data.errors));
@@ -59,47 +58,82 @@ export default function LoginForm() {
 
   return (
     <Formik
-      initialValues={{ email: "", password: "" }}
-      validationSchema={LoginSchema}
+      initialValues={{ name: "", surname: "", email: "", password: "" }}
+      validationSchema={registerSchema}
       onSubmit={handleSubmit}
     >
       {({ isSubmitting }) => (
-        <Form className="grid w-80">
+        <Form className="w-96">
+          <label className={styles.label} htmlFor="name">
+            Nombre
+          </label>
+          <Field
+            autoComplete="off"
+            className={styles.field}
+            type="text"
+            id="name"
+            name="name"
+          />
+          <ErrorMessage
+            className={styles.errorMsg}
+            name="name"
+            component="div"
+          />
+
+          <label className={styles.label} htmlFor="surname">
+            Apellido
+          </label>
+          <Field
+            autoComplete="off"
+            className={styles.field}
+            type="text"
+            id="surname"
+            name="surname"
+          />
+          <ErrorMessage
+            className={styles.errorMsg}
+            name="surname"
+            component="div"
+          />
+
           <label className={styles.label} htmlFor="email">
             Email
           </label>
           <Field
-            className={styles.field}
             autoComplete="off"
             id="email"
-            name="email"
+            className={styles.field}
             type="email"
+            name="email"
           />
           <ErrorMessage
             className={styles.errorMsg}
-            component="a"
             name="email"
+            component="div"
           />
+
           <label className={styles.label} htmlFor="password">
             Contraseña
           </label>
           <Field
-            className={styles.field}
+            autoComplete="off"
             id="password"
-            name="password"
+            className={styles.field}
             type="password"
+            name="password"
           />
           <ErrorMessage
             className={styles.errorMsg}
-            component="a"
             name="password"
+            component="div"
           />
+
           <button
             className={styles.button}
             type="submit"
             disabled={isSubmitting}
           >
-            Log In
+            Registrarme
           </button>
 
           {showErrorMessage && (
