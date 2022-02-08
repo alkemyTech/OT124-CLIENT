@@ -92,7 +92,7 @@ function EditOrganization() {
     }
    
 
-    console.log(orgData)
+   
     return (
         <div>
             <OrganizationsList organizations={organizations} setOrgData={setOrgData}></OrganizationsList>

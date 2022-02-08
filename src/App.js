@@ -6,8 +6,8 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import { Route, Routes } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
-import BackOffice from './components/Backoffice'
-import BackOfficeHome from "./pages/backoffice";
+import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
+import Backoffice from "./components/Backoffice";
 import Organization from "./pages/backoffice/organization/Organization";
 import EditOrganization from "./pages/backoffice/organization/EditOrganization";
 import BackofficeCategories from './pages/backoffice/categories/BackofficeCategories'
@@ -23,7 +23,7 @@ function App() {
         <Route path="contacto" element={<ContactUs />} />
         <Route path="signup" element={<SignUp />} />
 
-        <Route path="backoffice" element={<BackOffice />}>
+        <Route path="backoffice" element={<Backoffice />}>
           <Route index element={<BackOfficeHome />} />
           <Route path="organizacion" element={<Organization />}>
           </Route>

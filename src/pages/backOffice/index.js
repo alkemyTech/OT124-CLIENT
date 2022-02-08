@@ -1,6 +1,6 @@
 import React from "react";
-import BackofficeAdminLayout from '../../components/BackOfficeAdminLayout'
-import BackofficeUserLayout from "../../components/BackofficeUserLayout";
+import BackofficeAdminLayout from "../../components/BackOfficeAdminLayout";
+import BackofficeUserLayout from "../../components/BackOfficeUserLayout";
 
 export default function BackofficeHome() {
   // Mockup data
