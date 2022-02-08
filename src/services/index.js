@@ -4,6 +4,8 @@ import FormData from 'form-data';
 export const API_BASE_URL ="http://localhost:5000";
 //export const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:5000";
 
+export const API_CLIENT_ID = process.env.API_CLIENT_ID || "871300589314-rfonpaai5ogdgqpbhgf2pvtfn1gtkh30.apps.googleusercontent.com"
+
 
 export const createMultiForm = (object, keyOfFile='image') => {
     const formData = new FormData()
