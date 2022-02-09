@@ -10,6 +10,7 @@ import { PrivateRoute, AdminRoute } from "./routes";
 import BackOfficeAdminLayout from "./components/BackOfficeAdminLayout";
 import BackOfficeUserLayout from "./components/BackOfficeUserLayout";
 import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
+import BackofficeNews from "./pages/backoffice/news";
 import CUNewsForm from "./components/CUNewsForm";
 
 function App() {
@@ -24,10 +25,11 @@ function App() {
         <Route path="backoffice" element={<AdminRoute />}>
           <Route index element={<BackOfficeAdminLayout />} />
           <Route path="categories" element={<BackofficeCategories />} />
+          <Route path="novedades" element={<BackofficeNews />} />
           <Route path="news/:id" element={<CUNewsForm />} />
-        </Route>
-        <Route path="me" element={<PrivateRoute />}>
-          <Route index element={<BackOfficeUserLayout />} />
+          <Route path="me" element={<PrivateRoute />}>
+            <Route index element={<BackOfficeUserLayout />} />
+          </Route>
         </Route>
       </Route>
     </Routes>
