@@ -2,13 +2,13 @@ import React from "react";
 import Home from "./components/Home";
 import AboutUs from "./components/AboutUs";
 import Layout from "./components/Layout";
-import EditUser from "./components/EditUser";
+//import EditUser from "./components/EditUser";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import { Route, Routes } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
-import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
 import Backoffice from "./components/Backoffice";
+import BackofficeHome from "./pages/backoffice";
 import Organization from "./pages/backoffice/organization/Organization";
 import EditOrganization from "./pages/backoffice/organization/EditOrganization";
 import BackofficeCategories from './pages/backoffice/categories/BackofficeCategories'
@@ -25,7 +25,7 @@ function App() {
         <Route path="signup" element={<SignUp />} />
 
         <Route path="backoffice" element={<Backoffice />}>
-          <Route index element={<BackOfficeHome />} />
+          <Route index element={<BackofficeHome />} />
           <Route path="organizacion" element={<Organization />}>
           </Route>
           <Route path="editar-organizacion" element={<EditOrganization />}>

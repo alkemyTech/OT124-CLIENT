@@ -1,6 +1,6 @@
 import React from "react";
-import BackofficeAdminLayout from "../../components/BackOfficeAdminLayout";
-import BackofficeUserLayout from "../../components/BackOfficeUserLayout";
+import BackOfficeAdminLayout from "../../components/BackOfficeAdminLayout";
+import BackOfficeUserLayout from "../../components/BackOfficeUserLayout";
 
 export default function BackofficeHome() {
   // Mockup data
@@ -9,8 +9,8 @@ export default function BackofficeHome() {
 
   return (
     <div className="flex justify-center">
-      {role === "admin" && <BackofficeAdminLayout />}
-      {role === "user" && <BackofficeUserLayout />}
+      {role === "admin" && <BackOfficeAdminLayout />}
+      {role === "user" && <BackOfficeUserLayout />}
     </div>
   );
 }
