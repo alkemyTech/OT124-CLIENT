@@ -10,8 +10,8 @@ import Layout from "./components/Layout";
 import BackofficeHome from "./pages/backoffice";
 import BackOfficeActivities from "./pages/backoffice/actividades/BackofficeActivities";
 import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
+import BackofficeNews from "./pages/backoffice/news";
 import ContactUs from "./pages/ContactUs";
-import EditUser from "./components/EditUser";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 
@@ -26,6 +26,8 @@ function App() {
         <Route path="signup" element={<SignUp />} />
         <Route path="backoffice" element={<Backoffice />}>
           <Route index element={<BackofficeHome />} />
+          <Route path="categories" element={<BackofficeCategories />} />
+          <Route path="novedades" element={<BackofficeNews />} />
           <Route path="categories" element={<BackofficeCategories />} />
           <Route path="news/:id" element={<CUNewsForm />} />
           <Route path="actividades" element={<BackOfficeActivities />}>
