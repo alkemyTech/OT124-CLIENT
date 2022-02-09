@@ -2,12 +2,12 @@ import React from "react";
 import Home from "./components/Home";
 import AboutUs from "./components/AboutUs";
 import Layout from "./components/Layout";
-import EditUser from "./components/EditUser";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import { Route, Routes } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
 import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
+import BackofficeAboutUs from "./pages/backoffice/categories/BackofficeAboutUs";
 import Backoffice from "./components/Backoffice";
 import BackofficeHome from "./pages/backoffice";
 import BackofficeNews from "./pages/backoffice/news";
@@ -26,6 +26,7 @@ function App() {
           <Route index element={<BackofficeHome />} />
           <Route path="novedades" element={<BackofficeNews />} />
           <Route path="categories" element={<BackofficeCategories />} /> 
+          <Route path="aboutUsList" element={<BackofficeAboutUs />} /> 
           <Route path="news/:id" element={<CUNewsForm />} />
         </Route>
       </Route>
