@@ -1,5 +1,5 @@
 import React from "react";
-import BackOfficeCard from "./BackofficeCard";
+import BackOfficeCard from "./BackOfficeCard";
 import activitiesIcon from "../img/icons/activities.png";
 import categoriesIcon from "../img/icons/categories.png";
 import membersIcon from "../img/icons/members.png";
