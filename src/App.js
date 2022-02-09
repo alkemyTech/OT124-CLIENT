@@ -2,7 +2,6 @@ import React from "react";
 import Home from "./components/Home";
 import AboutUs from "./components/AboutUs";
 import Layout from "./components/Layout";
-import EditUser from "./components/EditUser";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import { Route, Routes } from "react-router-dom";
@@ -25,7 +24,7 @@ function App() {
         <Route path="backoffice" element={<Backoffice />}>
           <Route index element={<BackofficeHome />} />
           <Route path="novedades" element={<BackofficeNews />} />
-          <Route path="categories" element={<BackofficeCategories />} /> 
+          <Route path="categories" element={<BackofficeCategories />} />
           <Route path="news/:id" element={<CUNewsForm />} />
         </Route>
       </Route>
