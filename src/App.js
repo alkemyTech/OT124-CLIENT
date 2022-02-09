@@ -27,9 +27,9 @@ function App() {
           <Route path="categories" element={<BackofficeCategories />} />
           <Route path="novedades" element={<BackofficeNews />} />
           <Route path="news/:id" element={<CUNewsForm />} />
-          <Route path="me" element={<PrivateRoute />}>
-            <Route index element={<BackOfficeUserLayout />} />
-          </Route>
+        </Route>
+        <Route path="me" element={<PrivateRoute />}>
+          <Route index element={<BackOfficeUserLayout />} />
         </Route>
       </Route>
     </Routes>
