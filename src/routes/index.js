@@ -7,7 +7,7 @@ export function PrivateRoute() {
   return role === "user" ? <Outlet /> : <Navigate to="/login" />;
 }
 
-export function AdminRoute({ children }) {
+export function AdminRoute() {
   // Get auth form state
   const role = "admin";
 
