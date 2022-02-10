@@ -21,10 +21,11 @@ const ErrorComponent = (props) => (
   <p className={styles.error + props.center}>{props.children}</p>
 );
 
-function CUNewsForm() {
+function CUNewsForm(props) {
+  const { isEdit } = props;
   const { id } = useParams();
+  const [notFound, setNotFound] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
-  const [isEdit, setIsEdit] = useState(true);
   const initialValues = {
     name: "",
     content: "",
@@ -40,8 +41,8 @@ function CUNewsForm() {
         setANew(res.data.new);
       })
       .catch((err) => {
+        setNotFound(true);
         console.log(err);
-        setIsEdit(false);
       })
       .finally(setIsDisabled(false));
   }, [id]);
@@ -67,13 +68,7 @@ function CUNewsForm() {
         });
     }
   };
-  const FILE_SIZE = 10000000; // Bytes (5MB)
-  const SUPPORTED_FORMATS = [
-    "image/jpg",
-    "image/jpeg",
-    "image/gif",
-    "image/png",
-  ];
+
   const newsSchema = yup.object().shape({
     name: yup
       .string("El nombre debe ser un string")
@@ -94,103 +89,118 @@ function CUNewsForm() {
   console.log(aNew);
   return (
     <div className="animate__animated animate__slideInDown">
-      <h1 className=" text-3xl my-5 text-center text-[#9ac9fb]">
-        {isEdit ? "Modificar Novedad" : "Crear una nueva novedad"}
-      </h1>
-      <Formik
-        validationSchema={newsSchema}
-        enableReinitialize={true}
-        initialValues={aNew}
-        onSubmit={onSubmit}
-      >
-        {({ values, setFieldValue, isSubmitting, errors, touched, setFieldError }) => (
-          <Form className=" container mx-auto shadow-xl py-3">
-            <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-8 sm:px-24">
-              <div>
-                <div className=" w-full">
-                  <Field
-                    className={`${
-                      errors.name && touched.name
-                        ? styles.errorsField
-                        : styles.field
-                    } h-16`}
-                    name="name"
-                    placeholder="Titulo"
-                    type="text"
-                    disabled={isDisabled}
-                  />
-                  <ErrorMessage component={ErrorComponent} name="name" />
+      {!notFound || !isEdit ? (
+        <Formik
+          validationSchema={newsSchema}
+          enableReinitialize={true}
+          initialValues={aNew}
+          onSubmit={onSubmit}
+        >
+          {({
+            values,
+            setFieldValue,
+            isSubmitting,
+            errors,
+            touched,
+            setFieldError,
+          }) => (
+            <Form className=" container mx-auto shadow-xl py-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-8 sm:px-24">
+                <div>
+                  <div className=" w-full">
+                    <Field
+                      className={`${
+                        errors.name && touched.name
+                          ? styles.errorsField
+                          : styles.field
+                      } h-16`}
+                      name="name"
+                      placeholder="Titulo"
+                      type="text"
+                      disabled={isDisabled}
+                    />
+                    <ErrorMessage component={ErrorComponent} name="name" />
+                  </div>
+                  <div className="w-full">
+                    <Field
+                      as="textarea"
+                      className={`${
+                        errors.content && touched.content
+                          ? styles.errorsField
+                          : styles.field
+                      } h-32 resize-none`}
+                      name="content"
+                      placeholder="Contenido"
+                      type="text"
+                      disabled={isDisabled}
+                    />
+                    <ErrorMessage component={ErrorComponent} name="content" />
+                  </div>
+                  <div className="w-full">
+                    <Field
+                      className={`${
+                        errors.categoryId && touched.categoryId
+                          ? styles.errorsField
+                          : styles.field
+                      } h-16 `}
+                      name="categoryId"
+                      placeholder="Categoria"
+                      type="number"
+                      disabled={isDisabled}
+                    />
+                    <ErrorMessage
+                      component={ErrorComponent}
+                      name="categoryId"
+                    />
+                  </div>
+                  <div className="w-full">
+                    <Field
+                      className={`${
+                        errors.type && touched.type
+                          ? styles.errorsField
+                          : styles.field
+                      } h-16`}
+                      name="type"
+                      placeholder="Tipo"
+                      type="text"
+                      disabled={isDisabled}
+                    />
+                    <ErrorMessage component={ErrorComponent} name="type" />
+                  </div>
                 </div>
-                <div className="w-full">
-                  <Field
-                    as="textarea"
-                    className={`${
-                      errors.content && touched.content
-                        ? styles.errorsField
-                        : styles.field
-                    } h-32 resize-none`}
-                    name="content"
-                    placeholder="Contenido"
-                    type="text"
+                <div className="w-full my-auto">
+                  <UploadImageComponent
+                    setFieldValue={setFieldValue}
+                    setFieldError={setFieldError}
+                    file={values?.image}
+                    keyFile={values?.key}
                     disabled={isDisabled}
+                    error={errors.image}
+                    touched={touched.image}
                   />
-                  <ErrorMessage component={ErrorComponent} name="content" />
-                </div>
-                <div className="w-full">
-                  <Field
-                    className={`${
-                      errors.categoryId && touched.categoryId
-                        ? styles.errorsField
-                        : styles.field
-                    } h-16 `}
-                    name="categoryId"
-                    placeholder="Categoria"
-                    type="number"
-                    disabled={isDisabled}
+                  <ErrorMessage
+                    center=" text-center"
+                    component={ErrorComponent}
+                    name="image"
                   />
-                  <ErrorMessage component={ErrorComponent} name="categoryId" />
-                </div>
-                <div className="w-full">
-                  <Field
-                    className={`${
-                      errors.type && touched.type
-                        ? styles.errorsField
-                        : styles.field
-                    } h-16`}
-                    name="type"
-                    placeholder="Tipo"
-                    type="text"
-                    disabled={isDisabled}
-                  />
-                  <ErrorMessage component={ErrorComponent} name="type" />
                 </div>
               </div>
-              <div className="w-full my-auto">
-                <UploadImageComponent
-                  setFieldValue={setFieldValue}
-                  setFieldError={setFieldError}
-                  file={values?.image}
-                  keyFile={values?.key}
-                  disabled={isDisabled}
-                  error={errors.image}
-                  touched={touched.image}
-                />
-                <ErrorMessage
-                  center=" text-center"
-                  component={ErrorComponent}
-                  name="image"
-                />
+              <div className="flex justify-center my-6">
+                <button
+                  className={`${styles.button}`}
+                  type="submit"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting && <SpinSVGButton />}
+                  {!isEdit ? "Crear" : "Modificar"}
+                </button>
               </div>
-            </div>
-            <div className="flex justify-center my-6">
-              <button className={`${styles.button}`} type="submit" disabled={isSubmitting}>
-                {isSubmitting && <SpinSVGButton />}
-                {!isEdit ? "Crear" : "Modificar"}
-              </button>
-            </div>
-          </Form>
-        )}
-      </Formik>
+            </Form>
+          )}
+        </Formik>
+      ) : (
+        <h1>No existe esa novedad</h1>
+      )}
     </div>
   );
 }
