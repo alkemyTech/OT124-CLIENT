@@ -29,7 +29,7 @@ export default function News() {
             {newsArray !== undefined ?
                 newsArray.map((element) => {
                     <>
-                    <div className="md:grid hidden rounded shadow-md grid-cols-1 grid-rows-[1fr,40px] w-3/4 h-60 bg-white">
+                    <div className="md:grid hidden rounded max shadow-md grid-cols-1 grid-rows-[1fr,40px] w-3/4 h-60 bg-white">
                          <img className=" px-1 border-2 row-start-1 row-end-2 col-start-1 col-end-2" src={element.src} ></img>
                          <h3 className=" px-1 place-self-center text-xl row-start-2 row-end-3 col-start-1 col-end-2">{element.name}</h3>
                          <div className=" flex row-start-1 row-end-3 col-start-1 col-end-2 bg-slate-400 opacity-0 hover:opacity-80 justify-center items-center">
@@ -61,13 +61,3 @@ export default function News() {
         </section>
     )
 }
-
-/**
- * 
-<div className=" flex row-start-1 row-end-2 col-start-1 col-end-3 bg-slate-400 opacity-0 hover:opacity-80 justify-center items-center">
-                        <button className=" hover:bg-sky-600 rounded p-2 opacity-100 tx text-white bg-sky-500 h-fit">
-                            MÁS INFORMACION
-                        </button>
-                    </div>
- */
-
