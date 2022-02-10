@@ -1,0 +1,142 @@
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { useParams } from "react-router";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import SpinSVGButton from "./SpinSVGButton";
+import * as yup from "yup";
+import { createCategory, getCategory, updateCategory } from "../services/categories";
+
+const styles = {
+  field:
+    "w-full shadow-md bg-gray-100 border-b-4 transition hover:border-[#9ac9fb] ease-linear duration-300 my-2 p-4 outline-none transform hover:-translate-x-3",
+  errorsField:
+    "w-full shadow-md bg-gray-100 border  border-red-500 my-2 p-4 outline-none",
+  button:
+    "bg-transparent flex items-center justify-center hover:bg-sky-500 text-sky-500 font-semibold hover:text-white border border-sky-500 hover:border-transparent rounded py-2 px-4 w-96 transform hover:scale-110 ease-in duration-300",
+  error: " text-red-500 text-lg",
+};
+
+const ErrorComponent = (props) => (
+  <p className={styles.error + props.center}>{props.children}</p>
+);
+
+function CUCategoriesForm(props) {
+    const { isEdit } = props;
+    const { id } = useParams();
+    const [notFound, setNotFound] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(true);
+    const initialValues = {
+      name: "",
+      description: ""
+    };
+    const [category, setCategory] = useState(initialValues);
+    useEffect(() => {
+      getCategory(id)
+        .then((res) => {
+          setCategory(res.data.data);
+          console.log(res)
+        })
+        .catch((err) => {
+          setNotFound(true);
+          console.log(err);
+        })
+        .finally(setIsDisabled(false));
+    }, [id]);
+  
+    const onSubmit = (values, { resetForm }) => {
+      if (isEdit) {
+        updateCategory(values, id)
+          .then((res) => {
+            setCategory(initialValues);
+            resetForm();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        createCategory(values)
+          .then((res) => {
+            setCategory(initialValues);
+            resetForm();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    };
+  const categoriesSchema = yup.object().shape({
+    name: yup
+      .string("El nombre debe ser un string")
+      .required("El nombre de la categoria es requerida"),
+    description: yup
+      .string("La descripción debe ser un string")
+      .required("La descripción de la categoria es requerida"),
+  });
+
+  return (
+    <div className="animate__animated animate__slideInDown">
+      {!notFound || !isEdit ? (
+        <Formik
+          validationSchema={categoriesSchema}
+          enableReinitialize={true}
+          initialValues={category}
+          onSubmit={onSubmit}
+        >
+          {({
+            isSubmitting,
+            errors,
+            touched,
+          }) => (
+            <Form className=" container mx-auto shadow-xl py-3">
+              <div className="grid grid-cols-1 sm:gap-8 sm:px-24">
+                  <div className=" w-full">
+                    <Field
+                      className={`${
+                        errors.name && touched.name
+                          ? styles.errorsField
+                          : styles.field
+                      } h-16`}
+                      name="name"
+                      placeholder="Titulo"
+                      type="text"
+                      disabled={isDisabled}
+                    />
+                    <ErrorMessage component={ErrorComponent} name="name" />
+                  </div>
+                  <div className="w-full">
+                    <Field
+                      as="textarea"
+                      className={`${
+                        errors.content && touched.content
+                          ? styles.errorsField
+                          : styles.field
+                      } h-32 resize-none`}
+                      name="description"
+                      placeholder="Descripcion"
+                      type="text"
+                      disabled={isDisabled}
+                    />
+                    <ErrorMessage component={ErrorComponent} name="description" />
+                  </div>
+                </div>
+              <div className="flex justify-center my-6">
+                <button
+                  className={`${styles.button}`}
+                  type="submit"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting && <SpinSVGButton />}
+                  {!isEdit ? "Crear" : "Modificar"}
+                </button>
+              </div>
+            </Form>
+          )}
+        </Formik>
+      ) : (
+        <h1>No existe esa categoria</h1>
+      )}
+    </div>
+  );
+}
+
+export default CUCategoriesForm;
