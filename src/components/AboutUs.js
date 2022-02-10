@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "./Footer";
 
 function AboutUs(props) {
   return (
@@ -6,7 +7,7 @@ function AboutUs(props) {
       <div>
         <p>Hello!, we are an ....</p>
       </div>
-      <Footer />
+      
     </div>
   );
 }
