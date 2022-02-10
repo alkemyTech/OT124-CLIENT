@@ -11,6 +11,8 @@ import Backoffice from "./components/Backoffice";
 import BackofficeHome from "./pages/backoffice";
 import BackofficeNews from "./pages/backoffice/news";
 import CUNewsForm from "./components/CUNewsForm";
+import BackofficeEditCategory from "./pages/backoffice/categories/BackofficeEditCategory";
+import BackofficeCreateCategory from "./pages/backoffice/categories/BackofficeCreateCategory";
 
 function App() {
   return (
@@ -24,7 +26,9 @@ function App() {
         <Route path="backoffice" element={<Backoffice />}>
           <Route index element={<BackofficeHome />} />
           <Route path="novedades" element={<BackofficeNews />} />
-          <Route path="categories" element={<BackofficeCategories />} />
+          <Route path="categorias" element={<BackofficeCategories />} />
+          <Route path="categorias/crear-categoria" element={<BackofficeCreateCategory />} />
+          <Route path="categorias/editar-categoria/:id" element={<BackofficeEditCategory />} />
           <Route path="news/:id" element={<CUNewsForm />} />
         </Route>
       </Route>
