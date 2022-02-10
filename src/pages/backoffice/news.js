@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import newsIcon from "../../img/icons/news.png";
 import {getAllNews} from "../../services/news"
@@ -6,7 +6,19 @@ import {getAllNews} from "../../services/news"
 export default function BackofficeNews() {
 
 
-    const [newsArray, setNewsArray] = useState([1,2])
+    const [newsArray, setNewsArray] = useState()
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await getAllNews();
+                setNewsArray(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchData();
+    }, []);
 
     // map elements on second div. Adjust flow with flex.
 
@@ -22,8 +34,9 @@ export default function BackofficeNews() {
                 <img className=" p-1 w-28 " src={newsIcon}></img>
                 <button className="bg-sky-500 hover:bg-sky-700 text-white font-bold text-xs md:text-sm py-1 px-2 md:px-4 rounded"><Link to={"/backoffice"}>VOLVER</Link></button>
             </div>
-            <div className="flex justify-center md:p-2">
-                {newsArray.map((element) => {
+            <div className="flex flex-row justify-center md:p-2">
+                {newsArray !== undefined ? 
+                newsArray.map((element) => {
                     return(
                         <div className=" grid  h-fit md:grid-cols-[0.5fr_1fr] grid-rows-[0.5fr_1fr_0.5fr] grid-cols-1 flex-col mx-6 my-6  md:h-60 border-1 rounded-lg p-2 md:p-6 shadow-lg hover:shadow-2xl">
                             <img className="md:inline-block col-start-1 col-end-2 row-start-1 row-end-4 bg-slate-500"></img>
@@ -37,7 +50,14 @@ export default function BackofficeNews() {
                         </div>
 
                     )
-                } )}
+                })
+                : 
+                <>
+                    <div className=" grid  h-fit md:grid-cols-[0.5fr_1fr] grid-rows-[0.5fr_1fr_0.5fr] grid-cols-1 flex-col mx-6 my-6  md:h-60 border-1 rounded-lg p-2 md:p-6 shadow-lg hover:shadow-2xl">
+                            <h3 className=" p-1 text-xl">No se encontraron novedades</h3>
+                    </div>
+                </> }
+                
                 
             </div>
         </section>
