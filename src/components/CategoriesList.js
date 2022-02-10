@@ -1,32 +1,8 @@
 import React from "react";
-import Swal from "sweetalert2";
-import Axios from "axios";
-import { deleteCategorie } from "../services/categories";
-
-
+import { Link } from "react-router-dom";
+import DeleteAlert from "./DeleteAlert";
 function CategoriesList(props) {
-  const { categories } = props;
-
-  const deleteSubmit = async (e) => {
-    Swal.fire({
-      title: "ELIMINAR",
-      text: "Esta seguro que desea eliminar la categoria?",
-      icon: "warning",
-      confirmButtonText: "Si",
-      showCancelButton: true,
-      denyButtonText: "Cancelar",
-    }).then((respuesta) => {
-      if (respuesta.isConfirmed) {
-        deleteCategorie(e.target.id);
-        Swal.fire({
-          text: "La categoria a sido eliminada",
-          icon: "success",
-          timer: "2000",
-        });
-      }
-    });
-  };
-
+  const { categories, setCategories } = props;
   return (
     <>
       {categories.length ? (
@@ -51,16 +27,29 @@ function CategoriesList(props) {
                   <td className="py-3 px-4">{category.name}</td>
                   <td className="py-3 px-4">{category.description}</td>
                   <td className="py-3 px-4 text-center">
-                    <button
-                      className=" bg-red-500 text-white shadow shadow-red-800 rounded-sm px-4 py-1 hover:bg-red-600"
+                    <DeleteAlert
+                      styles={
+                        " bg-red-500 text-white shadow shadow-red-800 rounded-sm px-4 py-1 hover:bg-red-600"
+                      }
                       id={category.id}
-                      onClick={(e) => deleteSubmit(e)}
-                    >
-                      Eliminar
-                    </button>
+                      title={"ELIMINAR"}
+                      message={
+                        "¿Está seguro que desea eliminar esta categoría?"
+                      }
+                      afterMessage={
+                        "La categoría ha sido eliminada exitosamente"
+                      }
+                      setList={setCategories}
+                      list={categories}
+                    />
                   </td>
                   <td className="py-3 px-4 text-center">
-                    <button className="hover:underline">Editar</button>
+                    <Link
+                      to={`editar-novedad/${category.id}`}
+                      className="hover:underline"
+                    >
+                      Editar
+                    </Link>
                   </td>
                 </tr>
               ))}
