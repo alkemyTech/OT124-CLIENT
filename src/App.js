@@ -10,6 +10,7 @@ import Profile from "./pages/Profile"
 import SignUp from "./pages/SignUp";
 import { Route, Routes } from "react-router-dom";
 import ContactUs from "./pages/ContactUs";
+import ListNewsCollection from "./components/ListNewsCollection";
 import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
 import Backoffice from "./components/Backoffice";
 import BackofficeHome from "./pages/backoffice";
@@ -25,9 +26,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/contacto" element={<ContactUs />} />
         <Route path="/mi-perfil" element={<Profile />} />
-        <Route path="nosotros" element={<AboutUs />} />
-        <Route path="login" element={<Login />} />
-        <Route path="contacto" element={<ContactUs />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="backoffice" element={<Backoffice />}>
           <Route index element={<BackofficeHome />} />
