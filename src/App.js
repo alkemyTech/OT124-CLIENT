@@ -12,6 +12,7 @@ import BackofficeHome from "./pages/backoffice";
 import BackofficeNews from "./pages/backoffice/news";
 import CUNewsForm from "./components/CUNewsForm";
 import News from "./pages/News";
+import NewDetails from "./components/NewDetails";
 
 function App() {
   return (
@@ -19,7 +20,9 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="nosotros" element={<AboutUs />} />
-        <Route path="novedades" element={<News />} />
+        <Route path="novedades" element={<News />}> 
+          <Route path=":id" element={<NewDetails />} />
+        </Route>
         <Route path="login" element={<Login />} />
         <Route path="contacto" element={<ContactUs />} />
         <Route path="signup" element={<SignUp />} />
