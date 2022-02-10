@@ -1,15 +1,18 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import { selectUserData } from "../features/authSlice";
+import { useSelector } from "react-redux";
 
 export function PrivateRoute() {
-  // Get auth form state
-  const role = "user";
+  const userData = useSelector(selectUserData);
+  const role = userData?.user.role;
+
   return role === "user" ? <Outlet /> : <Navigate to="/login" />;
 }
 
 export function AdminRoute() {
-  // Get auth form state
-  const role = "admin";
+  const userData = useSelector(selectUserData);
+  const role = userData?.user.role;
 
   return role === "admin" ? <Outlet /> : <Navigate to="/" />;
 }
