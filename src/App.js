@@ -14,7 +14,6 @@ import BackOfficeUserLayout from "./components/BackOfficeUserLayout";
 import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
 import BackofficeNews from "./pages/backoffice/news";
 import CUNewsForm from "./components/CUNewsForm";
-import SignUp from "./pages/SignUp";
 
 function App() {
   return (
