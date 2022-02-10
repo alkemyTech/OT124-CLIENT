@@ -13,22 +13,55 @@ let seeder = [
 ]
 // replace "seeder" by incoming array
 function Carrusel() {
-  return( 
-  <div className='flex justify-center w-full'>
-    <div className=' w-3/4'>
-    <Carousel autoFocus={true} >
-    {seeder.map(e => {
-      return(
-        <div>
-        <img src={e.imgUrl} className='max-h-[35rem]' />
-        <p className="legend">{e.text}</p>
-          </div>
-      )
-    })}
-    </Carousel>
-  </div>
-</div>
-)
+
+  const styles = {
+    carouselContainer: "flex justify-center w-full my-[25px] bg-slate-200 z-10",
+    carouselImage: "max-w-[30rem] object-contain",
+    carouselLabel: "absolute w-full bottom-[10%] ",
+    prevArrow:
+      "absolute flex justify-center items-center h-12 w-12 z-10 cursor-pointer text-5xl text-white transition-all duration-200 rounded-full top-[40%] left-[5%] bg-[rgb(0,0,0,0.3)] hover:bg-[rgb(0,0,0,1)]",
+    nextArrow:
+      "absolute flex justify-center items-center h-12 w-12 z-10 cursor-pointer text-5xl text-white transition-all duration-200 rounded-full top-[40%] right-[5%] bg-[rgb(0,0,0,0.3)] hover:bg-[rgb(0,0,0,1)]",
+  };
+
+  const prevArrow = (handler) => {
+    return (
+      <div className={styles.prevArrow} onClick={handler}>
+        {"<"}
+      </div>
+    );
+  };
+  const nextArrow = (handler) => {
+    return (
+      <div className={styles.nextArrow} onClick={handler}>
+        {">"}
+      </div>
+    );
+  };
+
+  return (
+    <div className={styles.carouselContainer}>
+      <Carousel
+        autoFocus={true}
+        showStatus={false}
+        showIndicators={false}
+        showThumbs={false}
+        autoPlay={true}
+        infiniteLoop={true}
+        renderArrowPrev={prevArrow}
+        renderArrowNext={nextArrow}
+      >
+        {seeder.map((e) => {
+          return (
+            <div key={e.imgUrl}>
+              <img src={e.imgUrl} className={styles.carouselImage} />
+              <div className={styles.carouselLabel}>{e.text}</div>
+            </div>
+          );
+        })}
+      </Carousel>
+    </div>
+  );
 }
 
 export default Carrusel;
