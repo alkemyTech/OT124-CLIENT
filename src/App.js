@@ -6,16 +6,13 @@ import AboutUs from "./components/AboutUs";
 import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import ContactUs from "./pages/ContactUs";
-import Profile from "./pages/Profile"
-import SignUp from "./pages/SignUp";
-import { Route, Routes } from "react-router-dom";
-import ContactUs from "./pages/ContactUs";
-import ListNewsCollection from "./components/ListNewsCollection";
+import Profile from "./pages/Profile";
 import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
 import Backoffice from "./components/Backoffice";
 import BackofficeHome from "./pages/backoffice";
 import BackofficeNews from "./pages/backoffice/news";
 import CUNewsForm from "./components/CUNewsForm";
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (
