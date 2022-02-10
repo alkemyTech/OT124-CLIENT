@@ -18,11 +18,7 @@
     "react-responsive-carousel": "^3.2.22",
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
-<<<<<<< HEAD
-    "react-scripts": "5.0.0",
-=======
     "react-scripts": "^5.0.0",
->>>>>>> bae4c1e1521ea93ba17a26c17b150598670578f3
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
     "slick-carousel": "^1.8.1",

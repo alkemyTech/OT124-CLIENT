@@ -92,7 +92,6 @@ function CUNewsForm() {
     image: yup.mixed().required("El archivo es requerido"),
   });
   
-  console.log(aNew);
   return (
     <div className="animate__animated animate__slideInDown">
       <h1 className=" text-3xl my-5 text-center text-[#9ac9fb]">
