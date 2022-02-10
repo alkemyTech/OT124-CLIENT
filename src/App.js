@@ -11,8 +11,9 @@ import Backoffice from "./components/Backoffice";
 import BackofficeHome from "./pages/backoffice";
 import BackofficeNews from "./pages/backoffice/news";
 import CUNewsForm from "./components/CUNewsForm";
+import NewsIndex from "./components/NewsIndex";
 import News from "./pages/News";
-import NewDetails from "./components/NewDetails";
+import NewDetails from "./components/NewDatails";
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="nosotros" element={<AboutUs />} />
-        <Route path="novedades" element={<News />}> 
+        <Route path="novedades" element={<NewsIndex />}> 
+          <Route index element={<News />}/>
           <Route path=":id" element={<NewDetails />} />
         </Route>
         <Route path="login" element={<Login />} />

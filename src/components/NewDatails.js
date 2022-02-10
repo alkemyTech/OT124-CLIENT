@@ -19,8 +19,19 @@ export default function NewDetails() {
         fetchData();
     }, []);
 
+    console.log(newId)
+
     return (
         <section>
+            {selectedNew !== undefined ?
+                <div>
+                    Aqui si hay
+                </div> 
+             : 
+                <div>
+                    No existe, cabron. No existe la id =  {newId}
+                </div>
+             }
         </section>
     )
 
