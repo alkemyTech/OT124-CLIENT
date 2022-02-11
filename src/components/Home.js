@@ -19,7 +19,7 @@ function Home(props) {
     <div className="Home flex flex-col justify-center items-center text-center">
       <Carrusel />
 
-      <h1 className="text-2xl">{welcome}</h1>
+      <h1 className="text-4xl">{welcome}</h1>
 
       <section className="mt-16">
         <h2 className="pb-10 text-xl">Últimas novedades</h2>
