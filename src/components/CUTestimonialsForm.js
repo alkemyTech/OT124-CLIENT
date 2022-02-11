@@ -73,7 +73,7 @@ function CUTestimonialsForm(props) {
       .required("El nombre del testimonio es requerido"),
     content: yup
       .string("El contenido debe ser un string")
-      .required("El contenido deñ testimonio es requerido"),
+      .required("El contenido del testimonio es requerido"),
     image: yup.mixed().required("El archivo es requerido"),
   });
   
