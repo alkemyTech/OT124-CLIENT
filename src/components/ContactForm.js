@@ -1,6 +1,8 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import React from "react";
+import { postContact } from "../services/contact";
+import { useNavigate } from "react-router-dom";
 
 const styles = {
   field:
@@ -17,6 +19,7 @@ const ErrorComponent = (props) => (
 );
 
 export default function ContactForm(props) {
+  const navigate = useNavigate();
   const initialValues = {
     name: "",
     email: "",
@@ -39,18 +42,22 @@ export default function ContactForm(props) {
     message: Yup.string().required("Por favor ingresa un mensaje"),
   });
 
-  const onSubmit = (values, { resetForm }) => {
-    console.log(values);
-    resetForm();
-  };
+  async function handleSubmit(values) {
+    const { name, email, phone, message } = values;
+    const res = await postContact(name, email, phone, message);
+
+    if (res.status === 201) {
+      navigate("/");
+    }
+  } 
 
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, }) => (
         <Form className=" container mx-auto px-5">
           <div className=" w-full">
             <Field

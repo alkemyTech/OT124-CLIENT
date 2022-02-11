@@ -14,6 +14,9 @@ import BackOfficeUserLayout from "./components/BackOfficeUserLayout";
 import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
 import BackofficeNews from "./pages/backoffice/news";
 import CUNewsForm from "./components/CUNewsForm";
+import NewsIndex from "./components/NewsIndex";
+import News from "./pages/News";
+import NewDetails from "./components/NewDatails";
 
 function App() {
   return (
@@ -33,6 +36,10 @@ function App() {
         </Route>
         <Route path="me" element={<PrivateRoute />}>
           <Route index element={<BackOfficeUserLayout />} />
+        </Route>
+        <Route path="novedades" element={<NewsIndex />}> 
+          <Route index element={<News />}/>
+          <Route path=":id" element={<NewDetails />} />
         </Route>
       </Route>
     </Routes>
