@@ -8,14 +8,15 @@ import Login from "./pages/Login";
 import ContactUs from "./pages/ContactUs";
 import Profile from "./pages/Profile"
 import SignUp from "./pages/SignUp";
-import { Route, Routes } from "react-router-dom";
-import ContactUs from "./pages/ContactUs";
-import ListNewsCollection from "./components/ListNewsCollection";
+// import ListNewsCollection from "./components/ListNewsCollection";
 import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
 import Backoffice from "./components/Backoffice";
 import BackofficeHome from "./pages/backoffice";
 import BackofficeNews from "./pages/backoffice/news";
 import CUNewsForm from "./components/CUNewsForm";
+import BackofficeTestimonials from "./pages/backoffice/testimonials/BackofficeTestimonials";
+import BackofficeEditTestimonials from "./pages/backoffice/testimonials/BackofficeEditTestimonials";
+import BackofficeCreateTestimonials from "./pages/backoffice/testimonials/BackofficeCreateTestimonials";
 
 function App() {
   return (
@@ -32,6 +33,10 @@ function App() {
           <Route path="novedades" element={<BackofficeNews />} />
           <Route path="categories" element={<BackofficeCategories />} />
           <Route path="news/:id" element={<CUNewsForm />} />
+          <Route path="testimonios" element={<BackofficeTestimonials />} >
+            <Route path="editar-testimonio/:id" element={<BackofficeEditTestimonials />} />
+            <Route path="crear-testimonio" element={<BackofficeCreateTestimonials />} />
+          </Route>
         </Route>
       </Route>
     </Routes>
