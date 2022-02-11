@@ -3,10 +3,13 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { logIn } from "../services/auth";
 import { useNavigate } from "react-router-dom";
-import { GoogleLogin, } from 'react-google-login'
+import { GoogleLogin } from "react-google-login";
 import axios from "axios";
 import { API_BASE_URL, API_CLIENT_ID } from "../services";
 import GoogleIcon from "./GoogleIcon";
+import { setUserData } from "../features/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserData } from "../features/authSlice";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().required("Obligatorio").email("Email invalido").max(255),
@@ -18,6 +21,7 @@ const LoginSchema = Yup.object().shape({
 
 export default function LoginForm() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [showErrorMessage, setShowErrorMessage] = useState();
 
@@ -39,16 +43,21 @@ export default function LoginForm() {
     return message;
   }
 
-  async function handleSubmit(values, { setSubmitting }) {
-    setShowErrorMessage();
-    const { email, password } = values;
-    const res = await logIn(email, password);
+  async function handleSubmit(values, actions) {
+    const { tokenId } = values;
 
-    if (res.status === 200) {
+    setShowErrorMessage();
+
+    const { email, password } = values;
+    const res = await logIn(email, password, tokenId);
+
+    dispatch(setUserData(res.data));
+
+    if (res.status === 200 || 201) {
       navigate("/");
     } else {
       setShowErrorMessage(getErrorMessage(res.response.data.errors));
-      setSubmitting(false);
+      actions.setSubmitting(false);
     }
   }
 
@@ -61,90 +70,75 @@ export default function LoginForm() {
     errorMsg: "text-red-500 text-sm text-center",
   };
 
-  const responseSuccessGoogle = async (res) =>{
-   const { tokenId } = res
-    try{
-    const response = await axios.post(`${API_BASE_URL}/api/v1/auth/googleAuth`, { tokenId })
-    if (response.status === 200) {
-      navigate("/");
-      }
-    }
-    catch(err){
-      console.log(err)
-    }
-  }
-  
-  const responseErrorGoogle = (res) =>{
-    console.log(res)
-  }
   return (
     <>
-    <Formik
-      initialValues={{ email: "", password: "" }}
-      validationSchema={LoginSchema}
-      onSubmit={handleSubmit}
-    >
-      {({ isSubmitting }) => (
-        <Form className="grid w-80">
-          <label className={styles.label} htmlFor="email">
-            Email
-          </label>
-          <Field
-            className={styles.field}
-            autoComplete="off"
-            id="email"
-            name="email"
-            type="email"
-          />
-          <ErrorMessage
-            className={styles.errorMsg}
-            component="a"
-            name="email"
-          />
-          <label className={styles.label} htmlFor="password">
-            Contraseña
-          </label>
-          <Field
-            className={styles.field}
-            id="password"
-            name="password"
-            type="password"
-          />
-          <ErrorMessage
-            className={styles.errorMsg}
-            component="a"
-            name="password"
-          />
-          <button
-            className={styles.button}
-            type="submit"
-            disabled={isSubmitting}
-          >
-            Log In
-          </button>
-
-          {showErrorMessage && (
-            <div className={styles.errorMsg}>{showErrorMessage}</div>
-          )}
-           <GoogleLogin 
-            className=" my-4 text-lg text-center"
-            clientId={API_CLIENT_ID}
-            render={(props)=>(
-              <button onClick={props.onClick} 
-              className={" inline-flex items-center "+styles.button} disabled={props.disabled} >
-                <GoogleIcon className=' hover:bg-sky-500'/>
-                <span className={"w-full mt-1"}>
-                  Loguearse con Google
-                </span>
-             </button>
-          )}
-            onFailure={responseErrorGoogle}
-            onSuccess={responseSuccessGoogle}
-            cookiePolicy={'single_host_origin'}
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        validationSchema={LoginSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form className="grid w-80">
+            <label className={styles.label} htmlFor="email">
+              Email
+            </label>
+            <Field
+              className={styles.field}
+              autoComplete="off"
+              id="email"
+              name="email"
+              type="email"
             />
-        </Form>    
-      )}
-    </Formik>
+            <ErrorMessage
+              className={styles.errorMsg}
+              component="a"
+              name="email"
+            />
+            <label className={styles.label} htmlFor="password">
+              Contraseña
+            </label>
+            <Field
+              className={styles.field}
+              id="password"
+              name="password"
+              type="password"
+            />
+            <ErrorMessage
+              className={styles.errorMsg}
+              component="a"
+              name="password"
+            />
+            <button
+              className={styles.button}
+              type="submit"
+              disabled={isSubmitting}
+            >
+              Log In
+            </button>
+
+            {showErrorMessage && (
+              <div className={styles.errorMsg}>{showErrorMessage}</div>
+            )}
+            <GoogleLogin
+              className=" my-4 text-lg text-center"
+              clientId={API_CLIENT_ID}
+              render={(props) => (
+                <button
+                  onClick={props.onClick}
+                  className={" inline-flex items-center " + styles.button}
+                  disabled={props.disabled}
+                >
+                  <GoogleIcon className=" hover:bg-sky-500" />
+                  <span className={"w-full mt-1"}>Loguearse con Google</span>
+                </button>
+              )}
+              onFailure={handleSubmit}
+              onSuccess={handleSubmit}
+              cookiePolicy={"single_host_origin"}
+            />
+          </Form>
+        )}
+      </Formik>
     </>
   );
 }
