@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { getNew } from "../services/news";
+
+import { getNew } from "../services/new";
+
 
 
 export default function NewsCollection() {
