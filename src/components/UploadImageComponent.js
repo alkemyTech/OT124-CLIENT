@@ -36,7 +36,7 @@ const DropZone = (props) => {
 
 
 const UploadImageComponent = (props) => {
-  const { setFieldValue, setFieldError, file, keyFile, error, touched } = props;
+  const { setFieldValue, setFieldError, file, keyFile, error, touched , circle} = props;
   const { getRootProps, getInputProps, isDragActive, isDragReject } =
     useDropzone({
       accept: "image/*",
@@ -46,16 +46,16 @@ const UploadImageComponent = (props) => {
             const filePreview = acceptedFiles?.map(file => Object.assign(file, {
                 preview: URL.createObjectURL(file)
               }))
-              return setFieldValue('image', filePreview) 
+              return setFieldValue("image", filePreview) 
         }
       },
     });
     useEffect(()=>{
         if (isDragReject){
-        setFieldError('image', 'Formato de archivo no soportado')
+        setFieldError("image", 'Formato de archivo no soportado')
         }
         else{
-        setFieldError('image', null)
+        setFieldError("image", null)
         }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -63,22 +63,21 @@ const UploadImageComponent = (props) => {
 
   return (
     <>
-      <div className="mx-auto my-3 flex flex-col justify-center items-center">
+      <div className="mx-auto flex flex-col justify-center items-center">
         <div
-          className={`flex w-3/6 h-3/6 justify-center relative shadow-lg ${
-            !file && "px-6 pt-5 pb-6"
+          className={`flex flex-col items-center ${circle ? "w-56" : "w-80"} h-56 ${circle && "rounded-full"} justify-center text-center relative shadow-lg ${
+            !file && "px-6 pt-10 pb-10"
           } ${
             error && touched
               ? "border  border-red-500"
               : "border-2 border-gray-300 border-dashed"
           } 
-          rounded-md transform ease-in-out hover:scale-110 duration-200`}
+          transform ease-in-out hover:scale-110 duration-200`}
           {...getRootProps()}
         >
-          <div className="space-y-1 text-center">
             {file && (
               <button
-                className="bg-red-500 text-white rounded-xl px-2 transform hover:scale-110 mx-3 right-0 absolute z-10"
+                className="bg-red-500 text-white rounded-xl px-2 transform hover:scale-110 mx-3 right-0 top-0 absolute z-10"
                 onClick={(e) => {
                   e.stopPropagation();
                   setFieldValue("image", null);
@@ -92,7 +91,7 @@ const UploadImageComponent = (props) => {
                 <img
                   className={`${
                     isDragActive && " opacity-30"
-                  } object-scale-down z-0`}
+                  } ${circle && "rounded-full"} object-contain w-full h-full z-0`}
                   alt=""
                   src={`${
                     file[0].preview || `${API_BASE_URL}/api/v1/files/${keyFile}`
@@ -124,7 +123,6 @@ const UploadImageComponent = (props) => {
             )}
           </div>
         </div>
-      </div>
     </>
   );
 };
