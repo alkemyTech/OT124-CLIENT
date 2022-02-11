@@ -159,7 +159,7 @@ function CUTestimonialsForm(props) {
           )}
         </Formik>
       ) : (
-        <h1>No existe esa novedad</h1>
+        <h1>No existe ese testimonio</h1>
       )}
     </div>
   );
