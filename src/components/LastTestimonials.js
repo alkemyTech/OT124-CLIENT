@@ -26,6 +26,8 @@ export default function LastTestimonials() {
         {testimonials.map((testimonial) => {
           return (
             <HomeCard
+              id={testimonial.id}
+              type="testimonios"
               key={testimonial.id}
               name={testimonial.name}
               img={testimonial.lastimage?.key}

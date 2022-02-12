@@ -24,7 +24,13 @@ export default function LastNews() {
       <div className="flex gap-9 flex-wrap justify-center">
         {newsArray.map((news) => {
           return (
-            <HomeCard key={news.id} name={news.name} img={news.image.key} />
+            <HomeCard
+              id={news.id}
+              type="novedades"
+              key={news.id}
+              name={news.name}
+              img={news.image.key}
+            />
           );
         })}
       </div>
