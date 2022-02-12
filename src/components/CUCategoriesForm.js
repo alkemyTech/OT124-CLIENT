@@ -4,7 +4,13 @@ import { useParams } from "react-router";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import SpinSVGButton from "./SpinSVGButton";
 import * as yup from "yup";
-import { createCategory, getCategory, updateCategory } from "../services/categories";
+import {
+  createCategory,
+  getCategory,
+  updateCategory,
+} from "../services/categories";
+import ErrorAlert from "./ErrorAlert";
+import SuccessAlert from "./SuccessAlert";
 
 const styles = {
   field:
@@ -21,49 +27,54 @@ const ErrorComponent = (props) => (
 );
 
 function CUCategoriesForm(props) {
-    const { isEdit } = props;
-    const { id } = useParams();
-    const [notFound, setNotFound] = useState(false);
-    const [isDisabled, setIsDisabled] = useState(true);
-    const initialValues = {
-      name: "",
-      description: ""
-    };
-    const [category, setCategory] = useState(initialValues);
-    useEffect(() => {
-      getCategory(id)
-        .then((res) => {
-          setCategory(res.data.data);
-          console.log(res)
-        })
-        .catch((err) => {
+  const { isEdit } = props;
+  const { id } = useParams();
+  const [notFound, setNotFound] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [error, setError] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
+  const initialValues = {
+    name: "",
+    description: "",
+  };
+  const [category, setCategory] = useState(initialValues);
+  useEffect(() => {
+    getCategory(id)
+      .then((res) => {
+        if (res.status === 200) {
+          setCategory(res?.data?.new);
+        } else {
           setNotFound(true);
-          console.log(err);
-        })
-        .finally(setIsDisabled(false));
-    }, [id]);
-  
-    const onSubmit = (values, { resetForm }) => {
-      if (isEdit) {
-        updateCategory(values, id)
-          .then((res) => {
-            setCategory(initialValues);
-            resetForm();
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      } else {
-        createCategory(values)
-          .then((res) => {
-            setCategory(initialValues);
-            resetForm();
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    };
+        }
+      })
+      .finally(setIsDisabled(false));
+  }, [id]);
+
+  const onSubmit = (values, { setSubmitting, resetForm }) => {
+    if (isEdit) {
+      updateCategory(values, id).then((res) => {
+        if (res.status === 200) {
+          setCategory(initialValues);
+          resetForm();
+          setSuccessMsg("La categoria ha sido modificada exitosamente");
+        } else {
+          setError(true);
+          setSubmitting(false);
+        }
+      });
+    } else {
+      createCategory(values).then((res) => {
+        if (res.status === 201) {
+          setCategory(initialValues);
+          resetForm();
+          setSuccessMsg("La categoria ha sido creada exitosamente");
+        } else {
+          setError(true);
+          setSubmitting(false);
+        }
+      });
+    }
+  };
   const categoriesSchema = yup.object().shape({
     name: yup
       .string("El nombre debe ser un string")
@@ -74,7 +85,7 @@ function CUCategoriesForm(props) {
   });
 
   return (
-    <div className="animate__animated animate__slideInDown">
+    <div className="">
       {!notFound || !isEdit ? (
         <Formik
           validationSchema={categoriesSchema}
@@ -82,43 +93,39 @@ function CUCategoriesForm(props) {
           initialValues={category}
           onSubmit={onSubmit}
         >
-          {({
-            isSubmitting,
-            errors,
-            touched,
-          }) => (
+          {({ isSubmitting, errors, touched }) => (
             <Form className=" container mx-auto shadow-xl py-3">
               <div className="grid grid-cols-1 sm:gap-8 sm:px-24">
-                  <div className=" w-full">
-                    <Field
-                      className={`${
-                        errors.name && touched.name
-                          ? styles.errorsField
-                          : styles.field
-                      } h-16`}
-                      name="name"
-                      placeholder="Titulo"
-                      type="text"
-                      disabled={isDisabled}
-                    />
-                    <ErrorMessage component={ErrorComponent} name="name" />
-                  </div>
-                  <div className="w-full">
-                    <Field
-                      as="textarea"
-                      className={`${
-                        errors.content && touched.content
-                          ? styles.errorsField
-                          : styles.field
-                      } h-32 resize-none`}
-                      name="description"
-                      placeholder="Descripcion"
-                      type="text"
-                      disabled={isDisabled}
-                    />
-                    <ErrorMessage component={ErrorComponent} name="description" />
-                  </div>
+                <div className=" w-full">
+                  <Field
+                    className={`${
+                      errors.name && touched.name
+                        ? styles.errorsField
+                        : styles.field
+                    } h-16`}
+                    name="name"
+                    placeholder="Titulo"
+                    type="text"
+                    disabled={isDisabled}
+                  />
+                  <ErrorMessage component={ErrorComponent} name="name" />
                 </div>
+                <div className="w-full">
+                  <Field
+                    as="textarea"
+                    className={`${
+                      errors.content && touched.content
+                        ? styles.errorsField
+                        : styles.field
+                    } h-32 resize-none`}
+                    name="description"
+                    placeholder="Descripcion"
+                    type="text"
+                    disabled={isDisabled}
+                  />
+                  <ErrorMessage component={ErrorComponent} name="description" />
+                </div>
+              </div>
               <div className="flex justify-center my-6">
                 <button
                   className={`${styles.button}`}
@@ -133,7 +140,13 @@ function CUCategoriesForm(props) {
           )}
         </Formik>
       ) : (
-        <h1>No existe esa categoria</h1>
+        <div className=" flex flex-col text-center justify-center  mx-6 my-6  md:h-60 border-1 rounded-lg p-2 md:p-6 shadow-lg hover:shadow-2xl">
+          <h3 className=" p-1 text-xl">No existe esa categoria</h3>
+        </div>
+      )}
+      {error && <ErrorAlert setError={setError} />}
+      {successMsg && (
+        <SuccessAlert successMsg={successMsg} setSuccessMsg={setSuccessMsg} />
       )}
     </div>
   );
