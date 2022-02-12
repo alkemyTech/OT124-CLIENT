@@ -1,6 +1,5 @@
 import axios from "axios";
 import { API_BASE_URL, createMultiForm } from "./index";
-axios.defaults.headers.common["Authorization"] = 'Bearer '+JSON.parse(localStorage.getItem('userData'))?.token;
 
 export async function getAllNews() {
   return await axios
