@@ -7,9 +7,9 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 export default function Layout() {
   const location = useLocation();
   return (
-    <div>
+    <div className="flex flex-col justify-between min-h-[100vh]">
       <Header />
-      <div>
+      <div className="flex flex-col flex-grow justify-center py-[25px]">
         <TransitionGroup component={null}>
           <CSSTransition key={location.key} classNames="fade" timeout={300}>
             <Outlet></Outlet>
