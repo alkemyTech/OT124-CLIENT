@@ -91,7 +91,7 @@ function CUTestimonialsForm(props) {
   });
   
   return (
-    <div className="animate__animated animate__slideInDown">
+    <div className="">
       {!notFound || !isEdit ? (
         <Formik
           validationSchema={testimonialsSchema}
@@ -172,7 +172,9 @@ function CUTestimonialsForm(props) {
           )}
         </Formik>
       ) : (
-        <h1>No existe ese testimonio</h1>
+        <div className=" flex flex-col text-center justify-center  mx-6 my-6  md:h-60 border-1 rounded-lg p-2 md:p-6 shadow-lg hover:shadow-2xl">
+                            <h3 className=" p-1 text-xl">No existe ese testimonio</h3>
+                    </div> 
       )}
       {error && <ErrorAlert />}
       {successMsg && <SuccessAlert successMsg={successMsg} setSuccessMsg={setSuccessMsg} />}

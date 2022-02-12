@@ -213,7 +213,9 @@ function CUNewsForm(props) {
           )}
         </Formik>
       ) : (
-        <h1>No existe esa novedad</h1>
+        <div className=" flex flex-col text-center justify-center  mx-6 my-6  md:h-60 border-1 rounded-lg p-2 md:p-6 shadow-lg hover:shadow-2xl">
+                            <h3 className=" p-1 text-xl">No existe esa novedad</h3>
+                    </div> 
       )}
       {error && <ErrorAlert setError={setError} />}
       {successMsg && <SuccessAlert successMsg={successMsg} setSuccessMsg={setSuccessMsg} />}
