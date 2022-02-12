@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Carrusel from "./Carrusel";
-import LastNews from "./LastNews";
-import LastTestimonials from "./LastTestimonials";
+import Carrusel from "../components/Carrusel";
+import LastNews from "../components/LastNews";
+import LastTestimonials from "../components/LastTestimonials";
 
 function Box() {
   const styles = {
