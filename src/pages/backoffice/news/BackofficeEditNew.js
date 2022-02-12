@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import CUNewsForm from "../../../components/CUNewsForm";
 
 export default function BackofficeEditNews() {
@@ -9,9 +8,6 @@ export default function BackofficeEditNews() {
         <h1 className=" text-3xl my-5 text-center text-[#9ac9fb]">
           Modificar Novedad
         </h1>
-        <button className={``}>
-            <Link to={"/backoffice/novedades"}>Volver</Link>
-        </button>
         <CUNewsForm isEdit={true} />
       </div>
     </div>

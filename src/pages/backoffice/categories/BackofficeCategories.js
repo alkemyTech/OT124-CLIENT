@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import CategoriesHeader from "../../../components/CategoriesHeader";
 import CategoriesList from "../../../components/CategoriesList";
+import { getAllCategories } from "../../../services/categories";
 
-let categories = [
+let initialCategories = [
   {
     id: "1",
     name: "Categ 1",
@@ -21,13 +23,22 @@ let categories = [
   },
 ];
 
-
 export default function BackofficeCategories() {
+  const [categories, setCategories] = useState(initialCategories);
+  useEffect(() => {
+    getAllCategories()
+      .then((res) => {
+        setCategories(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <div className=" container mx-auto flex justify-center shadow-lg sm:py-40">
       <div className="sm:px-32 px-2 w-full">
         <CategoriesHeader />
-        <CategoriesList categories={categories} />
+        <CategoriesList categories={categories} setCategories={setCategories} />
       </div>
     </div>
   );
