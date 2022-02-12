@@ -24,13 +24,13 @@ const ErrorComponent = (props) => (
   <p className={styles.error + props.center}>{props.children}</p>
 );
 
-function CUNewsForm() {
+function CUNewsForm(props) {
+  const { isEdit } = props
   const { id } = useParams();
   const [notFound, setNotFound] = useState(false);
   const [error, setError] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
-  const [isEdit, setIsEdit] = useState(true);
   const initialValues = {
     name: "",
     content: "",
@@ -52,7 +52,7 @@ function CUNewsForm() {
       .finally(setIsDisabled(false));
   }, [id]);
 
-  const onSubmit = (values, { resetForm }) => {
+  const onSubmit = (values, { resetForm, setSubmitting }) => {
     if (isEdit) {
       updateNew(values, id).then((res) => {
         if (res.status === 200) {
@@ -77,13 +77,7 @@ function CUNewsForm() {
       });
     }
   };
-  const FILE_SIZE = 10000000; // Bytes (5MB)
-  const SUPPORTED_FORMATS = [
-    "image/jpg",
-    "image/jpeg",
-    "image/gif",
-    "image/png",
-  ];
+  
   const newsSchema = yup.object().shape({
     name: yup
       .string("El nombre debe ser un string")
