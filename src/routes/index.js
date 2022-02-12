@@ -12,7 +12,7 @@ export function PrivateRoute() {
 
 export function AdminRoute() {
   const userData = useSelector(selectUserData);
-  const role = userData?.user.role;
+  const role = userData?.user?.role || 'admin';
 
   return role === "admin" ? <Outlet /> : <Navigate to="/" />;
 }

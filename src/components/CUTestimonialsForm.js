@@ -78,7 +78,7 @@ function CUTestimonialsForm(props) {
   });
   
   return (
-    <div className="animate__animated animate__slideInDown">
+    <div className="">
       {!notFound || !isEdit ? (
         <Formik
           validationSchema={testimonialsSchema}
