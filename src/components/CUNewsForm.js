@@ -8,7 +8,6 @@ import SpinSVGButton from "./SpinSVGButton";
 import * as yup from "yup";
 import ErrorAlert from "./ErrorAlert";
 import SuccessAlert from "./SuccessAlert";
-import { Link } from "react-router-dom";
 
 const styles = {
   field:
@@ -25,11 +24,11 @@ const ErrorComponent = (props) => (
 );
 
 function CUNewsForm(props) {
-  const { isEdit } = props
+  const { isEdit } = props;
   const { id } = useParams();
   const [notFound, setNotFound] = useState(false);
-  const [error, setError] = useState(false);
-  const [successMsg, setSuccessMsg] = useState("");
+  const [error, setError] = useState(false)
+  const [successMsg, setSuccessMsg] = useState('')
   const [isDisabled, setIsDisabled] = useState(true);
   const initialValues = {
     name: "",
@@ -177,53 +176,26 @@ function CUNewsForm(props) {
                     <ErrorMessage component={ErrorComponent} name="type" />
                   </div>
                 </div>
-                <div className="w-full">
-                  <Field
-                    as="textarea"
-                    className={`${
-                      errors.content && touched.content
-                        ? styles.errorsField
-                        : styles.field
-                    } h-32 resize-none`}
-                    name="content"
-                    placeholder="Contenido"
-                    type="text"
+                <div className="w-full my-auto">
+                  <UploadImageComponent
+                    setFieldValue={setFieldValue}
+                    setFieldError={setFieldError}
+                    file={values?.image}
+                    keyFile={values?.key}
                     disabled={isDisabled}
+                    error={errors.image}
+                    touched={touched.image}
                   />
-                  <ErrorMessage component={ErrorComponent} name="content" />
-                </div>
-                <div className="w-full">
-                  <Field
-                    className={`${
-                      errors.categoryId && touched.categoryId
-                        ? styles.errorsField
-                        : styles.field
-                    } h-16 `}
-                    name="categoryId"
-                    placeholder="Categoria"
-                    type="number"
-                    disabled={isDisabled}
+                  <ErrorMessage
+                    center=" text-center"
+                    component={ErrorComponent}
+                    name="image"
                   />
-                  <ErrorMessage component={ErrorComponent} name="categoryId" />
-                </div>
-                <div className="w-full">
-                  <Field
-                    className={`${
-                      errors.type && touched.type
-                        ? styles.errorsField
-                        : styles.field
-                    } h-16`}
-                    name="type"
-                    placeholder="Tipo"
-                    type="text"
-                    disabled={isDisabled}
-                  />
-                  <ErrorMessage component={ErrorComponent} name="type" />
                 </div>
               </div>
               <div className="flex justify-center my-6">
                 <button
-                  className={`${styles.button} mx-5`}
+                  className={`${styles.button}`}
                   type="submit"
                   disabled={isSubmitting}
                 >
