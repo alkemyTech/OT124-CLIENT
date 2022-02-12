@@ -13,7 +13,7 @@ export const authSlice = createSlice({
     setUserData: (state, action) => {
         const {token} = action.payload
         const decoded = decodeToken(token)
-        console.log(decoded)
+        
         const {user} = decoded
         state.userData = user;  
         localStorage.setItem("userData", token);
