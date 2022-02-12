@@ -1,8 +1,11 @@
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { deleteCategory } from "../services/categories";
 import DeleteAlert from "./DeleteAlert";
 function CategoriesList(props) {
-  const { categories, setCategories } = props;
+  const { categories } = props;
+  const { isLoad, setIsLoad } = useState(false)
   return (
     <>
       {categories.length ? (
@@ -39,8 +42,9 @@ function CategoriesList(props) {
                       afterMessage={
                         "La categoría ha sido eliminada exitosamente"
                       }
-                      setList={setCategories}
-                      list={categories}
+                      service={deleteCategory}
+                      setIsLoad={setIsLoad}
+                      isLoad={isLoad}
                     />
                   </td>
                   <td className="py-3 px-4 text-center">
