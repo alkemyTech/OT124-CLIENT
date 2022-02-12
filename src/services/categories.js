@@ -1,9 +1,8 @@
 import axios from "axios";
 import { API_BASE_URL } from "./index";
-axios.defaults.headers.common["Authorization"] = 'Bearer '+JSON.parse(localStorage.getItem('userData'))?.token;
 
 
-export async function deleteCategorie(id) {
+export async function deleteCategory(id) {
   return await axios
     .delete(`${API_BASE_URL}/api/v1/categories/${id}`)
     .catch((error) => error);
