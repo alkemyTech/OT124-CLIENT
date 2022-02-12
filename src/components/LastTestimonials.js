@@ -8,7 +8,7 @@ export default function LastTestimonials() {
   async function fetchData() {
     try {
       const response = await getAllTestimonials();
-      console.log(response);
+
       setTestimonials(response?.data.testimonials.slice(0, 4));
     } catch (e) {
       console.log(e);
