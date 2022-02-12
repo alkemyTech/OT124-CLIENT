@@ -1,38 +1,18 @@
 import React, { useState, useEffect } from "react";
 import HomeCard from "./HomeCard";
+import { getAllTestimonials } from "../services/testimonials";
 
 export default function LastTestimonials() {
   const [testimonials, setTestimonials] = useState([]);
 
   async function fetchData() {
-    // Fetch data form db
-    const mockTestimonials = [
-      {
-        id: 1,
-        name: "Testimonial 1",
-        lastImage: "www.image.url",
-        content: "Soy un contenido",
-      },
-      {
-        id: 2,
-        name: "Testimonial 2",
-        lastImage: "www.image.url",
-        content: "Soy un contenido",
-      },
-      {
-        id: 3,
-        name: "Testimonial 3",
-        lastImage: "www.image.url",
-        content: "Soy un contenido",
-      },
-      {
-        id: 4,
-        name: "Testimonial 4",
-        lastImage: "www.image.url",
-        content: "Soy un contenido",
-      },
-    ];
-    setTestimonials(mockTestimonials);
+    try {
+      const response = await getAllTestimonials();
+      console.log(response);
+      setTestimonials(response?.data.testimonials.slice(0, 4));
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   useEffect(() => {
@@ -48,7 +28,7 @@ export default function LastTestimonials() {
             <HomeCard
               key={testimonial.id}
               name={testimonial.name}
-              img={testimonial.lastImage}
+              img={testimonial.lastimage?.key}
             />
           );
         })}
