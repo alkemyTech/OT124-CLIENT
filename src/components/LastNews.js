@@ -13,6 +13,7 @@ export default function LastNews() {
       console.log(e);
     }
   }
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -22,7 +23,9 @@ export default function LastNews() {
       <h2 className="pb-10 text-xl">Últimas novedades</h2>
       <div className="flex gap-9 flex-wrap justify-center">
         {newsArray.map((news) => {
-          return <HomeCard key={news.id} name={news.name} img={news.image} />;
+          return (
+            <HomeCard key={news.id} name={news.name} img={news.image.key} />
+          );
         })}
       </div>
       <div className="flex mt-12 items-center">
