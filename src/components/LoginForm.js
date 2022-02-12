@@ -51,9 +51,8 @@ export default function LoginForm() {
     const { email, password } = values;
     const res = await logIn(email, password, tokenId);
 
-    dispatch(setUserData(res.data));
-
     if (res.status === 200 || 201) {
+      dispatch(setUserData(res.data));
       navigate("/");
     } else {
       setShowErrorMessage(getErrorMessage(res.response.data.errors));

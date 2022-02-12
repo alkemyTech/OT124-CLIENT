@@ -48,9 +48,8 @@ export default function SignUpForm() {
     const { name, surname, email, password } = values;
     const res = await signUp(name, surname, email, password, tokenId);
 
-    dispatch(setUserData(res.data));
-
     if (res.status === 201 || 200) {
+      dispatch(setUserData(res.data));
       navigate("/");
     } else {
       setShowErrorMessage(getErrorMessage(res.response.data.errors));
