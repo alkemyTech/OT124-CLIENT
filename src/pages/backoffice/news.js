@@ -14,15 +14,14 @@ export default function BackofficeNews() {
     useEffect(() => {
         async function fetchData() {
             try {
-                //const response = await getAllNews();
-                //console.log(response)
-                //setNewsArray(response?.data?.news)
+                const response = await getAllNews();
+                if (response.data.news === undefined) {
+                    setNewsArray([])
+                } else {
+                    setNewsArray(response?.data?.news)
+                }
             } catch (e) {
                 console.error(e);
-            } finally {
-                if (newsArray === undefined) {
-                    setNewsArray([])
-                }
             }
         };
         fetchData();
@@ -32,7 +31,7 @@ export default function BackofficeNews() {
     return (
         <section className=" grid justify-items-center grid-cols-1 md:p-12">
             <button className=" cursor-pointer absolute grid justify-items-center hover:bg-green-700 bg-green-500 right-1 md:mr-16 rounded-full shadow-lg hover:shadow-2xl w-fit h-fit p-2 text-white text-4xl">
-                +
+                <Link to={"crear-novedad"}>+</Link>
             </button>
             <div className=" md:w-48 w-32 md:h-48 h-fit border-1 rounded-lg p-2 md:p-6 grid justify-items-center gap-2 shadow-lg">
                 <img className=" p-1 w-28 " alt='' src={newsIcon}></img>
