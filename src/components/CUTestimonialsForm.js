@@ -6,6 +6,8 @@ import UploadImageComponent from "./UploadImageComponent";
 import SpinSVGButton from "./SpinSVGButton";
 import * as yup from "yup";
 import { createTestimonial, getTestimonial, updateTestimonial } from "../services/testimonials";
+import ErrorAlert from "./ErrorAlert";
+import SuccessAlert from "./SuccessAlert";
 
 const styles = {
   field:
@@ -25,7 +27,9 @@ function CUTestimonialsForm(props) {
   const {isEdit} = props
   const { id } = useParams();
   const [notFound, setNotFound] = useState(false);
+  const [error, setError] = useState(false)
   const [isDisabled, setIsDisabled] = useState(true);
+  const [successMsg, setSuccessMsg] = useState('')
   const initialValues = {
     name: "",
     content: "",
@@ -36,34 +40,43 @@ function CUTestimonialsForm(props) {
   useEffect(() => {
     getTestimonial(id)
       .then((res) => {
-        setTestimonial(res.data.new);
-      })
-      .catch((err) => {
-        setNotFound(true);
-        console.log(err);
+        if (res.status===200){
+          setTestimonial(res.data.testimonials);
+        }
+        else{
+          setNotFound(true)
+        }
       })
       .finally(setIsDisabled(false));
   }, [id]);
 
-  const onSubmit = (values, { resetForm }) => {
+  const onSubmit = (values, { setSubmitting, resetForm }) => {
     if (isEdit) {
       updateTestimonial(values, id)
         .then((res) => {
-          setTestimonial(initialValues);
-          resetForm();
+          if (res.status===200){
+            setTestimonial(initialValues);
+            resetForm();
+            setSuccessMsg("El testimonio ha sido modificado exitosamente")
+          }
+          else{
+            setError(true)
+            setSubmitting(false);
+          }
         })
-        .catch((err) => {
-          console.log(err);
-        });
     } else {
       createTestimonial(values)
         .then((res) => {
-          setTestimonial(initialValues);
-          resetForm();
+          if (res.status===201){
+            setTestimonial(initialValues);
+            resetForm();
+            setSuccessMsg("El testimonio ha sido creado exitosamente")
+          }
+          else{
+            setError(true)
+            setSubmitting(false);
+          }
         })
-        .catch((err) => {
-          console.log(err);
-        });
     }
   };
 
@@ -78,7 +91,7 @@ function CUTestimonialsForm(props) {
   });
   
   return (
-    <div className="animate__animated animate__slideInDown">
+    <div className="">
       {!notFound || !isEdit ? (
         <Formik
           validationSchema={testimonialsSchema}
@@ -159,8 +172,12 @@ function CUTestimonialsForm(props) {
           )}
         </Formik>
       ) : (
-        <h1>No existe ese testimonio</h1>
+        <div className=" flex flex-col text-center justify-center  mx-6 my-6  md:h-60 border-1 rounded-lg p-2 md:p-6 shadow-lg hover:shadow-2xl">
+                            <h3 className=" p-1 text-xl">No existe ese testimonio</h3>
+                    </div> 
       )}
+      {error && <ErrorAlert />}
+      {successMsg && <SuccessAlert successMsg={successMsg} setSuccessMsg={setSuccessMsg} />}
     </div>
   );
 }

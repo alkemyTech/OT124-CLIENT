@@ -1,10 +1,10 @@
-import React from "react";
 import axios from "axios";
 import { API_BASE_URL, createMultiForm } from "./index";
 
-
 export async function getAllNews() {
-  return await axios.get(`${API_BASE_URL}/api/v1/news`).catch((error) => error);
+  return await axios
+    .get(`${API_BASE_URL}/api/v1/news`)
+    .catch((error) => error);
 }
 
 export async function getNew(id) {
