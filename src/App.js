@@ -20,6 +20,7 @@ import BackofficeCreateTestimonials from "./pages/backoffice/testimonials/Backof
 import NewsIndex from "./components/NewsIndex";
 import News from "./pages/News";
 import NewDetails from "./components/NewDatails";
+import ListUsers from './pages/backoffice/users/listUsers';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             <Route path="editar-testimonio/:id" element={<BackofficeEditTestimonials />} />
             <Route path="crear-testimonio" element={<BackofficeCreateTestimonials />} />
           </Route>
+          <Route path="users" element={<ListUsers />} />
         </Route>
         <Route path="me" element={<PrivateRoute />}>
           <Route index element={<BackOfficeUserLayout />} />
