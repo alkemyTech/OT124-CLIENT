@@ -1,12 +1,23 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { deleteCategory } from "../services/categories";
+import { deleteCategory, getAllCategories } from "../services/categories";
 import DeleteAlert from "./DeleteAlert";
 
 function CategoriesList(props) {
-  const { categories } = props;
   const [ isLoad, setIsLoad ] = useState(false)
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    getAllCategories()
+      .then((res) => {
+        setCategories(res.data.categories);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [isLoad]);
+
   return (
     <>
       {categories.length ? (
@@ -62,7 +73,9 @@ function CategoriesList(props) {
           </table>
         </div>
       ) : (
-        <h1 className="text-center">No hay categorias existentes</h1>
+        <div className=" flex flex-col text-center justify-center  mx-6 my-6  md:h-60 border-1 rounded-lg p-2 md:p-6 shadow-lg hover:shadow-2xl">
+                            <h3 className=" p-1 text-xl">No hay categorias existentes</h3>
+                    </div> 
       )}
     </>
   );

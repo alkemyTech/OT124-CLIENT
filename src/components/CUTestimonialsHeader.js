@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function TestimonialsHeader(props) {
+function CUTestimonialsHeader(props) {
   const { title } = props;
   return (
     <div className="flex sm:flex-row flex-col px-24">
@@ -21,4 +21,4 @@ function TestimonialsHeader(props) {
   );
 }
 
-export default TestimonialsHeader;
+export default CUTestimonialsHeader;
