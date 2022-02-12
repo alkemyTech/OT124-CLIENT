@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import HomeCard from "./HomeCard";
+import { Link } from "react-router-dom";
 import { getAllNews } from "../services/news";
 
 export default function LastNews() {
@@ -38,10 +39,12 @@ export default function LastNews() {
           <h2>No existen nodevades por el momento</h2>
         )}
       </div>
-      <div className="flex mt-12 items-center">
-        <button className="bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white py-1.5 px-6 border border-sky-500 hover:border-transparent rounded m-auto">
-          Ver todas
-        </button>
+      <div className="flex mt-12 items-center justify-center">
+        <Link to="/novedades">
+          <button className="bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white py-1.5 px-6 border border-sky-500 hover:border-transparent rounded m-auto">
+            Ver todas
+          </button>
+        </Link>
       </div>
     </section>
   );

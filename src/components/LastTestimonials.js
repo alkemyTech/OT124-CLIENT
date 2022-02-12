@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import HomeCard from "./HomeCard";
 import { getAllTestimonials } from "../services/testimonials";
 
@@ -39,10 +40,12 @@ export default function LastTestimonials() {
           <h2>No existen testimonios por el momento</h2>
         )}
       </div>
-      <div className="flex mt-12 items-center">
-        <button className="bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white py-1.5 px-6 border border-sky-500 hover:border-transparent rounded m-auto">
-          Ver todos
-        </button>
+      <div className="flex mt-12 items-center justify-center">
+        <Link to="/testimonios">
+          <button className="bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white py-1.5 px-6 border border-sky-500 hover:border-transparent rounded m-auto">
+            Ver todos
+          </button>
+        </Link>
       </div>
     </section>
   );
