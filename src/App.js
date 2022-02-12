@@ -46,7 +46,8 @@ function App() {
             <Route path="crear-novedad" element={<BackofficeCreateNews />} />
             <Route path="editar-novedad/:id" element={<BackofficeEditNews  />} />
           </Route>
-          <Route path="testimonios" element={<BackofficeTestimonials />} >
+          <Route path="testimonios" >
+            <Route index element={<BackofficeTestimonials />} />
             <Route path="editar-testimonio/:id" element={<BackofficeEditTestimonials />} />
             <Route path="crear-testimonio" element={<BackofficeCreateTestimonials />} />
           </Route>
