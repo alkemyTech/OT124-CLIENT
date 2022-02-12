@@ -14,6 +14,12 @@ import BackOfficeUserLayout from "./components/BackOfficeUserLayout";
 import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
 import BackofficeNews from "./pages/backoffice/news";
 import CUNewsForm from "./components/CUNewsForm";
+import BackofficeTestimonials from "./pages/backoffice/testimonials/BackofficeTestimonials";
+import BackofficeEditTestimonials from "./pages/backoffice/testimonials/BackofficeEditTestimonials";
+import BackofficeCreateTestimonials from "./pages/backoffice/testimonials/BackofficeCreateTestimonials";
+import NewsIndex from "./components/NewsIndex";
+import News from "./pages/News";
+import NewDetails from "./components/NewDatails";
 
 function App() {
   return (
@@ -30,9 +36,17 @@ function App() {
           <Route path="categories" element={<BackofficeCategories />} />
           <Route path="novedades" element={<BackofficeNews />} />
           <Route path="news/:id" element={<CUNewsForm />} />
+          <Route path="testimonios" element={<BackofficeTestimonials />} >
+            <Route path="editar-testimonio/:id" element={<BackofficeEditTestimonials />} />
+            <Route path="crear-testimonio" element={<BackofficeCreateTestimonials />} />
+          </Route>
         </Route>
         <Route path="me" element={<PrivateRoute />}>
           <Route index element={<BackOfficeUserLayout />} />
+        </Route>
+        <Route path="novedades" element={<NewsIndex />}> 
+          <Route index element={<News />}/>
+          <Route path=":id" element={<NewDetails />} />
         </Route>
       </Route>
     </Routes>
