@@ -3,9 +3,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { deleteCategory } from "../services/categories";
 import DeleteAlert from "./DeleteAlert";
+
 function CategoriesList(props) {
   const { categories } = props;
-  const { isLoad, setIsLoad } = useState(false)
+  const [ isLoad, setIsLoad ] = useState(false)
   return (
     <>
       {categories.length ? (
@@ -49,7 +50,7 @@ function CategoriesList(props) {
                   </td>
                   <td className="py-3 px-4 text-center">
                     <Link
-                      to={`editar-novedad/${category.id}`}
+                      to={`editar-categoria/${category.id}`}
                       className="hover:underline"
                     >
                       Editar
