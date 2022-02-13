@@ -5,10 +5,6 @@ import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
 import store from './store'
-import axios from "axios";
-const token = JSON.parse(localStorage.getItem('userData') || null)?.token
-axios.defaults.headers.common["Authorization"] = token ? `Bearer ${token}` : null;
-
 
 ReactDOM.render(
   <React.StrictMode>

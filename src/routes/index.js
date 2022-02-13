@@ -5,14 +5,14 @@ import { useSelector } from "react-redux";
 
 export function PrivateRoute() {
   const userData = useSelector(selectUserData);
-  const role = userData?.user.role;
+  const role = userData?.role;
 
   return role === "user" ? <Outlet /> : <Navigate to="/login" />;
 }
 
 export function AdminRoute() {
   const userData = useSelector(selectUserData);
-  const role = userData?.user.role;
+  const role = userData?.role;
 
   return role === "admin" ? <Outlet /> : <Navigate to="/" />;
 }
