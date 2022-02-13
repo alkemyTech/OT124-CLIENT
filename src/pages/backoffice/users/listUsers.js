@@ -18,27 +18,25 @@ export default function ListUsers() {
     }, []);
 
     return (
-        <table class='table-auto'>
+        <table className='border-collapse table-auto w-full flex flex-col text-sm items-center'>
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Email</th>
+                    <th className='border-b dark:border-slate-600 font-black p-4 pl-8 pt-0 pb-3 text-slate-400 text-left text-base'>Nombre</th>
+                    <th className='border-b dark:border-slate-600 font-black p-4 pl-8 pt-0 pb-3 text-slate-400 text-left text-base'>Apellido</th>
+                    <th className='border-b dark:border-slate-600 font-black p-4 pl-8 pt-0 pb-3 text-slate-400 text-left text-base'>Email</th>
 
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th className='border-b dark:border-slate-600 font-black p-4 pl-8 pt-0 pb-3 text-slate-400 text-left text-base'>Acción</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody className='bg-ong-sky'>
                 {
                     allUsers.map(user => (
                         <tr key={user.id}>
-                            <td>{user.firstName}</td>
-                            <td>{user.lastName}</td>
-                            <td>{user.email}</td>
+                            <td className='border-b border-slate-100 dark:border-slate-700 p-4 text-slate-200 dark:text-slate-600'>{user.firstName}</td>
+                            <td className='border-b border-slate-100 dark:border-slate-700 p-4 text-slate-200 dark:text-slate-600'>{user.lastName}</td>
+                            <td className='border-b border-slate-100 dark:border-slate-700 p-4 text-slate-200 dark:text-slate-600'>{user.email}</td>
 
-                            <td>Editar</td>
-                            <td><button onClick={() => deleteUser(user.id)}>Eliminar</button></td>
+                            <td className='border-b border-slate-100 dark:border-slate-700 text-ong-red p-4'><button onClick={() => deleteUser(user.id)}>Eliminar</button></td>
                         </tr>
                     ))
                 }

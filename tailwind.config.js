@@ -4,6 +4,11 @@ module.exports = {
     extend: {
       height: {
         '128': '32rem',
+      },
+      colors: {
+        'ong-red': '#DB5752',
+        'ong-yellow': '#FAFA88',
+        'ong-sky': '#9AC9FB'
       }
     },
   },
