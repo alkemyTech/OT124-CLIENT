@@ -4,12 +4,10 @@ import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { signUp } from "../services/auth";
 import { GoogleLogin } from "react-google-login";
-import axios from "axios";
-import { API_BASE_URL, API_CLIENT_ID } from "../services";
+import { API_CLIENT_ID } from "../services";
 import GoogleIcon from "./GoogleIcon";
 import { setUserData } from "../features/authSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { selectUserData } from "../features/authSlice";
+import { useDispatch } from "react-redux";
 
 const registerSchema = yup.object().shape({
   name: yup.string().required("Obligatorio"),
@@ -48,7 +46,7 @@ export default function SignUpForm() {
     const { name, surname, email, password } = values;
     const res = await signUp(name, surname, email, password, tokenId);
 
-    if (res.status === 201 || 200) {
+    if (res.status === 201 || res.status === 200) {
       dispatch(setUserData(res.data));
       navigate("/");
     } else {
