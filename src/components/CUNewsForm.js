@@ -11,7 +11,7 @@ import SuccessAlert from "./SuccessAlert";
 
 const styles = {
   field:
-    "w-full shadow-md bg-gray-100 border-b-4 transition hover:border-[#9ac9fb] ease-linear duration-300 my-2 p-4 outline-none transform hover:-translate-x-3",
+    "w-full shadow-md bg-gray-100 border-b-4 border transition hover:border-sky-500 ease-linear duration-300 my-2 p-4 outline-none transform hover:-translate-x-2",
   errorsField:
     "w-full shadow-md bg-gray-100 border  border-red-500 my-2 p-4 outline-none",
   button:
@@ -27,8 +27,8 @@ function CUNewsForm(props) {
   const { isEdit } = props;
   const { id } = useParams();
   const [notFound, setNotFound] = useState(false);
-  const [error, setError] = useState(false)
-  const [successMsg, setSuccessMsg] = useState('')
+  const [error, setError] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
   const initialValues = {
     name: "",
@@ -42,11 +42,10 @@ function CUNewsForm(props) {
   useEffect(() => {
     getNew(id)
       .then((res) => {
-        if (res.status===200){
+        if (res.status === 200) {
           setANew(res?.data?.new);
-        }
-        else{
-          setNotFound(true)
+        } else {
+          setNotFound(true);
         }
       })
       .finally(setIsDisabled(false));
@@ -54,32 +53,27 @@ function CUNewsForm(props) {
 
   const onSubmit = (values, { resetForm, setSubmitting }) => {
     if (isEdit) {
-      updateNew(values, id)
-        .then((res) => {
-          if (res.status===200){
-            setANew(initialValues);
-            resetForm();
-            setSuccessMsg("La novedad ha sido modificada exitosamente")
-          }
-          else{
-            setError(true)
-            setSubmitting(false);
-          }
-        })
-        
+      updateNew(values, id).then((res) => {
+        if (res.status === 200) {
+          setANew(initialValues);
+          resetForm();
+          setSuccessMsg("La novedad ha sido modificada exitosamente");
+        } else {
+          setError(true);
+          setSubmitting(false);
+        }
+      });
     } else {
-      createNew(values)
-        .then((res) => {
-          if (res.status===201){
-            setANew(initialValues);
-            resetForm();
-            setSuccessMsg("La novedad ha sido creada exitosamente")
-          }
-          else{
-            setError(true)
-            setSubmitting(false);
-          }
-        })
+      createNew(values).then((res) => {
+        if (res.status === 201) {
+          setANew(initialValues);
+          resetForm();
+          setSuccessMsg("La novedad ha sido creada exitosamente");
+        } else {
+          setError(true);
+          setSubmitting(false);
+        }
+      });
     }
   };
 
@@ -100,7 +94,7 @@ function CUNewsForm(props) {
       .integer("La categoria debe ser un numero entero"),
     image: yup.mixed().required("El archivo es requerido"),
   });
-  
+
   return (
     <div className="">
       {!notFound || !isEdit ? (
@@ -214,11 +208,13 @@ function CUNewsForm(props) {
         </Formik>
       ) : (
         <div className=" flex flex-col text-center justify-center  mx-6 my-6  md:h-60 border-1 rounded-lg p-2 md:p-6 shadow-lg hover:shadow-2xl">
-                            <h3 className=" p-1 text-xl">No existe esa novedad</h3>
-                    </div> 
+          <h3 className=" p-1 text-xl">No existe esa novedad</h3>
+        </div>
       )}
       {error && <ErrorAlert setError={setError} />}
-      {successMsg && <SuccessAlert successMsg={successMsg} setSuccessMsg={setSuccessMsg} />}
+      {successMsg && (
+        <SuccessAlert successMsg={successMsg} setSuccessMsg={setSuccessMsg} />
+      )}
     </div>
   );
 }

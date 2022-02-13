@@ -13,6 +13,8 @@ import BackOfficeAdminLayout from "./components/BackOfficeAdminLayout";
 import BackOfficeUserLayout from "./components/BackOfficeUserLayout";
 import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
 import BackofficeNews from "./pages/backoffice/news";
+import BackofficeEditCategory from "./pages/backoffice/categories/BackofficeEditCategory";
+import BackofficeCreateCategory from "./pages/backoffice/categories/BackofficeCreateCategory";
 import BackofficeCreateNews from "./pages/backoffice/news/BackofficeCreateNew";
 import BackofficeEditNews from "./pages/backoffice/news/BackofficeEditNew";
 import BackofficeTestimonials from "./pages/backoffice/testimonials/BackofficeTestimonials";
@@ -27,22 +29,25 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="/nosotros" element={<AboutUs />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/contacto" element={<ContactUs />} />
-        <Route path="/mi-perfil" element={<Profile />} />
+        <Route path="nosotros" element={<AboutUs />} />
+        <Route path="login" element={<Login />} />
+        <Route path="contacto" element={<ContactUs />} />
+        <Route path="mi-perfil" element={<Profile />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="backoffice" element={<AdminRoute />}>
           <Route index element={<BackOfficeAdminLayout />} />
           <Route path="categorias" >
             <Route index element={<BackofficeCategories />} />
+            <Route path="crear-categoria" element={<BackofficeCreateCategory />} />
+            <Route path="editar-categoria/:id" element={<BackofficeEditCategory />} />
           </Route>
           <Route path="novedades" >
             <Route index element={<BackofficeNews />} />
             <Route path="crear-novedad" element={<BackofficeCreateNews />} />
             <Route path="editar-novedad/:id" element={<BackofficeEditNews  />} />
           </Route>
-          <Route path="testimonios" element={<BackofficeTestimonials />} >
+          <Route path="testimonios" >
+            <Route index element={<BackofficeTestimonials />} />
             <Route path="editar-testimonio/:id" element={<BackofficeEditTestimonials />} />
             <Route path="crear-testimonio" element={<BackofficeCreateTestimonials />} />
           </Route>
