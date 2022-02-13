@@ -15,7 +15,7 @@ import SuccessAlert from "./SuccessAlert";
 
 const styles = {
   field:
-    "w-full shadow-md bg-gray-100 border-b-4 transition hover:border-[#9ac9fb] ease-linear duration-300 my-2 p-4 outline-none transform hover:-translate-x-3",
+    "w-full shadow-md bg-gray-100 border-b-4 border transition hover:border-sky-500 ease-linear duration-300 my-2 p-4 outline-none transform hover:-translate-x-2",
   errorsField:
     "w-full shadow-md bg-gray-100 border  border-red-500 my-2 p-4 outline-none",
   button:
@@ -175,7 +175,7 @@ function CUTestimonialsForm(props) {
           <h3 className=" p-1 text-xl">No existe ese testimonio</h3>
         </div>
       )}
-      {error && <ErrorAlert />}
+      {error && <ErrorAlert setError={setError} />}
       {successMsg && (
         <SuccessAlert successMsg={successMsg} setSuccessMsg={setSuccessMsg} />
       )}

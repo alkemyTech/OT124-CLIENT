@@ -15,7 +15,7 @@ function CUCategoriesHeader(props) {
         </Link>
       </div>
       <div className="text-center w-full">
-        <h1 className=" text-3xl my-5 text-center text-[#9ac9fb]">{title}</h1>
+        <h1 className=" text-3xl my-5 text-center text-sky-500">{title}</h1>
       </div>
     </div>
   );

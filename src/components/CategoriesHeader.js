@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 function CategoriesHeader() {
   return (
-    <div className="flex sm:flex-row flex-col justify-around ">
-      <h1 className="sm:text-5xl text-3xl text-center pt-10">Categorias</h1>
+    <div className="flex sm:flex-row flex-col  items-center justify-around my-7">
+      <h1 className="sm:text-5xl text-3xl text-center text-sky-500">Categorias</h1>
       <div className="py-10 text-center">
         <Link
           to={`crear-categoria`}

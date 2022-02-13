@@ -29,10 +29,10 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="/nosotros" element={<AboutUs />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/contacto" element={<ContactUs />} />
-        <Route path="/mi-perfil" element={<Profile />} />
+        <Route path="nosotros" element={<AboutUs />} />
+        <Route path="login" element={<Login />} />
+        <Route path="contacto" element={<ContactUs />} />
+        <Route path="mi-perfil" element={<Profile />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="backoffice" element={<AdminRoute />}>
           <Route index element={<BackOfficeAdminLayout />} />

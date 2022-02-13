@@ -14,7 +14,7 @@ import SuccessAlert from "./SuccessAlert";
 
 const styles = {
   field:
-    "w-full shadow-md bg-gray-100 border-b-4 transition hover:border-[#9ac9fb] ease-linear duration-300 my-2 p-4 outline-none transform hover:-translate-x-3",
+    "w-full shadow-md bg-gray-100 border-b-4 border transition hover:border-sky-500 ease-linear duration-300 my-2 p-4 outline-none transform hover:-translate-x-2",
   errorsField:
     "w-full shadow-md bg-gray-100 border  border-red-500 my-2 p-4 outline-none",
   button:
@@ -95,7 +95,7 @@ function CUCategoriesForm(props) {
         >
           {({ isSubmitting, errors, touched }) => (
             <Form className=" container mx-auto shadow-xl py-3">
-              <div className="grid grid-cols-1 sm:gap-8 sm:px-24">
+              <div className="grid grid-cols-1 sm:px-24">
                 <div className=" w-full">
                   <Field
                     className={`${
