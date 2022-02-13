@@ -9,7 +9,7 @@ const DropZone = (props) => {
       <div className="flex text-lg text-gray-600">
         <label
           htmlFor="file-upload"
-          className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+          className="relative cursor-pointer bg-white rounded-md font-medium text-sky-500 hover:text-sky-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-sky-500"
         >
           {isDragReject ? (
             <p>Formato de archivo no soportado</p>
@@ -72,7 +72,7 @@ const UploadImageComponent = (props) => {
               ? "border  border-red-500"
               : "border-2 border-gray-300 border-dashed"
           } 
-          transform ease-in-out hover:scale-110 duration-200`}
+          transform ease-in-out hover:scale-110 hover:border-sky-500 duration-200`}
           {...getRootProps()}
         >
             {file && (
