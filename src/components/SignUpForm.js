@@ -3,10 +3,13 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { signUp } from "../services/auth";
-import { GoogleLogin, } from 'react-google-login'
+import { GoogleLogin } from "react-google-login";
 import axios from "axios";
 import { API_BASE_URL, API_CLIENT_ID } from "../services";
 import GoogleIcon from "./GoogleIcon";
+import { setUserData } from "../features/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserData } from "../features/authSlice";
 
 const registerSchema = yup.object().shape({
   name: yup.string().required("Obligatorio"),
@@ -22,6 +25,7 @@ const registerSchema = yup.object().shape({
 export default function SignUpForm() {
   const navigate = useNavigate();
   const [showErrorMessage, setShowErrorMessage] = useState();
+  const dispatch = useDispatch();
 
   function getErrorMessage(errorMessage) {
     let message;
@@ -37,17 +41,19 @@ export default function SignUpForm() {
     return message;
   }
 
-  async function handleSubmit(values, { setSubmitting }) {
+  async function handleSubmit(values, actions) {
+    const { tokenId } = values;
     setShowErrorMessage();
+
     const { name, surname, email, password } = values;
+    const res = await signUp(name, surname, email, password, tokenId);
 
-    const res = await signUp(name, surname, email, password);
-
-    if (res.status === 201) {
+    if (res.status === 201 || 200) {
+      dispatch(setUserData(res.data));
       navigate("/");
     } else {
       setShowErrorMessage(getErrorMessage(res.response.data.errors));
-      setSubmitting(false);
+      actions.setSubmitting(false);
     }
   }
 
@@ -59,23 +65,6 @@ export default function SignUpForm() {
       "bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white border border-sky-500 hover:border-transparent rounded py-2 mt-2 px-4 w-full",
     errorMsg: "text-red-500 text-sm text-center",
   };
-
-  const responseSuccessGoogle = async (res) =>{
-    const { tokenId } = res
-     try{
-     const response = await axios.post(`${API_BASE_URL}/api/v1/auth/googleAuth`, { tokenId })
-     if (response.status === 200) {
-       navigate("/");
-       }
-     }
-     catch(err){
-       console.log(err)
-     }
-   }
-   
-   const responseErrorGoogle = (res) =>{
-     console.log(res)
-   }
 
   return (
     <Formik
@@ -160,22 +149,23 @@ export default function SignUpForm() {
           {showErrorMessage && (
             <div className={styles.errorMsg}>{showErrorMessage}</div>
           )}
-          <GoogleLogin 
+          <GoogleLogin
             className=" my-4 text-lg text-center"
             clientId={API_CLIENT_ID}
-            render={(props)=>(
-              <button onClick={props.onClick} 
-              className={" inline-flex items-center "+styles.button} disabled={props.disabled} >
-                <GoogleIcon className=' hover:bg-sky-500'/>
-                <span className={"w-full mt-1"}>
-                  Registrarme con Google
-                </span>
-             </button>
-          )}
-            onFailure={responseErrorGoogle}
-            onSuccess={responseSuccessGoogle}
-            cookiePolicy={'single_host_origin'}
-            />
+            render={(props) => (
+              <button
+                onClick={props.onClick}
+                className={" inline-flex items-center " + styles.button}
+                disabled={props.disabled}
+              >
+                <GoogleIcon className=" hover:bg-sky-500" />
+                <span className={"w-full mt-1"}>Registrarme con Google</span>
+              </button>
+            )}
+            onFailure={handleSubmit}
+            onSuccess={handleSubmit}
+            cookiePolicy={"single_host_origin"}
+          />
         </Form>
       )}
     </Formik>

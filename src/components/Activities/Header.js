@@ -10,7 +10,7 @@ function ActivitiesHeader() {
           to="create"
           className="text-sm bg-green-600 sm:text-lg text-white shadow shadow-green-800 rounded-sm px-8 py-4 hover:bg-green-700 transform ease-in-out duration-300 hover:scale-105"
         >
-          Añadir nueva Activitdad
+          Añadir nueva Actividad
         </Link>
       </div>
     </div>
