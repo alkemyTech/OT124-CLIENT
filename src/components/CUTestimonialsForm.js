@@ -179,8 +179,6 @@ function CUTestimonialsForm(props) {
       {successMsg && (
         <SuccessAlert successMsg={successMsg} setSuccessMsg={setSuccessMsg} />
       )}
-      {error && <ErrorAlert />}
-      {successMsg && <SuccessAlert successMsg={successMsg} setSuccessMsg={setSuccessMsg} />}
     </div>
   );
 }
