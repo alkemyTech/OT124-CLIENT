@@ -91,7 +91,7 @@ function CUNewsForm(props) {
       .required("La categoria de la novedad es requerida")
       .positive("La categoria debe ser un numero positivo")
       .integer("La categoria debe ser un numero entero"),
-    image: yup.mixed(),
+    image: yup.mixed().required("El archivo es requerido"),
   });
 
   return (
