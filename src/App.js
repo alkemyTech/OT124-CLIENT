@@ -1,11 +1,12 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+
+import Home from "./pages/Home";
 import AboutUs from "./components/AboutUs";
 import ActivitiesForm from "./components/Activities/Form";
 import ActivitiesList from "./components/Activities/List";
 import BackOfficeAdminLayout from "./components/BackOfficeAdminLayout";
-import BackOfficeUserLayout from "./components/BackofficeUserLayout";
-import Home from "./components/Home";
+import BackOfficeUserLayout from "./components/BackOfficeUserLayout";
 import Layout from "./components/Layout";
 import NewDetails from "./components/NewDatails";
 import Organization from "./pages/backoffice/organization/Organization";
@@ -15,6 +16,8 @@ import BackOfficeActivities from "./pages/backoffice/actividades/BackofficeActiv
 import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
 import BackofficeCreateCategory from "./pages/backoffice/categories/BackofficeCreateCategory";
 import BackofficeEditCategory from "./pages/backoffice/categories/BackofficeEditCategory";
+import BackOfficeContacts from "./pages/backoffice/contacts/BackOfficeContacts";
+import ContactsList from "./pages/backoffice/contacts/ContactsLIst";
 import BackofficeNews from "./pages/backoffice/news";
 import BackofficeCreateNews from "./pages/backoffice/news/BackofficeCreateNew";
 import BackofficeEditNews from "./pages/backoffice/news/BackofficeEditNew";
@@ -79,13 +82,16 @@ function App() {
             <Route path="create" element={<ActivitiesForm />} />
             <Route path="edit/:id" element={<ActivitiesForm />} />
           </Route>
+          <Route path="contactos" element={<BackOfficeContacts />}>
+            <Route index element={<ContactsList />} />
+          </Route>
+          <Route path="novedades" element={<NewsIndex />}>
+            <Route index element={<News />} />
+            <Route path=":id" element={<NewDetails />} />
+          </Route>
         </Route>
         <Route path="me" element={<PrivateRoute />}>
           <Route index element={<BackOfficeUserLayout />} />
-        </Route>
-        <Route path="novedades" element={<NewsIndex />}>
-          <Route index element={<News />} />
-          <Route path=":id" element={<NewDetails />} />
         </Route>
       </Route>
     </Routes>
