@@ -1,11 +1,19 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+<<<<<<< HEAD
+=======
+
+import Home from "./pages/Home";
+>>>>>>> client-development
 import AboutUs from "./components/AboutUs";
 import ActivitiesForm from "./components/Activities/Form";
 import ActivitiesList from "./components/Activities/List";
 import BackOfficeAdminLayout from "./components/BackOfficeAdminLayout";
 import BackOfficeUserLayout from "./components/BackOfficeUserLayout";
+<<<<<<< HEAD
 import Home from "./components/Home";
+=======
+>>>>>>> client-development
 import Layout from "./components/Layout";
 import NewDetails from "./components/NewDatails";
 import NewsIndex from "./components/NewsIndex";
@@ -13,6 +21,8 @@ import BackOfficeActivities from "./pages/backoffice/actividades/BackofficeActiv
 import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
 import BackofficeCreateCategory from "./pages/backoffice/categories/BackofficeCreateCategory";
 import BackofficeEditCategory from "./pages/backoffice/categories/BackofficeEditCategory";
+import BackOfficeContacts from "./pages/backoffice/contacts/BackOfficeContacts";
+import ContactsList from "./pages/backoffice/contacts/ContactsLIst";
 import BackofficeNews from "./pages/backoffice/news";
 import BackofficeCreateNews from "./pages/backoffice/news/BackofficeCreateNew";
 import BackofficeEditNews from "./pages/backoffice/news/BackofficeEditNew";
@@ -31,10 +41,10 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="/nosotros" element={<AboutUs />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/contacto" element={<ContactUs />} />
-        <Route path="/mi-perfil" element={<Profile />} />
+        <Route path="nosotros" element={<AboutUs />} />
+        <Route path="login" element={<Login />} />
+        <Route path="contacto" element={<ContactUs />} />
+        <Route path="mi-perfil" element={<Profile />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="backoffice" element={<AdminRoute />}>
           <Route index element={<BackOfficeAdminLayout />} />
@@ -71,13 +81,16 @@ function App() {
             <Route path="create" element={<ActivitiesForm />} />
             <Route path="edit/:id" element={<ActivitiesForm />} />
           </Route>
+          <Route path="contactos" element={<BackOfficeContacts />}>
+            <Route index element={<ContactsList />} />
+          </Route>
+          <Route path="novedades" element={<NewsIndex />}>
+            <Route index element={<News />} />
+            <Route path=":id" element={<NewDetails />} />
+          </Route>
         </Route>
         <Route path="me" element={<PrivateRoute />}>
           <Route index element={<BackOfficeUserLayout />} />
-        </Route>
-        <Route path="novedades" element={<NewsIndex />}>
-          <Route index element={<News />} />
-          <Route path=":id" element={<NewDetails />} />
         </Route>
       </Route>
     </Routes>
