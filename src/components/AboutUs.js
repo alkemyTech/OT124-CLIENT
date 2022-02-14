@@ -17,7 +17,7 @@ function AboutUs() {
 
   return (
     <>
-      {members.length ? (
+      {members?.length ? (
         <div className="shadow-md">
           <table className=" shadow-md text-left transform ease-in-out hover:-translate-x-1 duration-200 divide-y divide-gray-200 table-fixed w-full border-collapse cursor-pointer">
             <thead className="bg-gray-100 text-sm sm:text-base">
