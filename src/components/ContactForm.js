@@ -7,7 +7,6 @@ import SuccessAlert from "./SuccessAlert";
 import ErrorAlert from "./ErrorAlert";
 import SpinSVGButton from "./SpinSVGButton";
 
-
 const styles = {
   field:
     "w-full shadow-md bg-gray-100 border-b-4 border transition hover:border-sky-500 ease-linear duration-300 my-2 p-4 outline-none transform hover:-translate-x-2",
