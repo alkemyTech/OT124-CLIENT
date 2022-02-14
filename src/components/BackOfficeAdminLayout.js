@@ -7,7 +7,7 @@ import organizationIcon from "../img/icons/organization.png";
 import slidesIcon from "../img/icons/slides.png";
 import testimonialsIcon from "../img/icons/testimonials.png";
 import usersIcon from "../img/icons/users.png";
-import BackOfficeCard from "./BackOfficeCard";
+import BackOfficeCard from "./BackofficeCard";
 
 export default function BackOfficeAdminLayout() {
   const items = [

@@ -1,5 +1,5 @@
 import React from "react";
-import BackOfficeCard from "./BackOfficeCard";
+import BackOfficeCard from "./BackofficeCard";
 import profileIcon from "../img/icons/profile.png";
 
 export default function BackOfficeUserLayout() {

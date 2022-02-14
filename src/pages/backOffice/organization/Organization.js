@@ -1,5 +1,5 @@
 import React from 'react';
-import BackOfficeCard from '../../../components/BackOfficeCard';
+import BackOfficeCard from '../../../components/BackofficeCard';
 import organizationIcon from "../../../img/icons/organization.png";
 function Organization() {
   const items = [

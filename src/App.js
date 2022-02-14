@@ -4,7 +4,7 @@ import AboutUs from "./components/AboutUs";
 import ActivitiesForm from "./components/Activities/Form";
 import ActivitiesList from "./components/Activities/List";
 import BackOfficeAdminLayout from "./components/BackOfficeAdminLayout";
-import BackOfficeUserLayout from "./components/BackOfficeUserLayout";
+import BackOfficeUserLayout from "./components/BackofficeUserLayout";
 import Home from "./components/Home";
 import Layout from "./components/Layout";
 import NewDetails from "./components/NewDatails";
