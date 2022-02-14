@@ -1,11 +1,12 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+
+import Home from "./pages/Home";
 import AboutUs from "./components/AboutUs";
 import ActivitiesForm from "./components/Activities/Form";
 import ActivitiesList from "./components/Activities/List";
 import BackOfficeAdminLayout from "./components/BackOfficeAdminLayout";
 import BackOfficeUserLayout from "./components/BackOfficeUserLayout";
-import Home from "./components/Home";
 import Layout from "./components/Layout";
 import NewDetails from "./components/NewDatails";
 import NewsIndex from "./components/NewsIndex";
