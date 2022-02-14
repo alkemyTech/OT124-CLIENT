@@ -1,30 +1,22 @@
 import React from "react";
-import Swal from "sweetalert2";
-import { deleteCategorie } from "../services/categories";
-
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { deleteCategory, getAllCategories } from "../services/categories";
+import DeleteAlert from "./DeleteAlert";
 
 function CategoriesList(props) {
-  const { categories } = props;
+  const [ isLoad, setIsLoad ] = useState(false)
+  const [categories, setCategories] = useState([]);
 
-  const deleteSubmit = async (e) => {
-    Swal.fire({
-      title: "ELIMINAR",
-      text: "Esta seguro que desea eliminar la categoria?",
-      icon: "warning",
-      confirmButtonText: "Si",
-      showCancelButton: true,
-      denyButtonText: "Cancelar",
-    }).then((respuesta) => {
-      if (respuesta.isConfirmed) {
-        deleteCategorie(e.target.id);
-        Swal.fire({
-          text: "La categoria a sido eliminada",
-          icon: "success",
-          timer: "2000",
-        });
-      }
-    });
-  };
+  useEffect(() => {
+    getAllCategories()
+      .then((res) => {
+        setCategories(res.data.categories);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [isLoad]);
 
   return (
     <>
@@ -50,16 +42,30 @@ function CategoriesList(props) {
                   <td className="py-3 px-4">{category.name}</td>
                   <td className="py-3 px-4">{category.description}</td>
                   <td className="py-3 px-4 text-center">
-                    <button
-                      className=" bg-red-500 text-white shadow shadow-red-800 rounded-sm px-4 py-1 hover:bg-red-600"
+                    <DeleteAlert
+                      styles={
+                        " bg-red-500 text-white shadow shadow-red-800 rounded-sm px-4 py-1 hover:bg-red-600"
+                      }
                       id={category.id}
-                      onClick={(e) => deleteSubmit(e)}
-                    >
-                      Eliminar
-                    </button>
+                      title={"ELIMINAR"}
+                      message={
+                        "¿Está seguro que desea eliminar esta categoría?"
+                      }
+                      afterMessage={
+                        "La categoría ha sido eliminada exitosamente"
+                      }
+                      service={deleteCategory}
+                      setIsLoad={setIsLoad}
+                      isLoad={isLoad}
+                    />
                   </td>
                   <td className="py-3 px-4 text-center">
-                    <button className="hover:underline">Editar</button>
+                    <Link
+                      to={`editar-categoria/${category.id}`}
+                      className="hover:underline"
+                    >
+                      Editar
+                    </Link>
                   </td>
                 </tr>
               ))}
@@ -67,7 +73,9 @@ function CategoriesList(props) {
           </table>
         </div>
       ) : (
-        <h1 className="text-center">No hay categorias existentes</h1>
+        <div className=" flex flex-col text-center justify-center  mx-6 my-6  md:h-60 border-1 rounded-lg p-2 md:p-6 shadow-lg hover:shadow-2xl">
+                            <h3 className=" p-1 text-xl">No hay categorias existentes</h3>
+                    </div> 
       )}
     </>
   );
