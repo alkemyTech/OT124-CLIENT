@@ -1,7 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL, createMultiForm } from "./index";
 
-
 export async function postContact(name, email, phone, message) {
   return await axios
     .post(`${API_BASE_URL}/api/v1/contacts`, {
@@ -11,4 +10,10 @@ export async function postContact(name, email, phone, message) {
       message,
     })
     .catch((error) => error);
+}
+
+export async function getContacts() {
+  return await axios
+    .get(`${API_BASE_URL}/api/v1/contacts`)
+    .catch((error) => console.log(error));
 }
