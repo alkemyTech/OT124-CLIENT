@@ -30,12 +30,13 @@ export default function BackofficeNews() {
     console.log(newsArray)
     return (
         <section className=" grid justify-items-center grid-cols-1 md:p-12">
-            <button className=" cursor-pointer absolute grid justify-items-center hover:bg-green-700 bg-green-500 right-1 md:mr-16 rounded-full shadow-lg hover:shadow-2xl w-fit h-fit p-2 text-white text-4xl">
+            
+            <div className=" md:w-48 w-32 md:h-48 h-fit border-1 rounded-lg p-2 md:p-6 grid grid-cols-[fit-10px] grid-rows-2 justify-items-center gap-2 shadow-lg">
+                <img className=" col-start-1 col-end-2 row-start-1 row-end-2 p-1 w-28 " alt='' src={newsIcon}></img>
+                <button className="col-start-1 col-end-2 row-start-2 row-end-3 h-fit self-center bg-sky-500 hover:bg-sky-700 text-white font-bold text-xs md:text-sm py-1 px-2 md:px-4 rounded"><Link to={"/backoffice"}>VOLVER</Link></button>
+                <button className=" col-start-2 col-end-3 row-start-1 row-end-2 cursor-pointer grid justify-items-center hover:bg-green-700 bg-green-500 top-1 right-1 md:mr-2 rounded-full shadow-lg hover:shadow-2xl w-9 md:w-12 h-fit p-1 text-white text-xl md:text-4xl">
                 <Link to={"crear-novedad"}>+</Link>
-            </button>
-            <div className=" md:w-48 w-32 md:h-48 h-fit border-1 rounded-lg p-2 md:p-6 grid justify-items-center gap-2 shadow-lg">
-                <img className=" p-1 w-28 " alt='' src={newsIcon}></img>
-                <button className="bg-sky-500 hover:bg-sky-700 text-white font-bold text-xs md:text-sm py-1 px-2 md:px-4 rounded"><Link to={"/backoffice"}>VOLVER</Link></button>
+                </button>
             </div>
             <div className="grid grid-cols-[250px] md:grid-cols-[600px] justify-items-center md:p-2">
                 {newsArray.length !== 0 ?
