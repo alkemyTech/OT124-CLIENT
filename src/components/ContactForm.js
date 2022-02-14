@@ -1,14 +1,19 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import React from "react";
+import { postContact } from "../services/contact";
+import { useState } from "react";
+import SuccessAlert from "./SuccessAlert";
+import ErrorAlert from "./ErrorAlert";
+import SpinSVGButton from "./SpinSVGButton";
 
 const styles = {
   field:
-    "w-full shadow-md bg-gray-100 border-b-4 transition hover:border-[#9ac9fb] ease-linear duration-300 my-2 p-4 outline-none transform hover:-translate-x-6",
+    "w-full shadow-md bg-gray-100 border-b-4 border transition hover:border-sky-500 ease-linear duration-300 my-2 p-4 outline-none transform hover:-translate-x-2",
   errorsField:
     "w-full shadow-md bg-gray-100 border  border-red-500 my-2 p-4 outline-none",
   button:
-    "bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white border border-sky-500 hover:border-transparent rounded py-2 mt-2 px-4 w-96",
+    "bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white border border-sky-500 hover:border-transparent rounded py-2 mt-2 px-4 w-96 transform hover:scale-105 easy-in duration-300",
   error: " text-red-500 text-lg",
 };
 
@@ -23,34 +28,45 @@ export default function ContactForm(props) {
     phone: "",
     message: "",
   };
-
+  const [error, setError] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
   const validationSchema = Yup.object({
     name: Yup.string().required("Por favor ingresa tu nombre"),
     email: Yup.string()
-      .email("Por favor ingresa un formato de email válido 'ej@correo.com'")
-      .required("Por favor ingresa un email"),
-    phone: Yup.string()
-      .matches(
-        /\d+$/,
-        "Por favor ingresa un formato de telefono válido y sin guiones"
+      .email(
+        "Por favor ingresa un formato de email válido 'ejemplo@correo.com'"
       )
-      .min(8, "Debe ingresar un mínimo de 8 números.")
+      .required("Por favor ingresa un email"),
+    phone: Yup
+      .number('El telefono debe ser un numero')
+      .positive('Por favor ingresa solo numeros')
+      .integer('Por favor ingresa solo numeros')
+      .min(10000000, "Debe ingresar un mínimo de 8 números")
+      .max(999999999999, "Debe ingresar un maximo de 13 números ")
       .required("Por favor ingresa un teléfono"),
     message: Yup.string().required("Por favor ingresa un mensaje"),
   });
 
-  const onSubmit = (values, { resetForm }) => {
-    console.log(values);
-    resetForm();
-  };
+  async function handleSubmit(values) {
+    const { name, email, phone, message } = values;
+    const res = await postContact(name, email, phone, message);
+
+    if (res.status === 201 || res.status === 200) {
+      setSuccessMsg(
+        "¡Gracias por contactarnos! Su formulario de contacto ha sido recibido"
+      );
+    } else {
+      setError(true);
+    }
+  }
 
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, isSubmitting }) => (
         <Form className=" container mx-auto px-5">
           <div className=" w-full">
             <Field
@@ -85,7 +101,7 @@ export default function ContactForm(props) {
               } h-16`}
               name="phone"
               placeholder="Teléfono"
-              type="tel"
+              type="number"
             />
             <ErrorMessage component={ErrorComponent} name="phone" />
           </div>
@@ -104,12 +120,21 @@ export default function ContactForm(props) {
           </div>
           <div className="flex justify-center my-4">
             <button
-              className={`${styles.button} transform hover:scale-110 ease-in duration-300`}
+              className={`${styles.button}`}
               type="submit"
+              disabled={isSubmitting}
             >
+              {isSubmitting && <SpinSVGButton />}
               Enviar
             </button>
           </div>
+          {error && <ErrorAlert setError={setError} />}
+          {successMsg && (
+            <SuccessAlert
+              successMsg={successMsg}
+              setSuccessMsg={setSuccessMsg}
+            />
+          )}
         </Form>
       )}
     </Formik>

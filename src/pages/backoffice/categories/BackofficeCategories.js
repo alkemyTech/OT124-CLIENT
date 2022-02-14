@@ -1,8 +1,14 @@
-import React from "react";
+<<<<<<< HEAD
+import React, { useEffect } from "react";
+import { useState } from "react";
+=======
+>>>>>>> 7037ad47f323656ec4db039422c9a02fa25d84b9
 import CategoriesHeader from "../../../components/CategoriesHeader";
 import CategoriesList from "../../../components/CategoriesList";
+import { getAllCategories } from "../../../services/categories";
 
-let categories = [
+<<<<<<< HEAD
+let initialCategories = [
   {
     id: "1",
     name: "Categ 1",
@@ -21,13 +27,30 @@ let categories = [
   },
 ];
 
-
 export default function BackofficeCategories() {
+  const [categories, setCategories] = useState(initialCategories);
+  useEffect(() => {
+    getAllCategories()
+      .then((res) => {
+        setCategories(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+=======
+export default function BackofficeCategories() {
+  
+>>>>>>> 7037ad47f323656ec4db039422c9a02fa25d84b9
   return (
     <div className=" container mx-auto flex justify-center shadow-lg sm:py-40">
       <div className="sm:px-32 px-2 w-full">
         <CategoriesHeader />
-        <CategoriesList categories={categories} />
+<<<<<<< HEAD
+        <CategoriesList categories={categories} setCategories={setCategories} />
+=======
+        <CategoriesList />
+>>>>>>> 7037ad47f323656ec4db039422c9a02fa25d84b9
       </div>
     </div>
   );

@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { createNew, getNew, updateNew } from "../services/news";
 import UploadImageComponent from "./UploadImageComponent";
 import SpinSVGButton from "./SpinSVGButton";
 import * as yup from "yup";
+import {
+  createTestimonial,
+  getTestimonial,
+  updateTestimonial,
+} from "../services/testimonials";
 import ErrorAlert from "./ErrorAlert";
 import SuccessAlert from "./SuccessAlert";
 
@@ -23,27 +27,25 @@ const ErrorComponent = (props) => (
   <p className={styles.error + props.center}>{props.children}</p>
 );
 
-function CUNewsForm(props) {
+function CUTestimonialsForm(props) {
   const { isEdit } = props;
   const { id } = useParams();
   const [notFound, setNotFound] = useState(false);
   const [error, setError] = useState(false);
-  const [successMsg, setSuccessMsg] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
+  const [successMsg, setSuccessMsg] = useState("");
   const initialValues = {
     name: "",
     content: "",
-    categoryId: "",
-    type: "",
     image: "",
     key: "",
   };
-  const [aNew, setANew] = useState(initialValues);
+  const [testimonial, setTestimonial] = useState(initialValues);
   useEffect(() => {
-    getNew(id)
+    getTestimonial(id)
       .then((res) => {
         if (res.status === 200) {
-          setANew(res?.data?.new);
+          setTestimonial(res.data.testimonials);
         } else {
           setNotFound(true);
         }
@@ -51,24 +53,24 @@ function CUNewsForm(props) {
       .finally(setIsDisabled(false));
   }, [id]);
 
-  const onSubmit = (values, { resetForm, setSubmitting }) => {
+  const onSubmit = (values, { setSubmitting, resetForm }) => {
     if (isEdit) {
-      updateNew(values, id).then((res) => {
+      updateTestimonial(values, id).then((res) => {
         if (res.status === 200) {
-          setANew(initialValues);
+          setTestimonial(initialValues);
           resetForm();
-          setSuccessMsg("La novedad ha sido modificada exitosamente");
+          setSuccessMsg("El testimonio ha sido modificado exitosamente");
         } else {
           setError(true);
           setSubmitting(false);
         }
       });
     } else {
-      createNew(values).then((res) => {
+      createTestimonial(values).then((res) => {
         if (res.status === 201) {
-          setANew(initialValues);
+          setTestimonial(initialValues);
           resetForm();
-          setSuccessMsg("La novedad ha sido creada exitosamente");
+          setSuccessMsg("El testimonio ha sido creado exitosamente");
         } else {
           setError(true);
           setSubmitting(false);
@@ -76,31 +78,24 @@ function CUNewsForm(props) {
       });
     }
   };
-  const newsSchema = yup.object().shape({
+
+  const testimonialsSchema = yup.object().shape({
     name: yup
       .string("El nombre debe ser un string")
-      .required("El nombre de la novedad es requerida"),
+      .required("El nombre del testimonio es requerido"),
     content: yup
       .string("El contenido debe ser un string")
-      .required("El contenido de la novedad es requerido"),
-    type: yup
-      .string("El tipo debe ser un string")
-      .required("El tipo de la novedad es requerido"),
-    categoryId: yup
-      .number("La categoria debe ser un numero")
-      .required("La categoria de la novedad es requerida")
-      .positive("La categoria debe ser un numero positivo")
-      .integer("La categoria debe ser un numero entero"),
-    image: yup.mixed(),
+      .required("El contenido del testimonio es requerido"),
+    image: yup.mixed().required("El archivo es requerido"),
   });
 
   return (
     <div className="">
       {!notFound || !isEdit ? (
         <Formik
-          validationSchema={newsSchema}
+          validationSchema={testimonialsSchema}
           enableReinitialize={true}
-          initialValues={aNew}
+          initialValues={testimonial}
           onSubmit={onSubmit}
         >
           {({
@@ -113,7 +108,7 @@ function CUNewsForm(props) {
           }) => (
             <Form className=" container mx-auto shadow-xl py-3">
               <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-8 sm:px-24">
-                <div>
+                <div className=" order-last sm:order-first">
                   <div className=" w-full">
                     <Field
                       className={`${
@@ -135,44 +130,13 @@ function CUNewsForm(props) {
                         errors.content && touched.content
                           ? styles.errorsField
                           : styles.field
-                      } h-32 resize-none`}
+                      } h-36 resize-none`}
                       name="content"
                       placeholder="Contenido"
                       type="text"
                       disabled={isDisabled}
                     />
                     <ErrorMessage component={ErrorComponent} name="content" />
-                  </div>
-                  <div className="w-full">
-                    <Field
-                      className={`${
-                        errors.categoryId && touched.categoryId
-                          ? styles.errorsField
-                          : styles.field
-                      } h-16 `}
-                      name="categoryId"
-                      placeholder="Categoria"
-                      type="number"
-                      disabled={isDisabled}
-                    />
-                    <ErrorMessage
-                      component={ErrorComponent}
-                      name="categoryId"
-                    />
-                  </div>
-                  <div className="w-full">
-                    <Field
-                      className={`${
-                        errors.type && touched.type
-                          ? styles.errorsField
-                          : styles.field
-                      } h-16`}
-                      name="type"
-                      placeholder="Tipo"
-                      type="text"
-                      disabled={isDisabled}
-                    />
-                    <ErrorMessage component={ErrorComponent} name="type" />
                   </div>
                 </div>
                 <div className="w-full my-auto">
@@ -182,8 +146,9 @@ function CUNewsForm(props) {
                     file={values?.image}
                     keyFile={values?.key}
                     disabled={isDisabled}
-                    error={errors.image}
-                    touched={touched.image}
+                    error={errors?.image}
+                    touched={touched?.image}
+                    circle={true}
                   />
                   <ErrorMessage
                     center=" text-center"
@@ -207,15 +172,17 @@ function CUNewsForm(props) {
         </Formik>
       ) : (
         <div className=" flex flex-col text-center justify-center  mx-6 my-6  md:h-60 border-1 rounded-lg p-2 md:p-6 shadow-lg hover:shadow-2xl">
-          <h3 className=" p-1 text-xl">No existe esa novedad</h3>
+          <h3 className=" p-1 text-xl">No existe ese testimonio</h3>
         </div>
       )}
       {error && <ErrorAlert setError={setError} />}
       {successMsg && (
         <SuccessAlert successMsg={successMsg} setSuccessMsg={setSuccessMsg} />
       )}
+      {error && <ErrorAlert />}
+      {successMsg && <SuccessAlert successMsg={successMsg} setSuccessMsg={setSuccessMsg} />}
     </div>
   );
 }
 
-export default CUNewsForm;
+export default CUTestimonialsForm;
