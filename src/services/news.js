@@ -30,3 +30,9 @@ export async function updateNew(newToUpdate, id) {
     })
     .catch((error) => error);
 }
+
+export async function deleteNew(id) {
+  return await axios
+    .delete(`${API_BASE_URL}/api/v1/news/${id}`)
+    .catch((error) => error);
+}
