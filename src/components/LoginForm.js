@@ -4,12 +4,10 @@ import * as Yup from "yup";
 import { logIn } from "../services/auth";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
-import axios from "axios";
-import { API_BASE_URL, API_CLIENT_ID } from "../services";
+import { API_CLIENT_ID } from "../services";
 import GoogleIcon from "./GoogleIcon";
 import { setUserData } from "../features/authSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { selectUserData } from "../features/authSlice";
+import { useDispatch } from "react-redux";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().required("Obligatorio").email("Email invalido").max(255),
@@ -51,9 +49,8 @@ export default function LoginForm() {
     const { email, password } = values;
     const res = await logIn(email, password, tokenId);
 
-    dispatch(setUserData(res.data));
-
-    if (res.status === 200 || 201) {
+    if (res.status === 200 || res.status === 201) {
+      dispatch(setUserData(res.data));
       navigate("/");
     } else {
       setShowErrorMessage(getErrorMessage(res.response.data.errors));
