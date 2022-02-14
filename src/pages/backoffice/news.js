@@ -27,7 +27,6 @@ export default function BackofficeNews() {
         fetchData();
     }, [isLoad]);
 
-    console.log(newsArray)
     return (
         <section className=" grid justify-items-center grid-cols-1 md:p-12">
             
