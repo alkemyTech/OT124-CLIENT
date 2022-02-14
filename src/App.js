@@ -13,6 +13,8 @@ import BackOfficeActivities from "./pages/backoffice/actividades/BackofficeActiv
 import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
 import BackofficeCreateCategory from "./pages/backoffice/categories/BackofficeCreateCategory";
 import BackofficeEditCategory from "./pages/backoffice/categories/BackofficeEditCategory";
+import BackOfficeContacts from "./pages/backoffice/contacts/BackOfficeContacts";
+import ContactsList from "./pages/backoffice/contacts/ContactsLIst";
 import BackofficeNews from "./pages/backoffice/news";
 import BackofficeCreateNews from "./pages/backoffice/news/BackofficeCreateNew";
 import BackofficeEditNews from "./pages/backoffice/news/BackofficeEditNew";
@@ -71,13 +73,16 @@ function App() {
             <Route path="create" element={<ActivitiesForm />} />
             <Route path="edit/:id" element={<ActivitiesForm />} />
           </Route>
+          <Route path="contactos" element={<BackOfficeContacts />}>
+            <Route index element={<ContactsList />} />
+          </Route>
+          <Route path="novedades" element={<NewsIndex />}>
+            <Route index element={<News />} />
+            <Route path=":id" element={<NewDetails />} />
+          </Route>
         </Route>
         <Route path="me" element={<PrivateRoute />}>
           <Route index element={<BackOfficeUserLayout />} />
-        </Route>
-        <Route path="novedades" element={<NewsIndex />}>
-          <Route index element={<News />} />
-          <Route path=":id" element={<NewDetails />} />
         </Route>
       </Route>
     </Routes>

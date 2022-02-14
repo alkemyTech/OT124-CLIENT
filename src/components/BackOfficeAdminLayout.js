@@ -7,6 +7,7 @@ import organizationIcon from "../img/icons/organization.png";
 import slidesIcon from "../img/icons/slides.png";
 import testimonialsIcon from "../img/icons/testimonials.png";
 import usersIcon from "../img/icons/users.png";
+import contactsIcon from "../img/icons/contacts.png";
 import BackOfficeCard from "./BackOfficeCard";
 
 export default function BackOfficeAdminLayout() {
@@ -50,6 +51,11 @@ export default function BackOfficeAdminLayout() {
       title: "Usuarios",
       image: usersIcon,
       navlink: "/usuarios",
+    },
+    {
+      title: "Contactos",
+      image: contactsIcon,
+      navlink: "/contactos",
     },
   ];
 
