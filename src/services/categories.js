@@ -31,4 +31,3 @@ export async function getAllCategories() {
     .get(`${API_BASE_URL}/api/v1/categories`)
     .catch((error) => error);
 }
-
