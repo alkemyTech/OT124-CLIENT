@@ -9,6 +9,8 @@ import BackOfficeAdminLayout from "./components/BackOfficeAdminLayout";
 import BackOfficeUserLayout from "./components/BackOfficeUserLayout";
 import Layout from "./components/Layout";
 import NewDetails from "./components/NewDatails";
+import Organization from "./pages/backoffice/organization/Organization";
+import EditOrganization from "./pages/backoffice/organization/EditOrganization";
 import NewsIndex from "./components/NewsIndex";
 import BackOfficeActivities from "./pages/backoffice/actividades/BackofficeActivities";
 import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
@@ -41,6 +43,12 @@ function App() {
         <Route path="signup" element={<SignUp />} />
         <Route path="backoffice" element={<AdminRoute />}>
           <Route index element={<BackOfficeAdminLayout />} />
+          <Route path="organizacion" element={<Organization />}>
+          </Route>
+          <Route path="editar-organizacion" element={<EditOrganization />}>
+          </Route>
+        
+
           <Route path="categorias">
             <Route index element={<BackofficeCategories />} />
             <Route
