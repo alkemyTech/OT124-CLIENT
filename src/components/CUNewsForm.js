@@ -76,7 +76,6 @@ function CUNewsForm(props) {
       });
     }
   };
-
   const newsSchema = yup.object().shape({
     name: yup
       .string("El nombre debe ser un string")
