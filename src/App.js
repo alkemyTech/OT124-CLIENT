@@ -1,7 +1,5 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-
-import Home from "./pages/Home";
 import AboutUs from "./components/AboutUs";
 import ActivitiesForm from "./components/Activities/Form";
 import ActivitiesList from "./components/Activities/List";
@@ -25,11 +23,13 @@ import BackofficeCreateTestimonials from "./pages/backoffice/testimonials/Backof
 import BackofficeEditTestimonials from "./pages/backoffice/testimonials/BackofficeEditTestimonials";
 import BackofficeTestimonials from "./pages/backoffice/testimonials/BackofficeTestimonials";
 import ContactUs from "./pages/ContactUs";
+import Home from "./pages/Home";
 import Login from "./pages/Login";
 import News from "./pages/News";
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 import { AdminRoute, PrivateRoute } from "./routes";
+
 
 function App() {
   return (
