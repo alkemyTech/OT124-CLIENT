@@ -90,7 +90,7 @@ function App() {
             <Route index element={<News />} />
             <Route path=":id" element={<NewDetails />} />
           </Route>
-          <Route path="users" element={<ListUsers />} />
+          <Route path="usuarios" element={<ListUsers />} />
         </Route>
         <Route path="me" element={<PrivateRoute />}>
           <Route index element={<BackOfficeUserLayout />} />
