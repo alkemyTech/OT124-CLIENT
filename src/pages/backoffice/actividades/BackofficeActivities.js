@@ -4,10 +4,8 @@ import { Outlet } from "react-router";
 export default function BackOfficeActivities() {
   return (
     <>
-      <div className="mx-auto flex justify-center shadow-lg sm:py-40">
-        <div className="sm:px-32 px-2 w-full">
+      <div className="flex flex-col justify-center">
           <Outlet />
-        </div>
       </div>
     </>
   );

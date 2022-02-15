@@ -92,23 +92,22 @@ const ActivitiesForm = () => {
   }, [id]);
 
   return (
-    <>
+    <div className="container max-w-lg mx-auto flex flex-col">
       {error && <ErrorAlert setError={setError} />}
       {successMsg && (
         <SuccessAlert successMsg={successMsg} setSuccessMsg={setSuccessMsg} />
       )}
       <Link
-        className="bg-sky-500 hover:bg-transparent hover:text-sky-500 hover:border-sky-500 hover:border text-white font-bold py-3 px-6 rounded transform hover:scale-110 ease-in duration-300"
+        className="mx-auto bg-sky-500 hover:bg-transparent hover:text-sky-500 hover:border-sky-500 hover:border text-white font-bold py-3 px-6 rounded transform hover:scale-110 ease-in duration-300"
         to="/backoffice/actividades"
       >
         <span className="pr-2">⬅</span>
         Volver
       </Link>
-      <h1 className=" text-3xl my-5 text-center text-[#9ac9fb]">
+      <h1 className="text-2xl  md:text-3xl my-5 text-center text-[#9ac9fb]">
         {isEdit ? "Modificar Actividad" : "Crear nueva Actividad"}
       </h1>
       <Formik
-        className="container max-w-lg mx-auto flex flex-col justify-center shadow-lg sm:py-40"
         validationSchema={activitiesSchema}
         enableReinitialize={true}
         initialValues={activities}
@@ -179,7 +178,7 @@ const ActivitiesForm = () => {
           </Form>
         )}
       </Formik>
-    </>
+    </div>
   );
 };
 
