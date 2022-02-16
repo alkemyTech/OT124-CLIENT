@@ -6,8 +6,8 @@ const Cards = ({ activity }) => {
       <div class="max-w-sm rounded-lg overflow-hidden shadow-lg">
         <img
           class="w-full object-cover "
-          src={`https://drive.google.com/uc?export=view&id=1ileZuq6dMphx9i-aFtz95iSDRsRVZgLj`}
-          alt="Mountain"
+          src={`${activity.image}`}
+          alt=""
         />
         <div class="px-6 py-4">
           <div class="font-bold text-xl mb-2">{activity.name}</div>
