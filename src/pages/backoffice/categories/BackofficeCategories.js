@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
 import CategoriesHeader from "../../../components/CategoriesHeader";
 import CategoriesList from "../../../components/CategoriesList";
-import { getAllCategories } from "../../../services/categories";
+import React from "react";
 
 export default function BackofficeCategories() {
   

@@ -10,7 +10,7 @@ const ProfileSchema = Yup.object().shape({
     email: Yup.string().required("Obligatorio*").email("Datos ingresados no son validos*").max(255),
   });
 
-export default function ProfileForm({popUp, setPopUp}) {
+export default function ProfileForm({popUp, setPopUp, profile}) {
 
     const navigate = useNavigate();
     const [showErrMsg, setShowErrMsg] = useState();
@@ -35,7 +35,7 @@ export default function ProfileForm({popUp, setPopUp}) {
         const res = await profileUpdate(firstname, lastname, email);
     
         if (res.status === 200) {
-          navigate("/profile");
+          navigate("/mi-perfil");
         } else {
             setShowErrMsg(getErrMsg(res.response.data.errors));
             setSubmitting(false);
@@ -60,6 +60,7 @@ export default function ProfileForm({popUp, setPopUp}) {
                         id="firstname"
                         name="firstname"
                         type="firstname"
+                        values={profile === undefined ? null : profile.firstname}
                     />
                     {errors.name && touched.name ? (
                         <ErrorMessage
@@ -77,6 +78,7 @@ export default function ProfileForm({popUp, setPopUp}) {
                         id="lastname"
                         name="lastname"
                         type="lastname"
+                        values={profile === undefined ? null : profile.lastname}
                     />
                     {errors.name && touched.name ? (
                         <ErrorMessage
@@ -93,6 +95,7 @@ export default function ProfileForm({popUp, setPopUp}) {
                         id="email"
                         name="email"
                         type="email"
+                        values={profile === undefined ? null : profile.email}
                     />
                     {errors.name && touched.name ? (
                         <ErrorMessage
@@ -101,7 +104,7 @@ export default function ProfileForm({popUp, setPopUp}) {
                             name="email"
                         />
                     ) : null}
-                    <button type="submit" onClick={() => setPopUp({visible:false, operation: "Null"})} className=" mt-4 col-start-1 col-end-3 max-w-fit md:max-w-fit h-12 p-2 justify-self-center  border rounded border-sky-500 font-semibold hover:text-white hover:bg-sky-500 text-sky-500">CONFIRMAR</button>
+                    <button type="submit" onClick={() => handleSubmit()} className=" mt-4 col-start-1 col-end-3 max-w-fit md:max-w-fit h-12 p-2 justify-self-center  border rounded border-sky-500 font-semibold hover:text-white hover:bg-sky-500 text-sky-500">CONFIRMAR</button>
                 
             </Form>
         )}

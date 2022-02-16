@@ -17,9 +17,17 @@ export async function profileDelete() {
         // Pedir email del token
       })
       .catch((error) => error);
-  }
+}
+
+export async function profileGetMine() {
+  return await axios
+    .get(`${API_BASE_URL}/api/v1/auth/getMe`, { 
+    })
+    .catch((error) => error);
+}
 
   export default {
     profileUpdate,
-    profileDelete
+    profileDelete,
+    profileGetMine
   }
