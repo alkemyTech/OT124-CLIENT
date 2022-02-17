@@ -1,5 +1,4 @@
 import React, { useEffect,useState } from "react";
-import { useState } from "react";
 import CategoriesHeader from "../../../components/CategoriesHeader";
 import CategoriesList from "../../../components/CategoriesList";
 

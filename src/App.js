@@ -5,10 +5,6 @@ import ActivitiesForm from "./components/Activities/Form";
 import ActivitiesList from "./components/Activities/List";
 import BackOfficeAdminLayout from "./components/BackOfficeAdminLayout";
 import BackOfficeUserLayout from "./components/BackOfficeUserLayout";
-<<<<<<< HEAD
-import Home from "./components/Home";
-=======
->>>>>>> 2cca7059bd11e138da2b71e747da63c036d94ba9
 import Layout from "./components/Layout";
 import NewDetails from "./components/NewDatails";
 import Organization from "./pages/backoffice/organization/Organization";
