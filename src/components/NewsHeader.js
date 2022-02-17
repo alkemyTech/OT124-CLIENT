@@ -5,7 +5,7 @@ const BackArrow = "<"
 
 function NewsHeader() {
   return (
-    <div className="flex sm:flex-row flex-col  items-center justify-around my-7">
+    <div className=" flex sm:flex-row flex-col  items-center justify-around my-7">
       <h1 className="sm:text-5xl text-3xl text-center text-sky-500">
         Novedades
       </h1>

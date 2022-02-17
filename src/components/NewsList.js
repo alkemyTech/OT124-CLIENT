@@ -7,7 +7,7 @@ import { API_BASE_URL } from "../services";
 
 function NewsList(props) {
   const [ isLoad, setIsLoad ] = useState(false)
-  const [news, setnews] = useState([]);
+  const [news, setnews] = useState([{id: 1, name: 2, content: 3, imagen: 4}]);
 
   useEffect(() => {
     getAllNews()
@@ -19,6 +19,8 @@ function NewsList(props) {
       });
   }, [isLoad]);
 
+
+  
   return (
     <>
       {news.length ? (
@@ -26,10 +28,11 @@ function NewsList(props) {
           <table className=" shadow-md text-left transform ease-in-out hover:-translate-x-1 duration-200 divide-y divide-gray-200 table-fixed w-full border-collapse cursor-pointer">
             <thead className="bg-gray-100 text-sm sm:text-base">
               <tr className="uppercase">
-                <th className="tracking-wider py-3 px-4">Nombre</th>
-                <th className="tracking-wider py-3 px-4">Fecha</th>
-                <th className="tracking-wider py-3 px-4">Acciones</th>
-                <th className="tracking-wider py-3 px-4"></th>
+              <th className="tracking-wider md:text-base text-xs py-3 px-4">Imagen</th>
+                <th className="tracking-wider md:text-base text-xs py-3 px-4">Nombre</th>
+                <th className="tracking-wider md:text-base text-xs py-3 px-4">Fecha</th>
+                <th className="tracking-wider md:text-base text-xs py-3 px-4">Acciones</th>
+                <th className="tracking-wider md:text-base text-xs py-3 px-4"></th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
@@ -40,8 +43,15 @@ function NewsList(props) {
                   } p-10 transform ease-in-out duration-300 md:hover:scale-102 text-sm sm:text-base`}
                   key={e.id}
                 >
-                  <td className="py-3 px-4">{e.name}</td>
-                  <td className="py-3 px-4">
+                  <td className="text-xs py-3 px-4">
+                    {e.image ? <img
+                       src={`${API_BASE_URL}/api/v1/files/${e?.image.key}`}
+                       alt="Imagen de novedad"
+                       className="inline-block md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-4 bg-slate-500"
+                     ></img> : null}
+                  </td>
+                  <td className="md:text-base text-xs py-3 px-4">{e.name}</td>
+                  <td className="md:text-base text-xs py-3 px-4">
                   {e?.createdAt
                          ? new Date(
                              e?.createdAt
@@ -51,7 +61,7 @@ function NewsList(props) {
                   <td className="py-3 px-4 text-center">
                     <DeleteAlert
                       styles={
-                        " bg-red-500 text-white shadow shadow-red-800 rounded-sm px-4 py-1 hover:bg-red-600"
+                        " bg-red-500 text-white md:text-base text-xs shadow shadow-red-800 rounded-sm px-1 md:px-4 py-1 hover:bg-red-600"
                       }
                       id={e.id}
                       title={"ELIMINAR"}
@@ -66,7 +76,7 @@ function NewsList(props) {
                       isLoad={isLoad}
                     />
                   </td>
-                  <td className="py-3 px-4 text-center">
+                  <td className="md:text-base text-xs py-3 px-4 text-center">
                     <Link
                       to={`editar-novedad/${e.id}`}
                       className="hover:underline"
@@ -81,8 +91,8 @@ function NewsList(props) {
         </div>
       ) : (
         <div className=" flex flex-col text-center justify-center  mx-6 my-6  md:h-60 border-1 rounded-lg p-2 md:p-6 shadow-lg hover:shadow-2xl">
-                            <h3 className=" p-1 text-xl">No hay novedades existentes</h3>
-                    </div> 
+          <h3 className=" p-1 text-xl">No hay novedades existentes</h3>
+        </div> 
       )}
     </>
   );
