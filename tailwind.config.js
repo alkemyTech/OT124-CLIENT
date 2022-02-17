@@ -3,14 +3,9 @@ module.exports = {
   theme: {
     extend: {
       height: {
-        '128': '32rem',
+        128: "32rem",
       },
-      colors: {
-        'ong-red': '#DB5752',
-        'ong-yellow': '#FAFA88',
-        'ong-sky': '#9AC9FB'
-      }
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };

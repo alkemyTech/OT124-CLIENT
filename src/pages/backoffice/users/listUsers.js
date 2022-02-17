@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import usersServices from '../../../services/users';
+import DeleteAlert from '../../../components/DeleteAlert';
 
 export default function ListUsers() {
     const [ allUsers, setAllUsers ] = useState([]);
+    const [ isLoad, setIsLoad ] = useState(false);
 
     const getUsers = async () => {
         const { users } = await usersServices.getAllUsers();
         setAllUsers(users);
-    }
-
-    const deleteUser = async id => {
-        await usersServices.deleteUser(id);
     }
 
     useEffect(() => {
@@ -36,7 +34,24 @@ export default function ListUsers() {
                             <td className='border-b border-slate-100 dark:border-slate-700 p-4 text-slate-200 dark:text-slate-600'>{user.lastName}</td>
                             <td className='border-b border-slate-100 dark:border-slate-700 p-4 text-slate-200 dark:text-slate-600'>{user.email}</td>
 
-                            <td className='border-b border-slate-100 dark:border-slate-700 text-ong-red p-4'><button onClick={() => deleteUser(user.id)}>Eliminar</button></td>
+                            <td className='border-b border-slate-100 dark:border-slate-700 text-ong-red p-4'>
+                                <DeleteAlert
+                                    styles={
+                                        "bg-red-500 text-white shadow shadow-red-800 rounded-sm px-4 py-1 hover:bg-red-600"
+                                    }
+                                    id={user.id}
+                                    title={"ELIMINAR"}
+                                    message={
+                                        "¿Está seguro que desea eliminar a este usuario?"
+                                    }
+                                    afterMessage={
+                                        "El usuario ha sido eliminada exitosamente"
+                                    }
+                                    service={usersServices.deleteUser}
+                                    setIsLoad={setIsLoad}
+                                    isLoad={isLoad}
+                                />
+                            </td>
                         </tr>
                     ))
                 }
