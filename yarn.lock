@@ -5707,17 +5707,6 @@
     "@types/node" "*"
     "anymatch" "^3.0.3"
     "fb-watchman" "^2.0.0"
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    "fsevents" "^2.3.2"
->>>>>>> 62b2e3dd484379c8b37b4d405c46fcd6913ab8d8
->>>>>>> e88c75c4cfc157231a2595d2347e1b79e922a4b9
-=======
->>>>>>> 6315ca351dbbc7dc1004e0bd872e11b3553f0453
     "graceful-fs" "^4.2.4"
     "jest-regex-util" "^27.4.0"
     "jest-serializer" "^27.4.0"
