@@ -18,7 +18,7 @@ function ActivitiesList() {
   }, []);
 
   return (
-    <>
+    <div className="container mx-auto max-w-2xl">
       <ActivitiesHeader />
 
       {activities.length > 0 ? (
@@ -35,7 +35,7 @@ function ActivitiesList() {
       ) : (
         <h1 className="text-center">No hay actividades</h1>
       )}
-    </>
+    </div>
   );
 }
 
