@@ -29,7 +29,7 @@ import News from "./pages/News";
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 import { AdminRoute, PrivateRoute } from "./routes";
-
+import Activities from "./pages/Activities";
 
 function App() {
   return (
@@ -41,13 +41,14 @@ function App() {
         <Route path="contacto" element={<ContactUs />} />
         <Route path="mi-perfil" element={<Profile />} />
         <Route path="signup" element={<SignUp />} />
+        <Route path="actividades" element={<Activities />} />
         <Route path="backoffice" element={<AdminRoute />}>
           <Route index element={<BackOfficeAdminLayout />} />
-          <Route path="organizacion" element={<Organization />}>
-          </Route>
-          <Route path="editar-organizacion" element={<EditOrganization />}>
-          </Route>
-        
+          <Route path="organizacion" element={<Organization />}></Route>
+          <Route
+            path="editar-organizacion"
+            element={<EditOrganization />}
+          ></Route>
 
           <Route path="categorias">
             <Route index element={<BackofficeCategories />} />
