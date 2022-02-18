@@ -7,8 +7,8 @@ export default function ListUsers() {
     const [ isLoad, setIsLoad ] = useState(false);
 
     const getUsers = async () => {
-        const { users } = await usersServices.getAllUsers();
-        setAllUsers(users);
+        const res = await usersServices.getAllUsers();
+        setAllUsers(res.data.users);
     }
 
     useEffect(() => {
@@ -28,7 +28,7 @@ export default function ListUsers() {
             </thead>
             <tbody className='bg-ong-sky'>
                 {
-                    allUsers.map(user => (
+                    allUsers?.map(user => (
                         <tr key={user.id}>
                             <td className='border-b border-slate-100 dark:border-slate-700 p-4 text-slate-200 dark:text-slate-600'>{user.firstName}</td>
                             <td className='border-b border-slate-100 dark:border-slate-700 p-4 text-slate-200 dark:text-slate-600'>{user.lastName}</td>
