@@ -12,6 +12,9 @@ import {
 } from "../../services/testimonials";
 import ErrorAlert from "../Shared/Alerts/ErrorAlert";
 import SuccessAlert from "../Shared/Alerts/SuccessAlert";
+import InputForm from "../Shared/Forms/InputForm";
+import NotFoundComponent from "../Shared/Others/NotFoundComponent";
+import SendButton from "../Shared/Buttons/SendButton";
 
 const styles = {
   field:
@@ -45,7 +48,7 @@ function CUTestimonialsForm(props) {
     getTestimonial(id)
       .then((res) => {
         if (res.status === 200) {
-          setTestimonial(res.data.testimonials);
+          setTestimonial(res?.data?.testimonial);
         } else {
           setNotFound(true);
         }
@@ -109,35 +112,23 @@ function CUTestimonialsForm(props) {
             <Form className=" container mx-auto shadow-xl py-3">
               <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-8 sm:px-24">
                 <div className=" order-last sm:order-first">
-                  <div className=" w-full">
-                    <Field
-                      className={`${
-                        errors.name && touched.name
-                          ? styles.errorsField
-                          : styles.field
-                      } h-16`}
+                    <InputForm
+                      errors={error.name}
+                      touched={touched.name}
                       name="name"
                       placeholder="Titulo"
                       type="text"
                       disabled={isDisabled}
                     />
-                    <ErrorMessage component={ErrorComponent} name="name" />
-                  </div>
-                  <div className="w-full">
-                    <Field
-                      as="textarea"
-                      className={`${
-                        errors.content && touched.content
-                          ? styles.errorsField
-                          : styles.field
-                      } h-36 resize-none`}
+                    <InputForm
+                      errors={error.content}
+                      touched={touched.content}
                       name="content"
                       placeholder="Contenido"
                       type="text"
                       disabled={isDisabled}
-                    />
-                    <ErrorMessage component={ErrorComponent} name="content" />
-                  </div>
+                      as="textarea"
+                  />
                 </div>
                 <div className="w-full my-auto">
                   <UploadImageComponent
@@ -157,24 +148,13 @@ function CUTestimonialsForm(props) {
                   />
                 </div>
               </div>
-              <div className="flex justify-center my-6">
-                <button
-                  className={`${styles.button}`}
-                  type="submit"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting && <SpinSVGButton />}
-                  {!isEdit ? "Crear" : "Modificar"}
-                </button>
-              </div>
+              <SendButton isSubmitting={isSubmitting} text={`${isEdit ? "Modificar": "Crear"}`} />
             </Form>
           )}
         </Formik>
-      ) : (
-        <div className=" flex flex-col text-center justify-center  mx-6 my-6  md:h-60 border-1 rounded-lg p-2 md:p-6 shadow-lg hover:shadow-2xl">
-          <h3 className=" p-1 text-xl">No existe ese testimonio</h3>
-        </div>
-      )}
+      ) : 
+        <NotFoundComponent title={"No existe ese testimonio"} />
+      }
       {error && <ErrorAlert setError={setError} />}
       {successMsg && (
         <SuccessAlert successMsg={successMsg} setSuccessMsg={setSuccessMsg} />

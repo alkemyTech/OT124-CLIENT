@@ -21,16 +21,6 @@ const styles = {
     " text-red-500 text-sm bg-red-200 text-center border border-red-500 mt-2 rounded-sm p-2 shadow shadow-red-300",
 };
 
-const skeletonStyles = {
-  field: "w-full bg-gray-200 rounded-md my-2 p-4 animate-pulse",
-  button:
-    "bg-gray-200 text-transparent rounded py-2 mt-2 px-4 w-96 mx-auto my-4 animate-pulse",
-};
-
-const ErrorComponent = (props) => (
-  <p className={styles.error}>{props.children}</p>
-);
-
 export default function ContactForm(props) {
   const initialValues = {
     name: "",
@@ -117,7 +107,7 @@ export default function ContactForm(props) {
               as={"textarea"}
               isLoading={isLoading}
             />
-            <SendButton isSubmitting={isSubmitting} />
+            <SendButton isSubmitting={isSubmitting} isLoading={isLoading} text={"Enviar"} />
             {error && <ErrorAlert setError={setError} />}
             {successMsg && (
               <SuccessAlert
