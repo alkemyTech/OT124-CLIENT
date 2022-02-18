@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
-import { Formik, Form, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import { createNew, getNew, updateNew } from "../../services/news";
 import * as yup from "yup";
 import ErrorAlert from "../Shared/Alerts/ErrorAlert";
@@ -10,14 +10,6 @@ import UploadImageComponent from "../Shared/Others/UploadImageComponent";
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import InputForm from "../Shared/Forms/InputForm";
 import SendButton from "../Shared/Buttons/SendButton";
-
-const styles = {
-  error: " text-red-500 text-sm bg-red-200 text-center border border-red-500 mt-2 rounded-sm p-2 shadow shadow-red-300"
-};
-
-const ErrorComponent = (props) => (
-  <p className={styles.error}>{props.children}</p>
-);
 
 function CUNewsForm(props) {
   const { isEdit } = props;
@@ -151,10 +143,6 @@ function CUNewsForm(props) {
                     disabled={isDisabled}
                     error={errors.image}
                     touched={touched.image}
-                  />
-                  <ErrorMessage
-                    component={ErrorComponent}
-                    name="image"
                   />
                 </div>
               </div>

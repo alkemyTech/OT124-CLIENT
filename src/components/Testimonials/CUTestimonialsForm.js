@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
-import { Formik, Form, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import UploadImageComponent from "../Shared/Others/UploadImageComponent";
 import * as yup from "yup";
 import {
@@ -14,14 +14,6 @@ import SuccessAlert from "../Shared/Alerts/SuccessAlert";
 import InputForm from "../Shared/Forms/InputForm";
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import SendButton from "../Shared/Buttons/SendButton";
-
-const styles = {
-  error: " text-red-500 text-sm bg-red-200 text-center border border-red-500 mt-2 rounded-sm p-2 shadow shadow-red-300"
-};
-
-const ErrorComponent = (props) => (
-  <p className={styles.error}>{props.children}</p>
-);
 
 function CUTestimonialsForm(props) {
   const { isEdit } = props;
@@ -134,10 +126,6 @@ function CUTestimonialsForm(props) {
                     error={errors?.image}
                     touched={touched?.image}
                     circle={true}
-                  />
-                  <ErrorMessage
-                    component={ErrorComponent}
-                    name="image"
                   />
                 </div>
               </div>
