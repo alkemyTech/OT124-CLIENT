@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import SpinSVGButton from "../Shared/Loaders/SpinSVGButton";
+import { Formik, Form } from "formik";
 import * as yup from "yup";
 import {
   createCategory,
@@ -14,20 +13,6 @@ import SuccessAlert from "../Shared/Alerts/SuccessAlert";
 import InputForm from "../Shared/Forms/InputForm";
 import SendButton from "../Shared/Buttons/SendButton";
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
-
-const styles = {
-  field:
-    "w-full shadow-md bg-gray-100 border-b-4 border transition hover:border-sky-500 ease-linear duration-300 my-2 p-4 outline-none transform hover:-translate-x-2",
-  errorsField:
-    "w-full shadow-md bg-gray-100 border  border-red-500 my-2 p-4 outline-none",
-  button:
-    "bg-transparent flex items-center justify-center hover:bg-sky-500 text-sky-500 font-semibold hover:text-white border border-sky-500 hover:border-transparent rounded py-2 px-4 w-96 transform hover:scale-110 ease-in duration-300",
-  error: " text-red-500 text-lg",
-};
-
-const ErrorComponent = (props) => (
-  <p className={styles.error + props.center}>{props.children}</p>
-);
 
 function CUCategoriesForm(props) {
   const { isEdit } = props;

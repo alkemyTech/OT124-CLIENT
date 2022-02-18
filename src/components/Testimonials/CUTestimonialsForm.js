@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Form, ErrorMessage } from "formik";
 import UploadImageComponent from "../Shared/Others/UploadImageComponent";
-import SpinSVGButton from "../Shared/Loaders/SpinSVGButton";
 import * as yup from "yup";
 import {
   createTestimonial,
@@ -17,17 +16,11 @@ import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import SendButton from "../Shared/Buttons/SendButton";
 
 const styles = {
-  field:
-    "w-full shadow-md bg-gray-100 border-b-4 border transition hover:border-sky-500 ease-linear duration-300 my-2 p-4 outline-none transform hover:-translate-x-2",
-  errorsField:
-    "w-full shadow-md bg-gray-100 border  border-red-500 my-2 p-4 outline-none",
-  button:
-    "bg-transparent flex items-center justify-center hover:bg-sky-500 text-sky-500 font-semibold hover:text-white border border-sky-500 hover:border-transparent rounded py-2 px-4 w-96 transform hover:scale-110 ease-in duration-300",
-  error: " text-red-500 text-lg",
+  error: " text-red-500 text-sm bg-red-200 text-center border border-red-500 mt-2 rounded-sm p-2 shadow shadow-red-300"
 };
 
 const ErrorComponent = (props) => (
-  <p className={styles.error + props.center}>{props.children}</p>
+  <p className={styles.error}>{props.children}</p>
 );
 
 function CUTestimonialsForm(props) {
@@ -41,14 +34,16 @@ function CUTestimonialsForm(props) {
     name: "",
     content: "",
     image: "",
-    key: "",
+    lastimage: "",
   };
   const [testimonial, setTestimonial] = useState(initialValues);
   useEffect(() => {
     getTestimonial(id)
       .then((res) => {
         if (res.status === 200) {
-          setTestimonial(res?.data?.testimonial);
+          let { testimonial: resTestimonial } = res.data
+          resTestimonial.image = resTestimonial.lastimage
+          setTestimonial(resTestimonial);
         } else {
           setNotFound(true);
         }
@@ -91,7 +86,7 @@ function CUTestimonialsForm(props) {
       .required("El contenido del testimonio es requerido"),
     image: yup.mixed().required("El archivo es requerido"),
   });
-
+  console.log(testimonial)
   return (
     <div className="">
       {!notFound || !isEdit ? (
@@ -135,14 +130,12 @@ function CUTestimonialsForm(props) {
                     setFieldValue={setFieldValue}
                     setFieldError={setFieldError}
                     file={values?.image}
-                    keyFile={values?.key}
                     disabled={isDisabled}
                     error={errors?.image}
                     touched={touched?.image}
                     circle={true}
                   />
                   <ErrorMessage
-                    center=" text-center"
                     component={ErrorComponent}
                     name="image"
                   />

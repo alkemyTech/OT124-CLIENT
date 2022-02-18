@@ -36,7 +36,7 @@ const DropZone = (props) => {
 
 
 const UploadImageComponent = (props) => {
-  const { setFieldValue, setFieldError, file, keyFile, error, touched , circle} = props;
+  const { setFieldValue, setFieldError, file, error, touched , circle} = props;
   const { getRootProps, getInputProps, isDragActive, isDragReject } =
     useDropzone({
       accept: "image/*",
@@ -60,7 +60,6 @@ const UploadImageComponent = (props) => {
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [isDragReject])
-
   return (
     <>
       <div className="mx-auto flex flex-col justify-center items-center">
@@ -94,7 +93,7 @@ const UploadImageComponent = (props) => {
                   } ${circle && "rounded-full"} object-contain w-full h-full z-0`}
                   alt=""
                   src={`${
-                    file[0].preview || `${API_BASE_URL}/api/v1/files/${keyFile}`
+                    file[0]?.preview || (file?.key ? `${API_BASE_URL}/api/v1/files/${file?.key}` : null)
                   }`}
                 />
               </>
