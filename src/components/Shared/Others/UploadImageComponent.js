@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { API_BASE_URL } from "../services";
+import { API_BASE_URL } from "../../../services";
 import { useDropzone } from "react-dropzone";
 
 const DropZone = (props) => {

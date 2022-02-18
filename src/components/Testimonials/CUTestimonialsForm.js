@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import UploadImageComponent from "./UploadImageComponent";
-import SpinSVGButton from "./SpinSVGButton";
+import UploadImageComponent from "../Shared/Others/UploadImageComponent";
+import SpinSVGButton from "../Shared/Loaders/SpinSVGButton";
 import * as yup from "yup";
 import {
   createTestimonial,
   getTestimonial,
   updateTestimonial,
-} from "../services/testimonials";
-import ErrorAlert from "./ErrorAlert";
-import SuccessAlert from "./SuccessAlert";
+} from "../../services/testimonials";
+import ErrorAlert from "../Shared/Alerts/ErrorAlert";
+import SuccessAlert from "../Shared/Alerts/SuccessAlert";
 
 const styles = {
   field:

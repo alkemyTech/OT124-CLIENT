@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import SpinSVGButton from "./SpinSVGButton";
+import SpinSVGButton from "../Shared/Loaders/SpinSVGButton";
 import * as yup from "yup";
 import {
   createCategory,
   getCategory,
   updateCategory,
-} from "../services/categories";
-import ErrorAlert from "./ErrorAlert";
-import SuccessAlert from "./SuccessAlert";
+} from "../../services/categories";
+import ErrorAlert from "../Shared/Alerts/ErrorAlert";
+import SuccessAlert from "../Shared/Alerts/SuccessAlert";
 
 const styles = {
   field:

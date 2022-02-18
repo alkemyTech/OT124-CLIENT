@@ -1,7 +1,8 @@
 import React from "react";
-import Carrusel from "../components/Carrusel";
-import LastNews from "../components/LastNews";
-import LastTestimonials from "../components/LastTestimonials";
+import Carrusel from "../components/UI/Carrusel.js";
+import LastNews from "../components/News/LastNews";
+import LastTestimonials from "../components/Testimonials/LastTestimonials";
+
 
 function Box() {
   const styles = {

@@ -1,6 +1,6 @@
 import React from "react";
-import CUCategoriesForm from "../../../components/CUCategoriesForm";
-import CUCategoriesHeader from "../../../components/CUCategoriesHeader";
+import CUCategoriesForm from "../../../components/Categories/CUCategoriesForm";
+import CUCategoriesHeader from "../../../components/Categories/CUCategoriesHeader";
 
 export default function BackofficeEditCategory() {
   return (

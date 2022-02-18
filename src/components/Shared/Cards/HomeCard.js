@@ -1,6 +1,6 @@
 import React from "react";
-import { API_BASE_URL } from "../services";
-import exampleImage from "../img/3.jpg";
+import { API_BASE_URL } from "../../../services";
+import exampleImage from "../../../img/3.jpg";
 import { Link } from "react-router-dom";
 
 export default function HomeCard(props) {

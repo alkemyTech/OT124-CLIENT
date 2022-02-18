@@ -1,8 +1,8 @@
 import React, { useState, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, NavLink, Link } from 'react-router-dom';
-import { deleteUserData, selectUserData } from '../features/authSlice';
-import logo from "../img/logo-somos-mas.png";
+import { deleteUserData, selectUserData } from '../../features/authSlice';
+import logo from "../../img/logo-somos-mas.png";
 
 export default function Header() {
     const [ hamburguerOpened, setHamburguerOpened ] = useState(false);

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ProfileForm from "../components/ProfileForm";
+import ProfileForm from "../components/Profile/ProfileForm";
 import { profileDelete } from "../services/Profile";
 import { useNavigate } from "react-router-dom"
 
