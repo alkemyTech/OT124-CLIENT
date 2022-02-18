@@ -23,7 +23,6 @@ function CategoriesList(props) {
   return (
     <>
       {categories?.length ? (
-        <div className="shadow-md">
           <TableLayout>
             <HeaderTable columnsName={["ID","Nombre", "Descripción"]} />
             <BodyTable
@@ -36,7 +35,6 @@ function CategoriesList(props) {
               afterMessage={"Categoria eliminada con éxito"}
             />
           </TableLayout>
-        </div>
       ) : (
         <NotFoundComponent title={"No se encontraron categorias"} />
       )}

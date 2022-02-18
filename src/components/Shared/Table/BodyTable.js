@@ -26,6 +26,7 @@ function BodyTable(props) {
                       {property === "image" ? (
                         <img
                           alt=""
+                          className=" h-24"
                           src={`${API_BASE_URL}/api/v1/files/${item?.image?.key}`}
                         />
                       ) : (

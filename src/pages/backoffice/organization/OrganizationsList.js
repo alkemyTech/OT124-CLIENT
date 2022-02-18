@@ -9,7 +9,6 @@ function OrganizationsList({ organizations, setOrgData }) {
   return (
     <CenterResponsiveContainer>
       {organizations?.length ? (
-        <div className="shadow-md">
           <TableLayout>
             <HeaderTable
               columnsName={[
@@ -29,7 +28,6 @@ function OrganizationsList({ organizations, setOrgData }) {
               afterMessage={"Categoria eliminada con éxito"}
             />
           </TableLayout>
-        </div>
       ) : (
         <NotFoundComponent title={"No se encontraron organizaciones"} />
       )}
