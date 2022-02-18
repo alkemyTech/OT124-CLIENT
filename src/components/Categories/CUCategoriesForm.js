@@ -1,30 +1,18 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import SpinSVGButton from "./SpinSVGButton";
+import { Formik, Form } from "formik";
 import * as yup from "yup";
 import {
   createCategory,
   getCategory,
   updateCategory,
-} from "../services/categories";
-import ErrorAlert from "./ErrorAlert";
-import SuccessAlert from "./SuccessAlert";
-
-const styles = {
-  field:
-    "w-full shadow-md bg-gray-100 border-b-4 border transition hover:border-sky-500 ease-linear duration-300 my-2 p-4 outline-none transform hover:-translate-x-2",
-  errorsField:
-    "w-full shadow-md bg-gray-100 border  border-red-500 my-2 p-4 outline-none",
-  button:
-    "bg-transparent flex items-center justify-center hover:bg-sky-500 text-sky-500 font-semibold hover:text-white border border-sky-500 hover:border-transparent rounded py-2 px-4 w-96 transform hover:scale-110 ease-in duration-300",
-  error: " text-red-500 text-lg",
-};
-
-const ErrorComponent = (props) => (
-  <p className={styles.error + props.center}>{props.children}</p>
-);
+} from "../../services/categories";
+import ErrorAlert from "../Shared/Alerts/ErrorAlert";
+import SuccessAlert from "../Shared/Alerts/SuccessAlert";
+import InputForm from "../Shared/Forms/InputForm";
+import SendButton from "../Shared/Buttons/SendButton";
+import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 
 function CUCategoriesForm(props) {
   const { isEdit } = props;
@@ -42,7 +30,7 @@ function CUCategoriesForm(props) {
     getCategory(id)
       .then((res) => {
         if (res.status === 200) {
-          setCategory(res?.data?.new);
+          setCategory(res?.data?.category);
         } else {
           setNotFound(true);
         }
@@ -95,54 +83,31 @@ function CUCategoriesForm(props) {
         >
           {({ isSubmitting, errors, touched }) => (
             <Form className=" container mx-auto shadow-xl py-3">
-              <div className="grid grid-cols-1 sm:px-24">
-                <div className=" w-full">
-                  <Field
-                    className={`${
-                      errors.name && touched.name
-                        ? styles.errorsField
-                        : styles.field
-                    } h-16`}
+              <div className="grid grid-cols-1 sm:mx-24">
+                <InputForm 
+                    errors={errors.name}
+                    touched={touched.name}
                     name="name"
                     placeholder="Titulo"
                     type="text"
                     disabled={isDisabled}
                   />
-                  <ErrorMessage component={ErrorComponent} name="name" />
-                </div>
-                <div className="w-full">
-                  <Field
-                    as="textarea"
-                    className={`${
-                      errors.content && touched.content
-                        ? styles.errorsField
-                        : styles.field
-                    } h-32 resize-none`}
+               <InputForm 
+                    errors={errors.description}
+                    touched={touched.description}
                     name="description"
-                    placeholder="Descripcion"
+                    placeholder="Descripción"
                     type="text"
+                    as="textarea"
                     disabled={isDisabled}
                   />
-                  <ErrorMessage component={ErrorComponent} name="description" />
-                </div>
               </div>
-              <div className="flex justify-center my-6">
-                <button
-                  className={`${styles.button}`}
-                  type="submit"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting && <SpinSVGButton />}
-                  {!isEdit ? "Crear" : "Modificar"}
-                </button>
-              </div>
+              <SendButton isSubmitting={isSubmitting} text={`${isEdit ? "Modificar": "Crear"}`} />
             </Form>
           )}
         </Formik>
       ) : (
-        <div className=" flex flex-col text-center justify-center  mx-6 my-6  md:h-60 border-1 rounded-lg p-2 md:p-6 shadow-lg hover:shadow-2xl">
-          <h3 className=" p-1 text-xl">No existe esa categoria</h3>
-        </div>
+        <NotFoundComponent title={"No existe esa categoria"} />
       )}
       {error && <ErrorAlert setError={setError} />}
       {successMsg && (

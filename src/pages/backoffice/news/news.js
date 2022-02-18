@@ -1,10 +1,10 @@
 import { list } from "postcss";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import DeleteAlert from "../../components/DeleteAlert";
-import newsIcon from "../../img/icons/news.png";
-import { API_BASE_URL } from "../../services";
-import {deleteNew, getAllNews} from "../../services/news"
+import DeleteAlert from "../../../components/Shared/Alerts/DeleteAlert";
+import newsIcon from "../../../img/icons/news.png";
+import { API_BASE_URL } from "../../../services";
+import {deleteNew, getAllNews} from "../../../services/news"
 
 export default function BackofficeNews() {
 
@@ -43,7 +43,7 @@ export default function BackofficeNews() {
                         return (
                           <div className=" grid h-fit md:grid-cols-[250px_250px] md:grid-rows-[0.5fr_1fr_0.5fr] grid-rows-[125px_55px_40px_40px] grid-cols-[200px] mx-2 my-4 md:mx-0 md:my-6  md:h-60 border-1 rounded-lg p-2 md:p-3 shadow-lg hover:shadow-2xl">
                             <img
-                              src={`${API_BASE_URL}/api/v1/files/${element.image.key}`}
+                              src={`${API_BASE_URL}/api/v1/files/${element?.image?.key}`}
                               alt=""
                               className="inline-block md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-4 bg-slate-500"
                             ></img>

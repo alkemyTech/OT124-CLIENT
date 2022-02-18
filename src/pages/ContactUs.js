@@ -1,6 +1,6 @@
-import ContactForm from "../components/ContactForm";
+import ContactForm from "../components/Contacts/ContactForm";
 import React from "react";
-import ContactUsDetails from "../components/ContacUsDetails";
+import ContactUsDetails from "../components/Contacts/ContacUsDetails";
 
 export default function ContactUs() {
   return (

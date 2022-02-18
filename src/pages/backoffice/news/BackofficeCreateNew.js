@@ -1,7 +1,7 @@
 import React from "react";
+import CUNewsForm from "../../../components/News/CUNewsForm";
+import CUNewsHeader from "../../../components/News/CUNewsHeader";
 
-import CUNewsForm from "../../../components/CUNewsForm";
-import CUNewsHeader from "../../../components/CUNewsHeader";
 
 export default function BackofficeCreateNews() {
   return (

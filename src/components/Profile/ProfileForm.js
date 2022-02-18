@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom"
-import { profileUpdate } from "../services/Profile";
+import { profileUpdate } from "../../services/Profile";
 
 const ProfileSchema = Yup.object().shape({
     firstname: Yup.string().required("Obligatorio*"),

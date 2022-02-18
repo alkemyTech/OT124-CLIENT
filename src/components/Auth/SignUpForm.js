@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import { signUp } from "../services/auth";
+import { signUp } from "../../services/auth";
 import { GoogleLogin } from "react-google-login";
-import { API_CLIENT_ID } from "../services";
+import { API_CLIENT_ID } from "../../services";
 import GoogleIcon from "./GoogleIcon";
-import { setUserData } from "../features/authSlice";
+import { setUserData } from "../../features/authSlice";
 import { useDispatch } from "react-redux";
 
 const registerSchema = yup.object().shape({
