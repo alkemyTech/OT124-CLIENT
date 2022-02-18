@@ -1,8 +1,8 @@
 import React from 'react'
-import Facebook from "../img/facebook.png";
-import Instagram from "../img/instagram.png";
-import Mail from "../img/email.png";
-import Tel from "../img/whatsapp.png";
+import Facebook from "../../img/facebook.png";
+import Instagram from "../../img/instagram.png";
+import Mail from "../../img/email.png";
+import Tel from "../../img/whatsapp.png";
 
 function ContactUsDetails() {
     return ( 

@@ -1,13 +1,13 @@
 import React from "react";
-import activitiesIcon from "../img/icons/activities.png";
-import categoriesIcon from "../img/icons/categories.png";
-import membersIcon from "../img/icons/members.png";
-import newsIcon from "../img/icons/news.png";
-import organizationIcon from "../img/icons/organization.png";
-import slidesIcon from "../img/icons/slides.png";
-import testimonialsIcon from "../img/icons/testimonials.png";
-import usersIcon from "../img/icons/users.png";
-import contactsIcon from "../img/icons/contacts.png";
+import activitiesIcon from "../../img/icons/activities.png";
+import categoriesIcon from "../../img/icons/categories.png";
+import membersIcon from "../../img/icons/members.png";
+import newsIcon from "../../img/icons/news.png";
+import organizationIcon from "../../img/icons/organization.png";
+import slidesIcon from "../../img/icons/slides.png";
+import testimonialsIcon from "../../img/icons/testimonials.png";
+import usersIcon from "../../img/icons/users.png";
+import contactsIcon from "../../img/icons/contacts.png";
 import BackOfficeCard from "./BackOfficeCard";
 
 export default function BackOfficeAdminLayout() {

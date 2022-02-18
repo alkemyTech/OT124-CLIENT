@@ -1,31 +1,19 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import UploadImageComponent from "./UploadImageComponent";
-import SpinSVGButton from "./SpinSVGButton";
+import { Formik, Form } from "formik";
+import UploadImageComponent from "../Shared/Others/UploadImageComponent";
 import * as yup from "yup";
 import {
   createTestimonial,
   getTestimonial,
   updateTestimonial,
-} from "../services/testimonials";
-import ErrorAlert from "./ErrorAlert";
-import SuccessAlert from "./SuccessAlert";
-
-const styles = {
-  field:
-    "w-full shadow-md bg-gray-100 border-b-4 border transition hover:border-sky-500 ease-linear duration-300 my-2 p-4 outline-none transform hover:-translate-x-2",
-  errorsField:
-    "w-full shadow-md bg-gray-100 border  border-red-500 my-2 p-4 outline-none",
-  button:
-    "bg-transparent flex items-center justify-center hover:bg-sky-500 text-sky-500 font-semibold hover:text-white border border-sky-500 hover:border-transparent rounded py-2 px-4 w-96 transform hover:scale-110 ease-in duration-300",
-  error: " text-red-500 text-lg",
-};
-
-const ErrorComponent = (props) => (
-  <p className={styles.error + props.center}>{props.children}</p>
-);
+} from "../../services/testimonials";
+import ErrorAlert from "../Shared/Alerts/ErrorAlert";
+import SuccessAlert from "../Shared/Alerts/SuccessAlert";
+import InputForm from "../Shared/Forms/InputForm";
+import NotFoundComponent from "../Shared/Others/NotFoundComponent";
+import SendButton from "../Shared/Buttons/SendButton";
 
 function CUTestimonialsForm(props) {
   const { isEdit } = props;
@@ -38,14 +26,16 @@ function CUTestimonialsForm(props) {
     name: "",
     content: "",
     image: "",
-    key: "",
+    lastimage: "",
   };
   const [testimonial, setTestimonial] = useState(initialValues);
   useEffect(() => {
     getTestimonial(id)
       .then((res) => {
         if (res.status === 200) {
-          setTestimonial(res.data.testimonials);
+          let { testimonial: resTestimonial } = res.data
+          resTestimonial.image = resTestimonial.lastimage
+          setTestimonial(resTestimonial);
         } else {
           setNotFound(true);
         }
@@ -88,7 +78,7 @@ function CUTestimonialsForm(props) {
       .required("El contenido del testimonio es requerido"),
     image: yup.mixed().required("El archivo es requerido"),
   });
-
+  console.log(testimonial)
   return (
     <div className="">
       {!notFound || !isEdit ? (
@@ -109,72 +99,43 @@ function CUTestimonialsForm(props) {
             <Form className=" container mx-auto shadow-xl py-3">
               <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-8 sm:px-24">
                 <div className=" order-last sm:order-first">
-                  <div className=" w-full">
-                    <Field
-                      className={`${
-                        errors.name && touched.name
-                          ? styles.errorsField
-                          : styles.field
-                      } h-16`}
+                    <InputForm
+                      errors={error.name}
+                      touched={touched.name}
                       name="name"
                       placeholder="Titulo"
                       type="text"
                       disabled={isDisabled}
                     />
-                    <ErrorMessage component={ErrorComponent} name="name" />
-                  </div>
-                  <div className="w-full">
-                    <Field
-                      as="textarea"
-                      className={`${
-                        errors.content && touched.content
-                          ? styles.errorsField
-                          : styles.field
-                      } h-36 resize-none`}
+                    <InputForm
+                      errors={error.content}
+                      touched={touched.content}
                       name="content"
                       placeholder="Contenido"
                       type="text"
                       disabled={isDisabled}
-                    />
-                    <ErrorMessage component={ErrorComponent} name="content" />
-                  </div>
+                      as="textarea"
+                  />
                 </div>
                 <div className="w-full my-auto">
                   <UploadImageComponent
                     setFieldValue={setFieldValue}
                     setFieldError={setFieldError}
                     file={values?.image}
-                    keyFile={values?.key}
                     disabled={isDisabled}
                     error={errors?.image}
                     touched={touched?.image}
                     circle={true}
                   />
-                  <ErrorMessage
-                    center=" text-center"
-                    component={ErrorComponent}
-                    name="image"
-                  />
                 </div>
               </div>
-              <div className="flex justify-center my-6">
-                <button
-                  className={`${styles.button}`}
-                  type="submit"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting && <SpinSVGButton />}
-                  {!isEdit ? "Crear" : "Modificar"}
-                </button>
-              </div>
+              <SendButton isSubmitting={isSubmitting} text={`${isEdit ? "Modificar": "Crear"}`} />
             </Form>
           )}
         </Formik>
-      ) : (
-        <div className=" flex flex-col text-center justify-center  mx-6 my-6  md:h-60 border-1 rounded-lg p-2 md:p-6 shadow-lg hover:shadow-2xl">
-          <h3 className=" p-1 text-xl">No existe ese testimonio</h3>
-        </div>
-      )}
+      ) : 
+        <NotFoundComponent title={"No existe ese testimonio"} />
+      }
       {error && <ErrorAlert setError={setError} />}
       {successMsg && (
         <SuccessAlert successMsg={successMsg} setSuccessMsg={setSuccessMsg} />

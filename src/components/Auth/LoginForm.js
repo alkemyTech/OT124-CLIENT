@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { logIn } from "../services/auth";
+import { logIn } from "../../services/auth";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
-import { API_CLIENT_ID } from "../services";
+import { API_CLIENT_ID } from "../../services";
 import GoogleIcon from "./GoogleIcon";
-import { setUserData } from "../features/authSlice";
+import { setUserData } from "../../features/authSlice";
 import { useDispatch } from "react-redux";
 
 const LoginSchema = Yup.object().shape({
@@ -64,7 +64,7 @@ export default function LoginForm() {
       "bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none",
     button:
       "bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white border border-sky-500 hover:border-transparent rounded py-2 mt-2 px-4 w-full",
-    errorMsg: "text-red-500 text-sm text-center",
+    errorMsg: "text-red-400 text-sm bg-red-200 text-center border border-red-500 mt-2 rounded-sm p-2",
   };
 
   return (
@@ -74,7 +74,7 @@ export default function LoginForm() {
         validationSchema={LoginSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, errors, touched }) => (
           <Form className="grid w-80">
             <label className={styles.label} htmlFor="email">
               Email

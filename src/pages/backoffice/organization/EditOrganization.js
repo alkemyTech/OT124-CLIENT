@@ -4,16 +4,17 @@ import * as Yup from "yup";
 import React, { useEffect, useState } from "react";
 import Dropzone from 'react-dropzone'
 import { useParams } from "react-router";
-//import { Organization } from "../../../services/backOffice";
 import { useDispatch } from "react-redux";
 import OrganizationsList from "./OrganizationsList";
-import UploadImageComponent from "../../../components/UploadImageComponent";
-//when endpoint to get all organizations exists
+import UploadImageComponent from "../../../components/Shared/Others/UploadImageComponent";
+
 let organizations = [
     {
         id: "1",
         name: "org-1",
-        image: "https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80",
+        image: {
+            key: "08223af4-693e-4c23-a649-530b13c26c34.jpg"
+        },
         address: "adress-org-1",
         phone: "3131-1313",
         email: "org.1@gmail.com",
@@ -22,7 +23,9 @@ let organizations = [
     {
         id: "2",
         name: "org-2",
-        image: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
+        image: {
+            key: "08223af4-693e-4c23-a649-530b13c26c34.jpg"
+        },
         address: "adress-org-2",
         phone: "3131-1313",
         email: "org.2@gmail.com",
@@ -31,7 +34,9 @@ let organizations = [
     {
         id: "3",
         name: "org-3",
-        image: "https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80",
+        image: {
+            key: "08223af4-693e-4c23-a649-530b13c26c34.jpg"
+        },
         address: "adress-org-3",
         phone: "3131-1313",
         email: "org.3@gmail.com",
