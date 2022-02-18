@@ -8,36 +8,6 @@ import { useParams } from "react-router";
 import { useDispatch } from "react-redux";
 import OrganizationsList from "./OrganizationsList";
 import UploadImageComponent from "../../../components/UploadImageComponent";
-//when endpoint to get all organizations exists
-let organizations = [
-    {
-        id: "1",
-        name: "org-1",
-        image: "https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80",
-        address: "adress-org-1",
-        phone: "3131-1313",
-        email: "org.1@gmail.com",
-        welcomeText: "we are organization "
-    },
-    {
-        id: "2",
-        name: "org-2",
-        image: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
-        address: "adress-org-2",
-        phone: "3131-1313",
-        email: "org.2@gmail.com",
-        welcomeText: "we are organization "
-    },
-    {
-        id: "3",
-        name: "org-3",
-        image: "https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80",
-        address: "adress-org-3",
-        phone: "3131-1313",
-        email: "org.3@gmail.com",
-        welcomeText: "we are organization "
-    },
-]
 
 function EditOrganization() {
     const styles = {
@@ -61,13 +31,7 @@ function EditOrganization() {
     //const  dispatch = useDispatch()
     const { id } = useParams()
     const [isDisabled, setIsDisabled] = useState(true);
-    const [orgData,setOrgData] = useState({
-        name: "",
-        sender: false,
-        id: "",
-        image: ""
-
-    })
+    
     useEffect(() => {
         //Organization(id)
     }, [])
@@ -79,14 +43,14 @@ function EditOrganization() {
     const MessagePopup = (props) => (
         <div  className={`${styles.sendDiv}`}>
             <p className={`${styles.send}`} >{props.children}</p>
-            <p  onClick={() =>  setOrgData({sender:false})} className={`${styles.sendX}`} > x</p>
+            {/* <p  onClick={() =>  setOrgData({sender:false})} className={`${styles.sendX}`} > x</p> */}
         </div>
     )
 
     const onSubmit = (values, { resetForm }) => {
         console.log(values)
         resetForm();
-       setOrgData({sender:true}) ;
+       //setOrgData({sender:true}) ;
 
 
     }
@@ -95,13 +59,13 @@ function EditOrganization() {
    
     return (
         <div>
-            <OrganizationsList organizations={organizations} setOrgData={setOrgData}></OrganizationsList>
-            <Formik initialValues={orgData} validationSchema={validationSchema} onSubmit={onSubmit}>
+            
+            <Formik initialValues={null} validationSchema={validationSchema} onSubmit={onSubmit}>
             {({ values, setFieldValue, isSubmitting, errors, touched, setFieldError }) => (
                 <Form className=" container mx-auto px-5" >
                     <ErrorMessage component={MessagePopup} name="sender" />
                     <div className=" w-full">
-                        <Field className={`${styles.field} h-16`} name="name" value={orgData.name} placeholder="Nombre" type="text" />
+                        <Field className={`${styles.field} h-16`} name="name" value={null} placeholder="Nombre" type="text" />
                         <ErrorMessage component={ErrorComponent} name="name" />
                     </div>
                     <UploadImageComponent

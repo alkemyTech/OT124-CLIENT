@@ -10,12 +10,12 @@ export default function Footer() {
   const [ socialMedia, setSocialMedia ] = useState({});
 
   const fetchOrganizationSocials = async id => {
-    const response = await getOrganizationData(id);
-    setSocialMedia(response.data.socials);
+   const response = await getOrganizationData(id);
+    setSocialMedia(response?.data?.socials);
   }
 
   useEffect(() => {
-    fetchOrganizationSocials(1);
+   fetchOrganizationSocials(1);
   }, []);
 
   return (
@@ -48,13 +48,13 @@ export default function Footer() {
         </nav>
         <div className="m-5 md:m-0 w-full h-px bg-black bg-opacity-50 justify-self-center"></div>
         <div className="flex flex-wrap justify-center gap-5 m-10">
-          <a target="_blank" rel='noreferrer' href={socialMedia.instagram}>
+          <a target="_blank" rel='noreferrer' href={socialMedia?.instagram}>
             <img className="h-10" alt='instagram' src={instagram}></img>
           </a>
-          <a target="_blank" rel='noreferrer' href={socialMedia.facebook}>
+          <a target="_blank" rel='noreferrer' href={socialMedia?.facebook}>
             <img className="h-10" alt='facebook' src={facebook}></img>
           </a>
-          <a target="_blank" rel='noreferrer' href={socialMedia.linkedin}>
+          <a target="_blank" rel='noreferrer' href={socialMedia?.linkedin}>
             <img className="h-10" alt='linkedin' src={linkedin}></img>
           </a>
         </div>

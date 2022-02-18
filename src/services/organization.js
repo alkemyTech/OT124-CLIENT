@@ -7,6 +7,26 @@ export async function getOrganizationData(organizationId) {
         .get(`${API_BASE_URL}/api/v1/organizations/${organizationId}/public`)
         .catch(error => error);
 }
+export async function getAllOrganizations() {
+    
+    return await axios
+        .get(`${API_BASE_URL}/api/v1/organizations`).then((e)=>{
+            return e
+        })
+        .catch(error => error);
+}
+export async function createOrganization(organizationId) {
+  
+    return await axios
+        .post(`${API_BASE_URL}/api/v1/organizations/`)
+        .catch(error => error);
+}
+export async function deleteOrganization(organizationId) {
+  
+    return await axios
+        .delete(`${API_BASE_URL}/api/v1/organizations/${organizationId}`)
+        .catch(error => error);
+}
 
 const organizationService = {
     getOrganizationData
