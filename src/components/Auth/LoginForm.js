@@ -1,27 +1,52 @@
 import React, { useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import SuccessAlert from "../Shared/Alerts/SuccessAlert";
+import ErrorAlert from "../Shared/Alerts/ErrorAlert";
+import InputForm from "../Shared/Forms/InputForm";
+import SendButton from "../Shared/Buttons/SendButton";
+import { Formik, Form } from "formik";
 import { logIn } from "../../services/auth";
 import { useNavigate } from "react-router-dom";
-import { GoogleLogin } from "react-google-login";
-import { API_CLIENT_ID } from "../../services";
-import GoogleIcon from "./GoogleIcon";
 import { setUserData } from "../../features/authSlice";
 import { useDispatch } from "react-redux";
-
-const LoginSchema = Yup.object().shape({
-  email: Yup.string().required("Obligatorio").email("Email invalido").max(255),
-  password: Yup.string()
-    .min(6, "Muy corta!")
-    .max(50, "Muy larga!")
-    .required("Obligatorio"),
-});
+import GoogleButton from "../Shared/Buttons/GoogleButton";
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+
+  const [error, setError] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
   const [showErrorMessage, setShowErrorMessage] = useState();
+
+  const LoginSchema = Yup.object().shape({
+    email: Yup.string()
+      .required("Obligatorio")
+      .email("Email invalido")
+      .max(255),
+    password: Yup.string()
+      .min(6, "Muy corta!")
+      .max(50, "Muy larga!")
+      .required("Obligatorio"),
+  });
+
+  async function handleSubmit(values) {
+    const { email, password, tokenId } = values;
+    const res = await logIn(email, password, tokenId);
+
+    if (res.status === 201 || res.status === 200) {
+      dispatch(setUserData(res.data));
+      navigate("/");
+    } else {
+      setShowErrorMessage(getErrorMessage(res.response.data.errors));
+      setError(true);
+    }
+  }
 
   function getErrorMessage(errorMessage) {
     let message;
@@ -41,98 +66,46 @@ export default function LoginForm() {
     return message;
   }
 
-  async function handleSubmit(values, actions) {
-    const { tokenId } = values;
-
-    setShowErrorMessage();
-
-    const { email, password } = values;
-    const res = await logIn(email, password, tokenId);
-
-    if (res.status === 200 || res.status === 201) {
-      dispatch(setUserData(res.data));
-      navigate("/");
-    } else {
-      setShowErrorMessage(getErrorMessage(res.response.data.errors));
-      actions.setSubmitting(false);
-    }
-  }
-
-  const styles = {
-    label: "block text-gray-700 text-sm font-bold pt-2 pb-1",
-    field:
-      "bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none",
-    button:
-      "bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white border border-sky-500 hover:border-transparent rounded py-2 mt-2 px-4 w-full",
-    errorMsg: "text-red-400 text-sm bg-red-200 text-center border border-red-500 mt-2 rounded-sm p-2",
-  };
-
   return (
     <>
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={initialValues}
         validationSchema={LoginSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting, errors, touched }) => (
-          <Form className="grid w-80">
-            <label className={styles.label} htmlFor="email">
-              Email
-            </label>
-            <Field
-              className={styles.field}
-              autoComplete="off"
-              id="email"
-              name="email"
-              type="email"
+        {({ errors, touched, isSubmitting }) => (
+          <Form className=" container mx-auto px-5">
+            <InputForm
+              errors={errors.email}
+              touched={touched.email}
+              name={"email"}
+              placeholder={"Email"}
+              type={"text"}
+              isLoading={false}
             />
-            <ErrorMessage
-              className={styles.errorMsg}
-              component="a"
-              name="email"
+            <InputForm
+              errors={errors.password}
+              touched={touched.password}
+              name={"password"}
+              placeholder={"Contraseña"}
+              type={"password"}
+              isLoading={false}
             />
-            <label className={styles.label} htmlFor="password">
-              Contraseña
-            </label>
-            <Field
-              className={styles.field}
-              id="password"
-              name="password"
-              type="password"
+            <SendButton
+              isSubmitting={isSubmitting}
+              isLoading={false}
+              text={"Entrar"}
             />
-            <ErrorMessage
-              className={styles.errorMsg}
-              component="a"
-              name="password"
-            />
-            <button
-              className={styles.button}
-              type="submit"
-              disabled={isSubmitting}
-            >
-              Log In
-            </button>
-
-            {showErrorMessage && (
-              <div className={styles.errorMsg}>{showErrorMessage}</div>
+            <GoogleButton handleSubmit={handleSubmit} />
+            {error && (
+              <ErrorAlert setError={setError} message={showErrorMessage} />
             )}
-            <GoogleLogin
-              className=" my-4 text-lg text-center"
-              clientId={API_CLIENT_ID}
-              render={(props) => (
-                <button
-                  onClick={props.onClick}
-                  className={" inline-flex items-center " + styles.button}
-                  disabled={props.disabled}
-                >
-                  <GoogleIcon className=" hover:bg-sky-500" />
-                  <span className={"w-full mt-1"}>Loguearse con Google</span>
-                </button>
-              )}
-              onFailure={handleSubmit}
-              onSuccess={handleSubmit}
-              cookiePolicy={"single_host_origin"}
-            />
+            {successMsg && (
+              <SuccessAlert
+                successMsg={successMsg}
+                setSuccessMsg={setSuccessMsg}
+              />
+            )}
           </Form>
         )}
       </Formik>
