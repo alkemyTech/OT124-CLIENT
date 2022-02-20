@@ -19,20 +19,25 @@ function OrganizationsList({ organizations }) {
             .then((resdel) => {
                 if (resdel) {
                     dispatch(deleteOrg(resdel))
+                    console.log(resdel)
+                    console.log(resdel?.status)
                     ret.status = resdel?.status
 
                     getAllOrganizations()
                         .then((resget) => {
                             if (resget?.status === 200 || resget?.status === 201 || resget?.status === 304) {
                                 dispatch(getAllOrgs(resget?.data));
+                               
                             } else {
                                 console.error("error status")
                             }
                         }).catch(e => e)
                 }
+                console.log(resdel.status)
+                return resdel.status
             })
             .catch(e => e)
-        return ret
+           
     }
 
 

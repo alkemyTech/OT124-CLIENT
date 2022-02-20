@@ -6,7 +6,6 @@ function DeleteAlert(props) {
 
   const deleteSubmit = async (e) => {
     const id = e.target.getAttribute("id");
-    console.log(id)
     const { isConfirmed } = await Swal.fire({
       title: title,
       text: message,
