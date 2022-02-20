@@ -4,7 +4,7 @@ import InputForm from '../Shared/Forms/InputForm';
 import * as Yup from "yup";
 import organizationService, { editOrganization, EditOrganization, postOrganization } from '../../services/organization';
 import UploadImageComponent from '../Shared/Others/UploadImageComponent'; 
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import SendButton from '../Shared/Buttons/SendButton'; 
 import ErrorAlert from '../Shared/Alerts/ErrorAlert'; 
 import SuccessAlert from '../Shared/Alerts/SuccessAlert'; 
@@ -19,7 +19,9 @@ function CUOrganizationForm({ isEdit }) {
   const [notFound, setNotFound] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
+
   let dispatch = useDispatch()
+  let navigate = useNavigate();
   let {
     name,
     email,
@@ -46,7 +48,7 @@ function CUOrganizationForm({ isEdit }) {
             setSuccessMsg(
               "¡Gracias por contactarnos! la organización ha sido actualizada"
             );
-  
+            navigate(-1)
           } else {
             setError(true);
             setSubmitting(false);
@@ -62,6 +64,7 @@ function CUOrganizationForm({ isEdit }) {
           setSuccessMsg(
             "¡Gracias por contactarnos! la organización ha sido creada"
           );
+          navigate(-1)
   
         } else {
           setError(true);
@@ -70,6 +73,7 @@ function CUOrganizationForm({ isEdit }) {
       })
       .catch (err => err) 
     }
+
   }
   //use effects
   useEffect( () => {
@@ -87,13 +91,18 @@ function CUOrganizationForm({ isEdit }) {
     }
   }, [id]);
   useEffect(() => {
-    setOrg  ({
-      name,
-      email,
-      phone,
-      welcomeText,
-      address,
-    });
+    if(isEdit){
+
+      setOrg({
+        name,
+        email,
+        phone,
+        welcomeText,
+        address,
+      });
+    }else{
+      setOrg({initialValues})
+    }
 console.log(initialValues)
   }, [name]);
   useEffect(() => {
