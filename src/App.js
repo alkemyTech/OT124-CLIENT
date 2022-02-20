@@ -1,22 +1,21 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import AboutUs from "./components/AboutUs";
+import AboutUs from "./pages/AboutUs";
 import ActivitiesForm from "./components/Activities/Form";
 import ActivitiesList from "./components/Activities/List";
-import BackOfficeAdminLayout from "./components/BackOfficeAdminLayout";
-import BackOfficeUserLayout from "./components/BackOfficeUserLayout";
-import Layout from "./components/Layout";
+import BackOfficeAdminLayout from "./components/Backoffice/BackOfficeAdminLayout";
+import BackOfficeUserLayout from "./components/Backoffice/BackOfficeUserLayout";
+import Layout from "./components/UI/Layout";
 import NewDetails from "./components/NewDatails";
 import Organization from "./pages/backoffice/organization/Organization";
-import EditOrganization from "./pages/backoffice/organization/EditOrganization";
-import NewsIndex from "./components/NewsIndex";
+import NewsIndex from "./components/News/NewsIndex";
 import BackOfficeActivities from "./pages/backoffice/actividades/BackofficeActivities";
 import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
 import BackofficeCreateCategory from "./pages/backoffice/categories/BackofficeCreateCategory";
 import BackofficeEditCategory from "./pages/backoffice/categories/BackofficeEditCategory";
 import BackOfficeContacts from "./pages/backoffice/contacts/BackOfficeContacts";
 import ContactsList from "./pages/backoffice/contacts/ContactsLIst";
-import BackofficeNews from "./pages/backoffice/news";
+import BackofficeNews from "./pages/backoffice/news/news";
 import BackofficeCreateNews from "./pages/backoffice/news/BackofficeCreateNew";
 import BackofficeEditNews from "./pages/backoffice/news/BackofficeEditNew";
 import BackofficeCreateTestimonials from "./pages/backoffice/testimonials/BackofficeCreateTestimonials";
@@ -29,6 +28,9 @@ import News from "./pages/News";
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 import { AdminRoute, PrivateRoute } from "./routes";
+import Activities from "./pages/Activities";
+import CUOrganizationForm from "./components/Organizations/CUOrganizationForm";
+
 
 
 function App() {
@@ -41,13 +43,21 @@ function App() {
         <Route path="contacto" element={<ContactUs />} />
         <Route path="mi-perfil" element={<Profile />} />
         <Route path="signup" element={<SignUp />} />
+        <Route path="actividades" element={<Activities />} />
         <Route path="backoffice" element={<AdminRoute />}>
           <Route index element={<BackOfficeAdminLayout />} />
-          <Route path="organizacion" element={<Organization />}>
+          <Route path="organizacion">
+            <Route index element={<Organization />} />
+            <Route
+              path="editar-organizacion/:id"
+              element={<CUOrganizationForm isEdit={true}/>}
+            />
+            <Route
+              path="crear-organizacion"
+              element={<CUOrganizationForm />}
+            />
           </Route>
-          <Route path="editar-organizacion" element={<EditOrganization />}>
-          </Route>
-        
+
 
           <Route path="categorias">
             <Route index element={<BackofficeCategories />} />

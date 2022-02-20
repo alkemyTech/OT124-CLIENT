@@ -1,6 +1,6 @@
 import React from "react";
-import CUTestimonialsForm from "../../../components/CUTestimonialsForm";
-import CUTestimonialsHeader from "../../../components/CUTestimonialsHeader";
+import CUTestimonialsForm from "../../../components/Testimonials/CUTestimonialsForm";
+import CUTestimonialsHeader from "../../../components/Testimonials/CUTestimonialsHeader";
 
 export default function BackofficeCreateTestimonials() {
   return (

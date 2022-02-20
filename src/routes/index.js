@@ -16,3 +16,5 @@ export function AdminRoute() {
 
   return role === "admin" ? <Outlet /> : <Navigate to="/" />;
 }
+
+
