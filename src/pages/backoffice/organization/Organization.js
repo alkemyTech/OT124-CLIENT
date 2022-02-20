@@ -17,23 +17,23 @@ function Organization() {
 
 
 
-  useEffect(async () => {
-    try {
+  useEffect( () => {
 
-      const res = await getAllOrganizations();
 
-      if (res?.status === 200 || res?.status === 201 || res?.status === 304) {
+      const res =  getAllOrganizations()
+      .then((res) => {
 
-        dispatch(getAllOrgs(res?.data));
+        if (res?.status === 200 || res?.status === 201 || res?.status === 304) {
+  
+          dispatch(getAllOrgs(res?.data));
+  
+        }else{
+          
+          console.error("error status")
+        }
+      })
 
-      }else{
-        
-        console.error("error status")
-      }
-
-    } catch (e) {
-      console.error(e)
-    }
+     .catch(e => e) 
 
   }
     , [])

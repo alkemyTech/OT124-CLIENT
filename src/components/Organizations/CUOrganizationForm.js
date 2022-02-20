@@ -38,43 +38,42 @@ function CUOrganizationForm({ isEdit }) {
   };
   const [Org, setOrg] = useState(initialValues);
 
-  async function handleSubmit(values, { resetForm, setSubmitting }) {
+   function handleSubmit(values, { resetForm, setSubmitting }) {
     if (!isEdit) {
-      try {
+      postOrganization(values).then((res)=>{
+          if (res.status === 200 || res.status === 201) {
+            resetForm();
+            setSuccessMsg(
+              "¡Gracias por contactarnos! la organización ha sido actualizada"
+            );
+  
+          } else {
+            setError(true);
+            setSubmitting(false);
+          }
+        })
+    .catch (err => err) 
+    
+    } else if(isEdit) {
+      editOrganization(values,id).then((res) =>{
 
-        const res = await postOrganization(values);
         if (res.status === 200 || res.status === 201) {
           resetForm();
           setSuccessMsg(
-            "¡Gracias por contactarnos! la organización ha sido actualizada"
+            "¡Gracias por contactarnos! la organización ha sido creada"
           );
-
+  
         } else {
           setError(true);
           setSubmitting(false);
         }
-      } catch (err) {
-        console.log(err)
-      }
-    } else if(isEdit) {
-      const res = await editOrganization(values,id);
-      if (res.status === 200 || res.status === 201) {
-        resetForm();
-        setSuccessMsg(
-          "¡Gracias por contactarnos! la organización ha sido creada"
-        );
-
-      } else {
-        setError(true);
-        setSubmitting(false);
-      }
+      })
+      .catch (err => err) 
     }
   }
   //use effects
-  useEffect(async () => {
-    
+  useEffect( () => {
     if (isEdit) {
-
       organizationService.getOrganizationData(id)
         .then((res) => {
           if (res?.status == 200 || res?.status == 304) {

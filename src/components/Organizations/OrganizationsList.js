@@ -15,24 +15,27 @@ function OrganizationsList({ organizations }) {
 
     async function HandlerDelete(id) {
         let ret = {}
-        const deleteOrgRes = await deleteOrganization(id)
-        if (deleteOrgRes) {
-            dispatch(deleteOrg(deleteOrgRes))
-            ret.status = deleteOrgRes?.status
-            try {
-                const res = await getAllOrganizations();
-                if (res?.status === 200 || res?.status === 201 || res?.status === 304) {
-                    dispatch(getAllOrgs(res?.data));
-                } else {
-                    console.error("error status")
-                }
-            } catch (e) {
-                console.error(e)
-            }
-            return ret
-        }
+        deleteOrganization(id)
+            .then((resdel) => {
+                if (resdel) {
+                    dispatch(deleteOrg(resdel))
+                    ret.status = resdel?.status
 
+                    getAllOrganizations()
+                        .then((resget) => {
+                            if (resget?.status === 200 || resget?.status === 201 || resget?.status === 304) {
+                                dispatch(getAllOrgs(resget?.data));
+                            } else {
+                                console.error("error status")
+                            }
+                        }).catch(e => e)
+                }
+            })
+            .catch(e => e)
+        return ret
     }
+
+
 
     return (
         <CenterResponsiveContainer>
