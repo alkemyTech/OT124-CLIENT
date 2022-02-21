@@ -30,6 +30,8 @@ import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 import { AdminRoute, PrivateRoute } from "./routes";
 import Activities from "./pages/Activities";
+import BackofficeListUsers from './pages/backoffice/users/BackofficeListUsers';
+import BackofficeEditUsers from './pages/backoffice/users/BackofficeEditUsers';
 
 function App() {
   return (
@@ -89,6 +91,10 @@ function App() {
           <Route path="novedades" element={<NewsIndex />}>
             <Route index element={<News />} />
             <Route path=":id" element={<NewDetails />} />
+          </Route>
+          <Route path="usuarios">
+            <Route index element={<BackofficeListUsers />} />
+            <Route path='editar-usuario/:id' element={<BackofficeEditUsers />} />
           </Route>
         </Route>
         <Route path="me" element={<PrivateRoute />}>
