@@ -16,9 +16,23 @@ export async function deleteUser(userId) {
         .catch(error => error);
 }
 
+export async function getUser(userId) {
+    return await axios
+        .get(`${API_BASE_URL}/api/v1/users/${userId}`)
+        .catch(error => error);
+}
+
+export async function updateUser(userId, user) {
+    return await axios
+        .put(`${API_BASE_URL}/api/v1/users/${userId}`, user)
+        .catch(error => error);
+}
+
 const usersServices = {
     getAllUsers,
-    deleteUser
+    deleteUser,
+    getUser,
+    updateUser
 }
 
 export default usersServices;
