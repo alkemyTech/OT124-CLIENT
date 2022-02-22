@@ -30,6 +30,7 @@ import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 import { AdminRoute, PrivateRoute } from "./routes";
 import Activities from "./pages/Activities";
+import Contribuye from "./pages/Contribuye";
 
 function App() {
   return (
@@ -42,7 +43,9 @@ function App() {
         <Route path="mi-perfil" element={<Profile />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="actividades" element={<Activities />} />
+        <Route path="contribuye" element={<Contribuye />} />
         <Route path="backoffice" element={<AdminRoute />}>
+          
           <Route index element={<BackOfficeAdminLayout />} />
           <Route path="organizacion" element={<Organization />}></Route>
           <Route
