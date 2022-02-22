@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {deleteNew, getAllNews} from "../services/news"
-import DeleteAlert from "./DeleteAlert";
+import DeleteAlert from "./Shared/Alerts/DeleteAlert";
 import { API_BASE_URL } from "../services";
 
 function NewsList(props) {
