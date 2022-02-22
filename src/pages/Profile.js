@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import ProfileForm from "../components/ProfileForm";
-import profileGetMine from "../services/Profile"
+import ProfileForm from "../components/Profile/ProfileForm";
+import {profileGetMine} from "../services/Profile"
 import { profileDelete } from "../services/Profile";
-import DeleteAlert from "../components/DeleteAlert";
+import DeleteAlert from "../components/Shared/Alerts/DeleteAlert";
 import { useNavigate } from "react-router-dom"
 
 export default function Profile() {
