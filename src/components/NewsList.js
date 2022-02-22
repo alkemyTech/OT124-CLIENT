@@ -7,7 +7,7 @@ import { API_BASE_URL } from "../services";
 
 function NewsList(props) {
   const [ isLoad, setIsLoad ] = useState(false)
-  const [news, setnews] = useState([{id: 1, name: 2, content: 3, imagen: 4}]);
+  const [news, setnews] = useState([]);
 
   useEffect(() => {
     getAllNews()
