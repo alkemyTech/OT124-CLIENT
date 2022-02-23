@@ -12,10 +12,10 @@ import {
 } from "../../services/activities";
 
 import { useNavigate } from "react-router-dom";
-import ErrorAlert from "../ErrorAlert";
-import SuccessAlert from "../SuccessAlert";
-import UploadImageComponent from "../UploadImageComponent";
-import SpinSVGButton from "../SpinSVGButton";
+import ErrorAlert from "../Shared/Alerts/ErrorAlert";
+import SuccessAlert from "../Shared/Alerts/SuccessAlert";
+import UploadImageComponent from "../Shared/Others/UploadImageComponent";
+import SpinSVGButton from "../Shared/Loaders/SpinSVGButton";
 
 const styles = {
   field:
