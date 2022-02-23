@@ -13,7 +13,8 @@ import ErrorAlert from "../Shared/Alerts/ErrorAlert";
 import SuccessAlert from "../Shared/Alerts/SuccessAlert";
 import InputForm from "../Shared/Forms/InputForm";
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
-import SendButton from "../Shared/Buttons/SendButton";
+import AddButton from "../Shared/Buttons/Addbutton";
+import TwoColsForm from "../Shared/Containers/TwoColsForm";
 
 function CUTestimonialsForm(props) {
   const { isEdit } = props;
@@ -96,9 +97,9 @@ function CUTestimonialsForm(props) {
             touched,
             setFieldError,
           }) => (
-            <Form className=" container mx-auto shadow-xl py-3">
-              <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-8 sm:px-24">
-                <div className=" order-last sm:order-first">
+            <Form >
+              <TwoColsForm>
+                <div className=" order-last sm:order-first sm:w-[400px]">
                     <InputForm
                       errors={error.name}
                       touched={touched.name}
@@ -128,8 +129,8 @@ function CUTestimonialsForm(props) {
                     circle={true}
                   />
                 </div>
-              </div>
-              <SendButton isSubmitting={isSubmitting} text={`${isEdit ? "Modificar": "Crear"}`} />
+              </TwoColsForm>
+              <AddButton isEdit={isEdit} isSubmitting={isSubmitting} />
             </Form>
           )}
         </Formik>

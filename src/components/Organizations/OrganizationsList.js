@@ -1,49 +1,31 @@
 
 import React from "react";
-import CenterResponsiveContainer from "../Shared/Containers/CenterResponsiveContainer";
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import BodyTable from "../Shared/Table/BodyTable";
 import HeaderTable from "../Shared/Table/HeaderTable";
 import TableLayout from "../Shared/Table/TableLayout";
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteOrg, getAllOrgs } from '../../features/orgSlice';
-import { API_BASE_URL } from '../../services';
 import { deleteOrganization } from '../../services/organization';
 import { getAllOrganizations } from '../../services/organization';
-function OrganizationsList({ organizations }) {
-    let dispatch = useDispatch()
+import { useEffect } from "react";
+import { useState } from "react";
 
-    async function HandlerDelete(id) {
-        let ret = {}
-        deleteOrganization(id)
-            .then((resdel) => {
-                if (resdel) {
-                    dispatch(deleteOrg(resdel))
-                    console.log(resdel)
-                    console.log(resdel?.status)
-                    ret.status = resdel?.status
+function OrganizationsList() {
+     const [organizations, setOrganizations] = useState([])
+     const [isLoad, setIsLoad] = useState(false)
 
-                    getAllOrganizations()
-                        .then((resget) => {
-                            if (resget?.status === 200 || resget?.status === 201 || resget?.status === 304) {
-                                dispatch(getAllOrgs(resget?.data));
-                               
-                            } else {
-                                console.error("error status")
-                            }
-                        }).catch(e => e)
-                }
-                console.log(resdel.status)
-                return resdel.status
-            })
-            .catch(e => e)
-           
-    }
-
-
+        useEffect(() => {
+            getAllOrganizations()
+              .then((res) => {
+                setOrganizations(res?.data?.organizations);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }, [isLoad]);
+        
 
     return (
-        <CenterResponsiveContainer>
+        <>
             {organizations?.length ? (
                 <TableLayout>
                     <HeaderTable
@@ -62,13 +44,15 @@ function OrganizationsList({ organizations }) {
                         bodyName={"organizacion"}
                         message={"¿Desea eliminar esta organización?"}
                         afterMessage={"organización eliminada con éxito"}
-                        service={(id) => HandlerDelete(id)}
+                        isLoad={isLoad}
+                        setIsLoad={setIsLoad}
+                        service={deleteOrganization}
                     />
                 </TableLayout>
             ) : (
                 <NotFoundComponent title={"No se encontraron organizaciones"} />
             )}
-        </CenterResponsiveContainer>
+        </>
     );
 }
 

@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { signUp } from "../../services/auth";
-import { GoogleLogin } from "react-google-login";
-import { API_CLIENT_ID } from "../../services";
-import GoogleIcon from "./GoogleIcon";
 import { setUserData } from "../../features/authSlice";
 import { useDispatch } from "react-redux";
+import SuccessAlert from "../Shared/Alerts/SuccessAlert";
+import ErrorAlert from "../Shared/Alerts/ErrorAlert";
+import InputForm from "../Shared/Forms/InputForm";
+import SendButton from "../Shared/Buttons/SendButton";
+import GoogleButton from "../Shared/Buttons/GoogleButton";
 
 const registerSchema = yup.object().shape({
   name: yup.string().required("Obligatorio"),
@@ -22,8 +24,11 @@ const registerSchema = yup.object().shape({
 
 export default function SignUpForm() {
   const navigate = useNavigate();
-  const [showErrorMessage, setShowErrorMessage] = useState();
   const dispatch = useDispatch();
+
+  const [error, setError] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
+  const [showErrorMessage, setShowErrorMessage] = useState();
 
   function getErrorMessage(errorMessage) {
     let message;
@@ -39,7 +44,7 @@ export default function SignUpForm() {
     return message;
   }
 
-  async function handleSubmit(values, actions) {
+  async function handleSubmit(values) {
     const { tokenId } = values;
     setShowErrorMessage();
 
@@ -51,18 +56,9 @@ export default function SignUpForm() {
       navigate("/");
     } else {
       setShowErrorMessage(getErrorMessage(res.response.data.errors));
-      actions.setSubmitting(false);
+      setError(true);
     }
   }
-
-  const styles = {
-    label: "block text-gray-700 text-sm font-bold pt-2 pb-1",
-    field:
-      "bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none",
-    button:
-      "bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white border border-sky-500 hover:border-transparent rounded py-2 mt-2 px-4 w-full",
-    errorMsg: "text-red-500 text-sm text-center",
-  };
 
   return (
     <Formik
@@ -70,100 +66,55 @@ export default function SignUpForm() {
       validationSchema={registerSchema}
       onSubmit={handleSubmit}
     >
-      {({ isSubmitting }) => (
-        <Form className="w-96">
-          <label className={styles.label} htmlFor="name">
-            Nombre
-          </label>
-          <Field
-            autoComplete="off"
-            className={styles.field}
-            type="text"
-            id="name"
-            name="name"
+      {({ errors, touched, isSubmitting }) => (
+        <Form className=" container mx-auto px-5">
+          <InputForm
+            errors={errors.name}
+            touched={touched.name}
+            name={"name"}
+            placeholder={"Nombre"}
+            type={"text"}
+            isLoading={false}
           />
-          <ErrorMessage
-            className={styles.errorMsg}
-            name="name"
-            component="div"
+          <InputForm
+            errors={errors.surname}
+            touched={touched.surname}
+            name={"surname"}
+            placeholder={"Apellido"}
+            type={"text"}
+            isLoading={false}
           />
-
-          <label className={styles.label} htmlFor="surname">
-            Apellido
-          </label>
-          <Field
-            autoComplete="off"
-            className={styles.field}
-            type="text"
-            id="surname"
-            name="surname"
+          <InputForm
+            errors={errors.email}
+            touched={touched.email}
+            name={"email"}
+            placeholder={"Email"}
+            type={"text"}
+            isLoading={false}
           />
-          <ErrorMessage
-            className={styles.errorMsg}
-            name="surname"
-            component="div"
+          <InputForm
+            errors={errors.password}
+            touched={touched.password}
+            name={"password"}
+            placeholder={"Contraseña"}
+            type={"password"}
+            isLoading={false}
           />
-
-          <label className={styles.label} htmlFor="email">
-            Email
-          </label>
-          <Field
-            autoComplete="off"
-            id="email"
-            className={styles.field}
-            type="email"
-            name="email"
+          <SendButton
+            isSubmitting={isSubmitting}
+            isLoading={false}
+            text={"Registrarse"}
           />
-          <ErrorMessage
-            className={styles.errorMsg}
-            name="email"
-            component="div"
-          />
-
-          <label className={styles.label} htmlFor="password">
-            Contraseña
-          </label>
-          <Field
-            autoComplete="off"
-            id="password"
-            className={styles.field}
-            type="password"
-            name="password"
-          />
-          <ErrorMessage
-            className={styles.errorMsg}
-            name="password"
-            component="div"
-          />
-
-          <button
-            className={styles.button}
-            type="submit"
-            disabled={isSubmitting}
-          >
-            Registrarme
-          </button>
-
-          {showErrorMessage && (
-            <div className={styles.errorMsg}>{showErrorMessage}</div>
+          <GoogleButton handleSubmit={handleSubmit} />
+          {error && (
+            <ErrorAlert setError={setError} message={showErrorMessage} />
           )}
-          <GoogleLogin
-            className=" my-4 text-lg text-center"
-            clientId={API_CLIENT_ID}
-            render={(props) => (
-              <button
-                onClick={props.onClick}
-                className={" inline-flex items-center " + styles.button}
-                disabled={props.disabled}
-              >
-                <GoogleIcon className=" hover:bg-sky-500" />
-                <span className={"w-full mt-1"}>Registrarme con Google</span>
-              </button>
-            )}
-            onFailure={handleSubmit}
-            onSuccess={handleSubmit}
-            cookiePolicy={"single_host_origin"}
-          />
+          {successMsg && (
+            <SuccessAlert
+              successMsg={successMsg}
+              setSuccessMsg={setSuccessMsg}
+            />
+          )}
         </Form>
       )}
     </Formik>

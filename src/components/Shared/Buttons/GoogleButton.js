@@ -21,7 +21,7 @@ export default function GoogleButton(props) {
           disabled={props.disabled}
         >
           <GoogleIcon className="hover:bg-sky-500" />
-          <span className={"w-full mt-1"}>Loguearse con Google</span>
+          <span className={"w-full mt-1 ml-2"}>Loguearse con Google</span>
         </button>
       )}
       onSuccess={handleSubmit}

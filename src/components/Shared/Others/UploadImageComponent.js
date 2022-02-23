@@ -12,7 +12,7 @@ const DropZone = (props) => {
   const { isDragActive, getInputProps, isDragReject } = props;
   return (
     <>
-      <div className="flex text-lg text-gray-600">
+      <div className="flex text-md text-gray-600">
         <label
           htmlFor="file-upload"
           className="relative cursor-pointer bg-white rounded-md font-medium text-sky-500 hover:text-sky-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-sky-500"
@@ -77,8 +77,8 @@ const UploadImageComponent = (props) => {
       <div className="mx-auto flex flex-col justify-center items-center">
         <div
           className={`flex flex-col items-center ${
-            circle ? "w-56" : "w-80"
-          } h-56 ${
+            circle ? "w-48" : "w-80"
+          } h-48 ${
             circle && "rounded-full"
           } justify-center text-center relative shadow-lg ${
             !file && "px-6 pt-10 pb-10"

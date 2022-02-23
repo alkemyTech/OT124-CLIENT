@@ -96,10 +96,6 @@ function App() {
           <Route path="contactos" element={<BackOfficeContacts />}>
             <Route index element={<ContactsList />} />
           </Route>
-          <Route path="novedades" element={<NewsIndex />}>
-            <Route index element={<News />} />
-            <Route path=":id" element={<NewDetails />} />
-          </Route>
           <Route path="usuarios">
             <Route index element={<BackofficeListUsers />} />
             <Route path='editar-usuario/:id' element={<BackofficeEditUsers />} />
@@ -107,6 +103,10 @@ function App() {
         </Route>
         <Route path="me" element={<PrivateRoute />}>
           <Route index element={<BackOfficeUserLayout />} />
+        </Route>
+        <Route path="novedades" element={<NewsIndex />}>
+            <Route index element={<News />} />
+            <Route path=":id" element={<NewDetails />} />
         </Route>
       </Route>
     </Routes>
