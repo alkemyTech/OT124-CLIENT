@@ -11,6 +11,8 @@ import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import InputForm from "../Shared/Forms/InputForm";
 import AddButton from "../Shared/Buttons/Addbutton";
 import TwoColsForm from "../Shared/Containers/TwoColsForm";
+import SelectForm from "../Shared/Forms/SelectForm"
+import {getAllCategories} from "../../services/categories";
 
 function CUNewsForm(props) {
   const { isEdit } = props;
@@ -19,11 +21,25 @@ function CUNewsForm(props) {
   const [error, setError] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
+  const [options, setOptions] = useState([])
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await getAllCategories();
+                setOptions(response?.data?.categories)
+            } catch (e) {
+                console.error(e);
+            }
+        };
+        fetchData();
+    }, []);
+
   const initialValues = {
     name: "",
     content: "",
     categoryId: "",
-    type: "",
+    type: "news",
     image: "",
   };
   const [aNew, setANew] = useState(initialValues);
@@ -116,21 +132,15 @@ function CUNewsForm(props) {
                       as="textarea"
                       disabled={isDisabled}
                     />
-                    <InputForm
+                    <SelectForm
                       errors={errors.categoryId}
                       touched={touched.categoryId}
                       name="categoryId"
                       placeholder="Categoria"
                       type="number"
+                      as="select"
                       disabled={isDisabled}
-                    />
-                    <InputForm
-                      errors={errors.type}
-                      touched={touched.type}
-                      name="type"
-                      placeholder="Tipo"
-                      type="text"
-                      disabled={isDisabled}
+                      options={options}
                     />
                   </div>
                   <div className="my-auto">

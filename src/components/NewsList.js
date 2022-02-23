@@ -5,7 +5,7 @@ import TableLayout from "./Shared/Table/TableLayout";
 import HeaderTable from "./Shared/Table/HeaderTable";
 import BodyTable from "./Shared/Table/BodyTable";
 import NotFoundComponent from "./Shared/Others/NotFoundComponent"
-import { deleteCategory } from "../services/categories";
+import { deleteNew } from "../services/news";
 
 function NewsList(props) {
   const [ isLoad, setIsLoad ] = useState(false)
@@ -14,7 +14,11 @@ function NewsList(props) {
   useEffect(() => {
     getAllNews()
       .then((res) => {
-        setnews(res.data.news);
+        setnews(res.data.news.map((e)=>{
+          const {id, name, image, createdAt} = e
+          const date = new Date(createdAt).toLocaleDateString() 
+          return { ...{image,name, date, id} }
+        }));
       })
       .catch((err) => {
         console.log(err);
@@ -27,13 +31,13 @@ function NewsList(props) {
     <>
       {news?.length ? (
         <TableLayout>
-          <HeaderTable columnsName={["ID","Nombre","Fecha"]} />
+          <HeaderTable columnsName={["Imagen", "Nombre","Fecha"]} />
           <BodyTable
             isLoad={isLoad}
             setIsLoad={setIsLoad}
-            service={deleteCategory}
+            service={deleteNew}
             list={news}
-            bodyName={"Novedades"}
+            bodyName={"novedad"}
             message={"¿Desea eliminar esta novedad?"}
             afterMessage={"Novedad eliminada con éxito"}
           />

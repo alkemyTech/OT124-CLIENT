@@ -19,9 +19,9 @@ function BodyTable(props) {
           {Object.keys(item).map((property) => {
             return (
               <>
-                {property !== "createdAt" &&
-                  property !== "updatedAt" &&
-                  property !== "deletedAt" && (
+                { property !== "updatedAt" &&
+                  property !== "deletedAt" &&
+                  property !== "id" && (
                     <td className="py-3 px-4">
                       {property === "image" ? (
                         <img
