@@ -32,7 +32,7 @@ export default function Layout() {
     if (isActive) {
       interval = setInterval(() => {
         dispach(setIsExpired(true))
-      }, 8000);
+      }, 8000000);
     } else{
       clearInterval(interval);
     }
@@ -46,7 +46,7 @@ export default function Layout() {
     <div className="flex flex-col justify-between min-h-[100vh]">
       {(isExpired) && <ExpiredSessionAlert />}
       <Header />
-      <div className="flex flex-col flex-grow justify-center py-[25px]">
+      <div className="h-full">
         <TransitionGroup component={null}>
           <CSSTransition key={location.key} classNames="fade" timeout={300}>
             <Outlet></Outlet>

@@ -2,8 +2,8 @@ import React from "react";
 
 function CenterResponsiveContainer({ children }) {
   return (
-    <div className="container mx-auto flex justify-center">
-      <div className="px-2 lg:w-auto w-full">
+    <div className="mx-auto flex justify-center h-full bg-sky-500 sm:py-10">
+      <div className="sm:w-auto w-full bg-white h-full sm:rounded-md sm:p-10">
           {children}
       </div>
     </div>
