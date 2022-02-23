@@ -102,8 +102,7 @@ function CUOrganizationForm({ isEdit }) {
   });
 
   return (
-      <div className="flex flex-wrap justify-center gap-5">
-        <CenterResponsiveContainer>
+    <CenterResponsiveContainer>
         <CUHeader title={`${isEdit ? "Editar Organización" : "Crear Organización"}`} name={"organizacion"} />
         {!notFound || !isEdit ? (
         <>
@@ -187,9 +186,7 @@ function CUOrganizationForm({ isEdit }) {
         )
         :
         <NotFoundComponent title={"No existe esa organización"} />}
-        </CenterResponsiveContainer>
-      </div>
-    
+      </CenterResponsiveContainer>
   );
 }
 
