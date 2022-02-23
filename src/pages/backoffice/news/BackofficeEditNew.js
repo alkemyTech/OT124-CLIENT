@@ -1,16 +1,13 @@
 import React from "react";
 import CUNewsForm from "../../../components/News/CUNewsForm";
-import CUNewsHeader from "../../../components/News/CUNewsHeader";
-
-
+import CenterResponsiveContainer from "../../../components/Shared/Containers/CenterResponsiveContainer";
+import CUHeader from "../../../components/Shared/Containers/CUHeader";
 
 export default function BackofficeEditNews() {
   return (
-    <div className=" container mx-auto flex justify-center shadow-lg sm:py-40">
-      <div className="sm:px-32 px-2 w-full">
-        <CUNewsHeader title={"Modificar una novedad"} />
-        <CUNewsForm isEdit={true} />
-      </div>
-    </div>
+    <CenterResponsiveContainer>
+      <CUHeader title={"Modificar una novedad"} />
+      <CUNewsForm isEdit={true} />
+    </CenterResponsiveContainer>
   );
 }
