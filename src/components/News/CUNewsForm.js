@@ -81,7 +81,7 @@ function CUNewsForm(props) {
       .integer("La categoria debe ser un numero entero"),
     image: yup.mixed().required("El archivo es requerido"),
   });
-  console.log(aNew);
+
   return (
     <div className="">
       {!notFound || !isEdit ? (
