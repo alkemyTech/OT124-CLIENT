@@ -71,9 +71,6 @@ function CUNewsForm(props) {
     content: yup
       .string("El contenido debe ser un string")
       .required("El contenido de la novedad es requerido"),
-    type: yup
-      .string("El tipo debe ser un string")
-      .required("El tipo de la novedad es requerido"),
     categoryId: yup
       .number("La categoria debe ser un numero")
       .required("La categoria de la novedad es requerida")
