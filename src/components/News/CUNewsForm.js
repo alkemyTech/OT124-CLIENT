@@ -9,8 +9,8 @@ import SuccessAlert from "../Shared/Alerts/SuccessAlert";
 import UploadImageComponent from "../Shared/Others/UploadImageComponent";
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import InputForm from "../Shared/Forms/InputForm";
-import SelectForm from "../Shared/Forms/SelectForm";
-import SendButton from "../Shared/Buttons/SendButton";
+import AddButton from "../Shared/Buttons/Addbutton";
+import TwoColsForm from "../Shared/Containers/TwoColsForm";
 
 function CUNewsForm(props) {
   const { isEdit } = props;
@@ -23,8 +23,8 @@ function CUNewsForm(props) {
     name: "",
     content: "",
     categoryId: "",
-    type: "news",
-    image: ""
+    type: "",
+    image: "",
   };
   const [aNew, setANew] = useState(initialValues);
   useEffect(() => {
@@ -78,7 +78,7 @@ function CUNewsForm(props) {
       .integer("La categoria debe ser un numero entero"),
     image: yup.mixed().required("El archivo es requerido"),
   });
-  console.log(aNew)
+
   return (
     <div className="">
       {!notFound || !isEdit ? (
@@ -96,48 +96,55 @@ function CUNewsForm(props) {
             touched,
             setFieldError,
           }) => (
-            <Form className=" container mx-auto shadow-xl py-3">
-              <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-8 sm:px-24">
-                <div>
-                  <InputForm
-                    errors={errors.name}
-                    touched={touched.name}
-                    name="name"
-                    placeholder="Titulo"
-                    type="text"
-                    disabled={isDisabled}
-                  />
-                  <InputForm
-                    errors={errors.content}
-                    touched={touched.content}
-                    name="content"
-                    placeholder="Contenido"
-                    type="text"
-                    as="textarea"
-                    disabled={isDisabled}
-                  />
-                  <SelectForm
-                    errors={errors.categoryId}
-                    touched={touched.categoryId}
-                    name="categoryId"
-                    placeholder="Categoria"
-                    type="number"
-                    as="select"
-                    disabled={isDisabled}
-                  />
-                </div>
-                <div className="w-full my-auto">
-                  <UploadImageComponent
-                    setFieldValue={setFieldValue}
-                    setFieldError={setFieldError}
-                    file={values?.image}
-                    disabled={isDisabled}
-                    error={errors.image}
-                    touched={touched.image}
-                  />
-                </div>
-              </div>
-              <SendButton isSubmitting={isSubmitting} text={`${isEdit ? "Modificar": "Crear"}`} />
+            <Form>
+              <TwoColsForm >
+                  <div className="sm:w-[500px]">
+                    <InputForm
+                      errors={errors.name}
+                      touched={touched.name}
+                      name="name"
+                      placeholder="Titulo"
+                      type="text"
+                      disabled={isDisabled}
+                    />
+                    <InputForm
+                      errors={errors.content}
+                      touched={touched.content}
+                      name="content"
+                      placeholder="Contenido"
+                      type="text"
+                      as="textarea"
+                      disabled={isDisabled}
+                    />
+                    <InputForm
+                      errors={errors.categoryId}
+                      touched={touched.categoryId}
+                      name="categoryId"
+                      placeholder="Categoria"
+                      type="number"
+                      disabled={isDisabled}
+                    />
+                    <InputForm
+                      errors={errors.type}
+                      touched={touched.type}
+                      name="type"
+                      placeholder="Tipo"
+                      type="text"
+                      disabled={isDisabled}
+                    />
+                  </div>
+                  <div className="my-auto">
+                    <UploadImageComponent
+                      setFieldValue={setFieldValue}
+                      setFieldError={setFieldError}
+                      file={values?.image}
+                      disabled={isDisabled}
+                      error={errors.image}
+                      touched={touched.image}
+                    />
+                  </div>
+                </TwoColsForm>
+                <AddButton isEdit={isEdit} isSubmitting={isSubmitting} />
             </Form>
           )}
         </Formik>

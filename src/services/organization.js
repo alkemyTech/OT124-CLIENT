@@ -60,6 +60,7 @@ export async function editOrganization(uptOrg,id) {
 }
 const organizationService = {
     getOrganizationData,
+    deleteOrganization
 }
 
 export default organizationService;

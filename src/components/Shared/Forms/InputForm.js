@@ -3,7 +3,7 @@ import React from "react";
 
 const styles = {
   field:
-    "w-full shadow-md bg-gray-100 border transition hover:border-sky-500 ease-linear duration-300 my-2 p-4 outline-none transform hover:-translate-x-2",
+    "w-full shadow shadow-slate-300 hover:shadow-none bg-gray-100 border transition hover:border-sky-500 ease-linear duration-300 my-2 p-4 outline-none transform hover:-translate-x-2",
   errorsField:
     "w-full shadow-md bg-gray-100 border border-red-500 my-2 p-4 outline-none",
   button:
@@ -41,7 +41,7 @@ function InputForm(props) {
             as={as}
             className={`${
               errors && touched ? styles.errorsField : styles.field
-            } ${as ? "h-32 align-top resize-none" : "h-16"}`}
+            } ${as ? "h-32 align-top resize-none" : "h-12"}`}
             name={name}
             placeholder={placeholder}
             type={type}
@@ -50,7 +50,7 @@ function InputForm(props) {
           <ErrorMessage component={ErrorComponent} name={name} />
         </div>
       ) : (
-        <div className={`${skeletonStyles.field} ${as ? "h-32" : "h-16"}`} />
+        <div className={`${skeletonStyles.field} ${as ? "h-32" : "h-12"}`} />
       )}
     </>
   );
