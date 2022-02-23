@@ -9,6 +9,7 @@ import SuccessAlert from "../Shared/Alerts/SuccessAlert";
 import UploadImageComponent from "../Shared/Others/UploadImageComponent";
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import InputForm from "../Shared/Forms/InputForm";
+import SelectForm from "../Shared/Forms/SelectForm";
 import SendButton from "../Shared/Buttons/SendButton";
 
 function CUNewsForm(props) {
@@ -22,7 +23,7 @@ function CUNewsForm(props) {
     name: "",
     content: "",
     categoryId: "",
-    type: "",
+    type: "news",
     image: ""
   };
   const [aNew, setANew] = useState(initialValues);
@@ -70,9 +71,6 @@ function CUNewsForm(props) {
     content: yup
       .string("El contenido debe ser un string")
       .required("El contenido de la novedad es requerido"),
-    type: yup
-      .string("El tipo debe ser un string")
-      .required("El tipo de la novedad es requerido"),
     categoryId: yup
       .number("La categoria debe ser un numero")
       .required("La categoria de la novedad es requerida")
@@ -118,20 +116,13 @@ function CUNewsForm(props) {
                     as="textarea"
                     disabled={isDisabled}
                   />
-                  <InputForm
+                  <SelectForm
                     errors={errors.categoryId}
                     touched={touched.categoryId}
                     name="categoryId"
                     placeholder="Categoria"
                     type="number"
-                    disabled={isDisabled}
-                  />
-                  <InputForm
-                    errors={errors.type}
-                    touched={touched.type}
-                    name="type"
-                    placeholder="Tipo"
-                    type="text"
+                    as="select"
                     disabled={isDisabled}
                   />
                 </div>

@@ -11,7 +11,6 @@ export default function News() {
         async function fetchData() {
             try {
                 const response = await getAllNews();
-                console.log(response)
                 setNewsArray(response?.data?.news)
             } catch (e) {
                 console.error(e);
@@ -23,7 +22,7 @@ export default function News() {
 
 
     return (
-        <section className="grid grid-cols-1 grid-rows-[20px, 1fr] w-auto gap-5 bg-slate-100">
+        <section className="grid grid-cols-1 grid-rows-[20px, 1fr] w-auto gap-5">
             <div className="justify-self-center">
                 <h2 className=" text-3xl p-4">Novedades</h2>
             </div>
