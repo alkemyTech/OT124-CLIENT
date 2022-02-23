@@ -25,14 +25,17 @@ export const authSlice = createSlice({
       state.isExpired = false
       axios.defaults.headers.common["Authorization"] = null;
     },
-    setIsExpired: (state) => {
+    getIsExpired: (state ) => {
       const token = localStorage.getItem("userData")
       state.isExpired = token ? isExpired(token) : false
+    },
+    setIsExpired: (state ) => {
+      state.isExpired = true
     }
   },
 });
 
-export const { setUserData, deleteUserData, setIsExpired } = authSlice.actions;
+export const { setUserData, deleteUserData, setIsExpired, getIsExpired } = authSlice.actions;
 
 export const selectUserData = (state) => state.auth.userData;
 
