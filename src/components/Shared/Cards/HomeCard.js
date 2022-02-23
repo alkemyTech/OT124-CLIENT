@@ -15,9 +15,8 @@ export default function HomeCard(props) {
   return (
     <div className={styles.container}>
       <div className={styles.cover}>
-        <p>{props.name}</p>
         <Link to={"/" + props.type + "/" + props.id}>
-          <SmallButton text="Abrir" />
+          <SmallButton text={props.name} />
         </Link>
       </div>
       <img
