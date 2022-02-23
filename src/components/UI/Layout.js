@@ -39,8 +39,8 @@ export default function Layout() {
     return () => clearInterval(interval);
   }
     },[isActive, isExpired, userData, dispach])
-    console.log(isExpired)
-    document.body.addEventListener('click', ()=>setIsActive(true))
+    
+    document.body.addEventListener('click', ()=>setIsActive(false))
 
   return (
     <div className="flex flex-col justify-between min-h-[100vh]">
