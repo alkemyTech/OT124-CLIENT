@@ -11,7 +11,6 @@ export default function News() {
         async function fetchData() {
             try {
                 const response = await getAllNews();
-                console.log(response)
                 setNewsArray(response?.data?.news)
             } catch (e) {
                 console.error(e);
