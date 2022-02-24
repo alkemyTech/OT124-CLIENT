@@ -19,9 +19,9 @@ function BodyTable(props) {
           {Object.keys(item).map((property) => {
             return (
               <>
-                {property !== "createdAt" &&
-                  property !== "updatedAt" &&
-                  property !== "deletedAt" && (
+                { property !== "updatedAt" &&
+                  property !== "deletedAt" &&
+                  property !== "id" && (
                     <td className="py-3 px-4">
                       {property === "image" ? (
                         <img
@@ -30,7 +30,10 @@ function BodyTable(props) {
                           src={`${API_BASE_URL}/api/v1/files/${item?.image?.key}`}
                         />
                       ) : (
-                        item[property]
+                        property === "createdAt" ?
+                        (new Date(item[property]).toLocaleDateString())
+                        :
+                        (item[property])
                       )}
                     </td>
                   )}
