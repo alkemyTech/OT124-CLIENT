@@ -71,7 +71,7 @@ function CUMembersForm(props) {
       .required("El nombre del miembro es requerido"),
     image: yup.mixed().required("El archivo es requerido"),
   });
-  console.log(aNew)
+  
   return (
     <div className="">
       {!notFound || !isEdit ? (
