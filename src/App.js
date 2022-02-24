@@ -16,8 +16,11 @@ import BackofficeEditCategory from "./pages/backoffice/categories/BackofficeEdit
 import BackOfficeContacts from "./pages/backoffice/contacts/BackOfficeContacts";
 import ContactsList from "./pages/backoffice/contacts/ContactsLIst";
 import BackofficeNews from "./pages/backoffice/news/news";
+import BackofficeMembers from "./pages/backoffice/members/members";
 import BackofficeCreateNews from "./pages/backoffice/news/BackofficeCreateNew";
 import BackofficeEditNews from "./pages/backoffice/news/BackofficeEditNew";
+import BackofficeCreateMembers from "./pages/backoffice/members/BackofficeCreateMember";
+import BackofficeEditMembers from "./pages/backoffice/members/BackofficeEditMember";
 import BackofficeCreateTestimonials from "./pages/backoffice/testimonials/BackofficeCreateTestimonials";
 import BackofficeEditTestimonials from "./pages/backoffice/testimonials/BackofficeEditTestimonials";
 import BackofficeTestimonials from "./pages/backoffice/testimonials/BackofficeTestimonials";
@@ -76,6 +79,13 @@ function App() {
             <Route path="crear-novedad" element={<BackofficeCreateNews />} />
             <Route path="editar-novedad/:id" element={<BackofficeEditNews />} />
           </Route>
+
+          <Route path="miembros">
+            <Route index element={<BackofficeMembers />} />
+            <Route path="crear-miembro" element={<BackofficeCreateMembers />} />
+            <Route path="editar-miembro/:id" element={<BackofficeEditMembers />} />
+          </Route>
+          
           <Route path="testimonios">
             <Route index element={<BackofficeTestimonials />} />
             <Route
