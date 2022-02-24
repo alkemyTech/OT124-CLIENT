@@ -10,7 +10,7 @@ function ActivitiesList() {
   useEffect(() => {
     getAllActivities()
       .then((response) => {
-        setActivities(response.data.listActivity);
+        setActivities(response.data.activities);
       })
       .catch((err) => {
         console.log(err);
@@ -21,7 +21,7 @@ function ActivitiesList() {
     <div className="container mx-auto max-w-2xl">
       <ActivitiesHeader />
 
-      {activities.length > 0 ? (
+      {activities?.length > 0 ? (
         <div className="shadow-md">
           <table className=" shadow-md text-left duration-200 divide-y divide-gray-200 table-fixed w-full border-collapse cursor-pointer">
             <ActivitiesTableHeader />
