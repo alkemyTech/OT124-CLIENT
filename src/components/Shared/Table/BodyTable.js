@@ -30,7 +30,10 @@ function BodyTable(props) {
                           src={`${API_BASE_URL}/api/v1/files/${item?.image?.key}`}
                         />
                       ) : (
-                        item[property]
+                        property === "createdAt" ?
+                        (new Date(item[property]).toLocaleDateString())
+                        :
+                        (item[property])
                       )}
                     </td>
                   )}

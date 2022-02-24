@@ -16,8 +16,7 @@ function OrganizationsList() {
         useEffect(() => {
             getAllOrganizations()
               .then((res) => {
-                setOrganizations(res?.data?.organizations);
-              })
+                setOrganizations(res?.data?.organizations)})
               .catch((err) => {
                 console.log(err);
               });
@@ -30,13 +29,13 @@ function OrganizationsList() {
                 <TableLayout>
                     <HeaderTable
                         columnsName={[
-                            "ID",
                             "Nombre",
                             "Imagen",
                             "Direccion",
                             "Teléfono",
                             "Email",
                             "WelcomeText",
+                            "Fecha"
                         ]}
                     />
                     <BodyTable
