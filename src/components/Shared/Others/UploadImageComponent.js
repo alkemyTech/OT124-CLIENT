@@ -72,6 +72,12 @@ const UploadImageComponent = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [isDragReject]
   );
+  useEffect(()=>{
+    setTimeout(()=>{
+    setFieldValue("key", file?.key)}, 2000)
+    
+  },[file, setFieldValue])
+ 
   return (
     <>
       <div className="mx-auto flex flex-col justify-center items-center">
@@ -141,7 +147,7 @@ const UploadImageComponent = (props) => {
           )}
         </div>
         <ErrorMessage component={ErrorComponent} name="image" />
-      </div>  
+      </div>
     </>
   );
 };
