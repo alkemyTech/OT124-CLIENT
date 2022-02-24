@@ -14,7 +14,7 @@ const Activities = () => {
 
   return (
     <>
-      {actividades.length > 0 ? (
+      {actividades?.length > 0 ? (
         <div className="flex flex-wrap justify-center">
           {actividades.map((activity) => (
             <Card key={activity.id} activity={activity} />
