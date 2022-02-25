@@ -1,8 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import AboutUs from "./pages/AboutUs";
-import ActivitiesForm from "./components/Activities/Form";
-import ActivitiesList from "./components/Activities/List";
 import BackOfficeAdminLayout from "./components/Backoffice/BackOfficeAdminLayout";
 import BackOfficeUserLayout from "./components/Backoffice/BackOfficeUserLayout";
 import Layout from "./components/UI/Layout";
@@ -33,9 +31,10 @@ import SignUp from "./pages/SignUp";
 import { AdminRoute, PrivateRoute } from "./routes";
 import Activities from "./pages/Activities";
 import CUOrganizationForm from "./components/Organizations/CUOrganizationForm";
-import BackofficeListUsers from './pages/backoffice/users/BackofficeListUsers';
-import BackofficeEditUsers from './pages/backoffice/users/BackofficeEditUsers';
-
+import BackofficeListUsers from "./pages/backoffice/users/BackofficeListUsers";
+import BackofficeEditUsers from "./pages/backoffice/users/BackofficeEditUsers";
+import BackofficeCreateActivity from "./pages/backoffice/actividades/BackofficeCreateActivity";
+import BackofficeEditActivities from "./pages/backoffice/actividades/BackofficeEditActivities";
 
 function App() {
   return (
@@ -54,14 +53,10 @@ function App() {
             <Route index element={<Organization />} />
             <Route
               path="editar-organizacion/:id"
-              element={<CUOrganizationForm isEdit={true}/>}
+              element={<CUOrganizationForm isEdit={true} />}
             />
-            <Route
-              path="crear-organizacion"
-              element={<CUOrganizationForm />}
-            />
+            <Route path="crear-organizacion" element={<CUOrganizationForm />} />
           </Route>
-
 
           <Route path="categorias">
             <Route index element={<BackofficeCategories />} />
@@ -83,9 +78,12 @@ function App() {
           <Route path="miembros">
             <Route index element={<BackofficeMembers />} />
             <Route path="crear-miembro" element={<BackofficeCreateMembers />} />
-            <Route path="editar-miembro/:id" element={<BackofficeEditMembers />} />
+            <Route
+              path="editar-miembro/:id"
+              element={<BackofficeEditMembers />}
+            />
           </Route>
-          
+
           <Route path="testimonios">
             <Route index element={<BackofficeTestimonials />} />
             <Route
@@ -98,25 +96,34 @@ function App() {
             />
           </Route>
 
-          <Route path="actividades" element={<BackOfficeActivities />}>
-            <Route index element={<ActivitiesList />} />
-            <Route path="create" element={<ActivitiesForm />} />
-            <Route path="edit/:id" element={<ActivitiesForm />} />
+          <Route path="actividades">
+            <Route index element={<BackOfficeActivities />} />
+            <Route
+              path="crear-actividad"
+              element={<BackofficeCreateActivity />}
+            />
+            <Route
+              path="editar-actividad/:id"
+              element={<BackofficeEditActivities />}
+            />
           </Route>
           <Route path="contactos" element={<BackOfficeContacts />}>
             <Route index element={<ContactsList />} />
           </Route>
           <Route path="usuarios">
             <Route index element={<BackofficeListUsers />} />
-            <Route path='editar-usuario/:id' element={<BackofficeEditUsers />} />
+            <Route
+              path="editar-usuario/:id"
+              element={<BackofficeEditUsers />}
+            />
           </Route>
         </Route>
         <Route path="me" element={<PrivateRoute />}>
           <Route index element={<BackOfficeUserLayout />} />
         </Route>
         <Route path="novedades" element={<NewsIndex />}>
-            <Route index element={<News />} />
-            <Route path=":id" element={<NewDetails />} />
+          <Route index element={<News />} />
+          <Route path=":id" element={<NewDetails />} />
         </Route>
       </Route>
     </Routes>
