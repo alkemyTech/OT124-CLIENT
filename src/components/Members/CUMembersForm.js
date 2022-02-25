@@ -91,7 +91,7 @@ function CUMembersForm(props) {
           }) => (
             <Form className=" container mx-auto shadow-xl py-3">
               <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-8 sm:px-24">
-                <div>
+                <div className="w-full my-auto">
                   <InputForm
                     errors={errors.name}
                     touched={touched.name}

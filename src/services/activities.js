@@ -19,7 +19,7 @@ export async function createActivities(data) {
 export async function updateActivities(id, activity) {
   const formData = createMultiForm(activity);
   return await axios
-    .put(`${API_BASE_URL}/api/v1/activities/${id}`, activity, {
+    .put(`${API_BASE_URL}/api/v1/activities/${id}`, formData, {
       headers: formData.getHeaders,
     })
     .catch((error) => console.log(error));
