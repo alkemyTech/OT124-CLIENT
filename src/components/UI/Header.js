@@ -32,7 +32,7 @@ export default function Header() {
         history('/')
     }
     return (
-      <nav class="flex sm:text-lg text-sm items-center justify-between p-6">
+      <nav class="flex sm:text-lg text-sm items-center flex-wrap lg:flex-nowrap justify-between p-6">
         <img className='lg:ml-4 -ml-1 mr-8 inline-flex' width='100' src={logo} alt='logo' />
         <div class="block lg:hidden">
           <button onClick={openHamburguerMenu} class="flex items-center px-3 py-2 border rounded text-sky-500 border-sky-500">

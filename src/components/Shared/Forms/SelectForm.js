@@ -1,12 +1,11 @@
 import { ErrorMessage, Field } from "formik";
-import {getAllCategories} from "../../../services/categories";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const styles = {
   field:
-    "w-full shadow-md bg-gray-100 border transition hover:border-sky-500 ease-linear duration-300 my-2 p-4 outline-none transform hover:-translate-x-2",
+    "w-full shadow shadow-slate-300 hover:shadow-none bg-gray-100 border transition hover:border-sky-500 ease-linear duration-300 my-2 px-4 outline-none transform hover:-translate-x-2",
   errorsField:
-    "w-full shadow-md bg-gray-100 border border-red-500 my-2 p-4 outline-none",
+    "w-full shadow-md bg-gray-100 border border-red-500 my-2 px-4 outline-none",
   button:
     "bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white border border-sky-500 hover:border-transparent rounded py-2 mt-2 px-4 w-96 transform hover:scale-105 easy-in duration-300",
   error:
@@ -14,7 +13,7 @@ const styles = {
 };
 
 const skeletonStyles = {
-  field: "w-full bg-gray-200 rounded-md my-2 p-4 animate-pulse",
+  field: "w-full bg-gray-200 rounded-md my-2 px-4 animate-pulse",
   button:
     "bg-gray-200 text-transparent rounded py-2 mt-2 px-4 w-96 mx-auto my-4 animate-pulse",
 };
@@ -24,21 +23,6 @@ const ErrorComponent = (props) => (
 );
 
 function InputForm(props) {
-
-  const [options, setOptions] = useState([])
-
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const response = await getAllCategories();
-                setOptions(response?.data?.categories)
-            } catch (e) {
-                console.error(e);
-            }
-        };
-        fetchData();
-    }, []);
-
   const {
     errors,
     touched,
@@ -47,7 +31,8 @@ function InputForm(props) {
     type,
     isDisabled,
     as,
-    isLoading
+    isLoading,
+    options
   } = props;
 
   return (
@@ -58,7 +43,7 @@ function InputForm(props) {
             as={as}
             className={`${
               errors && touched ? styles.errorsField : styles.field
-            } ${as === "select" ? "h-16 align-top resize-none" : "h-16"}`}
+            } ${as === "select" ? "h-12 align-top resize-none" : "h-12"}`}
             name={name}
             placeholder={placeholder}
             type={type}
@@ -67,9 +52,9 @@ function InputForm(props) {
             <>
               <option value="" label="Selecionar categoria"></option>
               {(options === undefined || options.length === 0) ? null : 
-                options.map((opt) => {
+                options.map((opt) => (
                   <option value={opt.id} label={opt.name}>{opt.name}</option>
-                })
+                ))
               }
             </>
 

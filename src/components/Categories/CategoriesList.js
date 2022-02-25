@@ -13,7 +13,7 @@ function CategoriesList(props) {
   useEffect(() => {
     getAllCategories()
       .then((res) => {
-        setCategories(res?.data?.categories);
+        setCategories(res?.data?.categories)
       })
       .catch((err) => {
         console.log(err);
@@ -24,7 +24,7 @@ function CategoriesList(props) {
     <>
       {categories?.length ? (
           <TableLayout>
-            <HeaderTable columnsName={["ID","Nombre", "Descripción"]} />
+            <HeaderTable columnsName={["Nombre", "Descripción", "Fecha"]} />
             <BodyTable
               isLoad={isLoad}
               setIsLoad={setIsLoad}

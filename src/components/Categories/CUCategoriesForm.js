@@ -11,8 +11,9 @@ import {
 import ErrorAlert from "../Shared/Alerts/ErrorAlert";
 import SuccessAlert from "../Shared/Alerts/SuccessAlert";
 import InputForm from "../Shared/Forms/InputForm";
-import SendButton from "../Shared/Buttons/SendButton";
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
+import AddButton from "../Shared/Buttons/Addbutton";
+import OneColForm from "../Shared/Containers/OneColForm";
 
 function CUCategoriesForm(props) {
   const { isEdit } = props;
@@ -82,27 +83,27 @@ function CUCategoriesForm(props) {
           onSubmit={onSubmit}
         >
           {({ isSubmitting, errors, touched }) => (
-            <Form className=" container mx-auto shadow-xl py-3">
-              <div className="grid grid-cols-1 sm:mx-24">
-                <InputForm 
-                    errors={errors.name}
-                    touched={touched.name}
-                    name="name"
-                    placeholder="Titulo"
-                    type="text"
-                    disabled={isDisabled}
-                  />
-               <InputForm 
-                    errors={errors.description}
-                    touched={touched.description}
-                    name="description"
-                    placeholder="Descripción"
-                    type="text"
-                    as="textarea"
-                    disabled={isDisabled}
-                  />
-              </div>
-              <SendButton isSubmitting={isSubmitting} text={`${isEdit ? "Modificar": "Crear"}`} />
+            <Form>
+              <OneColForm>
+                <InputForm
+                  errors={errors.name}
+                  touched={touched.name}
+                  name="name"
+                  placeholder="Titulo"
+                  type="text"
+                  disabled={isDisabled}
+                />
+                <InputForm
+                  errors={errors.description}
+                  touched={touched.description}
+                  name="description"
+                  placeholder="Descripción"
+                  type="text"
+                  as="textarea"
+                  disabled={isDisabled}
+                />
+                <AddButton isEdit={isEdit} isSubmitting={isSubmitting} />
+              </OneColForm>
             </Form>
           )}
         </Formik>

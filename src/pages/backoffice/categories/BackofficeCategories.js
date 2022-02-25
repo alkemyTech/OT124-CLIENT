@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import CategoriesHeader from "../../../components/Categories/CategoriesHeader";
+import React  from "react";
 import CategoriesList from "../../../components/Categories/CategoriesList";
 import CenterResponsiveContainer from "../../../components/Shared/Containers/CenterResponsiveContainer";
-import { getAllCategories } from "../../../services/categories";
+import HeaderList from "../../../components/Shared/Containers/HeaderList";
 
 export default function BackofficeCategories() {
   return (
     <CenterResponsiveContainer>
-      <CategoriesHeader />
+      <HeaderList
+        title={"Categorias"}
+        name={"categoria"}
+        addTitle={"Añadir una nueva categoria"}
+      />
       <CategoriesList />
     </CenterResponsiveContainer>
   );
