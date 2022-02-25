@@ -116,6 +116,7 @@ function CUTestimonialsForm(props) {
                       type="text"
                       disabled={isDisabled}
                       as="textarea"
+                      high={true}
                   />
                 </div>
                 <div className="w-full my-auto">
