@@ -8,6 +8,11 @@ import SuccessAlert from '../../../components/Shared/Alerts/SuccessAlert';
 import InputForm from '../../../components/Shared/Forms/InputForm';
 import SendButton from '../../../components/Shared/Buttons/SendButton';
 import NotFoundComponent from '../../../components/Shared/Others/NotFoundComponent';
+import CenterResponsiveContainer from '../../../components/Shared/Containers/CenterResponsiveContainer';
+import CUHeader from '../../../components/Shared/Containers/CUHeader';
+import OneColForm from '../../../components/Shared/Containers/OneColForm';
+import SelectForm from '../../../components/Shared/Forms/SelectForm';
+import AddButton from '../../../components/Shared/Buttons/Addbutton';
 
 export default function BackofficeEditUsers() {
     const [ notFound, setNotFound ] = useState(false);
@@ -64,24 +69,23 @@ export default function BackofficeEditUsers() {
       role: yup.string().test('match', 'Rol inválido: (user o admin)', role => role === 'user' || role === 'admin' ? true : false)
     });
 
+    const options = [
+      {
+        id: "user",
+        name: "user",
+      },
+      {
+        id: "admin",
+        name: "admin",
+      }
+
+    ]
+      
+
     return (
-        <div className=" container mx-auto flex justify-center shadow-lg sm:py-40">
-            <div className="sm:px-32 px-2 sm:w-2/3">
-                <header className='flex sm:flex-row flex-col px-24'>
-                    <div className="flex flex-wrap items-center justify-center">
-                      <Link
-                        className="bg-sky-500 hover:bg-transparent hover:text-sky-500 hover:border-sky-500 hover:border text-white font-bold py-3 px-6 rounded transform hover:scale-110 ease-in duration-300"
-                        to="/backoffice/usuarios"
-                      >
-                        <span className="pr-2">⬅</span>
-                        Volver
-                      </Link>
-                    </div>
-                    <div className="text-center w-full">
-                      <h1 className="text-3xl my-5 text-center text-sky-500">Modificar usuario</h1>
-                    </div>
-                </header>
+        <CenterResponsiveContainer>
                 
+                <CUHeader title={"Modificar un usuario"} />
                 {!notFound ? (
                   <Formik
                     validationSchema={userSchema}
@@ -90,8 +94,8 @@ export default function BackofficeEditUsers() {
                     onSubmit={onSubmit}
                   >
                     {({ isSubmitting, errors, touched }) => (
-                      <Form className=" container mx-auto shadow-xl py-3">
-                        <div className="grid grid-cols-1 sm:mx-24">
+                      <Form className="">
+                        <OneColForm>
                           <InputForm 
                             errors={errors.firstName}
                             touched={touched.firstName}
@@ -116,16 +120,17 @@ export default function BackofficeEditUsers() {
                             type="text"
                             disabled={isDisabled}
                           />
-                          <InputForm 
+                          <SelectForm
                             errors={errors.role}
                             touched={touched.role}
+                            as="select"
                             name="role"
-                            placeholder="Rol"
-                            type="text"
                             disabled={isDisabled}
+                            options={options}
+                            optLabel={"Seleccionar Rol"}
                           />
-                        </div>
-                        <SendButton isSubmitting={isSubmitting} text={'Modificar'} />
+                        </OneColForm>
+                        <AddButton isSubmitting={isSubmitting} text={'Modificar'} isEdit={true} />
                       </Form>
                     )}
                   </Formik>)
@@ -134,7 +139,6 @@ export default function BackofficeEditUsers() {
                 }
                   {error && <ErrorAlert setError={setError} />}
                   {successMsg && <SuccessAlert successMsg={successMsg} setSuccessMsg={setSuccessMsg} />}
-            </div>
-        </div>
+                  </CenterResponsiveContainer>
     );
 }

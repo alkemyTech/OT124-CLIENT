@@ -136,9 +136,8 @@ function CUNewsForm(props) {
                       errors={errors.categoryId}
                       touched={touched.categoryId}
                       name="categoryId"
-                      placeholder="Categoria"
-                      type="number"
-                      as="select"
+                      optLabel="Seleccionar Categoria"
+                      as={"select"}
                       disabled={isDisabled}
                       options={options}
                     />

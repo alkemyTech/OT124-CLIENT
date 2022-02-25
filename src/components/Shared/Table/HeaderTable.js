@@ -4,13 +4,13 @@ function HeaderTable(props) {
   const { columnsName } = props;
 
   return (
-    <thead className="bg-sky-500 text-sm sm:text-base">
-      <tr className="uppercase">
+    <thead className="bg-sky-500  text-sm sm:text-base z-0">
+      <tr className="uppercase  bg-sky-500 ">
         {columnsName?.map((item) => (
-          <th className="tracking-wider py-3 px-4">{item}</th>
+          <th className=" py-3 px-4 w-[170px]">{item}</th>
         ))}
-        <th className="tracking-wider py-3 px-4"></th>
-        <th className="tracking-wider py-3 px-4"></th>
+        <th className=" py-3 px-4 "></th>
+        <th className=" py-3 px-4 "></th>
       </tr>
     </thead>
   );

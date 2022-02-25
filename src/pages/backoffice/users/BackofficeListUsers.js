@@ -34,7 +34,7 @@ export default function BackofficeListUsers() {
         {
             allUsers?.length ? (
                 <TableLayout>
-                    <HeaderTable columnsName={['ID', 'Nombre', 'Apellido', 'Email', 'Rol']} />
+                    <HeaderTable columnsName={['Nombre', 'Apellido', 'Email', 'Rol']} />
                     <BodyTable
                         isLoad={isLoad}
                         setIsLoad={setIsLoad}
