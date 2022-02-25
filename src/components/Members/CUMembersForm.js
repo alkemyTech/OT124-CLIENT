@@ -10,7 +10,6 @@ import SuccessAlert from "../Shared/Alerts/SuccessAlert";
 import UploadImageComponent from "../Shared/Others/UploadImageComponent";
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import InputForm from "../Shared/Forms/InputForm";
-import SelectForm from "../Shared/Forms/SelectForm";
 import SendButton from "../Shared/Buttons/SendButton";
 
 function CUMembersForm(props) {
@@ -91,7 +90,7 @@ function CUMembersForm(props) {
           }) => (
             <Form className=" container mx-auto shadow-xl py-3">
               <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-8 sm:px-24">
-                <div>
+                <div className="w-full my-auto">
                   <InputForm
                     errors={errors.name}
                     touched={touched.name}
