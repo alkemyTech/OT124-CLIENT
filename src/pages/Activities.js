@@ -7,7 +7,7 @@ const Activities = () => {
 
   useEffect(() => {
     getAllActivities().then((res) => {
-      setActividades(res.data.activities);
+      setActividades(res?.data?.activities);
     });
   }, []);
 

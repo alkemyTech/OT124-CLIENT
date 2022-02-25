@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { getAllMembers } from "../services/members";
+import { API_BASE_URL } from "../services";
 
 function AboutUs() {
   const [members, setMembers] = useState([]);
@@ -8,7 +9,7 @@ function AboutUs() {
   useEffect(() => {
     getAllMembers()
       .then((res) => {
-        setMembers(res.data.resMembers);
+        setMembers(res.data.members);
       })
       .catch((err) => {
         console.log(err);
@@ -17,32 +18,14 @@ function AboutUs() {
 
   return (
     <>
-      {members?.length ? (
-        <div className="shadow-md">
-          <table className=" shadow-md text-left transform ease-in-out hover:-translate-x-1 duration-200 divide-y divide-gray-200 table-fixed w-full border-collapse cursor-pointer">
-            <thead className="bg-gray-100 text-sm sm:text-base">
-              <tr className="uppercase">
-                <th className="tracking-wider py-3 px-4">Nombre</th>
-                <th className="tracking-wider py-3 px-4">Imagen</th>
-                <th className="tracking-wider py-3 px-4"></th>
-                <th className="tracking-wider py-3 px-4"></th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200">
-              {members?.map((member, count) => (
-                <tr
-                  className={`${
-                    count % 2 === 0 ? "" : ""
-                  } p-10 transform ease-in-out duration-300 hover:scale-105 text-sm sm:text-base`}
-                  key={member.id}
-                >
-                  <td className="py-3 px-4">{member.name}</td>
-                  <td className="py-3 px-4">{member.image}</td>
-                  <td className="py-3 px-4 text-center"></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      {members?.length !== 0 ? (
+        <div className=" bg-sky-500 p-4 shadow-md flex flex-wrap justify-center">
+            {members?.map((member)=> (
+              <div className=" rounded md:h-80 flex flex-col bg-white p-2 mx-12 my-2 justify-center text-center shadow-md transform ease-in-out duration-300 hover:scale-105">
+                <img className=" rounded-full border-2 " src={member?.image?.key && `${API_BASE_URL}/api/v1/files/${member?.image?.key}`}></img>
+                <h3 className=" text-lg my-4 ">{member.name}</h3>
+              </div>
+            ))}
         </div>
       ) : (
         <div className=" flex flex-col text-center justify-center  mx-6 my-6  md:h-60 border-1 rounded-lg p-2 md:p-6 shadow-lg hover:shadow-2xl">
