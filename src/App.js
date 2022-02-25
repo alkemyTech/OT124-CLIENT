@@ -32,6 +32,7 @@ import Activities from "./pages/Activities";
 import CUOrganizationForm from "./components/Organizations/CUOrganizationForm";
 import BackofficeListUsers from './pages/backoffice/users/BackofficeListUsers';
 import BackofficeEditUsers from './pages/backoffice/users/BackofficeEditUsers';
+import BackofficeSlides from './pages/backoffice/slides/BackofficeSlides';
 
 
 function App() {
@@ -99,6 +100,9 @@ function App() {
           <Route path="usuarios">
             <Route index element={<BackofficeListUsers />} />
             <Route path='editar-usuario/:id' element={<BackofficeEditUsers />} />
+          </Route>
+          <Route path="slides">
+            <Route index element={<BackofficeSlides />} />
           </Route>
         </Route>
         <Route path="me" element={<PrivateRoute />}>
