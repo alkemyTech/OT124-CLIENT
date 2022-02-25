@@ -10,7 +10,7 @@ function ContactsList() {
   useEffect(() => {
     getContacts()
       .then((response) => {
-        setContacts(response.data);
+        setContacts(response?.data?.contactList);
       })
       .catch((err) => {
         console.log(err);
@@ -21,13 +21,13 @@ function ContactsList() {
     <>
       <ContactsHeader />
 
-      {contacts.length > 0 ? (
+      {contacts?.length > 0 ? (
         <div className="shadow-md">
           <table className=" shadow-md text-left duration-200 divide-y divide-gray-200 table-fixed w-full border-collapse cursor-pointer">
             <ContactsTableHeader />
             <tbody className="divide-y divide-gray-200">
-              {contacts.map((contact) => (
-                <ContactsRow key={contact.id} contact={contact} />
+              {contacts?.map((contact) => (
+                <ContactsRow key={contact?.id} contact={contact} />
               ))}
             </tbody>
           </table>

@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ContactsRow = ({ contacto }) => {
+const ContactsRow = ({ contact }) => {
   return (
-    <tr key={contacto.id}>
-      <td className="py-3 px-4">{contacto.name}</td>
-      <td className="py-3 px-4">{contacto.email}</td>
+    <tr key={contact.id}>
+      <td className="py-3 px-4">{contact.name}</td>
+      <td className="py-3 px-4">{contact.email}</td>
       <td colSpan={2} className="text-center">
         {/* <Link
           to={`editar-contacto/${contacto.id}`}
