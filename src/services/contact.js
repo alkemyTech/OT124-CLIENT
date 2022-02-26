@@ -17,3 +17,9 @@ export async function getContacts(queries='') {
     .get(`${API_BASE_URL}/api/v1/contacts${queries}`)
     .catch((error) => console.log(error));
 }
+
+export async function deleteContacts(id) {
+  return await axios
+    .delete(`${API_BASE_URL}/api/v1/contacts/${id}`)
+    .catch((error) => console.log(error));
+}

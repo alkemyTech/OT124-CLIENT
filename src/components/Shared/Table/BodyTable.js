@@ -68,12 +68,17 @@ function BodyTable(props) {
             />
           </td>
           <td className="py-3 px-4 text-center rounded-br-md ">
+            {bodyName === "contacto" ? null 
+            
+            :
             <Link
               to={`editar-${bodyName}/${item.id}`}
               className="hover:underline"
             >
               Editar
             </Link>
+            
+            }
           </td>
         </tr>
       ))}
