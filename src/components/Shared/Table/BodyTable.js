@@ -1,15 +1,26 @@
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { initial, selectPage, selectSize } from "../../../features/paginationSlice";
 import { API_BASE_URL } from "../../../services";
 import DeleteAlert from "../Alerts/DeleteAlert";
 
 function BodyTable(props) {
   const { list, service, setIsLoad, isLoad, afterMessage, message, bodyName } =
     props;
-  console.log(list);
+  
+  const page = useSelector(selectPage)
+  const size = useSelector(selectSize)
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(initial())
+  }, [dispatch])
+
   return (
     <tbody className=" bg-sky-50 max-h-[375px] overflow-y-auto overflow-x-hidden">
-      {list?.map((item, count) => (
+      {list?.slice(page*size, ((page+1)*(size)))?.map((item, count) => (
         <tr
           className={`${
             count % 2 === 0 ? "bg-sky-100 hover:bg-sky-200" : "bg-white hover:bg-slate-100 "

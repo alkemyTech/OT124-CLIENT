@@ -5,6 +5,7 @@ import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import BodyTable from "../Shared/Table/BodyTable";
 import TableLayout from "../Shared/Table/TableLayout";
 import HeaderTable from "../Shared/Table/HeaderTable";
+import Pagination from "../Shared/Table/Pagination";
 
 function CategoriesList(props) {
   const [isLoad, setIsLoad] = useState(false);
@@ -40,6 +41,7 @@ function CategoriesList(props) {
       ) : (
         <NotFoundComponent title={"No se encontraron actividades"} />
       )}
+      <Pagination list={activities} />
     </>
   );
 }

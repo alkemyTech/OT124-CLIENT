@@ -5,6 +5,7 @@ import TableLayout from "../../../components/Shared/Table/TableLayout";
 import HeaderTable from "../../../components/Shared/Table/HeaderTable";
 import BodyTable from "../../../components/Shared/Table/BodyTable";
 import NotFoundComponent from "../../../components/Shared/Others/NotFoundComponent"
+import Pagination from "../../../components/Shared/Table/Pagination";
 
 function MembersList(props) {
   const [ isLoad, setIsLoad ] = useState(false)
@@ -45,6 +46,7 @@ function MembersList(props) {
       (
         <NotFoundComponent title={"No se encontra el miembro"} />
       )}
+      <Pagination list={member} />
     </>
   );
 

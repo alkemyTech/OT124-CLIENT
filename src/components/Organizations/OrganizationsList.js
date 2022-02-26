@@ -8,6 +8,7 @@ import { deleteOrganization } from '../../services/organization';
 import { getAllOrganizations } from '../../services/organization';
 import { useEffect } from "react";
 import { useState } from "react";
+import Pagination from "../Shared/Table/Pagination";
 
 function OrganizationsList() {
      const [organizations, setOrganizations] = useState([])
@@ -51,6 +52,7 @@ function OrganizationsList() {
             ) : (
                 <NotFoundComponent title={"No se encontraron organizaciones"} />
             )}
+            <Pagination list={organizations} />
         </>
     );
 }

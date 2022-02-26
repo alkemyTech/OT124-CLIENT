@@ -6,6 +6,7 @@ import HeaderTable from "./Shared/Table/HeaderTable";
 import BodyTable from "./Shared/Table/BodyTable";
 import NotFoundComponent from "./Shared/Others/NotFoundComponent"
 import { deleteNew } from "../services/news";
+import Pagination from "./Shared/Table/Pagination";
 
 function NewsList(props) {
   const [ isLoad, setIsLoad ] = useState(false)
@@ -46,6 +47,7 @@ function NewsList(props) {
       (
         <NotFoundComponent title={"No se encontraron novedades"} />
       )}
+      <Pagination list={news} />
     </>
   );
 }

@@ -5,6 +5,7 @@ import BodyTable from '../../../components/Shared/Table/BodyTable';
 import HeaderTable from '../../../components/Shared/Table/HeaderTable';
 import TableLayout from '../../../components/Shared/Table/TableLayout';
 import CenterResponsiveContainer from '../../../components/Shared/Containers/CenterResponsiveContainer';
+import Pagination from '../../../components/Shared/Table/Pagination';
 
 export default function BackofficeListUsers() {
     const [ allUsers, setAllUsers ] = useState([]);
@@ -32,7 +33,8 @@ export default function BackofficeListUsers() {
                 <h1 className="sm:text-5xl text-3xl text-center text-sky-500">Usuarios</h1>
         </header>
         {
-            allUsers?.length ? (
+            <>
+            {allUsers?.length ? (
                 <TableLayout>
                     <HeaderTable columnsName={['Nombre', 'Apellido', 'Email', 'Rol']} />
                     <BodyTable
@@ -45,8 +47,11 @@ export default function BackofficeListUsers() {
                         afterMessage={'Usuario eliminado con éxito'}
                     />
                 </TableLayout>
-            ) : <NotFoundComponent title={'No se encontraron usuarios'} />
+            ) : <NotFoundComponent title={'No se encontraron usuarios'} />}
+            <Pagination list={allUsers} />
+            </>
         }
+        
         </CenterResponsiveContainer>
     );
 }
