@@ -3,7 +3,7 @@ import TestimonialsList from "../../../components/Testimonials/TestimonialsList"
 import CenterResponsiveContainer from "../../../components/Shared/Containers/CenterResponsiveContainer";
 import HeaderList from "../../../components/Shared/Containers/HeaderList";
 
-export default function BackOfficeActivities() {
+export default function BackOfficeTestimonials() {
   return (
     <CenterResponsiveContainer>
       <HeaderList
