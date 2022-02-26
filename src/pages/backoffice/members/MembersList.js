@@ -7,6 +7,7 @@ import BodyTable from "../../../components/Shared/Table/BodyTable";
 import NotFoundComponent from "../../../components/Shared/Others/NotFoundComponent"
 import Pagination from "../../../components/Shared/Table/Pagination";
 import useQueries from "../../../hooks/useQueries";
+import SearchBar from "../../../components/Shared/Others/SearchBar";
 
 function MembersList(props) {
   const [ isLoad, setIsLoad ] = useState(false)
@@ -34,6 +35,7 @@ function MembersList(props) {
   
   return (
     <>
+    <SearchBar />
       {member?.length ? (
         <TableLayout>
           <HeaderTable columnsName={["Imagen", "Nombre","Fecha"]} />

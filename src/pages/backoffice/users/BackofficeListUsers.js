@@ -7,6 +7,7 @@ import TableLayout from '../../../components/Shared/Table/TableLayout';
 import CenterResponsiveContainer from '../../../components/Shared/Containers/CenterResponsiveContainer';
 import Pagination from '../../../components/Shared/Table/Pagination';
 import useQueries from '../../../hooks/useQueries';
+import SearchBar from '../../../components/Shared/Others/SearchBar';
 
 export default function BackofficeListUsers() {
     const [ allUsers, setAllUsers ] = useState([]);
@@ -34,11 +35,13 @@ export default function BackofficeListUsers() {
 
     return (
         <CenterResponsiveContainer>
-        <header className='flex sm:flex-row flex-col  items-center justify-around mb-7'>
+        <header className='flex sm:flex-row flex-col  items-center justify-around '>
                 <h1 className="sm:text-5xl text-3xl text-center text-sky-500">Usuarios</h1>
         </header>
         {
+            
             <>
+            <SearchBar />
             {allUsers?.length ? (
                 <TableLayout>
                     <HeaderTable columnsName={['Nombre', 'Apellido', 'Email', 'Rol']} />

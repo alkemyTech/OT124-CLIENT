@@ -7,6 +7,7 @@ import TableLayout from "../Shared/Table/TableLayout";
 import HeaderTable from "../Shared/Table/HeaderTable";
 import Pagination from "../Shared/Table/Pagination";
 import useQueries from "../../hooks/useQueries";
+import SearchBar from "../Shared/Others/SearchBar";
 
 function CategoriesList(props) {
   const [isLoad, setIsLoad] = useState(false);
@@ -28,6 +29,7 @@ function CategoriesList(props) {
 
   return (
     <>
+      <SearchBar />
       {activities?.length ? (
         <TableLayout>
           <HeaderTable

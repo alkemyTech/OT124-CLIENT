@@ -8,6 +8,7 @@ import NotFoundComponent from "./Shared/Others/NotFoundComponent";
 import { deleteNew } from "../services/news";
 import Pagination from "./Shared/Table/Pagination";
 import useQueries from "../hooks/useQueries";
+import SearchBar from "./Shared/Others/SearchBar";
 
 function NewsList(props) {
   const [isLoad, setIsLoad] = useState(false);
@@ -35,6 +36,7 @@ function NewsList(props) {
 
   return (
     <>
+      <SearchBar />
       {news?.length ? (
         <TableLayout>
           <HeaderTable columnsName={["Imagen", "Nombre", "Fecha"]} />

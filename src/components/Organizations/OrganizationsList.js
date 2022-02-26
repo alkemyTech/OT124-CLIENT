@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Pagination from "../Shared/Table/Pagination";
 import useQueries from "../../hooks/useQueries";
+import SearchBar from "../Shared/Others/SearchBar";
 
 function OrganizationsList() {
   const [organizations, setOrganizations] = useState([]);
@@ -30,6 +31,7 @@ function OrganizationsList() {
 
   return (
     <>
+    <SearchBar />
       {organizations?.length ? (
         <TableLayout>
           <HeaderTable
