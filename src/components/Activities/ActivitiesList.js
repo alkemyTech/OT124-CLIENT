@@ -9,11 +9,11 @@ import Pagination from "../Shared/Table/Pagination";
 import useQueries from "../../hooks/useQueries";
 import SearchBar from "../Shared/Others/SearchBar";
 
-function CategoriesList(props) {
+function ActivitiesList(props) {
   const [isLoad, setIsLoad] = useState(false);
   const [activities, setActivities] = useState([]);
 
-  const queries = useQueries()
+  const queries = useQueries();
   const [cantItems, setCantItems] = useState(0);
 
   useEffect(() => {
