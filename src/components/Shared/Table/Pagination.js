@@ -8,9 +8,8 @@ import {
   setPage,
 } from "../../../features/paginationSlice";
 
-const Pagination = ({ ...props }) => {
-  const { list } = props;
-  const cantItems = list?.length;
+const Pagination = (props) => {
+  const { cantItems } = props;
   const size = useSelector(selectSize);
   const page = useSelector(selectPage);
   const dispatch = useDispatch();

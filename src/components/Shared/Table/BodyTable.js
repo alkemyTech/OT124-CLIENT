@@ -9,9 +9,6 @@ import DeleteAlert from "../Alerts/DeleteAlert";
 function BodyTable(props) {
   const { list, service, setIsLoad, isLoad, afterMessage, message, bodyName } =
     props;
-  
-  const page = useSelector(selectPage)
-  const size = useSelector(selectSize)
   const dispatch = useDispatch()
 
   useEffect(()=>{
@@ -20,7 +17,7 @@ function BodyTable(props) {
 
   return (
     <tbody className=" bg-sky-50 max-h-[375px] overflow-y-auto overflow-x-hidden">
-      {list?.slice(page*size, ((page+1)*(size)))?.map((item, count) => (
+      {list?.map((item, count) => (
         <tr
           className={`${
             count % 2 === 0 ? "bg-sky-100 hover:bg-sky-200" : "bg-white hover:bg-slate-100 "

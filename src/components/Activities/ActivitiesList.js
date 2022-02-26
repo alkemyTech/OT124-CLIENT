@@ -6,20 +6,25 @@ import BodyTable from "../Shared/Table/BodyTable";
 import TableLayout from "../Shared/Table/TableLayout";
 import HeaderTable from "../Shared/Table/HeaderTable";
 import Pagination from "../Shared/Table/Pagination";
+import useQueries from "../../hooks/useQueries";
 
 function CategoriesList(props) {
   const [isLoad, setIsLoad] = useState(false);
   const [activities, setActivities] = useState([]);
 
+  const queries = useQueries()
+  const [cantItems, setCantItems] = useState(0);
+
   useEffect(() => {
-    getAllActivities()
+    getAllActivities(queries)
       .then((res) => {
         setActivities(res?.data?.activities);
+        setCantItems(res?.data?.count);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [isLoad]);
+  }, [isLoad, queries]);
 
   return (
     <>
@@ -41,7 +46,7 @@ function CategoriesList(props) {
       ) : (
         <NotFoundComponent title={"No se encontraron actividades"} />
       )}
-      <Pagination list={activities} />
+      <Pagination cantItems={cantItems} />
     </>
   );
 }

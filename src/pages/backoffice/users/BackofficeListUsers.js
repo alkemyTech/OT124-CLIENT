@@ -6,13 +6,17 @@ import HeaderTable from '../../../components/Shared/Table/HeaderTable';
 import TableLayout from '../../../components/Shared/Table/TableLayout';
 import CenterResponsiveContainer from '../../../components/Shared/Containers/CenterResponsiveContainer';
 import Pagination from '../../../components/Shared/Table/Pagination';
+import useQueries from '../../../hooks/useQueries';
 
 export default function BackofficeListUsers() {
     const [ allUsers, setAllUsers ] = useState([]);
     const [ isLoad, setIsLoad ] = useState(false);
 
-    const getUsers = async () => {
-        const res = await usersServices.getAllUsers();
+    const queries = useQueries();
+    const [cantItems, setCantItems] = useState(0);
+
+    const getUsers = async (queries) => {
+        const res = await usersServices.getAllUsers(queries);
         const modified = res?.data?.users?.map(user => ({
             id: user.id,
             firstName: user.firstName,
@@ -21,11 +25,12 @@ export default function BackofficeListUsers() {
             role: user.role
         }));
         setAllUsers(modified);
+        setCantItems(res?.data?.count)
     }
 
     useEffect(() => {
-        getUsers();
-    }, [isLoad]);
+        getUsers(queries);
+    }, [isLoad, queries]);
 
     return (
         <CenterResponsiveContainer>
@@ -48,7 +53,7 @@ export default function BackofficeListUsers() {
                     />
                 </TableLayout>
             ) : <NotFoundComponent title={'No se encontraron usuarios'} />}
-            <Pagination list={allUsers} />
+            <Pagination cantItems={cantItems} />
             </>
         }
         

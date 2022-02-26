@@ -2,9 +2,9 @@ import axios from "axios";
 import { API_BASE_URL, createMultiForm } from "./index";
 
 
-export async function getAllMembers() {
+export async function getAllMembers(queries='') {
   return await axios
-    .get(`${API_BASE_URL}/api/v1/members`)
+    .get(`${API_BASE_URL}/api/v1/members${queries}`)
     .catch((error) => error);
 }
 
