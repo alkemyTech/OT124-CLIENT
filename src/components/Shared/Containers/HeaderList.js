@@ -6,6 +6,7 @@ function HeaderList(props) {
   return (
     <div className="flex sm:flex-row flex-col justify-center px-6">
       <h1 className="sm:text-5xl text-3xl text-center text-sky-500 sm:pr-20 mb-10">{title}</h1>
+      {title === "Contactos" ? null : 
       <div className="text-center mb-8">
         <Link to={`crear-${name}`} className='text-center py-4'>
           <button className=" bg-green-600 text-sm sm:text-lg  text-white shadow shadow-green-800 rounded-sm px-8 py-4 hover:bg-green-700 transform ease-in-out duration-300 hover:scale-105">
@@ -13,6 +14,8 @@ function HeaderList(props) {
           </button>
         </Link>
       </div>
+      
+      }
     </div>
   );
 }
