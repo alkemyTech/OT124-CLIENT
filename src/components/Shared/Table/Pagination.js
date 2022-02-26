@@ -114,7 +114,7 @@ const Pagination = ({ ...props }) => {
                     {"1"}
                   </button>
                 )}
-                {(page + 1) * size > 0 && page >= 2 && (
+                {(page + 1) * size > 0 && page >= 3 && (
                   <button
                     className={`inline-flex items-center px-3.5 aspect-square w-full rounded-full text-sm font-medium text-sky-600 `}
                   >
@@ -126,7 +126,7 @@ const Pagination = ({ ...props }) => {
                 {new Array(cantPages)
                   ?.fill(1, 0, 11)
                   ?.map((e, i) => i + 1)
-                  .slice(page-1, page + 2)
+                  .slice(page-1>=0 ? page-1 : 0, page + 2)
                   ?.map((e) => (
                     <>
                       {e !== 1 && e !== cantPages && (
@@ -146,7 +146,7 @@ const Pagination = ({ ...props }) => {
                   ))}
                 {cantPages > 3 &&
                   (page + 1) * size < cantItems - size &&
-                  page !== cantPages - 1 && (
+                  page !== cantPages - 3 && (
                     <>
                       <button
                         className={`inline-flex items-center px-3.5 aspect-square w-full rounded-full text-sm font-medium text-sky-600 `}
