@@ -7,11 +7,11 @@ function SearchBar() {
   const search = useSelector(selectSearch);
   return (
     <div className="flex flex-row justify-center">
-      <form className=" flex flex-row h-11 justify-between my-5 mx-4 border-sky-500  items-center border-2 rounded-full sm:w-[400px] w-full sm:text-md">
+      <div className=" flex flex-row h-11 justify-between my-5 mx-4 border-sky-500  items-center border-2 rounded-full sm:w-[400px] w-full sm:text-md">
         <input
           type="text"
           placeholder="Buscar..."
-          className="   bg-white px-4 rounded-full outline-none text-xs"
+          className="   bg-white px-4 rounded-full h-full w-full outline-none text-xs"
           value={search}
           onChange={(e) => dispatch(setSearch(e.target.value))}
         />
@@ -37,7 +37,7 @@ function SearchBar() {
         <div className=" bg-sky-500 -mr-0.5 h-full w-12 border-3 border-sky-500  flex justify-center items-center rounded-r-full">
           <span className="bg-sky-500">🔍</span>
         </div>
-      </form>
+      </div>
     </div>
   );
 }

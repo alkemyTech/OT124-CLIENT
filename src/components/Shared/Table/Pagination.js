@@ -1,3 +1,4 @@
+import React from 'react'
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -67,7 +68,7 @@ const Pagination = (props) => {
         )}
         <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
           {cantItems > 0 && (
-            <p className="text-sm text-gray-700">
+            <p className={`text-sm text-gray-700 ${cantItems<=size && "mt-3"}`}>
               Mostrando <span className="font-medium">{pageLimit.prev}</span>{" "}
               hasta{" "}
               <span className="font-medium">
