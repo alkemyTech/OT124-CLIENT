@@ -1,9 +1,9 @@
 import { API_BASE_URL, createMultiForm } from "./index";
 import axios from "axios";
 
-export async function getAllTestimonials() {
+export async function getAllTestimonials(queries='') {
   return await axios
-    .get(`${API_BASE_URL}/api/v1/testimonials`)
+    .get(`${API_BASE_URL}/api/v1/testimonials${queries}`)
     .catch((error) => error);
 }
 

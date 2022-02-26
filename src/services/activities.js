@@ -25,9 +25,9 @@ export async function updateActivities(id, activity) {
     .catch((error) => console.log(error));
 }
 
-export async function getAllActivities() {
+export async function getAllActivities(queries='') {
   return await axios
-    .get(`${API_BASE_URL}/api/v1/activities`)
+    .get(`${API_BASE_URL}/api/v1/activities${queries}`)
     .catch((error) => console.log(error));
 }
 

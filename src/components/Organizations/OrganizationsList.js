@@ -1,62 +1,69 @@
-
 import React from "react";
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import BodyTable from "../Shared/Table/BodyTable";
 import HeaderTable from "../Shared/Table/HeaderTable";
 import TableLayout from "../Shared/Table/TableLayout";
-import { deleteOrganization } from '../../services/organization';
-import { getAllOrganizations } from '../../services/organization';
+import { deleteOrganization } from "../../services/organization";
+import { getAllOrganizations } from "../../services/organization";
 import { useEffect } from "react";
 import { useState } from "react";
+import Pagination from "../Shared/Table/Pagination";
+import useQueries from "../../hooks/useQueries";
+import SearchBar from "../Shared/Others/SearchBar";
 
 function OrganizationsList() {
-     const [organizations, setOrganizations] = useState([])
-     const [isLoad, setIsLoad] = useState(false)
+  const [organizations, setOrganizations] = useState([]);
+  const [isLoad, setIsLoad] = useState(false);
 
-        useEffect(() => {
-            getAllOrganizations()
-              .then((res) => {
-                setOrganizations(res?.data?.organizations)})
-              .catch((err) => {
-                console.log(err);
-              });
-          }, [isLoad]);
-        
+  const queries = useQueries();
+  const [cantItems, setCantItems] = useState(0);
 
-    return (
-        <>
-            {organizations?.length ? (
-                <TableLayout>
-                    <HeaderTable
-                        columnsName={[
-                            "Nombre",
-                            "Imagen",
-                            "Direccion",
-                            "Teléfono",
-                            "Email",
-                            "WelcomeText",
-                            "Fecha"
-                        ]}
-                    />
-                    <BodyTable
-                        list={organizations}
-                        bodyName={"organizacion"}
-                        message={"¿Desea eliminar esta organización?"}
-                        afterMessage={"organización eliminada con éxito"}
-                        isLoad={isLoad}
-                        setIsLoad={setIsLoad}
-                        service={deleteOrganization}
-                    />
-                </TableLayout>
-            ) : (
-                <NotFoundComponent title={"No se encontraron organizaciones"} />
-            )}
-        </>
-    );
+  useEffect(() => {
+    getAllOrganizations(queries)
+      .then((res) => {
+        setOrganizations(res?.data?.organizations);
+        setCantItems(res?.data?.count)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [isLoad, queries]);
+
+  return (
+    <>
+    <SearchBar />
+      {organizations?.length ? (
+        <TableLayout>
+          <HeaderTable
+            columnsName={[
+              "Nombre",
+              "Imagen",
+              "Direccion",
+              "Teléfono",
+              "Email",
+              "WelcomeText",
+              "Fecha",
+            ]}
+          />
+          <BodyTable
+            list={organizations}
+            bodyName={"organizacion"}
+            message={"¿Desea eliminar esta organización?"}
+            afterMessage={"organización eliminada con éxito"}
+            isLoad={isLoad}
+            setIsLoad={setIsLoad}
+            service={deleteOrganization}
+          />
+        </TableLayout>
+      ) : (
+        <NotFoundComponent title={"No se encontraron organizaciones"} />
+      )}
+      <Pagination cantItems={cantItems} />
+    </>
+  );
 }
 
 export default OrganizationsList;
-
 
 // import React from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
