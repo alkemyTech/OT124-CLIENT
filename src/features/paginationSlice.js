@@ -23,14 +23,14 @@ export const paginationSlice = createSlice({
     setPage: (state, action) => {
         state.page =  parseInt(action.payload)
       },
-    initial: (state, action) => {
+    initialPagination: (state, action) => {
       state.page = 0;
       state.size = size;
     },
   },
 });
 
-export const { increasePage, increaseSize, decresePage, decreseSize, setPage, initial } =
+export const { increasePage, increaseSize, decresePage, decreseSize, setPage, initialPagination } =
   paginationSlice.actions;
 
 export const selectPage = (state) => state?.pagination?.page;

@@ -9,10 +9,13 @@ export const searchSlice = createSlice({
     setSearch: (state, action) => {
         state.search = action.payload
     },
+    initialSearch: (state) =>{
+        state.search = ''
+    }
   },
 });
 
-export const { setSearch } =
+export const { setSearch, initialSearch } =
   searchSlice.actions;
 
 export const selectSearch = (state) => state?.search?.search;
