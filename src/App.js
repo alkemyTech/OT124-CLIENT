@@ -110,6 +110,10 @@ function App() {
           </Route>
           <Route path="contactos" element={<BackOfficeContacts />}>
             <Route index element={<ContactsList />} />
+            <Route
+              path="editar-contactos/:id"
+              element={<BackofficeEditUsers />}
+            />
           </Route>
           <Route path="usuarios">
             <Route index element={<BackofficeListUsers />} />
