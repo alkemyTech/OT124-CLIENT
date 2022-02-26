@@ -7,20 +7,27 @@ import TableLayout from "../../../components/Shared/Table/TableLayout";
 import HeaderTable from "../../../components/Shared/Table/HeaderTable";
 import BodyTable from "../../../components/Shared/Table/BodyTable";
 import NotFoundComponent from "../../../components/Shared/Others/NotFoundComponent"
+import SearchBar from "../../../components/Shared/Others/SearchBar";
+import Pagination from "../../../components/Shared/Table/Pagination";
+import useQueries from "../../../hooks/useQueries";
 
 function ContactsList() {
   const [contacts, setContacts] = useState([]);
   const [ isLoad, setIsLoad ] = useState(false)
 
+  const queries = useQueries();
+  const [cantItems, setCantItems] = useState(0);
+
   useEffect(() => {
-    getContacts()
+    getContacts(queries)
       .then((response) => {
         setContacts(response?.data?.contactList);
+        setCantItems(response?.data?.count)
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [isLoad]);
+  }, [isLoad, queries]);
 
   return (
     <CenterResponsiveContainer>
@@ -30,6 +37,7 @@ function ContactsList() {
           addTitle={"Añadir una nueva novedad"}
         />
         <>
+        <SearchBar />
           {contacts?.length ? (
             <TableLayout>
               <HeaderTable columnsName={["Nombre", "Telefono","Email", "Message", "Enviado"]} />
@@ -47,6 +55,7 @@ function ContactsList() {
       (
         <NotFoundComponent title={"No se encontraron contactos"} />
       )}
+      <Pagination cantItems={cantItems} />
     </>
     </CenterResponsiveContainer>
     
