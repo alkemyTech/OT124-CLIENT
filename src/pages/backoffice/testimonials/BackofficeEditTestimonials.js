@@ -6,8 +6,8 @@ import CUTestimonialsForm from "../../../components/Testimonials/CUTestimonialsF
 export default function BackofficeEditTestimonials() {
   return (
     <CenterResponsiveContainer>
-        <CUHeader title={"Modificar un testimonio"} />
-        <CUTestimonialsForm isEdit={true} />
-     </CenterResponsiveContainer>
+      <CUHeader title={"Modificar un testimonio"} />
+      <CUTestimonialsForm isEdit={true} />
+    </CenterResponsiveContainer>
   );
 }
