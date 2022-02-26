@@ -53,4 +53,4 @@ function ActivitiesList(props) {
   );
 }
 
-export default CategoriesList;
+export default ActivitiesList;
