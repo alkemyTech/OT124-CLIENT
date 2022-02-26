@@ -9,6 +9,7 @@ import testimonialsIcon from "../../img/icons/testimonials.png";
 import usersIcon from "../../img/icons/users.png";
 import contactsIcon from "../../img/icons/contacts.png";
 import BackOfficeCard from "./BackOfficeCard";
+import CenterResponsiveContainer from "../Shared/Containers/CenterResponsiveContainer";
 
 export default function BackOfficeAdminLayout() {
   const items = [
@@ -60,7 +61,8 @@ export default function BackOfficeAdminLayout() {
   ];
 
   return (
-    <div className="flex flex-wrap justify-center gap-5 ">
+    <CenterResponsiveContainer>
+    <div className="flex flex-wrap justify-center gap-5">
       {items.map((item) => {
         return (
           <BackOfficeCard
@@ -72,5 +74,6 @@ export default function BackOfficeAdminLayout() {
         );
       })}
     </div>
+    </CenterResponsiveContainer>
   );
 }
