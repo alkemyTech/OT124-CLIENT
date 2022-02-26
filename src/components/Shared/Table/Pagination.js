@@ -126,7 +126,7 @@ const Pagination = ({ ...props }) => {
                 {new Array(cantPages)
                   ?.fill(1, 0, 11)
                   ?.map((e, i) => i + 1)
-                  .slice(page, page + 2)
+                  .slice(page-1, page + 2)
                   ?.map((e) => (
                     <>
                       {e !== 1 && e !== cantPages && (
