@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   decresePage,
-  incresePage,
+  increasePage,
   selectPage,
   selectSize,
   setPage,
@@ -58,7 +58,7 @@ const Pagination = ({ ...props }) => {
             )}
             {pageLimit.next < cantItems && (
               <button
-                onClick={(e) => dispatch(incresePage())}
+                onClick={(e) => dispatch(increasePage())}
                 className="ml-3 absolute right-0 items-center px-4 py-2 border border-sky-600 text-sm font-medium rounded-md text-sky-600 bg-white hover:bg-gray-50"
               >
                 Siguiente
@@ -66,7 +66,6 @@ const Pagination = ({ ...props }) => {
             )}
           </div>
         )}
-
         <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
           {cantItems > 0 && (
             <p className="text-sm text-gray-700">
@@ -90,14 +89,14 @@ const Pagination = ({ ...props }) => {
                   <>
                     <button
                       onClick={(e) => dispatch(setPage(0))}
-                      className="inline-flex items-center px-2 py-2 rounded-full aspect-square w-full    bg-white text-sm font-medium text-sky-600 "
+                      className="inline-flex items-center px-2 py-2 rounded-full aspect-square w-full    bg-white text-sm font-medium text-sky-500 "
                     >
                       <span className="sr-only">Anterior</span>
                       {"<<"}
                     </button>
                     <button
                       onClick={(e) => dispatch(decresePage())}
-                      className="inline-flex items-center px-2 py-2 aspect-square rounded-full w-full   bg-white text-sm font-medium text-sky-600 "
+                      className="inline-flex items-center px-2 py-2 aspect-square rounded-full w-full   bg-white text-sm font-medium text-sky-500 "
                     >
                       <span className="sr-only">Siguiente</span>
                       {"<"}
@@ -173,7 +172,7 @@ const Pagination = ({ ...props }) => {
                 {pageLimit.next < cantItems && (
                   <>
                     <button
-                      onClick={(e) => dispatch(incresePage())}
+                      onClick={(e) => dispatch(increasePage())}
                       className="inline-flex items-center px-2 py-2 aspect-square rounded-full w-full   bg-white text-sm font-medium text-sky-600 "
                     >
                       <span className="sr-only rounded-full">Siguiente</span>

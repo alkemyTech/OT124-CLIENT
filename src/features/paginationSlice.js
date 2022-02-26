@@ -8,10 +8,10 @@ export const paginationSlice = createSlice({
     size: size,
   },
   reducers: {
-    incresePage: (state, action) => {
+    increasePage: (state, action) => {
       state.page += 1
     },
-    increseSize: (state, action) => {
+    increaseSize: (state, action) => {
       return (state.size += size);
     },
     decreseSize: (state, action) => {
@@ -30,7 +30,7 @@ export const paginationSlice = createSlice({
   },
 });
 
-export const { incresePage, increseSize, decresePage, decreseSize, setPage, initial } =
+export const { increasePage, increaseSize, decresePage, decreseSize, setPage, initial } =
   paginationSlice.actions;
 
 export const selectPage = (state) => state?.pagination?.page;
