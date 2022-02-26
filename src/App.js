@@ -35,6 +35,7 @@ import BackofficeListUsers from "./pages/backoffice/users/BackofficeListUsers";
 import BackofficeEditUsers from "./pages/backoffice/users/BackofficeEditUsers";
 import BackofficeCreateActivity from "./pages/backoffice/actividades/BackofficeCreateActivity";
 import BackofficeEditActivities from "./pages/backoffice/actividades/BackofficeEditActivities";
+import ActivitiesDetails from "./components/Activities/ActivitiesDetails";
 
 function App() {
   return (
@@ -125,6 +126,8 @@ function App() {
           <Route index element={<News />} />
           <Route path=":id" element={<NewDetails />} />
         </Route>
+
+        <Route path="actividades/:id" element={<ActivitiesDetails />} />
       </Route>
     </Routes>
   );
