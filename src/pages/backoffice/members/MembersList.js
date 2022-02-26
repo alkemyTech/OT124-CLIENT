@@ -24,7 +24,7 @@ function MembersList(props) {
         const date = new Date(createdAt).toLocaleDateString() 
         return { ...{image,name, date, id} } 
       }));
-      setCantItems(res?.data?.counter)
+      setCantItems(res?.data?.count)
     })
       .catch((err) => {
         console.log(err);
