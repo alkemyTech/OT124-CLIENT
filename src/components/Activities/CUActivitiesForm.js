@@ -15,6 +15,7 @@ import InputForm from "../Shared/Forms/InputForm";
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import AddButton from "../Shared/Buttons/Addbutton";
 import TwoColsForm from "../Shared/Containers/TwoColsForm";
+import Spinner from "../Shared/Loaders/Spinner";
 
 function CUActivitiesForm(props) {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ function CUActivitiesForm(props) {
   const [error, setError] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [successMsg, setSuccessMsg] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const initialValues = {
     name: "",
     content: "",
@@ -41,7 +43,10 @@ function CUActivitiesForm(props) {
           setNotFound(true);
         }
       })
-      .finally(setIsDisabled(false));
+      .finally(()=>{
+        setIsDisabled(false)
+        setTimeout(() => setIsLoading(false), 500);
+      });
   }, [id]);
 
   const onSubmit = (values, { setSubmitting, resetForm }) => {
@@ -81,6 +86,10 @@ function CUActivitiesForm(props) {
       .required("El contenido de la actividad es requerido"),
     image: yup.mixed().required("El archivo es requerido"),
   });
+
+  if (isLoading){
+    return <Spinner />
+  }
 
   return (
     <div>

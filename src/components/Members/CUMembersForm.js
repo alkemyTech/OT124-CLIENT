@@ -12,6 +12,7 @@ import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import InputForm from "../Shared/Forms/InputForm";
 import OneColForm from "../Shared/Containers/OneColForm";
 import AddButton from "../Shared/Buttons/Addbutton";
+import Spinner from "../Shared/Loaders/Spinner";
 
 function CUMembersForm(props) {
   const history = useNavigate();
@@ -21,6 +22,7 @@ function CUMembersForm(props) {
   const [error, setError] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const initialValues = {
     name: "",
     image: "",
@@ -35,7 +37,10 @@ function CUMembersForm(props) {
           setNotFound(true);
         }
       })
-      .finally(setIsDisabled(false));
+      .finally(()=>{
+        setIsDisabled(false)
+        setTimeout(() => setIsLoading(false), 500);
+      });
   }, [id]);
 
   const onSubmit = (values, { resetForm, setSubmitting }) => {
@@ -71,6 +76,10 @@ function CUMembersForm(props) {
       .required("El nombre del miembro es requerido"),
     image: yup.mixed().required("El archivo es requerido"),
   });
+
+  if (isLoading){
+    return <Spinner />
+  }
 
   return (
     <div className="">
