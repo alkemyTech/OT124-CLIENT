@@ -141,7 +141,7 @@ function CUOrganizationForm({ isEdit }) {
                       touched={touched.phone}
                       name={"phone"}
                       placeholder={"Teléfono"}
-                      type={"text"}
+                      type={"number"}
                     />
                     <InputForm
                       errors={errors.address}
