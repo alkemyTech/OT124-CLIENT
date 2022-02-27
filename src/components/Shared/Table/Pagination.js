@@ -34,8 +34,8 @@ const Pagination = (props) => {
   }, [cantItems]);
 
       useEffect(() => {
-        if (pageLimit.prev >= size){
-            dispatch(setPage(0));
+        if (pageLimit.prev >= cantItems){
+            dispatch(setPage((cantItems % size)+1));
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cantItems])
