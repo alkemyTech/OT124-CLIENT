@@ -12,13 +12,14 @@ import testimonialsIcon from "../../img/icons/testimonials.png";
 import usersIcon from "../../img/icons/users.png";
 import contactsIcon from "../../img/icons/contacts.png";
 import logo from "../../img/logo-somos-mas.png";
+import profile from "../../img/icons/profile.png";
 
 export default function HeaderUser() {
   const [hamburguerOpened, setHamburguerOpened] = useState(false);
   const dispach = useDispatch();
   const history = useNavigate();
   const userData = useSelector(selectUserData);
-  let activeClassName = "text-sky-600 ";
+  let activeClassName = "text-sky-700 ";
   let desactiveClassName = "text-sky-400 ";
   const a =
     "mt-2 py-2 px-1 inline-flex text-md hover:text-black mr-4 transform hover:scale-105 ease-in duration-300";
@@ -156,7 +157,7 @@ export default function HeaderUser() {
         >
           <div class="flex flex-col sm:flex-row flex-wrap">
             <div className="sm:hidden flex justify-center items-center flex-col">
-              <div className=" bg-sky-500 opacity-30 w-[100px] h-[100px] rounded-full"></div>
+              <img src={profile} className="w-[100px] h-[100px] rounded-full mb-1" alt='' />
               {userData?.firstName} {userData?.lastName}
             </div>
             {navItemsAdmin}
