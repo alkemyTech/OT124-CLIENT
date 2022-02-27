@@ -127,8 +127,8 @@ export default function HeaderUser() {
   };
   return (
     <>
-      <nav class="flex sm:text-lg text-sm items-center flex-wrap justify-between p-6 bg-slate-200">
-        <Link to='/'>
+      <nav class="flex sm:text-lg text-sm items-center flex-wrap lg:flex-nowrap justify-between p-6 bg-slate-200">
+        <Link to='/' className=" inline-flex">
         <img
           className="lg:ml-4 -ml-1 mr-8 inline-flex"
           width="100"
