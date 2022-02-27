@@ -19,7 +19,7 @@ export default function HeaderUser() {
   const dispach = useDispatch();
   const history = useNavigate();
   const userData = useSelector(selectUserData);
-  let activeClassName = "text-sky-700 ";
+  let activeClassName = "font-bold text-sky-600 ";
   let desactiveClassName = "text-sky-400 ";
   const a =
     "mt-2 py-2 px-1 inline-flex text-md hover:text-black mr-4 transform hover:scale-105 ease-in duration-300";
@@ -127,13 +127,15 @@ export default function HeaderUser() {
   };
   return (
     <>
-      <nav class="flex sm:text-lg text-sm items-center flex-wrap justify-between p-6">
+      <nav class="flex sm:text-lg text-sm items-center flex-wrap justify-between p-6 bg-slate-200">
+        <Link to='/'>
         <img
           className="lg:ml-4 -ml-1 mr-8 inline-flex"
           width="100"
           src={logo}
           alt="logo"
         />
+        </Link>        
         <div class="flex text-right lg:hidden ">
           <button
             onClick={openHamburguerMenu}

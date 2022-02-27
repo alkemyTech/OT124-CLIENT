@@ -45,7 +45,7 @@ function ContactsList() {
         {isLoading ? <Spinner /> : <>
           {contacts?.length ? (
             <TableLayout>
-              <HeaderTable columnsName={["Nombre", "Telefono","Email", "Message", "Enviado"]} />
+              <HeaderTable columnsName={["Nombre", "Telefono","Email", "Mensaje", "Enviado"]} />
               <BodyTable
                 isLoad={isLoad}
                 setIsLoad={setIsLoad}

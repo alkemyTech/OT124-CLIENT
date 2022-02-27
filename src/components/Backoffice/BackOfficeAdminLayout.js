@@ -62,7 +62,8 @@ export default function BackOfficeAdminLayout() {
 
   return (
     <CenterResponsiveContainer>
-    <div className="flex flex-wrap justify-center gap-5">
+      <div className=" flex justify-center h-full">
+    <div className="flex flex-wrap justify-center items-center gap-5">
       {items.map((item) => {
         return (
           <BackOfficeCard
@@ -73,7 +74,8 @@ export default function BackOfficeAdminLayout() {
           />
         );
       })}
-    </div>
+      </div>
+      </div>
     </CenterResponsiveContainer>
   );
 }
