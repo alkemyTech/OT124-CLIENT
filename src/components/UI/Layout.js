@@ -46,7 +46,7 @@ export default function Layout() {
   return (
     <div className="flex flex-col justify-between min-h-[100vh]">
       {(isExpired) && <ExpiredSessionAlert />}
-      {location.pathname.indexOf("/backoffice")===-1 ? <Header /> : <HeaderUser />}
+      {location?.pathname?.indexOf("/backoffice")===-1 ? <Header /> : <HeaderUser />}
       <div className="h-full">
         <TransitionGroup component={null}>
           <CSSTransition key={location.key} classNames="fade" timeout={300}>
