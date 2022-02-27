@@ -15,6 +15,7 @@ import CenterResponsiveContainer from "../Shared/Containers/CenterResponsiveCont
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import AddButton from "../Shared/Buttons/Addbutton";
 import TwoColsForm from "../Shared/Containers/TwoColsForm";
+import Spinner from "../Shared/Loaders/Spinner";
 
 function CUOrganizationForm({ isEdit }) {
   const [error, setError] = useState(false);
@@ -22,6 +23,7 @@ function CUOrganizationForm({ isEdit }) {
   const { id } = useParams();
   const [notFound, setNotFound] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   let navigate = useNavigate();
 
   let initialValues = {
@@ -65,7 +67,6 @@ function CUOrganizationForm({ isEdit }) {
   }
   //use effects
   useEffect(() => {
-    if (isEdit) {
       organizationService
         .getOrganizationData(id)
         .then((res) => {
@@ -75,9 +76,11 @@ function CUOrganizationForm({ isEdit }) {
             setNotFound(true);
           }
         })
-        .finally(setIsDisabled(false));
-    }
-  }, [id, isEdit]);
+        .finally(()=>{
+          setIsDisabled(false)
+          setTimeout(() => setIsLoading(false), 500);
+        });
+  }, [id]);
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Por favor ingresa tu nombre"),
@@ -105,6 +108,7 @@ function CUOrganizationForm({ isEdit }) {
       />
       {!notFound || !isEdit ? (
         <>
+        {isLoading ? <Spinner/> : 
           <Formik
             initialValues={Org}
             enableReinitialize={true}
@@ -181,6 +185,7 @@ function CUOrganizationForm({ isEdit }) {
               </Form>
             )}
           </Formik>
+          }
         </>
       ) : (
         <NotFoundComponent title={"No existe esa organización"} />

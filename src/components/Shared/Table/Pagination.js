@@ -13,6 +13,7 @@ const Pagination = (props) => {
   const { cantItems } = props;
   const size = useSelector(selectSize);
   const page = useSelector(selectPage);
+  
   const dispatch = useDispatch();
   let pageLimit = {
     prev: (page + 1) * size - size + 1,

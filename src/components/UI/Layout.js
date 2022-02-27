@@ -8,6 +8,7 @@ import { selectIsExpired, setIsExpired, getIsExpired, selectUserData } from "../
 import ExpiredSessionAlert from "../Shared/Alerts/ExpiredSessionAlert";
 import { useEffect } from "react";
 import { useState } from "react";
+import HeaderUser from "./HeaderUser";
 
 
 export default function Layout() {
@@ -43,17 +44,17 @@ export default function Layout() {
     document.body.addEventListener('click', ()=>setIsActive(false))
 
   return (
-    <div className="flex flex-col justify-between min-h-[100vh]">
+    <div className="min-h-[100vh] h-[100vh] flex flex-col">
       {(isExpired) && <ExpiredSessionAlert />}
-      <Header />
-      <div className="h-full">
-        <TransitionGroup component={null}>
+      {location?.pathname?.indexOf("/backoffice")===-1 ? <Header /> : <HeaderUser />}
+      
+        <TransitionGroup component={null} className={"h-full"}>
           <CSSTransition key={location.key} classNames="fade" timeout={300}>
-            <Outlet></Outlet>
+            <Outlet />
           </CSSTransition>
         </TransitionGroup>
-      </div>
-      <Footer />
+     
+      {location?.pathname?.indexOf("/backoffice")===-1 && <Footer />}
     </div>
   );
 }

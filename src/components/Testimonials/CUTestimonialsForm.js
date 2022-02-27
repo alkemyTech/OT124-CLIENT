@@ -14,6 +14,7 @@ import SuccessAlert from "../Shared/Alerts/SuccessAlert";
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import AddButton from "../Shared/Buttons/Addbutton";
 import TwoColsForm from "../Shared/Containers/TwoColsForm";
+import Spinner from "../Shared/Loaders/Spinner";
 
 function CUTestimonialsForm({ isEdit }) {
   const [error, setError] = useState(false);
@@ -21,6 +22,7 @@ function CUTestimonialsForm({ isEdit }) {
   const { id } = useParams();
   const [notFound, setNotFound] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   let navigate = useNavigate();
 
   const initialValues = {
@@ -62,7 +64,6 @@ function CUTestimonialsForm({ isEdit }) {
   }
 
   useEffect(() => {
-    if (isEdit) {
       getTestimonial(id)
         .then((res) => {
           if (res?.status === 200 || res?.status === 304) {
@@ -71,9 +72,11 @@ function CUTestimonialsForm({ isEdit }) {
             setNotFound(true);
           }
         })
-        .finally(setIsDisabled(false));
-    }
-  }, [id, isEdit]);
+        .finally(()=>{
+          setIsDisabled(false)
+          setTimeout(() => setIsLoading(false), 500);
+        });
+  }, [id]);
 
   const testimonialsSchema = yup.object().shape({
     name: yup
@@ -84,6 +87,10 @@ function CUTestimonialsForm({ isEdit }) {
       .required("El contenido del testimonio es requerido"),
     image: yup.mixed().required("El archivo es requerido"),
   });
+
+  if (isLoading){
+    return <Spinner />
+  }
 
   return (
     <>
@@ -123,7 +130,7 @@ function CUTestimonialsForm({ isEdit }) {
                       high={true}
                     />
                   </div>
-                  <div className="w-full my-auto">
+                  <div className="w-full my-auto order-first sm:order-last">
                     <UploadImageComponent
                       setFieldValue={setFieldValue}
                       setFieldError={setFieldError}
@@ -131,6 +138,7 @@ function CUTestimonialsForm({ isEdit }) {
                       disabled={isDisabled}
                       error={errors.image}
                       touched={touched.image}
+                      circle={true}
                     />
                   </div>
                 </TwoColsForm>
