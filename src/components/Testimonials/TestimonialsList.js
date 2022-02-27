@@ -1,6 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { deleteActivities, getAllActivities } from "../../services/activities";
+import {
+  deleteTestimonial,
+  getAllTestimonials,
+} from "../../services/testimonials";
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import BodyTable from "../Shared/Table/BodyTable";
 import TableLayout from "../Shared/Table/TableLayout";
@@ -9,17 +12,17 @@ import Pagination from "../Shared/Table/Pagination";
 import useQueries from "../../hooks/useQueries";
 import SearchBar from "../Shared/Others/SearchBar";
 
-function ActivitiesList(props) {
+function TestimonialsList() {
   const [isLoad, setIsLoad] = useState(false);
-  const [activities, setActivities] = useState([]);
+  const [testimonials, setTestimonials] = useState([]);
 
   const queries = useQueries();
   const [cantItems, setCantItems] = useState(0);
 
   useEffect(() => {
-    getAllActivities(queries)
+    getAllTestimonials(queries)
       .then((res) => {
-        setActivities(res?.data?.activities);
+        setTestimonials(res?.data?.testimonials);
         setCantItems(res?.data?.count);
       })
       .catch((err) => {
@@ -30,27 +33,27 @@ function ActivitiesList(props) {
   return (
     <>
       <SearchBar />
-      {activities?.length ? (
+      {testimonials?.length ? (
         <TableLayout>
           <HeaderTable
-            columnsName={["Nombre", "Imagen", "Descripción", "Fecha"]}
+            columnsName={["Nombre", "Imagen", "Contenido", "Fecha"]}
           />
           <BodyTable
             isLoad={isLoad}
             setIsLoad={setIsLoad}
-            service={deleteActivities}
-            list={activities}
-            bodyName={"actividad"}
-            message={"¿Desea eliminar esta actividad?"}
-            afterMessage={"Actividad eliminada con éxito"}
+            service={deleteTestimonial}
+            list={testimonials}
+            bodyName={"testimonio"}
+            message={"¿Desea eliminar este testimonio?"}
+            afterMessage={"Testimonio eliminado con éxito"}
           />
         </TableLayout>
       ) : (
-        <NotFoundComponent title={"No se encontraron actividades"} />
+        <NotFoundComponent title={"No se encontraron testimonios"} />
       )}
       <Pagination cantItems={cantItems} />
     </>
   );
 }
 
-export default ActivitiesList;
+export default TestimonialsList;
