@@ -8,25 +8,29 @@ import NotFoundComponent from "../../../components/Shared/Others/NotFoundCompone
 import Pagination from "../../../components/Shared/Table/Pagination";
 import useQueries from "../../../hooks/useQueries";
 import SearchBar from "../../../components/Shared/Others/SearchBar";
+import Spinner from "../../../components/Shared/Loaders/Spinner";
 
 function MembersList(props) {
   const [isLoad, setIsLoad] = useState(false);
   const [member, setMember] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const queries = useQueries();
   const [cantItems, setCantItems] = useState(0);
 
   useEffect(() => {
+    setIsLoading(true);
     getAllMembers(queries)
       .then((res) => {
         setMember(
           res?.data?.members?.map((e) => {
-            const { id, name, image, position, createdAt } = e;
+            const { id, name, position, image, createdAt } = e;
             const date = new Date(createdAt).toLocaleDateString();
             return { ...{ image, name, position, date, id } };
           })
         );
         setCantItems(res?.data?.count);
+        setTimeout(() => setIsLoading(false), 500);
       })
       .catch((err) => {
         console.log(err);
@@ -36,25 +40,31 @@ function MembersList(props) {
   return (
     <>
       <SearchBar />
-      {member?.length ? (
-        <TableLayout>
-          <HeaderTable
-            columnsName={["Imagen", "Nombre", "Posición", "Fecha"]}
-          />
-          <BodyTable
-            isLoad={isLoad}
-            setIsLoad={setIsLoad}
-            service={deleteMember}
-            list={member}
-            bodyName={"miembro"}
-            message={"¿Desea eliminar este miembro?"}
-            afterMessage={"Miembro eliminado con éxito"}
-          />
-        </TableLayout>
+      {isLoading ? (
+        <Spinner />
       ) : (
-        <NotFoundComponent title={"No se encontra el miembro"} />
+        <>
+          {member?.length ? (
+            <TableLayout>
+              <HeaderTable
+                columnsName={["Imagen", "Nombre", "Posición", "Fecha"]}
+              />
+              <BodyTable
+                isLoad={isLoad}
+                setIsLoad={setIsLoad}
+                service={deleteMember}
+                list={member}
+                bodyName={"miembro"}
+                message={"¿Desea eliminar este miembro?"}
+                afterMessage={"Miembro eliminado con éxito"}
+              />
+            </TableLayout>
+          ) : (
+            <NotFoundComponent title={"No se encuentra ningun miembro"} />
+          )}
+          <Pagination cantItems={cantItems} />
+        </>
       )}
-      <Pagination cantItems={cantItems} />
     </>
   );
 }

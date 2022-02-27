@@ -13,6 +13,7 @@ const Pagination = (props) => {
   const { cantItems } = props;
   const size = useSelector(selectSize);
   const page = useSelector(selectPage);
+  
   const dispatch = useDispatch();
   let pageLimit = {
     prev: (page + 1) * size - size + 1,
@@ -33,13 +34,12 @@ const Pagination = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cantItems]);
 
-  //     useEffect(() => {
-  //       querys.get("page") < 0 ? querys.set("page", 0) :
-  //       (querys.get("page")  > (Math.ceil(cantOperations / size)-1)) && cantOperations
-  //       && querys.set("page", Math.ceil(cantOperations / size))
-  //       history.push(`/?${querys.toString()}`)
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   }, [querys])
+      useEffect(() => {
+        if ((page)*(size) >= cantItems){
+          dispatch(setPage(0));
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [cantItems])
 
   return (
     <>
