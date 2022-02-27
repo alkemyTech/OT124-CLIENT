@@ -30,7 +30,7 @@ function CUOrganizationForm({ isEdit }) {
     phone: "",
     welcomeText: "",
     address: "",
-    image: ""
+    image: "",
   };
   const [Org, setOrg] = useState(initialValues);
 
@@ -40,9 +40,7 @@ function CUOrganizationForm({ isEdit }) {
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
             resetForm();
-            setSuccessMsg(
-              "¡Gracias por contactarnos! la organización ha sido actualizada"
-            );
+            setSuccessMsg("La organización ha sido creada");
             navigate(-1);
           } else {
             setError(true);
@@ -55,9 +53,7 @@ function CUOrganizationForm({ isEdit }) {
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
             resetForm();
-            setSuccessMsg(
-              "¡Gracias por contactarnos! la organización ha sido creada"
-            );
+            setSuccessMsg("La organización ha sido actualizada");
             navigate(-1);
           } else {
             setError(true);
@@ -74,7 +70,7 @@ function CUOrganizationForm({ isEdit }) {
         .getOrganizationData(id)
         .then((res) => {
           if (res?.status === 200 || res?.status === 304) {
-            setOrg(res?.data);
+            setOrg(res?.data?.organization);
           } else {
             setNotFound(true);
           }
@@ -103,8 +99,11 @@ function CUOrganizationForm({ isEdit }) {
 
   return (
     <CenterResponsiveContainer>
-        <CUHeader title={`${isEdit ? "Editar Organización" : "Crear Organización"}`} name={"organizacion"} />
-        {!notFound || !isEdit ? (
+      <CUHeader
+        title={`${isEdit ? "Editar Organización" : "Crear Organización"}`}
+        name={"organizacion"}
+      />
+      {!notFound || !isEdit ? (
         <>
           <Formik
             initialValues={Org}
@@ -121,7 +120,7 @@ function CUOrganizationForm({ isEdit }) {
               setFieldError,
             }) => (
               <Form>
-               <TwoColsForm>
+                <TwoColsForm>
                   <div className="sm:w-[500px]">
                     <InputForm
                       errors={errors.name}
@@ -142,7 +141,7 @@ function CUOrganizationForm({ isEdit }) {
                       touched={touched.phone}
                       name={"phone"}
                       placeholder={"Teléfono"}
-                      type={"number"}
+                      type={"text"}
                     />
                     <InputForm
                       errors={errors.address}
@@ -183,10 +182,10 @@ function CUOrganizationForm({ isEdit }) {
             )}
           </Formik>
         </>
-        )
-        :
-        <NotFoundComponent title={"No existe esa organización"} />}
-      </CenterResponsiveContainer>
+      ) : (
+        <NotFoundComponent title={"No existe esa organización"} />
+      )}
+    </CenterResponsiveContainer>
   );
 }
 

@@ -22,7 +22,7 @@ function OrganizationsList() {
     getAllOrganizations(queries)
       .then((res) => {
         setOrganizations(res?.data?.organizations);
-        setCantItems(res?.data?.count)
+        setCantItems(res?.data?.count);
       })
       .catch((err) => {
         console.log(err);
@@ -31,7 +31,7 @@ function OrganizationsList() {
 
   return (
     <>
-    <SearchBar />
+      <SearchBar />
       {organizations?.length ? (
         <TableLayout>
           <HeaderTable
@@ -41,7 +41,7 @@ function OrganizationsList() {
               "Direccion",
               "Teléfono",
               "Email",
-              "WelcomeText",
+              "Lema",
               "Fecha",
             ]}
           />
