@@ -11,7 +11,7 @@ export default function Footer() {
 
   const fetchOrganizationSocials = async (id) => {
     const response = await getOrganizationData(id);
-    setSocialMedia(response?.data?.organization.social);
+    setSocialMedia(response?.data?.organization?.social);
   };
 
   useEffect(() => {
