@@ -10,19 +10,23 @@ import { useState } from "react";
 import Pagination from "../Shared/Table/Pagination";
 import useQueries from "../../hooks/useQueries";
 import SearchBar from "../Shared/Others/SearchBar";
+import Spinner from "../Shared/Loaders/Spinner";
 
 function OrganizationsList() {
   const [organizations, setOrganizations] = useState([]);
   const [isLoad, setIsLoad] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const queries = useQueries();
   const [cantItems, setCantItems] = useState(0);
 
   useEffect(() => {
+    setIsLoading(true);
     getAllOrganizations(queries)
       .then((res) => {
         setOrganizations(res?.data?.organizations);
-        setCantItems(res?.data?.count)
+        setCantItems(res?.data?.count);
+        setTimeout(() => setIsLoading(false), 500);
       })
       .catch((err) => {
         console.log(err);
@@ -31,34 +35,40 @@ function OrganizationsList() {
 
   return (
     <>
-    <SearchBar />
-      {organizations?.length ? (
-        <TableLayout>
-          <HeaderTable
-            columnsName={[
-              "Nombre",
-              "Imagen",
-              "Direccion",
-              "Teléfono",
-              "Email",
-              "WelcomeText",
-              "Fecha",
-            ]}
-          />
-          <BodyTable
-            list={organizations}
-            bodyName={"organizacion"}
-            message={"¿Desea eliminar esta organización?"}
-            afterMessage={"organización eliminada con éxito"}
-            isLoad={isLoad}
-            setIsLoad={setIsLoad}
-            service={deleteOrganization}
-          />
-        </TableLayout>
+      <SearchBar />
+      {isLoading ? (
+        <Spinner />
       ) : (
-        <NotFoundComponent title={"No se encontraron organizaciones"} />
+        <>
+          {organizations?.length ? (
+            <TableLayout>
+              <HeaderTable
+                columnsName={[
+                  "Nombre",
+                  "Imagen",
+                  "Direccion",
+                  "Teléfono",
+                  "Email",
+                  "WelcomeText",
+                  "Fecha",
+                ]}
+              />
+              <BodyTable
+                list={organizations}
+                bodyName={"organizacion"}
+                message={"¿Desea eliminar esta organización?"}
+                afterMessage={"organización eliminada con éxito"}
+                isLoad={isLoad}
+                setIsLoad={setIsLoad}
+                service={deleteOrganization}
+              />
+            </TableLayout>
+          ) : (
+            <NotFoundComponent title={"No se encontraron organizaciones"} />
+          )}
+          <Pagination cantItems={cantItems} />
+        </>
       )}
-      <Pagination cantItems={cantItems} />
     </>
   );
 }
