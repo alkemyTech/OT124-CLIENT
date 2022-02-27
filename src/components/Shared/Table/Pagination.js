@@ -1,5 +1,4 @@
 import React from 'react'
-import { useState } from 'react';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -37,7 +36,7 @@ const Pagination = (props) => {
 
       useEffect(() => {
         if ((page)*(size) >= cantItems){
-            dispatch(setPage(0));
+          dispatch(setPage(0));
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cantItems])
