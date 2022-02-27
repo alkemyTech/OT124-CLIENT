@@ -24,7 +24,7 @@ const ActivitiesDetails = () => {
         {activities.name}
       </h1>
       <img
-        src={`${API_BASE_URL}/api/v1/files/${activities?.image}`}
+        src={`${API_BASE_URL}/api/v1/files/${activities?.image?.key}`}
         alt=""
         className="w-full float-left mr-6 mb-8 sm:w-80 h-80"
       />
