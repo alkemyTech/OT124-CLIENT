@@ -33,13 +33,12 @@ const Pagination = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cantItems]);
 
-  //     useEffect(() => {
-  //       querys.get("page") < 0 ? querys.set("page", 0) :
-  //       (querys.get("page")  > (Math.ceil(cantOperations / size)-1)) && cantOperations
-  //       && querys.set("page", Math.ceil(cantOperations / size))
-  //       history.push(`/?${querys.toString()}`)
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   }, [querys])
+      useEffect(() => {
+        if (pageLimit.prev >= size){
+            dispatch(setPage(0));
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [cantItems])
 
   return (
     <>
