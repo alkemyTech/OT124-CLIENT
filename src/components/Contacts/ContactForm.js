@@ -61,7 +61,7 @@ export default function ContactForm(props) {
         onSubmit={handleSubmit}
       >
         {({ errors, touched, isSubmitting }) => (
-          <Form className=" container mx-auto px-5">
+          <Form className=" container mx-auto px-6 my-auto bg-white py-4 sm:rounded-l-xl rounded-xl">
             <InputForm
               errors={errors.name}
               touched={touched.name}

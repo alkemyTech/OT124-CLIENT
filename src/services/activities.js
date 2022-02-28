@@ -19,15 +19,15 @@ export async function createActivities(data) {
 export async function updateActivities(id, activity) {
   const formData = createMultiForm(activity);
   return await axios
-    .put(`${API_BASE_URL}/api/v1/activities/${id}`, activity, {
+    .put(`${API_BASE_URL}/api/v1/activities/${id}`, formData, {
       headers: formData.getHeaders,
     })
     .catch((error) => console.log(error));
 }
 
-export async function getAllActivities() {
+export async function getAllActivities(queries='') {
   return await axios
-    .get(`${API_BASE_URL}/api/v1/activities`)
+    .get(`${API_BASE_URL}/api/v1/activities${queries}`)
     .catch((error) => console.log(error));
 }
 
