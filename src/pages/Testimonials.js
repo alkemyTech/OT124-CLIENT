@@ -11,7 +11,7 @@ import NotFoundComponent from '../components/Shared/Others/NotFoundComponent';
 import { API_BASE_URL } from '../services/index';
 import CenterResponsiveSwiper from '../components/Shared/Containers/CenterResponsiveSwiper';
 
-function Testimonial(props) {
+export function Testimonial(props) {
     const { name, image, content } = props;
 
     return (
