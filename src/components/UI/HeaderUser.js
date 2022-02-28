@@ -136,7 +136,7 @@ export default function HeaderUser() {
   };
   return (
     <>
-      <nav class="flex sm:text-lg text-sm items-center flex-wrap lg:flex-nowrap justify-between p-6 bg-slate-200">
+      <nav class="flex sm:text-md text-sm items-center flex-wrap lg:flex-nowrap justify-between p-6 bg-slate-200">
         <Link to='/' className=" inline-flex">
         <img
           className="lg:ml-4 -ml-1 mr-8 inline-flex"
@@ -166,14 +166,14 @@ export default function HeaderUser() {
           id="navbar"
           className="w-full flex-grow lg:!flex lg:!flex-row lg:items-center lg:w-auto flex-col justify-center"
         >
-          <div class="flex flex-col sm:flex-row flex-wrap">
+          <div class="flex flex-col lg:flex-row flex-wrap">
             <div className="sm:hidden flex justify-center items-center flex-col">
               <img src={profile} className="w-[100px] h-[100px] rounded-full mb-1" alt='' />
               {userData?.firstName} {userData?.lastName}
             </div>
             {navItemsAdmin}
           </div>
-          <div className="flex mx-auto my-auto items-center justify-center">
+          <div className="flex items-center mx-auto justify-center">
             {userData && (
               <>
                 <button
@@ -192,9 +192,9 @@ export default function HeaderUser() {
                   </Link>
                 ) : (
                   <Link
-                    to={`backoffice`}
+                    to={`/backoffice`}
                     onClick={openHamburguerMenu}
-                    className="inline-block my-auto mx-4 px-4 py-2 leading-none border rounded text-white border-sky-500 mt-4 lg:mt-0 bg-sky-500 hover:bg-sky-700 transform hover:scale-105 ease-in duration-300"
+                    className="block mx-4 px-4 py-2 leading-none border rounded text-white border-sky-500 mt-4 lg:mt-0 bg-sky-500 hover:bg-sky-700 transform hover:scale-105 ease-in duration-300"
                   >
                     Backoffice
                   </Link>
