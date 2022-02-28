@@ -7,20 +7,31 @@ import TableLayout from "../../../components/Shared/Table/TableLayout";
 import HeaderTable from "../../../components/Shared/Table/HeaderTable";
 import BodyTable from "../../../components/Shared/Table/BodyTable";
 import NotFoundComponent from "../../../components/Shared/Others/NotFoundComponent"
+import SearchBar from "../../../components/Shared/Others/SearchBar";
+import Pagination from "../../../components/Shared/Table/Pagination";
+import useQueries from "../../../hooks/useQueries";
+import Spinner from "../../../components/Shared/Loaders/Spinner";
 
 function ContactsList() {
   const [contacts, setContacts] = useState([]);
   const [ isLoad, setIsLoad ] = useState(false)
+  const [isLoading, setIsLoading] = useState(true);
+
+  const queries = useQueries();
+  const [cantItems, setCantItems] = useState(0);
 
   useEffect(() => {
-    getContacts()
+    setIsLoading(true);
+    getContacts(queries)
       .then((response) => {
         setContacts(response?.data?.contactList);
+        setCantItems(response?.data?.count)
+        setTimeout(() => setIsLoading(false), 500);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [isLoad]);
+  }, [isLoad, queries]);
 
   return (
     <CenterResponsiveContainer>
@@ -30,9 +41,11 @@ function ContactsList() {
           addTitle={"Añadir una nueva novedad"}
         />
         <>
+        <SearchBar />
+        {isLoading ? <Spinner /> : <>
           {contacts?.length ? (
             <TableLayout>
-              <HeaderTable columnsName={["Nombre", "Telefono","Email", "Message", "Enviado"]} />
+              <HeaderTable columnsName={["Nombre", "Telefono","Email", "Mensaje", "Enviado"]} />
               <BodyTable
                 isLoad={isLoad}
                 setIsLoad={setIsLoad}
@@ -47,6 +60,8 @@ function ContactsList() {
       (
         <NotFoundComponent title={"No se encontraron contactos"} />
       )}
+      <Pagination cantItems={cantItems} />
+      </>}
     </>
     </CenterResponsiveContainer>
     

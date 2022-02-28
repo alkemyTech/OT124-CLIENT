@@ -1,12 +1,12 @@
 import { API_BASE_URL } from './index';
 import axios from 'axios';
 
-export async function getAllUsers() {
+export async function getAllUsers(queries='') {
     // SEND: {
     //     users
     // }
     return await axios
-        .get(`${API_BASE_URL}/api/v1/users`)
+        .get(`${API_BASE_URL}/api/v1/users${queries}`)
         .catch((error) => error);
 }
 

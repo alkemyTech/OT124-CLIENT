@@ -2,28 +2,30 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
 import { Formik, Form } from "formik";
-import { createMember, updateMember,getMember } from "../../services/members";
+import { createMember, updateMember, getMember } from "../../services/members";
 import * as yup from "yup";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import ErrorAlert from "../Shared/Alerts/ErrorAlert";
 import SuccessAlert from "../Shared/Alerts/SuccessAlert";
 import UploadImageComponent from "../Shared/Others/UploadImageComponent";
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import InputForm from "../Shared/Forms/InputForm";
-import SelectForm from "../Shared/Forms/SelectForm";
-import SendButton from "../Shared/Buttons/SendButton";
+import OneColForm from "../Shared/Containers/OneColForm";
+import AddButton from "../Shared/Buttons/Addbutton";
+import Spinner from "../Shared/Loaders/Spinner";
 
 function CUMembersForm(props) {
-  const history = useNavigate()
+  const history = useNavigate();
   const { isEdit } = props;
   const { id } = useParams();
   const [notFound, setNotFound] = useState(false);
   const [error, setError] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const initialValues = {
     name: "",
-    image: ""
+    image: "",
   };
   const [aNew, setANew] = useState(initialValues);
   useEffect(() => {
@@ -35,29 +37,32 @@ function CUMembersForm(props) {
           setNotFound(true);
         }
       })
-      .finally(setIsDisabled(false));
+      .finally(()=>{
+        setIsDisabled(false)
+        setTimeout(() => setIsLoading(false), 500);
+      });
   }, [id]);
 
   const onSubmit = (values, { resetForm, setSubmitting }) => {
     if (isEdit) {
-    updateMember(values, id).then((res) => {
+      updateMember(values, id).then((res) => {
         if (res.status === 200) {
           setANew(initialValues);
           resetForm();
           setSuccessMsg("El miembro ha sido modificado exitosamente");
-          history('/backoffice/miembros')
+          history("/backoffice/miembros");
         } else {
           setError(true);
           setSubmitting(false);
         }
       });
     } else {
-    createMember(values).then((res) => {
+      createMember(values).then((res) => {
         if (res.status === 201) {
           setANew(initialValues);
           resetForm();
           setSuccessMsg("El miembro ha sido creado exitosamente");
-          history('/backoffice/miembros')
+          history("/backoffice/miembros");
         } else {
           setError(true);
           setSubmitting(false);
@@ -71,7 +76,11 @@ function CUMembersForm(props) {
       .required("El nombre del miembro es requerido"),
     image: yup.mixed().required("El archivo es requerido"),
   });
-  
+
+  if (isLoading){
+    return <Spinner />
+  }
+
   return (
     <div className="">
       {!notFound || !isEdit ? (
@@ -89,19 +98,9 @@ function CUMembersForm(props) {
             touched,
             setFieldError,
           }) => (
-            <Form className=" container mx-auto shadow-xl py-3">
-              <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-8 sm:px-24">
-                <div className="w-full my-auto">
-                  <InputForm
-                    errors={errors.name}
-                    touched={touched.name}
-                    name="name"
-                    placeholder="Nombre"
-                    type="text"
-                    disabled={isDisabled}
-                  />
-                </div>
-                <div className="w-full my-auto">
+            <Form className="">
+              <OneColForm>
+                <div className="my-2">
                   <UploadImageComponent
                     setFieldValue={setFieldValue}
                     setFieldError={setFieldError}
@@ -109,10 +108,22 @@ function CUMembersForm(props) {
                     disabled={isDisabled}
                     error={errors.image}
                     touched={touched.image}
+                    circle={true}
                   />
                 </div>
-              </div>
-              <SendButton isSubmitting={isSubmitting} text={`${isEdit ? "Modificar": "Crear"}`} />
+                <InputForm
+                  errors={errors.name}
+                  touched={touched.name}
+                  name="name"
+                  placeholder="Nombre"
+                  type="text"
+                  disabled={isDisabled}
+                />
+              </OneColForm>
+              <AddButton
+                isSubmitting={isSubmitting}
+                text={`${isEdit ? "Modificar" : "Crear"}`}
+              />
             </Form>
           )}
         </Formik>

@@ -14,6 +14,7 @@ import InputForm from "../Shared/Forms/InputForm";
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import AddButton from "../Shared/Buttons/Addbutton";
 import OneColForm from "../Shared/Containers/OneColForm";
+import Spinner from "../Shared/Loaders/Spinner";
 
 function CUCategoriesForm(props) {
   const { isEdit } = props;
@@ -22,6 +23,7 @@ function CUCategoriesForm(props) {
   const [isDisabled, setIsDisabled] = useState(true);
   const [error, setError] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const initialValues = {
     name: "",
     description: "",
@@ -36,7 +38,10 @@ function CUCategoriesForm(props) {
           setNotFound(true);
         }
       })
-      .finally(setIsDisabled(false));
+      .finally(()=>{
+        setIsDisabled(false)
+        setTimeout(() => setIsLoading(false), 500);
+      });
   }, [id]);
 
   const onSubmit = (values, { setSubmitting, resetForm }) => {
@@ -72,6 +77,10 @@ function CUCategoriesForm(props) {
       .string("La descripción debe ser un string")
       .required("La descripción de la categoria es requerida"),
   });
+
+  if (isLoading){
+    return <Spinner />
+  }
 
   return (
     <div className="">

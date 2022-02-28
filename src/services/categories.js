@@ -26,8 +26,8 @@ export async function getCategory(id) {
     .catch((error) => error);
 }
 
-export async function getAllCategories() {
+export async function getAllCategories(queries='') {
   return await axios
-    .get(`${API_BASE_URL}/api/v1/categories`)
+    .get(`${API_BASE_URL}/api/v1/categories${queries}`)
     .catch((error) => error);
 }

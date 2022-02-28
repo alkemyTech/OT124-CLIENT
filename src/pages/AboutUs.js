@@ -1,7 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { getAllMembers } from "../services/members";
-import { API_BASE_URL } from "../services";
+import MemberCard from "../components/Members/MemberCard";
+import CenterResponsiveContainer from "../components/Shared/Containers/CenterResponsiveContainer";
 
 function AboutUs() {
   const [members, setMembers] = useState([]);
@@ -17,22 +18,61 @@ function AboutUs() {
   }, []);
 
   return (
-    <>
-      {members?.length !== 0 ? (
-        <div className=" bg-sky-500 p-4 shadow-md flex flex-wrap justify-center">
-            {members?.map((member)=> (
-              <div className=" rounded md:h-80 flex flex-col bg-white p-2 mx-12 my-2 justify-center text-center shadow-md transform ease-in-out duration-300 hover:scale-105">
-                <img className=" rounded-full border-2 " src={member?.image?.key && `${API_BASE_URL}/api/v1/files/${member?.image?.key}`}></img>
-                <h3 className=" text-lg my-4 ">{member.name}</h3>
-              </div>
-            ))}
+    <CenterResponsiveContainer>
+      <div className="grid md:grid-cols-2">
+        <div className="px-6">
+          <h2 className="text-3xl font-bold text-center m-4">Nosotros</h2>
+          <p className="text-justify">
+            Desde 1997 en <b>Somos Más</b> trabajamos con los chicos y chicas,
+            mamás y papás, abuelos y vecinos del barrio La Cava generando
+            procesos de crecimiento y de inserción social. Uniendo las manos de
+            todas las familias, las que viven en el barrio y las que viven fuera
+            de él, es que podemos pensar, crear y garantizar estos procesos.{" "}
+            <br /> Somos una asociación civil sin fines de lucro que se creó en
+            1997 con la intención de dar alimento a las familias del barrio. Con
+            el tiempo fuimos involucrándonos con la comunidad y agrandando y
+            mejorando nuestra capacidad de trabajo. <br /> Hoy somos un centro
+            comunitario que acompaña a más de 700 personas a través de las áreas
+            de: Educación, deportes, primera infancia, salud, alimentación y
+            trabajo social.
+          </p>
         </div>
-      ) : (
-        <div className=" flex flex-col text-center justify-center  mx-6 my-6  md:h-60 border-1 rounded-lg p-2 md:p-6 shadow-lg hover:shadow-2xl">
-          <h3 className=" p-1 text-xl">No hay miembros existentes</h3>
+        <div>
+          <div className="px-6">
+            <h2 className="text-3xl font-bold text-center m-4">Visión</h2>
+            <p className="text-justify">
+              Mejorar la calidad de vida de niños y familias en situación de
+              vulnerabilidad en el barrio La Cava, otorgando un cambio de rumbo
+              en cada individuo a través de la educación, salud, trabajo,
+              deporte, responsabilidad y compromiso.
+            </p>
+          </div>
+          <div className="px-2">
+            <h2 className="text-3xl font-bold text-center m-4">Misión</h2>
+            <p className="text-justify">
+              Trabajar articuladamente con los distintos aspectos de la vida de
+              las familias, generando espacios de desarrollo personal y
+              familiar, brindando herramientas que logren mejorar la calidad de
+              vida a través de su propio esfuerzo.
+            </p>
+          </div>
         </div>
-      )}
-    </>
+      </div>
+      <div className="p-4">
+        <h2 className="text-3xl font-bold text-center m-6">El equipo</h2>
+        {members?.length !== 0 ? (
+          <div className="flex flex-wrap justify-center gap-[20px]">
+            {members.map((member) => {
+              return <MemberCard key={member.id} member={member} />;
+            })}
+          </div>
+        ) : (
+          <div className=" flex flex-col text-center justify-center  mx-6 my-6  md:h-60 border-1 rounded-lg p-2 md:p-6 shadow-lg hover:shadow-2xl">
+            <h3 className=" p-1 text-xl">No hay miembros existentes</h3>
+          </div>
+        )}
+      </div>
+    </CenterResponsiveContainer>
   );
 }
 

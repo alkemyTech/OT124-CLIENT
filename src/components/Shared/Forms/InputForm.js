@@ -32,6 +32,7 @@ function InputForm(props) {
     isDisabled,
     as,
     isLoading,
+    high
   } = props;
   return (
     <>
@@ -41,7 +42,7 @@ function InputForm(props) {
             as={as}
             className={`${
               errors && touched ? styles.errorsField : styles.field
-            } ${as ? "h-32 align-top resize-none" : "h-12"}`}
+            } ${as ? `${!high ? "h-32" : "h-64"} align-top resize-none` : "h-12"}`}
             name={name}
             placeholder={placeholder}
             type={type}
