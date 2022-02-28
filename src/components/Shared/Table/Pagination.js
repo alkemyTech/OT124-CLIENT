@@ -25,21 +25,13 @@ const Pagination = (props) => {
       .map((e, i) => i + 1)
       .filter((e, i) => (e % size === 0 ? i : 0)).length + 1;
 
-  useEffect(() => {
-    if (cantItems % size === 0) {
-      if (pageLimit.prev >= size) {
-        dispatch(decresePage());
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cantItems]);
 
       useEffect(() => {
         if ((page)*(size) >= cantItems){
-          dispatch(setPage(0));
+          const cant = Math.floor(cantItems / size)-1
+          dispatch(setPage(cant>=0 ? cant : 0));
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cantItems])
+    }, [cantItems, page, size, dispatch])
 
   return (
     <>
