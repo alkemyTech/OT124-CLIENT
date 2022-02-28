@@ -59,6 +59,8 @@ export default function ProfileForm(params) {
                         const response = await profileUpdate(id, values);
                         if (response.status === 201 || response.status === 200) {
                             setSuccessMsg("El usuario ha sido modificado exitosamente.");
+                        } else {
+                            setError(true)
                         }
                     } catch (e) {
                         console.error(e);
