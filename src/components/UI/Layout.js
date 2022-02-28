@@ -10,15 +10,16 @@ export default function Layout() {
   const location = useLocation();
 
   return (
-    <div className="min-h-[100vh] h-[100vh] flex flex-col">
-      
+    <div>
       <Header /> 
+      <div className="min-h-[calc(100vh-150px)] h-full grid">
         <TransitionGroup component={null} className={"h-full"}>
           <CSSTransition key={location.key} classNames="fade" timeout={300}>
             <Outlet />
           </CSSTransition>
         </TransitionGroup>
-      {location?.pathname?.indexOf("/backoffice")===-1 && <Footer />}
+        </div>
+      <Footer />
     </div>
   );
 }
