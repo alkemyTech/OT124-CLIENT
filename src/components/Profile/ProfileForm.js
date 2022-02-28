@@ -9,11 +9,6 @@ import * as Yup from "yup";
 import ErrorAlert from "../Shared/Alerts/ErrorAlert";
 import SuccessAlert from "../Shared/Alerts/SuccessAlert";
 
-const ProfileSchema = Yup.object().shape({
-    firstname: Yup.string().required("Obligatorio*"),
-    lastname: Yup.string().required("Obligatorio*"),
-    email: Yup.string().required("Obligatorio*").email("Datos ingresados no son validos*").max(255),
-});
 const styles = {
     field:
       " shadow shadow-slate-300 hover:shadow-none bg-gray-100 border transition hover:border-sky-500 ease-linear duration-300 my-2 p-4 outline-none transform md:hover:-translate-x-2",
@@ -64,8 +59,6 @@ export default function ProfileForm(params) {
                         const response = await profileUpdate(id, values);
                         if (response.status === 201 || response.status === 200) {
                             setSuccessMsg("El usuario ha sido modificado exitosamente.");
-                            dispatch(setUserData(""));
-                            navigate("/");
                         }
                     } catch (e) {
                         console.error(e);

@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Navigate, useNavigate } from "react-router";
+import { deleteUserData, setUserData } from "../../features/authSlice";
 import {profileGetMine, profileDelete, profileUpdate} from "../../services/Profile"
 import DeleteAlert from "../Shared/Alerts/DeleteAlert";
 
@@ -10,6 +13,8 @@ export default function ProfileBody () {
     const [isLoad, setIsLoad] = useState(false)
     const [editing, setEditing] = useState(false)
     const [isLoading, setIsLoading] = useState(true);
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const amount = 10
 
@@ -18,9 +23,10 @@ export default function ProfileBody () {
            try {
                const response = await profileGetMine();
                if (response?.data === undefined) {
-                   setProfile(undefined)
+                   dispatch(deleteUserData())
+                   navigate('/')
                } else {
-                   setProfile(response?.data)
+                   setProfile(response?.data?.user)
                }
            } catch (e) {
                console.error(e);
@@ -28,7 +34,7 @@ export default function ProfileBody () {
            }
        };
        fetchData();
-   }, [isLoad]);
+   }, [isLoad, dispatch, navigate]);
 
     useEffect(() => {
         setTimeout(() => setIsLoading(false), 2000);
@@ -70,105 +76,3 @@ export default function ProfileBody () {
         </>  
     )
 }
-
-/**
- * 
- * <Formik
-            initialValues={{ firstName: '', lastname: '', email: '' }}
-            validationSchema={ProfileSchema}
-            onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 400);
-            }}
-     >
-       {({
-         values,
-         errors,
-         touched,
-         handleChange,
-         handleBlur,
-         handleSubmit,
-         isSubmitting,
-        }) => (
-            <form onSubmit={handleSubmit}>
-              <input
-                className=" border-2"
-                type="email"
-                name="email"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-              />
-              {errors.email && touched.email && errors.email}
-              <input
-                className=" border-2"
-                type="password"
-                name="password"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
-              />
-              {errors.password && touched.password && errors.password}
-              <button type="submit" disabled={isSubmitting}>
-                Submit
-              </button>
-            </form>
-          )}
-   </Formik>
- * 
- * 
- * 
- * 
- * <Formik
-                initialValues={initialValues}
-                validationSchema={ProfileSchema}
-                onSubmit={handleSubmit}
-            >
-        {({ errors, touched }) => (
-            <Form className="flex flex-col p-5">
-                    <h3 className=" text-lg">Editar usuario</h3>
-                        <InputForm
-                            errors={errors.firstname}
-                            touched={touched.firstname}
-                            name={"firstName"}
-                            placeholder={profile.firstName}
-                            type={"text"}
-                            isLoading={isLoading}
-                        />
-                        <InputForm
-                            errors={errors.lastname}
-                            touched={touched.lastname}
-                            name={"lastName"}
-                            placeholder={profile.lastName}
-                            type={"text"}
-                            isLoading={isLoading}
-                        />
-                        <InputForm
-                            errors={errors.email}
-                            touched={touched.email}
-                            name={"email"}
-                            placeholder={profile.email}
-                            type={"text"}
-                            isLoading={isLoading}
-                        />
-                    <div className=" grid gap-4 grid-cols-2 col-start-1 col-end-3 p-2 justify-self-center">
-                        <button type="submit"  onClick={handleSubmit} className=" mt-4  max-w-fit md:max-w-fit h-12 p-2 justify-self-center  border rounded border-sky-500 font-semibold hover:text-white hover:bg-sky-500 text-sky-500">Confirmar</button>
-                        <button type="" onClick={() => setEditing(false)} className=" mt-4  max-w-fit md:max-w-fit h-12 p-2 justify-self-center  border rounded border-red-500 font-semibold hover:text-white hover:bg-red-500 text-red-500">Cancelar</button>
-                    </div>
-                    {error && (
-                     <ErrorAlert setError={setError} message={showErrorMessage} />
-                    )}
-                    {successMsg && (
-                        <SuccessAlert
-                            successMsg={successMsg}
-                            setSuccessMsg={setSuccessMsg}
-                    />
-          )}
-            </Form>
-        )}
-            </Formik>
- * 
- */
-
