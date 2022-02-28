@@ -32,7 +32,7 @@ export default function LastTestimonials() {
                 type="testimonios"
                 key={testimonial.id}
                 name={testimonial.name}
-                img={testimonial.lastimage?.key}
+                img={testimonial.image?.key}
               />
             );
           })

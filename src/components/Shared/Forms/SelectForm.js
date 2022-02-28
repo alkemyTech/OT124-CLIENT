@@ -22,17 +22,16 @@ const ErrorComponent = (props) => (
   <p className={styles.error + props.center}>{props.children}</p>
 );
 
-function InputForm(props) {
+function SelectForm(props) {
   const {
     errors,
     touched,
     name,
-    placeholder,
-    type,
     isDisabled,
     as,
     isLoading,
-    options
+    options,
+    optLabel
   } = props;
 
   return (
@@ -45,12 +44,10 @@ function InputForm(props) {
               errors && touched ? styles.errorsField : styles.field
             } ${as === "select" ? "h-12 align-top resize-none" : "h-12"}`}
             name={name}
-            placeholder={placeholder}
-            type={type}
             disabled={isDisabled}
           >
             <>
-              <option value="" label="Selecionar categoria"></option>
+              <option selected disabled>{optLabel}</option>
               {(options === undefined || options.length === 0) ? null : 
                 options.map((opt) => (
                   <option value={opt.id} label={opt.name}>{opt.name}</option>
@@ -68,4 +65,4 @@ function InputForm(props) {
   );
 }
 
-export default InputForm;
+export default SelectForm;

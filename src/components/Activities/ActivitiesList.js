@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { deleteCategory, getAllCategories } from "../../services/categories";
+import { deleteActivities, getAllActivities } from "../../services/activities";
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import BodyTable from "../Shared/Table/BodyTable";
 import TableLayout from "../Shared/Table/TableLayout";
@@ -10,9 +10,9 @@ import useQueries from "../../hooks/useQueries";
 import SearchBar from "../Shared/Others/SearchBar";
 import Spinner from "../Shared/Loaders/Spinner";
 
-function CategoriesList(props) {
+function ActivitiesList(props) {
   const [isLoad, setIsLoad] = useState(false);
-  const [categories, setCategories] = useState([]);
+  const [activities, setActivities] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const queries = useQueries();
@@ -20,9 +20,9 @@ function CategoriesList(props) {
 
   useEffect(() => {
     setIsLoading(true);
-    getAllCategories(queries)
+    getAllActivities(queries)
       .then((res) => {
-        setCategories(res?.data?.categories);
+        setActivities(res?.data?.activities);
         setCantItems(res?.data?.count);
         setTimeout(() => setIsLoading(false), 500);
       })
@@ -38,21 +38,23 @@ function CategoriesList(props) {
         <Spinner />
       ) : (
         <>
-          {categories?.length ? (
+          {activities?.length ? (
             <TableLayout>
-              <HeaderTable columnsName={["Nombre", "Descripción", "Fecha"]} />
+              <HeaderTable
+                columnsName={["Nombre", "Imagen", "Descripción", "Fecha"]}
+              />
               <BodyTable
                 isLoad={isLoad}
                 setIsLoad={setIsLoad}
-                service={deleteCategory}
-                list={categories}
-                bodyName={"categoria"}
-                message={"¿Desea eliminar esta categoria?"}
-                afterMessage={"Categoria eliminada con éxito"}
+                service={deleteActivities}
+                list={activities}
+                bodyName={"actividad"}
+                message={"¿Desea eliminar esta actividad?"}
+                afterMessage={"Actividad eliminada con éxito"}
               />
             </TableLayout>
           ) : (
-            <NotFoundComponent title={"No se encontraron categorias"} />
+            <NotFoundComponent title={"No se encontraron actividades"} />
           )}
           <Pagination cantItems={cantItems} />
         </>
@@ -61,4 +63,4 @@ function CategoriesList(props) {
   );
 }
 
-export default CategoriesList;
+export default ActivitiesList;

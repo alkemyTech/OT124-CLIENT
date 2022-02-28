@@ -1,9 +1,9 @@
 import axios from "axios";
 import { API_BASE_URL, createMultiForm } from "./index";
 
-export async function getAllNews() {
+export async function getAllNews(queries='') {
   return await axios
-    .get(`${API_BASE_URL}/api/v1/news`)
+    .get(`${API_BASE_URL}/api/v1/news${queries}`)
     .catch((error) => error);
 }
 

@@ -13,6 +13,7 @@ import AddButton from "../Shared/Buttons/Addbutton";
 import TwoColsForm from "../Shared/Containers/TwoColsForm";
 import SelectForm from "../Shared/Forms/SelectForm"
 import {getAllCategories} from "../../services/categories";
+import Spinner from "../Shared/Loaders/Spinner";
 
 function CUNewsForm(props) {
   const { isEdit } = props;
@@ -22,6 +23,7 @@ function CUNewsForm(props) {
   const [successMsg, setSuccessMsg] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
   const [options, setOptions] = useState([])
+  const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         async function fetchData() {
@@ -52,7 +54,10 @@ function CUNewsForm(props) {
           setNotFound(true);
         }
       })
-      .finally(setIsDisabled(false));
+      .finally(()=>{
+        setIsDisabled(false)
+        setTimeout(() => setIsLoading(false), 500);
+      });
   }, [id]);
 
   const onSubmit = (values, { resetForm, setSubmitting }) => {
@@ -95,6 +100,10 @@ function CUNewsForm(props) {
     image: yup.mixed().required("El archivo es requerido"),
   });
 
+  if (isLoading){
+    return <Spinner />
+  }
+
   return (
     <div className="">
       {!notFound || !isEdit ? (
@@ -136,9 +145,8 @@ function CUNewsForm(props) {
                       errors={errors.categoryId}
                       touched={touched.categoryId}
                       name="categoryId"
-                      placeholder="Categoria"
-                      type="number"
-                      as="select"
+                      optLabel="Seleccionar Categoria"
+                      as={"select"}
                       disabled={isDisabled}
                       options={options}
                     />

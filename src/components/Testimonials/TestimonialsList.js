@@ -1,6 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { deleteCategory, getAllCategories } from "../../services/categories";
+import {
+  deleteTestimonial,
+  getAllTestimonials,
+} from "../../services/testimonials";
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import BodyTable from "../Shared/Table/BodyTable";
 import TableLayout from "../Shared/Table/TableLayout";
@@ -10,9 +13,9 @@ import useQueries from "../../hooks/useQueries";
 import SearchBar from "../Shared/Others/SearchBar";
 import Spinner from "../Shared/Loaders/Spinner";
 
-function CategoriesList(props) {
+function TestimonialsList() {
   const [isLoad, setIsLoad] = useState(false);
-  const [categories, setCategories] = useState([]);
+  const [testimonials, setTestimonials] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const queries = useQueries();
@@ -20,9 +23,9 @@ function CategoriesList(props) {
 
   useEffect(() => {
     setIsLoading(true);
-    getAllCategories(queries)
+    getAllTestimonials(queries)
       .then((res) => {
-        setCategories(res?.data?.categories);
+        setTestimonials(res?.data?.testimonials);
         setCantItems(res?.data?.count);
         setTimeout(() => setIsLoading(false), 500);
       })
@@ -38,21 +41,23 @@ function CategoriesList(props) {
         <Spinner />
       ) : (
         <>
-          {categories?.length ? (
+          {testimonials?.length ? (
             <TableLayout>
-              <HeaderTable columnsName={["Nombre", "Descripción", "Fecha"]} />
+              <HeaderTable
+                columnsName={["Nombre", "Imagen", "Contenido", "Fecha"]}
+              />
               <BodyTable
                 isLoad={isLoad}
                 setIsLoad={setIsLoad}
-                service={deleteCategory}
-                list={categories}
-                bodyName={"categoria"}
-                message={"¿Desea eliminar esta categoria?"}
-                afterMessage={"Categoria eliminada con éxito"}
+                service={deleteTestimonial}
+                list={testimonials}
+                bodyName={"testimonio"}
+                message={"¿Desea eliminar este testimonio?"}
+                afterMessage={"Testimonio eliminado con éxito"}
               />
             </TableLayout>
           ) : (
-            <NotFoundComponent title={"No se encontraron categorias"} />
+            <NotFoundComponent title={"No se encontraron testimonios"} />
           )}
           <Pagination cantItems={cantItems} />
         </>
@@ -61,4 +66,4 @@ function CategoriesList(props) {
   );
 }
 
-export default CategoriesList;
+export default TestimonialsList;

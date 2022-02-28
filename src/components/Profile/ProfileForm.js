@@ -60,7 +60,7 @@ export default function ProfileForm({popUp, setPopUp, profile}) {
                         id="firstname"
                         name="firstname"
                         type="firstname"
-                        values={profile === undefined ? null : profile.firstname}
+                        values={profile === undefined ? null : profile.firstName}
                     />
                     {errors.name && touched.name ? (
                         <ErrorMessage
@@ -78,7 +78,7 @@ export default function ProfileForm({popUp, setPopUp, profile}) {
                         id="lastname"
                         name="lastname"
                         type="lastname"
-                        values={profile === undefined ? null : profile.lastname}
+                        values={profile === undefined ? null : profile.lastName}
                     />
                     {errors.name && touched.name ? (
                         <ErrorMessage
