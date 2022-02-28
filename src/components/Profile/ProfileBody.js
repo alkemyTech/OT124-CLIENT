@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Navigate, useNavigate } from "react-router";
+import { deleteUserData, setUserData } from "../../features/authSlice";
 import {profileGetMine, profileDelete, profileUpdate} from "../../services/Profile"
 import DeleteAlert from "../Shared/Alerts/DeleteAlert";
 
@@ -10,6 +13,8 @@ export default function ProfileBody () {
     const [isLoad, setIsLoad] = useState(false)
     const [isLoading, setIsLoading] = useState(true);
     const [editing, setEditing] = useState(false)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const amount = 10
 
@@ -18,9 +23,10 @@ export default function ProfileBody () {
            try {
                const response = await profileGetMine();
                if (response?.data === undefined) {
-                   setProfile(undefined)
+                   dispatch(deleteUserData())
+                   navigate('/')
                } else {
-                   setProfile(response?.data)
+                   setProfile(response?.data?.user)
                }
            } catch (e) {
                console.error(e);
@@ -28,7 +34,7 @@ export default function ProfileBody () {
            }
        };
        fetchData();
-   }, [isLoad]);
+   }, [isLoad, dispatch, navigate]);
 
     useEffect(() => {
         setTimeout(() => setIsLoading(false), 2000);
