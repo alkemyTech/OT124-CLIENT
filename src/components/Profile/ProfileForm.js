@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { profileUpdate} from "../../services/Profile"
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { setUserData } from "../../features/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
+
+import ErrorAlert from "../Shared/Alerts/ErrorAlert";
+import SuccessAlert from "../Shared/Alerts/SuccessAlert";
 
 const ProfileSchema = Yup.object().shape({
     firstname: Yup.string().required("Obligatorio*"),
@@ -29,6 +32,9 @@ export default function ProfileForm(params) {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [error, setError] = useState(false);
+    const [successMsg, setSuccessMsg] = useState("");
+    
     const {
         firstName = firstName,
         lastName = lastName,
@@ -57,6 +63,7 @@ export default function ProfileForm(params) {
                     try {
                         const response = await profileUpdate(id, values);
                         if (response.status === 201 || response.status === 200) {
+                            setSuccessMsg("El usuario ha sido modificado exitosamente.");
                             dispatch(setUserData(""));
                             navigate("/");
                         }
@@ -119,6 +126,10 @@ export default function ProfileForm(params) {
                     </button>
 
                 </div>
+                {error && <ErrorAlert setError={setError} />}
+                {successMsg && (
+                    <SuccessAlert successMsg={successMsg} setSuccessMsg={setSuccessMsg} />
+                )}
                 </form>
             
             </>

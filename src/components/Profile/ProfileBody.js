@@ -8,8 +8,8 @@ import ProfileForm from "./ProfileForm";
 export default function ProfileBody () {
     const [profile, setProfile] = useState(undefined)
     const [isLoad, setIsLoad] = useState(false)
-    const [isLoading, setIsLoading] = useState(true);
     const [editing, setEditing] = useState(false)
+    const [isLoading, setIsLoading] = useState(true);
 
     const amount = 10
 
@@ -36,19 +36,16 @@ export default function ProfileBody () {
 
     return (
         <>
-        {(profile === undefined | profile === "error") ? <p>No data</p>  : 
+        {(profile === undefined | profile === "error") ? <p>No se encuntra la informacion del usuario</p>  : 
             editing ?  
                 <ProfileForm id = {profile.id} firstName= {profile.firstName} lastName= {profile.lastName} email={profile.email} editing = {editing} setEditing = {setEditing}/>
             :
                 <div className=" h-48 grid grid-cols-2 md:m-0 mx-4">
                     <div className="flex flex-row text-2xl col-start-1 col-end-2">
-                        <h3>{profile.firstName}</h3>
-                        <h3>{profile.lastName}</h3>
+                        <h3>{profile.firstName} {profile.lastName}</h3>
                     </div>
                     <h4 className=" text-lg text-gray-400 col-start-1 col-end-2">{profile.email}</h4>
-                    <div className=" flex content-center border-2 h-3 rounded-md my-2 col-start-1 col-end-2">
-                        {amount === 0 ? <div className=" bg-sky-600 w-2 h-2 rounded-md" /> : <div className=" bg-sky-600 w-14 h-2 rounded-md" />}
-                    </div>
+                    
                     <div className=" grid col-start-2 col-end-3 row-start-1 row-end-4">
                         <div className=" self-center justify-self-center border-2 rounded-full w-16 h-16 md:w-20 md:h-20 bg-slate-500 "></div>
                     </div>
