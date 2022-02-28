@@ -15,7 +15,7 @@ export default function Footer() {
   }
 
   useEffect(() => {
-    fetchOrganizationSocials(1);
+   fetchOrganizationSocials(1);
   }, []);
 
   return (

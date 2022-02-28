@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import useScript from "./useScript";
-import { formConfig } from "../components/MercadoPago/formConfig.js";
+import { formConfig } from "../components/Contribuye/FormMePaConfig";
+import { API_BASE_URL } from "../services";
+import { postDonate } from "../services/contribuye";
 
 export default function useMercadoPago() {
     const [resultPayment, setResultPayment] = useState(undefined);
+     const [amount, setAmount] = useState(500);
+     const [resourcePercentage, setResource] = useState(0);
 
+     
     const { MercadoPago } = useScript(
         "https://sdk.mercadopago.com/js/v2",
         "MercadoPago"
@@ -12,10 +17,9 @@ export default function useMercadoPago() {
 
     useEffect(() => {
         if (MercadoPago) {
-            const mp = new MercadoPago(import.meta.env.VITE_PUBLIC_KEY_MP);
+            const mp = new MercadoPago("TEST-6680d852-fbe4-4bce-ac70-458531385f4d");
             const cardForm = mp.cardForm({
-                amount: "100.5",
-                autoMount: true,
+                amount: `${amount}`,
                 form: formConfig,
                 callbacks: {
                     onFormMounted: (error) => {
@@ -27,57 +31,24 @@ export default function useMercadoPago() {
                     },
 
                     onSubmit: (event) => {
+
                         event.preventDefault();
-
-                        const {
-                            paymentMethodId: payment_method_id,
-                            issuerId: issuer_id,
-                            cardholderEmail: email,
-                            amount,
-                            token,
-                            installments,
-                            identificationNumber,
-                            identificationType,
-                        } = cardForm.getCardFormData();
-
-                        fetch(
-                            `${
-                                import.meta.env.VITE_URL_PAYMENT_MP
-                            }/process-payment`,
-                            {
-                                // entry point backend
-                                method: "POST",
-                                headers: {
-                                    "Access-Control-Allow-Origin": "*",
-                                    "Access-Control-Request-Method":
-                                        "GET, POST, DELETE, PUT, OPTIONS",
-                                    "Content-Type": "application/json",
-                                },
-                                body: JSON.stringify({
-                                    token,
-                                    issuer_id,
-                                    payment_method_id,
-                                    transaction_amount: 1000,
-                                    installments: Number(installments),
-                                    description: "Descripción del producto",
-                                    payer: {
-                                        email,
-                                        identification: {
-                                            type: identificationType,
-                                            number: identificationNumber,
-                                        },
-                                    },
-                                }),
-                            }
-                        )
-                            .then((res) => res.json())
-                            .then((data) => setResultPayment(data))
+                            console.log( cardForm.getCardFormData())
+                     postDonate( cardForm.getCardFormData())
+                        
+                            .then((data) =>{
+                                console.log(data,"data res")
+                                setResultPayment(data.data)
+                                //window.location.reload();
+                                })
                             .catch((err) => {
                                 setResultPayment(err);
                             });
                     },
                     onFetching: (resource) => {
                         // Animate progress bar
+                     
+                       setResource(resource)
                         const progressBar =
                             document.querySelector(".progress-bar");
                         progressBar.removeAttribute("value");
@@ -89,7 +60,7 @@ export default function useMercadoPago() {
                 },
             });
         }
-    }, [MercadoPago]);
+    }, [ MercadoPago]);
 
-    return resultPayment;
+    return { resultPayment,resourcePercentage};
 }

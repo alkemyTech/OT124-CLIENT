@@ -7710,6 +7710,13 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
   "version" "17.0.2"
 
+"react-js-progressbar@^1.1.1":
+  "integrity" "sha512-eNLZa2xhR+MHSnSHyNZCZuf++pjoGgc371ikie+vSS7WfAuKPhakxO3fqMwT2+cSdgcyDOHqRb72HgfUfvuW+Q=="
+  "resolved" "https://registry.npmjs.org/react-js-progressbar/-/react-js-progressbar-1.1.1.tgz"
+  "version" "1.1.1"
+  dependencies:
+    "request-animation-number" "^1.0.6"
+
 "react-jwt@^1.1.4":
   "integrity" "sha512-k9S7d/wosvT5/lHLfF3QS3YloCRNUuNDGSTRG5RsJmFAfWQtV/det/euDhZgSZ3BAzPYxImQl98AssYc2rkenw=="
   "resolved" "https://registry.npmjs.org/react-jwt/-/react-jwt-1.1.4.tgz"
@@ -7814,6 +7821,11 @@
     "workbox-webpack-plugin" "^6.4.1"
   optionalDependencies:
     "fsevents" "^2.3.2"
+
+"react-sdk-mercadopago@^1.1.1":
+  "integrity" "sha512-HG3WwC1YztevWe5MrcaY1/MzjTtohihstBMI5QXFWB6zQDxcL4PZT39q6SYQ2ZvNZMYCXxSFcGf6FheELthIXQ=="
+  "resolved" "https://registry.npmjs.org/react-sdk-mercadopago/-/react-sdk-mercadopago-1.1.1.tgz"
+  "version" "1.1.1"
 
 "react-transition-group@^4.4.2":
   "integrity" "sha512-/RNYfRAMlZwDSr6z4zNKV6xu53/e2BuaBbGhbyYIXTrmgu/bGHzmqOs7mJSJBHy9Ud+ApHx3QjrkKSp1pxvlFg=="
@@ -7971,6 +7983,11 @@
     "htmlparser2" "^6.1.0"
     "lodash" "^4.17.21"
     "strip-ansi" "^6.0.1"
+
+"request-animation-number@^1.0.6":
+  "integrity" "sha512-t/9G8TrTzE5GBWXiQuOTeNEkiGqfv0JRac/6KMzNlTy0i01IgQxJ6G78b4cI+nHg38ZAeUScUT/gY6p6ww/SOw=="
+  "resolved" "https://registry.npmjs.org/request-animation-number/-/request-animation-number-1.0.8.tgz"
+  "version" "1.0.8"
 
 "require-directory@^2.1.1":
   "integrity" "sha1-jGStX9MNqxyXbiNE/+f3kqam30I="

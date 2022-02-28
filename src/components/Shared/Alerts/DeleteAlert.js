@@ -17,7 +17,8 @@ function DeleteAlert(props) {
     });
     if (isConfirmed) {
       const response = await service(id);
-      if (response.status === 200) {
+      console.log(response.status,"res delete alert")
+      if (response?.status === 200) {
         setIsLoad(!isLoad)
         await Swal.fire({
           text: afterMessage,

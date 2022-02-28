@@ -8,7 +8,6 @@ import BackOfficeUserLayout from "./components/Backoffice/BackOfficeUserLayout";
 import Layout from "./components/UI/Layout";
 import NewDetails from "./components/NewDatails";
 import Organization from "./pages/backoffice/organization/Organization";
-import EditOrganization from "./pages/backoffice/organization/EditOrganization";
 import NewsIndex from "./components/News/NewsIndex";
 import BackOfficeActivities from "./pages/backoffice/actividades/BackofficeActivities";
 import BackofficeCategories from "./pages/backoffice/categories/BackofficeCategories";
@@ -31,6 +30,10 @@ import SignUp from "./pages/SignUp";
 import { AdminRoute, PrivateRoute } from "./routes";
 import Activities from "./pages/Activities";
 import Contribuye from "./pages/Contribuye";
+import CUOrganizationForm from "./components/Organizations/CUOrganizationForm";
+import BackofficeListUsers from './pages/backoffice/users/BackofficeListUsers';
+import BackofficeEditUsers from './pages/backoffice/users/BackofficeEditUsers';
+
 
 function App() {
   return (
@@ -47,11 +50,18 @@ function App() {
         <Route path="backoffice" element={<AdminRoute />}>
           
           <Route index element={<BackOfficeAdminLayout />} />
-          <Route path="organizacion" element={<Organization />}></Route>
-          <Route
-            path="editar-organizacion"
-            element={<EditOrganization />}
-          ></Route>
+          <Route path="organizacion">
+            <Route index element={<Organization />} />
+            <Route
+              path="editar-organizacion/:id"
+              element={<CUOrganizationForm isEdit={true}/>}
+            />
+            <Route
+              path="crear-organizacion"
+              element={<CUOrganizationForm />}
+            />
+          </Route>
+
 
           <Route path="categorias">
             <Route index element={<BackofficeCategories />} />
@@ -92,6 +102,10 @@ function App() {
           <Route path="novedades" element={<NewsIndex />}>
             <Route index element={<News />} />
             <Route path=":id" element={<NewDetails />} />
+          </Route>
+          <Route path="usuarios">
+            <Route index element={<BackofficeListUsers />} />
+            <Route path='editar-usuario/:id' element={<BackofficeEditUsers />} />
           </Route>
         </Route>
         <Route path="me" element={<PrivateRoute />}>

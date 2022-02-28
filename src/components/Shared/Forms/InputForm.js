@@ -32,6 +32,7 @@ function InputForm(props) {
     isDisabled,
     as,
     isLoading,
+    id,
   } = props;
   return (
     <>
@@ -39,13 +40,14 @@ function InputForm(props) {
         <div className=" w-full">
           <Field
             as={as}
-            className={`${
-              errors && touched ? styles.errorsField : styles.field
-            } ${as ? "h-32 align-top resize-none" : "h-16"}`}
+            className={`${errors && touched ? styles.errorsField : styles.field
+              } ${as ? "h-32 align-top resize-none" : "h-16"}`}
             name={name}
             placeholder={placeholder}
             type={type}
             disabled={isDisabled}
+            id={id}
+          
           />
           <ErrorMessage component={ErrorComponent} name={name} />
         </div>
