@@ -9,7 +9,11 @@ import SuccessAlert from "../Shared/Alerts/SuccessAlert";
 import UploadImageComponent from "../Shared/Others/UploadImageComponent";
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import InputForm from "../Shared/Forms/InputForm";
-import SendButton from "../Shared/Buttons/SendButton";
+import AddButton from "../Shared/Buttons/Addbutton";
+import TwoColsForm from "../Shared/Containers/TwoColsForm";
+import SelectForm from "../Shared/Forms/SelectForm"
+import {getAllCategories} from "../../services/categories";
+import Spinner from "../Shared/Loaders/Spinner";
 
 function CUNewsForm(props) {
   const { isEdit } = props;
@@ -18,12 +22,27 @@ function CUNewsForm(props) {
   const [error, setError] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
+  const [options, setOptions] = useState([])
+  const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await getAllCategories();
+                setOptions(response?.data?.categories)
+            } catch (e) {
+                console.error(e);
+            }
+        };
+        fetchData();
+    }, []);
+
   const initialValues = {
     name: "",
     content: "",
     categoryId: "",
-    type: "",
-    image: ""
+    type: "news",
+    image: "",
   };
   const [aNew, setANew] = useState(initialValues);
   useEffect(() => {
@@ -35,7 +54,10 @@ function CUNewsForm(props) {
           setNotFound(true);
         }
       })
-      .finally(setIsDisabled(false));
+      .finally(()=>{
+        setIsDisabled(false)
+        setTimeout(() => setIsLoading(false), 500);
+      });
   }, [id]);
 
   const onSubmit = (values, { resetForm, setSubmitting }) => {
@@ -70,9 +92,6 @@ function CUNewsForm(props) {
     content: yup
       .string("El contenido debe ser un string")
       .required("El contenido de la novedad es requerido"),
-    type: yup
-      .string("El tipo debe ser un string")
-      .required("El tipo de la novedad es requerido"),
     categoryId: yup
       .number("La categoria debe ser un numero")
       .required("La categoria de la novedad es requerida")
@@ -80,7 +99,11 @@ function CUNewsForm(props) {
       .integer("La categoria debe ser un numero entero"),
     image: yup.mixed().required("El archivo es requerido"),
   });
-  console.log(aNew)
+
+  if (isLoading){
+    return <Spinner />
+  }
+
   return (
     <div className="">
       {!notFound || !isEdit ? (
@@ -98,55 +121,48 @@ function CUNewsForm(props) {
             touched,
             setFieldError,
           }) => (
-            <Form className=" container mx-auto shadow-xl py-3">
-              <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-8 sm:px-24">
-                <div>
-                  <InputForm
-                    errors={errors.name}
-                    touched={touched.name}
-                    name="name"
-                    placeholder="Titulo"
-                    type="text"
-                    disabled={isDisabled}
-                  />
-                  <InputForm
-                    errors={errors.content}
-                    touched={touched.content}
-                    name="content"
-                    placeholder="Contenido"
-                    type="text"
-                    as="textarea"
-                    disabled={isDisabled}
-                  />
-                  <InputForm
-                    errors={errors.categoryId}
-                    touched={touched.categoryId}
-                    name="categoryId"
-                    placeholder="Categoria"
-                    type="number"
-                    disabled={isDisabled}
-                  />
-                  <InputForm
-                    errors={errors.type}
-                    touched={touched.type}
-                    name="type"
-                    placeholder="Tipo"
-                    type="text"
-                    disabled={isDisabled}
-                  />
-                </div>
-                <div className="w-full my-auto">
-                  <UploadImageComponent
-                    setFieldValue={setFieldValue}
-                    setFieldError={setFieldError}
-                    file={values?.image}
-                    disabled={isDisabled}
-                    error={errors.image}
-                    touched={touched.image}
-                  />
-                </div>
-              </div>
-              <SendButton isSubmitting={isSubmitting} text={`${isEdit ? "Modificar": "Crear"}`} />
+            <Form>
+              <TwoColsForm >
+                  <div className="sm:w-[500px]">
+                    <InputForm
+                      errors={errors.name}
+                      touched={touched.name}
+                      name="name"
+                      placeholder="Titulo"
+                      type="text"
+                      disabled={isDisabled}
+                    />
+                    <InputForm
+                      errors={errors.content}
+                      touched={touched.content}
+                      name="content"
+                      placeholder="Contenido"
+                      type="text"
+                      as="textarea"
+                      disabled={isDisabled}
+                    />
+                    <SelectForm
+                      errors={errors.categoryId}
+                      touched={touched.categoryId}
+                      name="categoryId"
+                      optLabel="Seleccionar Categoria"
+                      as={"select"}
+                      disabled={isDisabled}
+                      options={options}
+                    />
+                  </div>
+                  <div className="my-auto">
+                    <UploadImageComponent
+                      setFieldValue={setFieldValue}
+                      setFieldError={setFieldError}
+                      file={values?.image}
+                      disabled={isDisabled}
+                      error={errors.image}
+                      touched={touched.image}
+                    />
+                  </div>
+                </TwoColsForm>
+                <AddButton isEdit={isEdit} isSubmitting={isSubmitting} />
             </Form>
           )}
         </Formik>

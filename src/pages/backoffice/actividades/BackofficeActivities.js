@@ -1,12 +1,17 @@
 import React from "react";
-import { Outlet } from "react-router";
+import ActivitiesList from "../../../components/Activities/ActivitiesList";
+import CenterResponsiveContainer from "../../../components/Shared/Containers/CenterResponsiveContainer";
+import HeaderList from "../../../components/Shared/Containers/HeaderList";
 
 export default function BackOfficeActivities() {
   return (
-    <>
-      <div className="flex flex-col justify-center">
-          <Outlet />
-      </div>
-    </>
+    <CenterResponsiveContainer>
+      <HeaderList
+        title={"Actividades"}
+        name={"actividad"}
+        addTitle={"Añadir una nueva actividad"}
+      />
+      <ActivitiesList />
+    </CenterResponsiveContainer>
   );
 }

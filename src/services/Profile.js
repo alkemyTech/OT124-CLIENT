@@ -3,7 +3,7 @@ import { API_BASE_URL } from "./index";
 
 export async function profileUpdate(firstname, lastname, email) {
   return await axios
-    .update(`${API_BASE_URL}/api/v1/users/updateUser`, { // `${API_BASE_URL}/api/v1/user|profile/`
+    .update(`${API_BASE_URL}/api/v1/users`, { // `${API_BASE_URL}/api/v1/user|profile/`
       firstname,
       lastname,
       email
@@ -11,15 +11,23 @@ export async function profileUpdate(firstname, lastname, email) {
     .catch((error) => error);
 }
 
-export async function profileDelete() {
+export async function profileDelete(email) {
     return await axios
-      .delete(`${API_BASE_URL}/api/v1/users/deleteUser`, { // `${API_BASE_URL}/api/v1/user|profile/`
-        // Pedir email del token
+      .delete(`${API_BASE_URL}/api/v1/users`, { // `${API_BASE_URL}/api/v1/user|profile/`
+        email
       })
       .catch((error) => error);
-  }
+}
+
+export async function profileGetMine() {
+  return await axios
+    .get(`${API_BASE_URL}/api/v1/auth/me`, { 
+    })
+    .catch((error) => error);
+}
 
   export default {
     profileUpdate,
-    profileDelete
+    profileDelete,
+    profileGetMine
   }

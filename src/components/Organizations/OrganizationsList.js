@@ -1,79 +1,79 @@
-
 import React from "react";
-import CenterResponsiveContainer from "../Shared/Containers/CenterResponsiveContainer";
 import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import BodyTable from "../Shared/Table/BodyTable";
 import HeaderTable from "../Shared/Table/HeaderTable";
 import TableLayout from "../Shared/Table/TableLayout";
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteOrg, getAllOrgs } from '../../features/orgSlice';
-import { API_BASE_URL } from '../../services';
-import { deleteOrganization } from '../../services/organization';
-import { getAllOrganizations } from '../../services/organization';
-function OrganizationsList({ organizations }) {
-    let dispatch = useDispatch()
+import { deleteOrganization } from "../../services/organization";
+import { getAllOrganizations } from "../../services/organization";
+import { useEffect } from "react";
+import { useState } from "react";
+import Pagination from "../Shared/Table/Pagination";
+import useQueries from "../../hooks/useQueries";
+import SearchBar from "../Shared/Others/SearchBar";
+import Spinner from "../Shared/Loaders/Spinner";
 
-    async function HandlerDelete(id) {
-        let ret = {}
-        deleteOrganization(id)
-            .then((resdel) => {
-                if (resdel) {
-                    dispatch(deleteOrg(resdel))
-                    console.log(resdel)
-                    console.log(resdel?.status)
-                    ret.status = resdel?.status
+function OrganizationsList() {
+  const [organizations, setOrganizations] = useState([]);
+  const [isLoad, setIsLoad] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-                    getAllOrganizations()
-                        .then((resget) => {
-                            if (resget?.status === 200 || resget?.status === 201 || resget?.status === 304) {
-                                dispatch(getAllOrgs(resget?.data));
-                               
-                            } else {
-                                console.error("error status")
-                            }
-                        }).catch(e => e)
-                }
-                console.log(resdel.status)
-                return resdel.status
-            })
-            .catch(e => e)
-           
-    }
+  const queries = useQueries();
+  const [cantItems, setCantItems] = useState(0);
 
+  useEffect(() => {
+    setIsLoading(true);
+    getAllOrganizations(queries)
+      .then((res) => {
+        setOrganizations(res?.data?.organizations);
+        setCantItems(res?.data?.count);
+        setTimeout(() => setIsLoading(false), 500);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [isLoad, queries]);
 
-
-    return (
-        <CenterResponsiveContainer>
-            {organizations?.length ? (
-                <TableLayout>
-                    <HeaderTable
-                        columnsName={[
-                            "ID",
-                            "Nombre",
-                            "Imagen",
-                            "Direccion",
-                            "Teléfono",
-                            "Email",
-                            "WelcomeText",
-                        ]}
-                    />
-                    <BodyTable
-                        list={organizations}
-                        bodyName={"organizacion"}
-                        message={"¿Desea eliminar esta organización?"}
-                        afterMessage={"organización eliminada con éxito"}
-                        service={(id) => HandlerDelete(id)}
-                    />
-                </TableLayout>
-            ) : (
-                <NotFoundComponent title={"No se encontraron organizaciones"} />
-            )}
-        </CenterResponsiveContainer>
-    );
+  return (
+    <>
+      <SearchBar />
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          {organizations?.length ? (
+            <TableLayout>
+              <HeaderTable
+                columnsName={[
+                  "Nombre",
+                  "Imagen",
+                  "Direccion",
+                  "Teléfono",
+                  "Email",
+                  "WelcomeText",
+                  "Fecha",
+                ]}
+              />
+              <BodyTable
+                list={organizations}
+                bodyName={"organizacion"}
+                message={"¿Desea eliminar esta organización?"}
+                afterMessage={"organización eliminada con éxito"}
+                isLoad={isLoad}
+                setIsLoad={setIsLoad}
+                service={deleteOrganization}
+              />
+            </TableLayout>
+          ) : (
+            <NotFoundComponent title={"No se encontraron organizaciones"} />
+          )}
+          <Pagination cantItems={cantItems} />
+        </>
+      )}
+    </>
+  );
 }
 
 export default OrganizationsList;
-
 
 // import React from 'react';
 // import { useDispatch, useSelector } from 'react-redux';

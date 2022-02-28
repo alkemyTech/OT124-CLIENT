@@ -24,7 +24,7 @@ export default function LastTestimonials() {
     <section className="mt-16">
       <h2 className="pb-10 text-xl">Testimonios</h2>
       <div className="flex gap-9 flex-wrap justify-center">
-        {testimonials.lenght ? (
+        {testimonials.length ? (
           testimonials.map((testimonial) => {
             return (
               <HomeCard
@@ -32,7 +32,7 @@ export default function LastTestimonials() {
                 type="testimonios"
                 key={testimonial.id}
                 name={testimonial.name}
-                img={testimonial.lastimage?.key}
+                img={testimonial.image?.key}
               />
             );
           })

@@ -7,14 +7,13 @@ const Activities = () => {
 
   useEffect(() => {
     getAllActivities().then((res) => {
-      console.log(res);
-      setActividades(res.data.listActivity);
+      setActividades(res?.data?.activities);
     });
   }, []);
 
   return (
-    <>
-      {actividades.length > 0 ? (
+    <div>
+      {actividades?.length ? (
         <div className="flex flex-wrap justify-center">
           {actividades.map((activity) => (
             <Card key={activity.id} activity={activity} />
@@ -23,7 +22,7 @@ const Activities = () => {
       ) : (
         <h1 className="text-center">No hay actividades</h1>
       )}
-    </>
+    </div>
   );
 };
 

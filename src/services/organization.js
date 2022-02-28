@@ -13,11 +13,11 @@ export async function getOrganizationData(organizationId) {
     }
     
 }
-export async function getAllOrganizations() {
+export async function getAllOrganizations(queries='') {
 try{
 
     return await axios
-        .get(`${API_BASE_URL}/api/v1/organizations`)
+        .get(`${API_BASE_URL}/api/v1/organizations${queries}`)
 }catch(err){
     console.error(err)
 }
@@ -60,6 +60,7 @@ export async function editOrganization(uptOrg,id) {
 }
 const organizationService = {
     getOrganizationData,
+    deleteOrganization
 }
 
 export default organizationService;

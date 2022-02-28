@@ -1,9 +1,9 @@
 import { API_BASE_URL, createMultiForm } from "./index";
 import axios from "axios";
 
-export async function getAllTestimonials() {
+export async function getAllTestimonials(queries = "") {
   return await axios
-    .get(`${API_BASE_URL}/api/v1/testimonials`)
+    .get(`${API_BASE_URL}/api/v1/testimonials${queries}`)
     .catch((error) => error);
 }
 
@@ -34,5 +34,11 @@ export async function updateTestimonial(testimonial, id) {
 export async function getTestimonials() {
   return await axios
     .get(`${API_BASE_URL}/api/v1/testimonials/`)
+    .catch((error) => console.log(error));
+}
+
+export async function deleteTestimonial(id) {
+  return await axios
+    .delete(`${API_BASE_URL}/api/v1/testimonials/${id}`)
     .catch((error) => console.log(error));
 }
