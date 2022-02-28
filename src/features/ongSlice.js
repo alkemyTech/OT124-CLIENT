@@ -35,9 +35,6 @@ export const ongSlice = createSlice({
   },
   extraReducers: {
     [fetchOngData.fulfilled]: (state, action) => {
-      state.fetchError = false;
-      state.isLoading = false;
-
       state.ongData = action.payload;
     }
   }

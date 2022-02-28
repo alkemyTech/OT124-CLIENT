@@ -36,11 +36,10 @@ import BackofficeEditUsers from "./pages/backoffice/users/BackofficeEditUsers";
 import BackofficeCreateActivity from "./pages/backoffice/actividades/BackofficeCreateActivity";
 import BackofficeEditActivities from "./pages/backoffice/actividades/BackofficeEditActivities";
 import ActivitiesDetails from "./components/Activities/ActivitiesDetails";
-import BackofficeListUsers from './pages/backoffice/users/BackofficeListUsers';
-import BackofficeEditUsers from './pages/backoffice/users/BackofficeEditUsers';
 import BackofficeSlides from './pages/backoffice/slides/BackofficeSlides';
 import { fetchOngData } from './features/ongSlice';
 import { useDispatch } from 'react-redux';
+import Testimonials from './pages/Testimonials';
 
 function App() {
   const dispatch = useDispatch();
@@ -60,6 +59,7 @@ function App() {
         <Route path="mi-perfil" element={<Profile />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="actividades" element={<Activities />} />
+        <Route path="testimonios" element={<Testimonials />} />
         <Route path="backoffice" element={<AdminRoute />}>
           <Route index element={<BackOfficeAdminLayout />} />
           <Route path="organizacion">
