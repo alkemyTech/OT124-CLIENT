@@ -46,30 +46,30 @@ function App() {
   const isExpired = useSelector(selectIsExpired)
   const userData = useSelector(selectUserData)
   const [isActive, setIsActive] = useState(true);
-  const dispach = useDispatch()
+  const dispatch = useDispatch()
   
   useEffect(() => {
     if (!isExpired && userData){
       setInterval(() => {
-        dispach(getIsExpired())
+        dispatch(getIsExpired())
       }, 20000);
     } 
   }
-    , [dispach, isExpired, userData]);
+    , [dispatch, isExpired, userData]);
 
     useEffect(()=>{
       if (!isExpired && userData){
       let interval = null;
     if (isActive) {
       interval = setInterval(() => {
-        dispach(setIsExpired(true))
+        dispatch(setIsExpired(true))
       }, 8000000);
     } else{
       clearInterval(interval);
     }
     return () => clearInterval(interval);
   }
-    },[isActive, isExpired, userData, dispach])
+    },[isActive, isExpired, userData, dispatch])
     
     document.body.addEventListener('click', ()=>setIsActive(false))
 
