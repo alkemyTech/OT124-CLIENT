@@ -1,115 +1,135 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { profileUpdate} from "../../services/Profile"
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { setUserData } from "../../features/authSlice";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom"
-import { profileUpdate } from "../../services/Profile";
 
-const ProfileSchema = Yup.object().shape({
-    firstname: Yup.string().required("Obligatorio*"),
-    lastname: Yup.string().required("Obligatorio*"),
-    email: Yup.string().required("Obligatorio*").email("Datos ingresados no son validos*").max(255),
-  });
+import ErrorAlert from "../Shared/Alerts/ErrorAlert";
+import SuccessAlert from "../Shared/Alerts/SuccessAlert";
 
-export default function ProfileForm({popUp, setPopUp, profile}) {
+const styles = {
+    field:
+      " shadow shadow-slate-300 hover:shadow-none bg-gray-100 border transition hover:border-sky-500 ease-linear duration-300 my-2 p-4 outline-none transform md:hover:-translate-x-2",
+    errorsField:
+      "w-full shadow-md bg-gray-100 border border-red-500 my-2 p-4 outline-none",
+    button:
+      "bg-transparent font-semibold hover:text-white border hover:border-transparent rounded py-2 mt-2 w-80 transform hover:scale-102 easy-in duration-300 mx-4",
+    error:
+      " text-red-500 text-sm bg-red-200 text-center border border-red-500 mt-2 rounded-sm p-2 shadow shadow-red-300",
+};
+const ErrorComponent = (props) => (
+    <p className={styles.error + props.center}>{props.children}</p>
+);
+
+export default function ProfileForm(params) {
 
     const navigate = useNavigate();
-    const [showErrMsg, setShowErrMsg] = useState();
+    const dispatch = useDispatch();
+    const [error, setError] = useState(false);
+    const [successMsg, setSuccessMsg] = useState("");
     
-    function getErrMsg(errMsg) {
-        let message;
-        switch (errMsg) {
-          case "Email already exist": {
-            message = "El email ingresado ya existe";
-            break;
-          }
-          default: {
-            message = "Algo salió mal, intentelo más tarde";
-          }
-        }
-        return message;
-      }
+    const {
+        firstName = firstName,
+        lastName = lastName,
+        email = email,
+        id = id,
+        editing = editing,
+        setEditing = setEditing
+    } = params
 
-      async function handleSubmit(values, { setSubmitting }) {
-        setShowErrMsg();
-        const { firstname, lastname, email } = values;
-        const res = await profileUpdate(firstname, lastname, email);
-    
-        if (res.status === 200) {
-          navigate("/mi-perfil");
-        } else {
-            setShowErrMsg(getErrMsg(res.response.data.errors));
-            setSubmitting(false);
-        }
-      }
+    return(
+        <Formik
+            initialValues={{ firstName: firstName, lastName: lastName, email: email }}
+            validate={values => {
+                const errors = {};
+                if (!values.email) {
+                  errors.email = 'Ingresar un email';
+                } else if (
+                  !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                ) {
+                  errors.email = 'El formato no es correcto';
+                }
+                return errors;
+              }}
+            onSubmit={(values, { setSubmitting }) => {
+                async function updatingValue(id, values  ) {
+                    try {
+                        const response = await profileUpdate(id, values);
+                        if (response.status === 201 || response.status === 200) {
+                            setSuccessMsg("El usuario ha sido modificado exitosamente.");
+                        } else {
+                            setError(true)
+                        }
+                    } catch (e) {
+                        console.error(e);
+                    }
+                    };
+                updatingValue(id, values)
+                setSubmitting(false);
+            }}
+     >
+       {({
+         values,
+         errors,
+         touched,
+         handleChange,
+         handleBlur,
+         handleSubmit,
+         isSubmitting,
+        }) => (
+            <>
+                <h3 className=" font-semibold text-xl mx-4">Editar Usuario</h3>
+                <form className="flex flex-col" onSubmit={handleSubmit}>
+                <input
+                    className={styles.field}
+                    type="text"
+                    name="firstName"
+                    placeholder={firstName}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.firstName}
+                />
+                {errors.firstName && touched.firstName && errors.firstName}
+                <input
+                    className={styles.field}
+                    type="text"
+                    name="lastName"
+                    placeholder={lastName}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.lastName}
+                />
+                {errors.lastName && touched.lastName && errors.lastName}
+                <input
+                    className={styles.field}
+                    type="email"
+                    name="email"
+                    placeholder={email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                />
+                <ErrorMessage component={ErrorComponent} name="email" />
+                <div className="flex flex-row">
+                    <button onClick={() => setEditing(false)} className=" bg-transparent font-semibold hover:text-white border hover:border-transparent rounded py-2 mt-2 w-80 transform hover:scale-102 easy-in duration-300 mx-4 hover:bg-red-500 text-red-500 border-red-500">
+                        Volver
+                    </button>
+                    <button className=" bg-transparent font-semibold hover:text-white border hover:border-transparent rounded py-2 mt-2 w-80 transform hover:scale-102 easy-in duration-300 mx-4 hover:bg-sky-500 text-sky-500 border-sky-500" type="submit" disabled={isSubmitting}>
+                        Confirmar
+                    </button>
 
+                </div>
+                {error && <ErrorAlert setError={setError} />}
+                {successMsg && (
+                    <SuccessAlert successMsg={successMsg} setSuccessMsg={setSuccessMsg} />
+                )}
+                </form>
+            
+            </>
+          )}
+   </Formik>
 
-    return (
-    <Formik
-        initialValues={{ firstname: "", lastname: "", email: "" }}
-        validationSchema={ProfileSchema}
-        onSubmit={handleSubmit}
-    >
-        {({ errors, touched }) => (
-            <Form className=" grid gap-4 p-1 flex-col row-start-2 row-end-4 grid-cols-2">
-                
-                    <label htmlFor="firstname" className=" md:w-1/2 md:justify-self-end justify-self-center" >Nombre</label>
-                    <Field
-                        className="text-black p-1 md:w-1/2 bg-slate-100"
-                        placeholder="Nombre"
-                        autocomplete="off"
-                        id="firstname"
-                        name="firstname"
-                        type="firstname"
-                        values={profile === undefined ? null : profile.firstName}
-                    />
-                    {errors.name && touched.name ? (
-                        <ErrorMessage
-                            className="text-red-500 text-sm absolute ml-24"
-                            component="a"
-                            name="firstname"
-                        />
-                    ) : null}
-                    
-                    <label htmlFor="lastname" className=" md:w-1/2 md:justify-self-end justify-self-center">Apellido</label>
-                    <Field
-                        className="text-black p-1 md:w-1/2 bg-slate-100"
-                        placeholder="Apellido"
-                        autocomplete="off"
-                        id="lastname"
-                        name="lastname"
-                        type="lastname"
-                        values={profile === undefined ? null : profile.lastName}
-                    />
-                    {errors.name && touched.name ? (
-                        <ErrorMessage
-                            className="text-red-500 text-sm absolute mt-12 ml-24"
-                            component="a"
-                            name="lastname"
-                        />
-                    ) : null}
-                    <label htmlFor="email" className=" md:w-1/2 md:justify-self-end justify-self-center">Email</label>
-                    <Field
-                        className="text-black p-1 md:w-1/2 bg-slate-100"
-                        placeholder="miemail@dominio.com"
-                        autocomplete="off"
-                        id="email"
-                        name="email"
-                        type="email"
-                        values={profile === undefined ? null : profile.email}
-                    />
-                    {errors.name && touched.name ? (
-                        <ErrorMessage
-                            className="text-red-500 text-sm absolute mt-24 ml-24"
-                            component="a"
-                            name="email"
-                        />
-                    ) : null}
-                    <button type="submit" onClick={() => handleSubmit()} className=" mt-4 col-start-1 col-end-3 max-w-fit md:max-w-fit h-12 p-2 justify-self-center  border rounded border-sky-500 font-semibold hover:text-white hover:bg-sky-500 text-sky-500">CONFIRMAR</button>
-                
-            </Form>
-        )}
-    </Formik>
-    )
+    )    
 }
-
-// <input placeholder="First name" className=" text-black p-1 md:w-1/2 bg-slate-100"></input>

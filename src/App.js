@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import AboutUs from "./pages/AboutUs";
 import BackOfficeAdminLayout from "./components/Backoffice/BackOfficeAdminLayout";
@@ -28,7 +28,7 @@ import Login from "./pages/Login";
 import News from "./pages/News";
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
-import { AdminRoute, PrivateRoute } from "./routes";
+import { AdminRoute, PrivateRoute, PublicRoute } from "./routes";
 import Activities from "./pages/Activities";
 import CUOrganizationForm from "./components/Organizations/CUOrganizationForm";
 import BackofficeListUsers from "./pages/backoffice/users/BackofficeListUsers";
@@ -36,13 +36,43 @@ import BackofficeEditUsers from "./pages/backoffice/users/BackofficeEditUsers";
 import BackofficeCreateActivity from "./pages/backoffice/actividades/BackofficeCreateActivity";
 import BackofficeEditActivities from "./pages/backoffice/actividades/BackofficeEditActivities";
 import ActivitiesDetails from "./components/Activities/ActivitiesDetails";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsExpired, setIsExpired, getIsExpired, selectUserData } from "./features/authSlice";
+import ExpiredSessionAlert from "./components/Shared/Alerts/ExpiredSessionAlert";
 import BackofficeSlides from './pages/backoffice/slides/BackofficeSlides';
 import { fetchOngData } from './features/ongSlice';
-import { useDispatch } from 'react-redux';
 import Testimonials from './pages/Testimonials';
 
 function App() {
-  const dispatch = useDispatch();
+  const isExpired = useSelector(selectIsExpired)
+  const userData = useSelector(selectUserData)
+  const [isActive, setIsActive] = useState(true);
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+    if (!isExpired && userData){
+      setInterval(() => {
+        dispatch(getIsExpired())
+      }, 20000);
+    } 
+  }
+    , [dispatch, isExpired, userData]);
+
+    useEffect(()=>{
+      if (!isExpired && userData){
+      let interval = null;
+    if (isActive) {
+      interval = setInterval(() => {
+        dispatch(setIsExpired(true))
+      }, 8000000);
+    } else{
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }
+    },[isActive, isExpired, userData, dispatch])
+    
+    document.body.addEventListener('click', ()=>setIsActive(false))
 
   useEffect(() => {
     // Fetch for initial values from redux
@@ -50,8 +80,10 @@ function App() {
   }, []);
 
   return (
+    <>
+    {(isExpired) && <ExpiredSessionAlert />}
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<PublicRoute />}>
         <Route index element={<Home />} />
         <Route path="nosotros" element={<AboutUs />} />
         <Route path="login" element={<Login />} />
@@ -149,6 +181,7 @@ function App() {
         <Route path="actividades/:id" element={<ActivitiesDetails />} />
       </Route>
     </Routes>
+    </>
   );
 }
 

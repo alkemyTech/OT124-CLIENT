@@ -24,9 +24,9 @@ function MembersList(props) {
       .then((res) => {
         setMember(
           res?.data?.members?.map((e) => {
-            const { id, name, image, createdAt } = e;
+            const { id, name, position, image, createdAt } = e;
             const date = new Date(createdAt).toLocaleDateString();
-            return { ...{ image, name, date, id } };
+            return { ...{ image, name, position, date, id } };
           })
         );
         setCantItems(res?.data?.count);
@@ -46,7 +46,9 @@ function MembersList(props) {
         <>
           {member?.length ? (
             <TableLayout>
-              <HeaderTable columnsName={["Imagen", "Nombre", "Fecha"]} />
+              <HeaderTable
+                columnsName={["Imagen", "Nombre", "Posición", "Fecha"]}
+              />
               <BodyTable
                 isLoad={isLoad}
                 setIsLoad={setIsLoad}
