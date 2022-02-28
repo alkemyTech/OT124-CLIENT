@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import AboutUs from "./pages/AboutUs";
 import ActivitiesForm from "./components/Activities/Form";
@@ -36,9 +36,18 @@ import CUOrganizationForm from "./components/Organizations/CUOrganizationForm";
 import BackofficeListUsers from './pages/backoffice/users/BackofficeListUsers';
 import BackofficeEditUsers from './pages/backoffice/users/BackofficeEditUsers';
 import BackofficeSlides from './pages/backoffice/slides/BackofficeSlides';
+import { fetchOngData } from './features/ongSlice';
+import { useDispatch } from 'react-redux';
 
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Fetch for initial values from redux
+    dispatch(fetchOngData());
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

@@ -1,26 +1,17 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 import Carrusel from "../components/UI/Carrusel.js";
 import LastNews from "../components/News/LastNews";
 import LastTestimonials from "../components/Testimonials/LastTestimonials";
-
-
-function Box() {
-  const styles = {
-    width: 200,
-    height: 150,
-    backgroundColor: "gray",
-  };
-
-  return <div style={styles}></div>;
-}
+import { selectWelcomeText } from '../features/ongSlice';
 
 function Home(props) {
-  const welcome = "Texto de bienvenida";
+  const welcomeText = useSelector(selectWelcomeText);
 
   return (
     <div className="Home flex flex-col justify-center items-center text-center">
       <Carrusel />
-      <h1 className="text-4xl">{welcome}</h1>
+      <h1 className="text-4xl">{welcomeText}</h1>
       <LastNews></LastNews>
       <LastTestimonials></LastTestimonials>
     </div>
