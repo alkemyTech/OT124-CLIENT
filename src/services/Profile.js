@@ -1,20 +1,20 @@
 import axios from "axios";
 import { API_BASE_URL } from "./index";
 
-export async function profileUpdate(firstname, lastname, email) {
+export async function profileUpdate(id, values) {
   return await axios
-    .update(`${API_BASE_URL}/api/v1/users`, { // `${API_BASE_URL}/api/v1/user|profile/`
-      firstname,
-      lastname,
-      email
+    .put(`${API_BASE_URL}/api/v1/users/self/${id}`, { 
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email
     })
     .catch((error) => error);
 }
 
-export async function profileDelete(email) {
+export async function profileDelete(id) {
     return await axios
-      .delete(`${API_BASE_URL}/api/v1/users`, { // `${API_BASE_URL}/api/v1/user|profile/`
-        email
+      .delete(`${API_BASE_URL}/api/v1/users/${id}`, { // `${API_BASE_URL}/api/v1/user|profile/`
+        id
       })
       .catch((error) => error);
 }
