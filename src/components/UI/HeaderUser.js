@@ -29,6 +29,7 @@ export default function HeaderUser() {
       className={({ isActive }) =>
         isActive ? activeClassName + a : desactiveClassName + a
       }
+      onClick={()=>setHamburguerOpened(false)}
       to="/backoffice/organizacion"
     >
       <img
@@ -42,6 +43,7 @@ export default function HeaderUser() {
       className={({ isActive }) =>
         isActive ? activeClassName + a : desactiveClassName + a
       }
+      onClick={()=>setHamburguerOpened(false)}
       to="/backoffice/actividades"
     >
       <img src={activitiesIcon} alt="" className="h-5 md:h-5 mr-2 sm:hidden" />
@@ -51,6 +53,7 @@ export default function HeaderUser() {
       className={({ isActive }) =>
         isActive ? activeClassName + a : desactiveClassName + a
       }
+      onClick={()=>setHamburguerOpened(false)}
       to="/backoffice/novedades"
     >
       <img src={newsIcon} alt="" className="h-5 md:h-5 mr-2 sm:hidden" />
@@ -60,6 +63,7 @@ export default function HeaderUser() {
       className={({ isActive }) =>
         isActive ? activeClassName + a : desactiveClassName + a
       }
+      onClick={()=>setHamburguerOpened(false)}
       to="/backoffice/testimonios"
     >
       <img
@@ -74,6 +78,7 @@ export default function HeaderUser() {
         isActive ? activeClassName + a : desactiveClassName + a
       }
       exact
+      onClick={()=>setHamburguerOpened(false)}
       to="/backoffice/contactos"
     >
       <img src={contactsIcon} alt="" className="h-5 md:h-5 mr-2 sm:hidden" />
@@ -83,6 +88,7 @@ export default function HeaderUser() {
       className={({ isActive }) =>
         isActive ? activeClassName + a : desactiveClassName + a
       }
+      onClick={()=>setHamburguerOpened(false)}
       to="/backoffice/slides"
     >
       <img src={slidesIcon} alt="" className="h-5 md:h-5 mr-2 sm:hidden" />
@@ -92,6 +98,7 @@ export default function HeaderUser() {
       className={({ isActive }) =>
         isActive ? activeClassName + a : desactiveClassName + a
       }
+      onClick={()=>setHamburguerOpened(false)}
       to="/backoffice/miembros"
     >
       <img src={membersIcon} alt="" className="h-5 md:h-5 mr-2 sm:hidden" />
@@ -101,6 +108,7 @@ export default function HeaderUser() {
       className={({ isActive }) =>
         isActive ? activeClassName + a : desactiveClassName + a
       }
+      onClick={()=>setHamburguerOpened(false)}
       to="/backoffice/categorias"
     >
       <img src={categoriesIcon} alt="" className="h-5 md:h-5 mr-2 sm:hidden" />
@@ -110,6 +118,7 @@ export default function HeaderUser() {
       className={({ isActive }) =>
         isActive ? activeClassName + a : desactiveClassName + a
       }
+      onClick={()=>setHamburguerOpened(false)}
       to="/backoffice/usuarios"
     >
       <img src={usersIcon} alt="" className="h-5 md:h-5 mr-2 sm:hidden" />
