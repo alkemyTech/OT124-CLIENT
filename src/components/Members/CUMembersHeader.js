@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function CUTestimonialsHeader(props) {
+function CUMembersHeader(props) {
   const { title } = props;
   return (
     <div className="flex sm:flex-row flex-col px-24">
       <div className=" flex flex-wrap items-center justify-center">
         <Link
           className="bg-sky-500 hover:bg-transparent hover:text-sky-500 hover:border-sky-500 hover:border text-white font-bold py-3 px-6 rounded transform hover:scale-110 ease-in duration-300"
-          to="/backoffice/testimonios"
+          to="/backoffice/miembros"
         >
           <span className="pr-2">⬅</span>
           Volver
@@ -21,4 +21,4 @@ function CUTestimonialsHeader(props) {
   );
 }
 
-export default CUTestimonialsHeader;
+export default CUMembersHeader;

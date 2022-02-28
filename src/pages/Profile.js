@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
-import ProfileForm from "../components/Profile/ProfileForm";
-import {profileGetMine} from "../services/Profile"
-import { profileDelete } from "../services/Profile";
-import DeleteAlert from "../components/Shared/Alerts/DeleteAlert";
 import { useNavigate } from "react-router-dom"
+import CenterResponsiveContainer from "../components/Shared/Containers/CenterResponsiveContainer";
+import ProfileBody from "../components/Profile/ProfileBody";
 
 export default function Profile() {
 
-    const navigate = useNavigate();
-    const [popUp, setPopUp] = useState({visible: false, operation: "null"})
-    const [profile, setProfile] = useState(undefined)
-    const [isLoad, setIsLoad] = useState(false)
+   return <CenterResponsiveContainer>
+      <ProfileBody/>
+   </CenterResponsiveContainer>
 
+<<<<<<< HEAD
     async function handleDelete(id) {
 
       const res = await profileDelete(id);
@@ -91,4 +89,6 @@ export default function Profile() {
             }
       </div>
   );
+=======
+>>>>>>> c0431484976110d6e3b8b003a0b7cbfd8dc294eb
 }

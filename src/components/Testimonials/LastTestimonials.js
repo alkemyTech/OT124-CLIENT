@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import HomeCard from "../Shared/Cards/HomeCard";
+import TestimonialsCard from "./TestimonialsCard";
 import { getAllTestimonials } from "../../services/testimonials";
 
 export default function LastTestimonials() {
@@ -27,12 +28,9 @@ export default function LastTestimonials() {
         {testimonials.length ? (
           testimonials.map((testimonial) => {
             return (
-              <HomeCard
-                id={testimonial.id}
-                type="testimonios"
+              <TestimonialsCard
+                testimonial={testimonial}
                 key={testimonial.id}
-                name={testimonial.name}
-                img={testimonial.lastimage?.key}
               />
             );
           })
