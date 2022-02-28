@@ -28,7 +28,7 @@ import Login from "./pages/Login";
 import News from "./pages/News";
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
-import { AdminRoute, PrivateRoute } from "./routes";
+import { AdminRoute, PrivateRoute, PublicRoute } from "./routes";
 import Activities from "./pages/Activities";
 import CUOrganizationForm from "./components/Organizations/CUOrganizationForm";
 import BackofficeListUsers from "./pages/backoffice/users/BackofficeListUsers";
@@ -36,11 +36,47 @@ import BackofficeEditUsers from "./pages/backoffice/users/BackofficeEditUsers";
 import BackofficeCreateActivity from "./pages/backoffice/actividades/BackofficeCreateActivity";
 import BackofficeEditActivities from "./pages/backoffice/actividades/BackofficeEditActivities";
 import ActivitiesDetails from "./components/Activities/ActivitiesDetails";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsExpired, setIsExpired, getIsExpired, selectUserData } from "./features/authSlice";
+import ExpiredSessionAlert from "./components/Shared/Alerts/ExpiredSessionAlert";
+import { useEffect } from "react";
+import { useState } from "react";
 
 function App() {
+  const isExpired = useSelector(selectIsExpired)
+  const userData = useSelector(selectUserData)
+  const [isActive, setIsActive] = useState(true);
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+    if (!isExpired && userData){
+      setInterval(() => {
+        dispatch(getIsExpired())
+      }, 20000);
+    } 
+  }
+    , [dispatch, isExpired, userData]);
+
+    useEffect(()=>{
+      if (!isExpired && userData){
+      let interval = null;
+    if (isActive) {
+      interval = setInterval(() => {
+        dispatch(setIsExpired(true))
+      }, 8000000);
+    } else{
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }
+    },[isActive, isExpired, userData, dispatch])
+    
+    document.body.addEventListener('click', ()=>setIsActive(false))
+
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      {(isExpired) && <ExpiredSessionAlert />}
+      <Route path="/" element={<PublicRoute />}>
         <Route index element={<Home />} />
         <Route path="nosotros" element={<AboutUs />} />
         <Route path="login" element={<Login />} />
