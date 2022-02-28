@@ -74,8 +74,9 @@ function App() {
     document.body.addEventListener('click', ()=>setIsActive(false))
 
   return (
+    <>
+    {(isExpired) && <ExpiredSessionAlert />}
     <Routes>
-      {(isExpired) && <ExpiredSessionAlert />}
       <Route path="/" element={<PublicRoute />}>
         <Route index element={<Home />} />
         <Route path="nosotros" element={<AboutUs />} />
@@ -170,6 +171,7 @@ function App() {
         <Route path="actividades/:id" element={<ActivitiesDetails />} />
       </Route>
     </Routes>
+    </>
   );
 }
 
