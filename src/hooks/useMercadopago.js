@@ -24,6 +24,7 @@ export default function useMercadoPago() {
                 callbacks: {
                     onFormMounted: (error) => {
                         if (error)
+                        setResultPayment(false)
                             return console.warn(
                                 "Form Mounted handling error: ",
                                 error
@@ -42,7 +43,7 @@ export default function useMercadoPago() {
                                 console.log(data.data)
                                     setResultPayment(data.data)
                                 } else {
-                                    setResultPayment(undefined)
+                                    setResultPayment(false)
                                 }
                                 //window.location.reload();
                             })

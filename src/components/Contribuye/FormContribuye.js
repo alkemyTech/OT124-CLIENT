@@ -8,6 +8,7 @@ import { Form, Formik, useFormikContext } from 'formik';
 import * as Yup from "yup";
 import SweetAlert from '../Shared/Alerts/SweetAlert';
 import SuccessAlert from '../Shared/Alerts/SuccessAlert';
+import ErrorAlert from '../Shared/Alerts/ErrorAlert';
 
 function FormContribuye({ onClickActive,setActive }) {
     
@@ -191,9 +192,10 @@ function FormContribuye({ onClickActive,setActive }) {
 
                             </SendButton>
                         </div>
-                        {resultPayment&&
+                        {resultPayment =='Created'?
                         <SuccessAlert successMsg={'se ha realizado el pago'} setSuccessMsg={true}></SuccessAlert>
-                        
+                        :resultPayment ==false?
+                        <ErrorAlert seterror={true}></ErrorAlert>:null
                         }
                         
                         <progress value="0" style={{display:'none'}} className="progress-bar">

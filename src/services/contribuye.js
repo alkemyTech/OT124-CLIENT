@@ -46,3 +46,14 @@ export async function getDonate(){
     }
     
 }
+
+export async function getDonatesAll(){
+    try{
+        return await axios
+        .get(`${API_BASE_URL}/api/v1/donate/process-payment/all`)
+        
+    }catch(err){
+        console.error(err)
+    }
+    
+}

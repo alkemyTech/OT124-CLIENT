@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import useMercadoPago from '../../hooks/useMercadopago'
 import { getDonate } from '../../services/contribuye'
 import SendButton from '../Shared/Buttons/SendButton'
+import Donators from './Donators'
 
 function WelcomeMessage({ onClickActive }) {
     // let { amount, setAmount } = useMercadoPago()
@@ -14,7 +15,7 @@ function WelcomeMessage({ onClickActive }) {
             let donateRes = await getDonate()
             console.log(donate)
             setDonate(donateRes?.data)
-
+            
         }
         fetchData()
         return () => {
@@ -92,6 +93,7 @@ function WelcomeMessage({ onClickActive }) {
                     text={'contribuye'}
                     click={onClickActive}
                 />}
+                <Donators/>
         </div>
     )
 }
