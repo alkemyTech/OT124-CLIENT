@@ -15,7 +15,7 @@ function WelcomeMessage({ onClickActive }) {
             let donateRes = await getDonate()
             console.log(donate)
             setDonate(donateRes?.data)
-            
+
         }
         fetchData()
         return () => {
@@ -93,7 +93,7 @@ function WelcomeMessage({ onClickActive }) {
                     text={'contribuye'}
                     click={onClickActive}
                 />}
-                <Donators/>
+                {/* <Donators/> */}
         </div>
     )
 }
