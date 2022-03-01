@@ -35,7 +35,7 @@ export default function NewDetails() {
                 `${API_BASE_URL}/api/v1/files/${selectedNew?.image?.key}`
               }
             ></img>
-            <p className="w-full max-h-[250px] flex text-center md:text-left md:col-start-2 md:col-end-3 font-normal text-lg overflow-y-scroll">
+            <p className="w-full max-h-[250px] flex text-center md:text-left md:col-start-2 md:col-end-3 font-normal text-lg overflow-y-auto">
               {selectedNew.content}
             </p>
           </div>
