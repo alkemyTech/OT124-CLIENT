@@ -88,7 +88,7 @@ function WelcomeMessage({ onClickActive }) {
               />
             </>
           ) : (
-            <SendButton text={"contribuye"} click={onClickActive} />
+            <SendButton text={"Contribuye"} click={onClickActive} />
           )}
           {/* <Donators/> */}
         </div>
