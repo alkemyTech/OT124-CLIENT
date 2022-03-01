@@ -193,7 +193,7 @@ function FormContribuye({ onClickActive,setActive }) {
                             </SendButton>
                         </div>
                         {resultPayment =='Created'?
-                        <SuccessAlert successMsg={'se ha realizado el pago'} setSuccessMsg={true}></SuccessAlert>
+                        <SuccessAlert successMsg={'Se ha realizado el pago exitosamente'} setSuccessMsg={true}></SuccessAlert>
                         :resultPayment ==false?
                         <ErrorAlert seterror={true}></ErrorAlert>:null
                         }
@@ -206,7 +206,7 @@ function FormContribuye({ onClickActive,setActive }) {
                      
 
                         <SendButton
-                            text={'siguiente'}
+                            text={'Volver'}
                             click={onClickActive}
                         />
                     </Form>

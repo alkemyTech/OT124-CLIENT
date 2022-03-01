@@ -5,7 +5,7 @@ import { getAllSlides } from '../../services/slides';
 import { API_BASE_URL } from '../../services/index';
 
 function Carrusel() {
-  const [ slides, setSlides ] = useState();
+  const [ slides, setSlides ] = useState([]);
 
   const styles = {
     carouselContainer:
@@ -36,14 +36,13 @@ function Carrusel() {
     );
   };
 
-  // useEffect(() => {
-  //   getAllSlides()
-  //     .then(res => {
-  //       console.log(res);
-  //       setSlides(res.data);
-  //     })
-  //     .catch(err => console.log(err));
-  // }, []);
+  useEffect(() => {
+    getAllSlides()
+      .then(res => {
+        setSlides(res.data.slides);
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   return (
     <div className={styles.carouselContainer}>
@@ -60,9 +59,9 @@ function Carrusel() {
         {slides?.map(slide => {
           return (
             <div key={slide.id}>
-              <img src={`${API_BASE_URL}/api/v1/files/${slide.image.key}`} className={styles.carouselImage} alt={slide.image} />
+              <img src={`${API_BASE_URL}/api/v1/files/${slide?.image?.key}`} className={styles.carouselImage} alt={slide?.text} />
               <div className={styles.carouselLabelContainer}>
-                <p className={styles.carouselLabel}>{slide.text}</p>
+                <p className={styles.carouselLabel}>{slide?.text}</p>
               </div>
             </div>
           );
