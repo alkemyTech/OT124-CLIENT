@@ -7,7 +7,13 @@ export default function ErrorAlert(props) {
       text: props.message || "Algo salio mal, vuelva a intentarlo nuevamente",
       icon: "error",
       confirmButtonColor: "red",
-    }).then(setError(false));
+    })
+    .then(
+      window.location.reload()
+      )
+    .then(
+      setError(false)
+      );
 
     return (
         <></>

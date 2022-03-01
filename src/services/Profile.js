@@ -26,8 +26,16 @@ export async function profileGetMine() {
     .catch((error) => error);
 }
 
+export async function awardsGetMe() {
+  return await axios
+    .get(`${API_BASE_URL}/api/v1/donate/process-payment/user`, { 
+    })
+    .catch((error) => error);
+}
+
   export default {
     profileUpdate,
     profileDelete,
-    profileGetMine
+    profileGetMine,
+    awardsGetMe
   }
