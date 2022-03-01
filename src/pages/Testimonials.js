@@ -20,7 +20,7 @@ export function Testimonial(props) {
                 <p className="mb-6 text-center text-gray-600 ">{content}</p>
                 <div className="flex flex-col items-center justify-center">
                     <div className="mb-2 w-12 h-12 overflow-hidden bg-gray-100 border-2 border-indigo-100 rounded-full">
-                        <img src={`${API_BASE_URL}/api/v1/files/${image.key}`} alt={'testimonial-' + name} className="object-cover object-center w-full h-full" />
+                        <img src={`${API_BASE_URL}/api/v1/files/${image?.key}`} alt={'testimonial-' + name} className="object-cover object-center w-full h-full" />
                     </div>
                     <h5 className="font-bold text-[#DB5652]">{name}</h5>
                 </div>
