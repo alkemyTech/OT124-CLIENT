@@ -32,6 +32,7 @@ function InputForm(props) {
     isDisabled,
     as,
     isLoading,
+    id,
     high
   } = props;
   return (
@@ -47,6 +48,8 @@ function InputForm(props) {
             placeholder={placeholder}
             type={type}
             disabled={isDisabled}
+            id={id}
+          
           />
           <ErrorMessage component={ErrorComponent} name={name} />
         </div>

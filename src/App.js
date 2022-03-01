@@ -30,6 +30,7 @@ import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 import { AdminRoute, PrivateRoute, PublicRoute } from "./routes";
 import Activities from "./pages/Activities";
+import Contribuye from "./pages/Contribuye";
 import CUOrganizationForm from "./components/Organizations/CUOrganizationForm";
 import BackofficeListUsers from "./pages/backoffice/users/BackofficeListUsers";
 import BackofficeEditUsers from "./pages/backoffice/users/BackofficeEditUsers";
@@ -91,8 +92,10 @@ function App() {
         <Route path="mi-perfil" element={<Profile />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="actividades" element={<Activities />} />
+        <Route path="contribuye" element={<Contribuye />} />
         <Route path="testimonios" element={<Testimonials />} />
         <Route path="backoffice" element={<AdminRoute />}>
+          
           <Route index element={<BackOfficeAdminLayout />} />
           <Route path="organizacion">
             <Route index element={<Organization />} />
