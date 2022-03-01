@@ -91,12 +91,14 @@ export default function Header() {
   };
   return (
     <nav class="flex sm:text-lg text-sm items-center flex-wrap lg:flex-nowrap justify-between p-6">
-      <img
-        className="lg:ml-4 -ml-1 mr-8 inline-flex"
-        width="100"
-        src={logo}
-        alt="logo"
-      />
+      <Link to="/">
+        <img
+          className="lg:ml-4 -ml-1 mr-8 inline-flex"
+          width="100"
+          src={logo}
+          alt="logo"
+        />
+      </Link>
       <div class="block lg:hidden">
         <button
           onClick={openHamburguerMenu}
