@@ -92,11 +92,8 @@ function App() {
         <Route path="mi-perfil" element={<Profile />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="actividades" element={<Activities />} />
-<<<<<<< HEAD
         <Route path="contribuye" element={<Contribuye />} />
-=======
         <Route path="testimonios" element={<Testimonials />} />
->>>>>>> 81e16a57855deb1da15be15e249f01004e58f159
         <Route path="backoffice" element={<AdminRoute />}>
           
           <Route index element={<BackOfficeAdminLayout />} />
