@@ -27,15 +27,15 @@ export default function NewDetails() {
           <h3 className="text-center font-bold text-4xl mb-6 md:col-start-1 md:col-end-2">
             {selectedNew.name}
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 rounded items-center template-col-[1fr 1fr] gap-6 p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 rounded items-center center template-col-[1fr 1fr] gap-6 p-6">
             <img
-              className="object-cover md:col-start-1 md:col-end-2 w-[80%] md:w-full rounded justify-self-center self-center "
+              className="object-cover md:col-start-1 md:col-end-2 w-[80%] md:w-full justify-self-center rounded"
               src={
                 selectedNew?.image?.key &&
                 `${API_BASE_URL}/api/v1/files/${selectedNew?.image?.key}`
               }
             ></img>
-            <p className="w-full h-full md:p-10 flex text-center md:text-left items-center md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-3 font-normal text-lg overflow-y-scroll">
+            <p className="w-full max-h-[250px] flex text-center md:text-left md:col-start-2 md:col-end-3 font-normal text-lg overflow-y-scroll">
               {selectedNew.content}
             </p>
           </div>
