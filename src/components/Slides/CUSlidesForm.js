@@ -97,8 +97,8 @@ function CUSlidesForm({isEdit}) {
 
   const slidesSchema = yup.object().shape({
     text: yup
-      .string("El text debe ser un string")
-      .required("El text del slide es requerido"),
+      .string("El texto debe ser un string")
+      .required("El texto del slide es requerido"),
     order:  yup  
     .number("El orden debe ser un numero")
     .positive("Por favor ingresa solo numeros")
