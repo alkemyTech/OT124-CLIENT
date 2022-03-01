@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Card from "../components/Activities/Cards";
+import CenterResponsiveContainer from "../components/Shared/Containers/CenterResponsiveContainer";
 import { getAllActivities } from "../services/activities";
+import PublicCard from "../components/Shared/Cards/PublicCard";
 
 const Activities = () => {
   const [actividades, setActividades] = useState([]);
@@ -12,17 +13,18 @@ const Activities = () => {
   }, []);
 
   return (
-    <div>
-      {actividades?.length ? (
-        <div className="flex flex-wrap justify-center">
-          {actividades.map((activity) => (
-            <Card key={activity.id} activity={activity} />
-          ))}
-        </div>
-      ) : (
-        <h1 className="text-center">No hay actividades</h1>
-      )}
-    </div>
+    <CenterResponsiveContainer>
+      <h2 className="text-3xl font-bold text-center mb-10">Actividades</h2>
+      <div className="flex flex-wrap gap-20 justify-center">
+        {actividades?.length ? (
+          actividades.map((activity) => (
+            <PublicCard key={activity.id} entity={activity} />
+          ))
+        ) : (
+          <h1 className="text-center">No hay actividades</h1>
+        )}
+      </div>
+    </CenterResponsiveContainer>
   );
 };
 

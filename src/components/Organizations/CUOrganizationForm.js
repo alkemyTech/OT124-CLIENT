@@ -32,7 +32,7 @@ function CUOrganizationForm({ isEdit }) {
     phone: "",
     welcomeText: "",
     address: "",
-    image: ""
+    image: "",
   };
   const [Org, setOrg] = useState(initialValues);
 
@@ -42,9 +42,7 @@ function CUOrganizationForm({ isEdit }) {
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
             resetForm();
-            setSuccessMsg(
-              "¡Gracias por contactarnos! la organización ha sido actualizada"
-            );
+            setSuccessMsg("La organización ha sido creada");
             navigate(-1);
           } else {
             setError(true);
@@ -57,9 +55,7 @@ function CUOrganizationForm({ isEdit }) {
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
             resetForm();
-            setSuccessMsg(
-              "¡Gracias por contactarnos! la organización ha sido creada"
-            );
+            setSuccessMsg("La organización ha sido actualizada");
             navigate(-1);
           } else {
             setError(true);
@@ -71,23 +67,23 @@ function CUOrganizationForm({ isEdit }) {
   }
   //use effects
   useEffect(() => {
-      organizationService
-        .getOrganizationData(id)
-        .then((res) => {
-          if (res?.status === 200 || res?.status === 304) {
-            setOrg(res?.data);
-          } else {
-            setNotFound(true);
-          }
-        })
-        .finally(()=>{
-          setIsDisabled(false)
-          setTimeout(() => setIsLoading(false), 500);
-        });
+    organizationService
+      .getOrganizationData(id)
+      .then((res) => {
+        if (res?.status === 200 || res?.status === 304) {
+          setOrg(res?.data?.organization);
+        } else {
+          setNotFound(true);
+        }
+      })
+      .finally(() => {
+        setIsDisabled(false);
+        setTimeout(() => setIsLoading(false), 500);
+      });
   }, [id]);
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Por favor ingresa tu nombre"),
+    name: Yup.string().required("Por favor ingresa un nombre"),
     email: Yup.string()
       .email(
         "Por favor ingresa un formato de email válido 'ejemplo@correo.com'"
@@ -106,92 +102,97 @@ function CUOrganizationForm({ isEdit }) {
 
   return (
     <CenterResponsiveContainer>
-        <CUHeader title={`${isEdit ? "Editar Organización" : "Crear Organización"}`} name={"organizacion"} />
-        {!notFound || !isEdit ? (
+      <CUHeader
+        title={`${isEdit ? "Editar Organización" : "Crear Organización"}`}
+        name={"organizacion"}
+      />
+      {!notFound || !isEdit ? (
         <>
-        {isLoading ? <Spinner/> : 
-          <Formik
-            initialValues={Org}
-            enableReinitialize={true}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-          >
-            {({
-              values,
-              errors,
-              touched,
-              isSubmitting,
-              setFieldValue,
-              setFieldError,
-            }) => (
-              <Form>
-               <TwoColsForm>
-                  <div className="sm:w-[500px]">
-                    <InputForm
-                      errors={errors.name}
-                      touched={touched.name}
-                      name={"name"}
-                      placeholder={"Nombre"}
-                      type={"text"}
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <Formik
+              initialValues={Org}
+              enableReinitialize={true}
+              validationSchema={validationSchema}
+              onSubmit={handleSubmit}
+            >
+              {({
+                values,
+                errors,
+                touched,
+                isSubmitting,
+                setFieldValue,
+                setFieldError,
+              }) => (
+                <Form>
+                  <TwoColsForm>
+                    <div className="sm:w-[500px]">
+                      <InputForm
+                        errors={errors.name}
+                        touched={touched.name}
+                        name={"name"}
+                        placeholder={"Nombre"}
+                        type={"text"}
+                      />
+                      <InputForm
+                        errors={errors.email}
+                        touched={touched.email}
+                        name={"email"}
+                        placeholder={"Correo Electrónico"}
+                        type={"text"}
+                      />
+                      <InputForm
+                        errors={errors.phone}
+                        touched={touched.phone}
+                        name={"phone"}
+                        placeholder={"Teléfono"}
+                        type={"number"}
+                      />
+                      <InputForm
+                        errors={errors.address}
+                        touched={touched.address}
+                        name={"address"}
+                        placeholder={"Dirección"}
+                        type={"text"}
+                      />
+                      <InputForm
+                        errors={errors.welcomeText}
+                        touched={touched.welcomeText}
+                        name={"welcomeText"}
+                        placeholder={"Lema"}
+                        type={"text"}
+                        as={"textarea"}
+                      />
+                    </div>
+                    <div className="w-full my-auto">
+                      <UploadImageComponent
+                        setFieldValue={setFieldValue}
+                        setFieldError={setFieldError}
+                        file={values?.image}
+                        disabled={isDisabled}
+                        error={errors.image}
+                        touched={touched.image}
+                      />
+                    </div>
+                  </TwoColsForm>
+                  <AddButton isEdit={isEdit} isSubmitting={isSubmitting} />
+                  {error && <ErrorAlert setError={setError} />}
+                  {successMsg && (
+                    <SuccessAlert
+                      successMsg={successMsg}
+                      setSuccessMsg={setSuccessMsg}
                     />
-                    <InputForm
-                      errors={errors.email}
-                      touched={touched.email}
-                      name={"email"}
-                      placeholder={"Correo Electrónico"}
-                      type={"text"}
-                    />
-                    <InputForm
-                      errors={errors.phone}
-                      touched={touched.phone}
-                      name={"phone"}
-                      placeholder={"Teléfono"}
-                      type={"number"}
-                    />
-                    <InputForm
-                      errors={errors.address}
-                      touched={touched.address}
-                      name={"address"}
-                      placeholder={"Dirección"}
-                      type={"text"}
-                    />
-                    <InputForm
-                      errors={errors.welcomeText}
-                      touched={touched.welcomeText}
-                      name={"welcomeText"}
-                      placeholder={"Mensaje"}
-                      type={"text"}
-                      as={"textarea"}
-                    />
-                  </div>
-                  <div className="w-full my-auto">
-                    <UploadImageComponent
-                      setFieldValue={setFieldValue}
-                      setFieldError={setFieldError}
-                      file={values?.image}
-                      disabled={isDisabled}
-                      error={errors.image}
-                      touched={touched.image}
-                    />
-                  </div>
-                </TwoColsForm>
-                <AddButton isEdit={isEdit} isSubmitting={isSubmitting} />
-                {error && <ErrorAlert setError={setError} />}
-                {successMsg && (
-                  <SuccessAlert
-                    successMsg={successMsg}
-                    setSuccessMsg={setSuccessMsg}
-                  />
-                )}
-              </Form>
-            )}
-          </Formik>
-          }
+                  )}
+                </Form>
+              )}
+            </Formik>
+          )}
         </>
-        )
-        :
-        <NotFoundComponent title={"No existe esa organización"} />}
-      </CenterResponsiveContainer>
+      ) : (
+        <NotFoundComponent title={"No existe esa organización"} />
+      )}
+    </CenterResponsiveContainer>
   );
 }
 

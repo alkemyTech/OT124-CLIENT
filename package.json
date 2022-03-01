@@ -33,6 +33,7 @@
     "simple-react-google-maps": "^1.1.2",
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.3.10",
+    "swiper": "^8.0.6",
     "yup": "^0.32.11"
   },
   "scripts": {

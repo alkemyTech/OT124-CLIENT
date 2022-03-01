@@ -25,6 +25,7 @@ function CUMembersForm(props) {
   const [isLoading, setIsLoading] = useState(true);
   const initialValues = {
     name: "",
+    position: "",
     image: "",
   };
   const [aNew, setANew] = useState(initialValues);
@@ -72,8 +73,11 @@ function CUMembersForm(props) {
   };
   const newsSchema = yup.object().shape({
     name: yup
-      .string("El nombre debe ser un string")
+      .string("El nombre debe ser un texto")
       .required("El nombre del miembro es requerido"),
+    position: yup
+      .string("La posición debe ser un texto")
+      .required("La posición del miembro es requerida"),
     image: yup.mixed().required("El archivo es requerido"),
   });
 
@@ -119,11 +123,16 @@ function CUMembersForm(props) {
                   type="text"
                   disabled={isDisabled}
                 />
+                <InputForm
+                  errors={errors.position}
+                  touched={touched.position}
+                  name="position"
+                  placeholder="Posición"
+                  type="text"
+                  disabled={isDisabled}
+                />
               </OneColForm>
-              <AddButton
-                isSubmitting={isSubmitting}
-                text={`${isEdit ? "Modificar" : "Crear"}`}
-              />
+              <AddButton isEdit={isEdit} isSubmitting={isSubmitting} />
             </Form>
           )}
         </Formik>
