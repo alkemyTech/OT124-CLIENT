@@ -16,6 +16,8 @@ import NotFoundComponent from "../Shared/Others/NotFoundComponent";
 import AddButton from "../Shared/Buttons/Addbutton";
 import TwoColsForm from "../Shared/Containers/TwoColsForm";
 import Spinner from "../Shared/Loaders/Spinner";
+import { useDispatch } from 'react-redux';
+import { editOngWelcomeText } from '../../features/ongSlice';
 
 function CUOrganizationForm({ isEdit }) {
   const [error, setError] = useState(false);
@@ -25,6 +27,7 @@ function CUOrganizationForm({ isEdit }) {
   const [isDisabled, setIsDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   let navigate = useNavigate();
+  const dispatch = useDispatch();
 
   let initialValues = {
     name: "",
@@ -57,6 +60,9 @@ function CUOrganizationForm({ isEdit }) {
             resetForm();
             setSuccessMsg("La organización ha sido actualizada");
             navigate(-1);
+
+            // Updates the homepage if it's the main ong
+            if (id === '1' || id === 1) dispatch(editOngWelcomeText(values.welcomeText));
           } else {
             setError(true);
             setSubmitting(false);

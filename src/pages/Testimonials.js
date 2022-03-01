@@ -61,7 +61,7 @@ export default function Testimonials() {
                 </div>
                 {
                     isLoading ? <Spinner /> 
-                    : error.hasError ? <NotFoundComponent title={error.message} />
+                    : error?.hasError ? <NotFoundComponent title={error?.message} />
                     : (
                         <Swiper
                             pagination={{
