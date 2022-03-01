@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink, Navigate } from "react-router-dom";
 
 export default function BackOfficeCard(props) {
   return (
@@ -8,7 +8,7 @@ export default function BackOfficeCard(props) {
       <img src={props.image} className="h-10 lg:h-20"></img>
       <Link
         className=""
-        to={props.navlink}
+        to={`${props.title!=='Mi Perfil' ? "/backoffice" : ""}${props.navlink}`}
       >
         <button className="bg-sky-500 hover:bg-sky-700 text-white font-bold text-xs md:text-sm px-2 md:px-4 rounded">IR</button>
       </Link>
