@@ -7,7 +7,7 @@ export const fetchOngData = createAsyncThunk(
     try {
       const response = await getOrganizationData(1);
 
-      if (response.status === 200) return response.data;
+      if (response.status === 200) return response.data.organization;
     } catch(err) {
       console.log(err);
     }
