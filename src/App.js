@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import AboutUs from "./pages/AboutUs";
 import BackOfficeAdminLayout from "./components/Backoffice/BackOfficeAdminLayout";
@@ -39,8 +39,9 @@ import ActivitiesDetails from "./components/Activities/ActivitiesDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsExpired, setIsExpired, getIsExpired, selectUserData } from "./features/authSlice";
 import ExpiredSessionAlert from "./components/Shared/Alerts/ExpiredSessionAlert";
-import { useEffect } from "react";
-import { useState } from "react";
+import BackofficeSlides from './pages/backoffice/slides/BackofficeSlides';
+import { fetchOngData } from './features/ongSlice';
+import Testimonials from './pages/Testimonials';
 
 function App() {
   const isExpired = useSelector(selectIsExpired)
@@ -73,6 +74,11 @@ function App() {
     
     document.body.addEventListener('click', ()=>setIsActive(false))
 
+  useEffect(() => {
+    // Fetch for initial values from redux
+    dispatch(fetchOngData());
+  }, []);
+
   return (
     <>
     {(isExpired) && <ExpiredSessionAlert />}
@@ -85,6 +91,7 @@ function App() {
         <Route path="mi-perfil" element={<Profile />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="actividades" element={<Activities />} />
+        <Route path="testimonios" element={<Testimonials />} />
         <Route path="backoffice" element={<AdminRoute />}>
           <Route index element={<BackOfficeAdminLayout />} />
           <Route path="organizacion">
@@ -158,6 +165,9 @@ function App() {
               path="editar-usuario/:id"
               element={<BackofficeEditUsers />}
             />
+          </Route>
+          <Route path="slides">
+            <Route index element={<BackofficeSlides />} />
           </Route>
         </Route>
         <Route path="me" element={<PrivateRoute />}>

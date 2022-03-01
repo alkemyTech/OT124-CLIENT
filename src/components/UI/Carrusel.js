@@ -1,18 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import img1 from '../../img/1.png'
-import img2 from '../../img/2.png'
-import img3 from '../../img/3.jpg'
-//https://www.npmjs.com/package/react-responsive-carousel
+import { getAllSlides } from '../../services/slides';
+import { API_BASE_URL } from '../../services/index';
 
-let seeder = [
-  { imgUrl: `${img1}`, text: "Esto es un epigrafe." },
-  { imgUrl: `${img2}`, text: "Esto es otro epigrafe." },
-  { imgUrl: `${img3}`, text: "Otro epigrafe mas." },
-];
-// replace "seeder" by incoming array
 function Carrusel() {
+  const [ slides, setSlides ] = useState();
+
   const styles = {
     carouselContainer:
       "flex justify-center align-center mb-[50px] bg-slate-100",
@@ -42,6 +36,15 @@ function Carrusel() {
     );
   };
 
+  // useEffect(() => {
+  //   getAllSlides()
+  //     .then(res => {
+  //       console.log(res);
+  //       setSlides(res.data);
+  //     })
+  //     .catch(err => console.log(err));
+  // }, []);
+
   return (
     <div className={styles.carouselContainer}>
       <Carousel
@@ -54,12 +57,12 @@ function Carrusel() {
         renderArrowPrev={prevArrow}
         renderArrowNext={nextArrow}
       >
-        {seeder.map((e) => {
+        {slides?.map(slide => {
           return (
-            <div key={e.imgUrl}>
-              <img src={e.imgUrl} className={styles.carouselImage} />
+            <div key={slide.id}>
+              <img src={`${API_BASE_URL}/api/v1/files/${slide.image.key}`} className={styles.carouselImage} alt={slide.image} />
               <div className={styles.carouselLabelContainer}>
-                <p className={styles.carouselLabel}>{e.text}</p>
+                <p className={styles.carouselLabel}>{slide.text}</p>
               </div>
             </div>
           );
