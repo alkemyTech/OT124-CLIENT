@@ -155,7 +155,7 @@ function CUTestimonialsForm({ isEdit }) {
           </Formik>
         </>
       ) : (
-        <NotFoundComponent title={"No existe esa organización"} />
+        <NotFoundComponent title={"No existe ese testimonio"} />
       )}
     </>
   );

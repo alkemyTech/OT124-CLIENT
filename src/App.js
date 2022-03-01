@@ -43,6 +43,8 @@ import ExpiredSessionAlert from "./components/Shared/Alerts/ExpiredSessionAlert"
 import BackofficeSlides from './pages/backoffice/slides/BackofficeSlides';
 import { fetchOngData } from './features/ongSlice';
 import Testimonials from './pages/Testimonials';
+import BackofficeCreateSlides from "./pages/backoffice/slides/BackofficeCreateSlides";
+import BackofficeEditSlides from "./pages/backoffice/slides/BackofficeEditSlides";
 
 function App() {
   const isExpired = useSelector(selectIsExpired)
@@ -171,6 +173,14 @@ function App() {
           </Route>
           <Route path="slides">
             <Route index element={<BackofficeSlides />} />
+            <Route
+              path="crear-slide"
+              element={<BackofficeCreateSlides />}
+            />
+            <Route
+              path="editar-slide/:id"
+              element={<BackofficeEditSlides />}
+            />
           </Route>
         </Route>
         <Route path="me" element={<PrivateRoute />}>
