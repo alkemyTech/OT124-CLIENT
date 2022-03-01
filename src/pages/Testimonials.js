@@ -70,7 +70,7 @@ export default function Testimonials() {
                             modules={[Pagination]}
                             spaceBetween={30}
                             slidesPerView={1}
-                            className='flex items-center justify-center cursor-move'
+                            className='w-full flex items-center justify-center cursor-move'
                         >
                             {
                                 testimonials?.map(testimonial => 
