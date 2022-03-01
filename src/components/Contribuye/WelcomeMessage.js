@@ -11,10 +11,10 @@ function WelcomeMessage({ onClickActive }) {
 
     useEffect(() => {
         async function fetchData() {
-           let donateRes = await getDonate()
-                console.log(donate)
-                setDonate(donateRes?.data)
-            
+            let donateRes = await getDonate()
+            console.log(donate)
+            setDonate(donateRes?.data)
+
         }
         fetchData()
         return () => {
@@ -22,7 +22,7 @@ function WelcomeMessage({ onClickActive }) {
         }
     }, [])
 
-    let amountsArray = [500]
+    let amountsArray = [500,1000,2000]
     let styles = {
         title: 'text-4xl text-emerald-500',
         amounts: 'text-4xl text-sky-500',
@@ -38,13 +38,20 @@ function WelcomeMessage({ onClickActive }) {
     return (
         <div className='px-96'>
             <div className='flex flex-row bg-transparent  text-sky-500 rounded py-4 my-8 px-4  border border-sky-500 justify-evenly'>
-
-                <h4 className={styles.title}>
-                    {donate?.award}
-                </h4>
-                <h4 className={styles.amounts}>
-                    aportes: {donate?.amounts}
-                </h4>
+                {
+                    donate ?
+                        <>
+                            <h4 className={styles.title}>
+                                {donate?.award}
+                            </h4>
+                            <h4 className={styles.amounts}>
+                                aportes: {donate?.amounts}
+                            </h4>
+                        </>
+                        : <h4 className={styles.amounts}>
+                            no tiene donaciones aún
+                        </h4>
+                        }
             </div>
 
             <h4 className={styles.title}>

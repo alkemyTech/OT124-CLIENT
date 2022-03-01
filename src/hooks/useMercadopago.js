@@ -6,10 +6,10 @@ import { postDonate } from "../services/contribuye";
 
 export default function useMercadoPago() {
     const [resultPayment, setResultPayment] = useState(undefined);
-     const [amount, setAmount] = useState(500);
-     const [resourcePercentage, setResource] = useState(0);
+    const [amount, setAmount] = useState(500);
+    const [resourcePercentage, setResource] = useState(0);
+   // const [infoData, setInfoData] = useState(false);
 
-     
     const { MercadoPago } = useScript(
         "https://sdk.mercadopago.com/js/v2",
         "MercadoPago"
@@ -33,22 +33,27 @@ export default function useMercadoPago() {
                     onSubmit: (event) => {
 
                         event.preventDefault();
-                            console.log( cardForm.getCardFormData())
-                     postDonate( cardForm.getCardFormData())
-                        
-                            .then((data) =>{
-                                console.log(data,"data res")
-                                setResultPayment(data.data)
+                        console.log(cardForm.getCardFormData())
+                        postDonate(cardForm.getCardFormData())
+
+                            .then((data) => {
+                                console.log(data, "data res")
+                                if (data.data == 'Created') {
+                                console.log(data.data)
+                                    setResultPayment(data.data)
+                                } else {
+                                    setResultPayment(undefined)
+                                }
                                 //window.location.reload();
-                                })
+                            })
                             .catch((err) => {
                                 setResultPayment(err);
                             });
                     },
                     onFetching: (resource) => {
                         // Animate progress bar
-                     
-                       setResource(resource)
+
+                        setResource(resource)
                         const progressBar =
                             document.querySelector(".progress-bar");
                         progressBar.removeAttribute("value");
@@ -60,7 +65,7 @@ export default function useMercadoPago() {
                 },
             });
         }
-    }, [ MercadoPago]);
+    }, [MercadoPago]);
 
-    return { resultPayment,resourcePercentage};
+    return { resultPayment, resourcePercentage };
 }

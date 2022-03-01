@@ -6,10 +6,13 @@ import ProcessBar from './ProcessBar';
 import InputForm from '../Shared/Forms/InputForm'
 import { Form, Formik, useFormikContext } from 'formik';
 import * as Yup from "yup";
+import SweetAlert from '../Shared/Alerts/SweetAlert';
+import SuccessAlert from '../Shared/Alerts/SuccessAlert';
 
 function FormContribuye({ onClickActive,setActive }) {
     
     const [isLoading, setIsLoading] = useState(false);
+      const {resultPayment}  = useMercadoPago()
 
 
 
@@ -188,6 +191,11 @@ function FormContribuye({ onClickActive,setActive }) {
 
                             </SendButton>
                         </div>
+                        {resultPayment&&
+                        <SuccessAlert successMsg={'se ha realizado el pago'} setSuccessMsg={true}></SuccessAlert>
+                        
+                        }
+                        
                         <progress value="0" style={{display:'none'}} className="progress-bar">
                             Cargando...
                         </progress>
