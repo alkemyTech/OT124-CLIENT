@@ -15,12 +15,9 @@ export default function TestimonialsCard({ testimonial }) {
       <div>
         <p className="mt-2 text-gray-600 italic">"{testimonial.content}"</p>
       </div>
-      <Link
-        className="flex justify-end mt-4 self-end"
-        to={"/testimonios/" + testimonial.id}
-      >
+      <div className="flex justify-end mt-4 self-end">
         <a className="text-xl font-medium text-sky-500">{testimonial.name}</a>
-      </Link>
+      </div>
     </div>
   );
 }
