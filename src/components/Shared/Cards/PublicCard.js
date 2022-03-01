@@ -19,10 +19,7 @@ const PublicCard = ({ entity }) => {
       )}
       <div class="p-6 grid">
         <div class="font-bold text-xl mb-2 text-center">{entity.name}</div>
-        <p
-          class="text-gray-700 line-clamp-3 text-justify"
-          dangerouslySetInnerHTML={{ __html: entity.content }}
-        ></p>
+        
         <div class="px-6 pt-4 flex justify-end self-end">
           <Link to={`${entity?.id}`}>
             <button className=" hover:bg-green-700 bg-green-500 text-white px-4 py-1 rounded-full">

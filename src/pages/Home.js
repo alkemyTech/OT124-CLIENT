@@ -1,29 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Carrusel from "../components/UI/Carrusel.js";
 import LastNews from "../components/News/LastNews";
 import LastTestimonials from "../components/Testimonials/LastTestimonials";
-import { getOrganizationData } from "../services/organization.js";
-
-function Box() {
-  const styles = {
-    width: 200,
-    height: 150,
-    backgroundColor: "gray",
-  };
-
-  return <div style={styles}></div>;
-}
+import { useSelector } from 'react-redux';
+import { selectWelcomeText } from '../features/ongSlice';
 
 function Home() {
-  const [welcomeText, setWelcomeText] = useState("");
-
-  useEffect(() => {
-    async function fetchData() {
-      const orgData = await getOrganizationData(1);
-      setWelcomeText(orgData?.data?.organization.welcomeText);
-    }
-    fetchData();
-  }, []);
+  const welcomeText = useSelector(selectWelcomeText);
 
   return (
     <div className="Home flex flex-col justify-center items-center text-center">
