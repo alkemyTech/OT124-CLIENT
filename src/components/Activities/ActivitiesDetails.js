@@ -20,22 +20,29 @@ const ActivitiesDetails = () => {
 
   return (
     <CenterResponsiveContainer>
-    <div className="md:mx-10 mx-5 grid grid-cols-1 md:grid-cols-2 rounded" >
-      <h3 className="text-center font-bold text-4xl mb-6 md:col-start-1 md:col-end-2">
-        {" "}
-        {activities.name}
-      </h3>
-      <img
-        src={`${API_BASE_URL}/api/v1/files/${activities?.image?.key}`}
-        alt=""
-        className=" md:col-start-1 md:col-end-2 md:max-w-[600px] md:min-w-[500px] rounded justify-self-center self-center"
-      />
-      <p
-        className=" md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-3 font-normal text-lg mt-6 overflow-y-scroll overflow-x-hidden px-6 md:max-h-full min-h-[100px]"
-        dangerouslySetInnerHTML={{ __html: activities.content }}
-      ></p>
-    </div>
-
+      {activities !== undefined ? (
+        <>
+          <h3 className="text-center font-bold text-4xl mb-6 md:col-start-1 md:col-end-2">
+            {activities.name}
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 rounded items-center template-col-[1fr 1fr] gap-6 p-6">
+            <img
+              className="object-cover md:col-start-1 md:col-end-2 w-[80%] md:w-full rounded justify-self-center self-center "
+              src={
+                activities?.image?.key &&
+                `${API_BASE_URL}/api/v1/files/${activities?.image?.key}`
+              }
+            ></img>
+            <p className="w-full h-full md:p-10 flex text-center md:text-left items-center md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-3 font-normal text-lg overflow-y-scroll">
+              {activities.content}
+            </p>
+          </div>
+        </>
+      ) : (
+        <div className="grid rounded grid-cols-[1fr] grid-rows-[1fr] justify-items-center">
+          <h3 className=" text-xl ">La novedad no existe o no se encuentra.</h3>
+        </div>
+      )}
     </CenterResponsiveContainer>
   );
 };
