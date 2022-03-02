@@ -8,7 +8,7 @@ export default function ContactUs() {
     <div className="">
       <h1 className="text-center text-5xl my-10">Contactenos</h1>
       <div className="flex justify-center">
-      <div className="grid grid-cols-1 md:grid-cols-2 sm:gap-8 w-[1200px] py-4 px-6 rounded-3xl  bg-sky-500">
+      <div className="grid grid-cols-1 md:grid-cols-2 sm:gap-8 lg:w-3/5 py-4 px-6 rounded-3xl  bg-sky-500">
         <ContactForm />
         <ContactUsDetails >
         <Maps />
