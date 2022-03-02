@@ -47,7 +47,7 @@ function SelectForm(props) {
             disabled={isDisabled}
           >
             <>
-              <option selected disabled>{optLabel}</option>
+              <option selected>{optLabel}</option>
               {(options === undefined || options.length === 0) ? null : 
                 options.map((opt) => (
                   <option value={opt.id} label={opt.name}>{opt.name}</option>
