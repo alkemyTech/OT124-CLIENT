@@ -23,7 +23,7 @@ function Contribuye() {
 
     return (
         <CenterResponsiveContainer>
-        <div className="flex justify-center p-2 max-w-[800px]">
+        <div className="flex justify-center p-2 max-w-[600px]">
 
             {active ?
                  <FormContribuye onClickActive={onClickActive} setActive={setActive}/>:

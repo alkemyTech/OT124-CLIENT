@@ -26,7 +26,7 @@ function WelcomeMessage({ onClickActive }) {
     let styles = {
         title: "text-4xl text-emerald-500 text-center",
         amounts: "text-4xl text-sky-500 text-center",
-        text: "text-xl text-slate-600 m-8",
+        text: "text-xl text-slate-600 m-8 text-center",
         set: "text-slate-300 font-black	text-3xl",
     };
     function setAmountFun(e) {
