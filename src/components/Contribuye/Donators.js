@@ -14,7 +14,7 @@ function Donators() {
         async function fetchData() {
 
             let donatesRes = await getDonatesAll()
-            let donatesResNew = donatesRes?.data.map(e => {
+            let donatesResNew = donatesRes?.data.slice(0,6).map(e => {
                 let donates = Object.create(e.donates)
                 donates.images = {key:''}
                 switch (donates.award) {
