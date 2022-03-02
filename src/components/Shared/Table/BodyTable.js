@@ -21,7 +21,9 @@ function BodyTable(props) {
                 { property !== "updatedAt" &&
                   property !== "deletedAt" &&
                   property !== "id" && (
-                    <td className="py-3 px-4 first:rounded-bl-md ">
+                    <td className={`py-3 px-4 first:rounded-bl-md ${
+                      count % 2 === 0 ? "bg-sky-100" : "bg-white"
+                    }`}>
                       {property === "image" ? (
                         <div className="w-full flex">
                         {item?.image?.key ? <img
@@ -46,7 +48,9 @@ function BodyTable(props) {
           })}
           {!notBackOffice &&
           <>
-            <td className="py-3 px-4 text-center ">
+            <td className={`py-3 px-4 text-center ${
+                      count % 2 === 0 ? "bg-sky-100" : "bg-white"
+                    }`}>
             <DeleteAlert
               styles={
                 " bg-red-500 text-white shadow shadow-red-800 rounded-sm px-4 py-1  hover:bg-red-600"
@@ -60,7 +64,9 @@ function BodyTable(props) {
               isLoad={isLoad}
             />
           </td>
-          <td className="py-3 px-4 text-center rounded-br-md ">
+          <td className={`py-3 px-4 text-center ${
+                      count % 2 === 0 ? "bg-sky-100" : "bg-white"
+                    } rounded-br-md`}>
             {bodyName === "contacto" ? null 
             
             :
