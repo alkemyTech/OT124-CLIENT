@@ -74,10 +74,10 @@ export default function ProfileBody () {
                     
                     <div className=" grid col-start-2 col-end-3 row-start-1 row-end-4">
                         {
-                            awarded > 5000 ? <img className="justify-self-center self-center w-[170px]" src={`${files}/${badges.gold}`} alt='gold' />
-                            : awarded > 1000 ? <img className="justify-self-center self-center w-[210px]" src={`${files}/${badges.silver}`} alt='silver' />
-                            : awarded > 300 ? <img className="justify-self-center self-center w-[200px]" src={`${files}/${badges.bronze}`} alt='bronze' />
-                            : <img className="justify-self-center self-center w-[200px]" src={`${files}/${badges.newbie}`} alt='newbie' />
+                            awarded > 5000 ? <img className="justify-self-center self-center sm:w-[170px] w-[90px] sm:ml-0 sm:mb-0 mb-16 ml-4" src={`${files}/${badges.gold}`} alt='gold' />
+                            : awarded > 1000 ? <img className="justify-self-center self-center sm:w-[210px] w-[90px] sm:ml-0 sm:mb-0 mb-16 ml-4" src={`${files}/${badges.silver}`} alt='silver' />
+                            : awarded > 300 ? <img className="justify-self-center self-center sm:w-[200px] w-[90px] sm:ml-0 sm:mb-0 mb-16 ml-4" src={`${files}/${badges.bronze}`} alt='bronze' />
+                            : <img className="justify-self-center self-center  sm:w-[170px]  w-[90px] sm:ml-0 sm:mb-0 mb-16 ml-4" src={`${files}/${badges.newbie}`} alt='newbie' />
                         }
                     </div>
                     <div className=" grid grid-cols-2 gap-5 col-start-1 col-end-3 my-4">
