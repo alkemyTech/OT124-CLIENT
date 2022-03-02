@@ -48,8 +48,11 @@ function CUNewsForm(props) {
   useEffect(() => {
     getNew(id)
       .then((res) => {
+        console.log(res)
         if (res.status === 200) {
-          setANew(res?.data?.new);
+          let resItem= res?.data?.new
+          resItem.key = resItem?.image?.key
+          setANew(resItem)
         } else {
           setNotFound(true);
         }
