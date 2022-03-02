@@ -31,7 +31,8 @@ export default function ContactForm(props) {
         "Por favor ingresa un formato de email válido 'ejemplo@correo.com'"
       )
       .required("Por favor ingresa un email"),
-    phone: Yup.number("El telefono debe ser un numero")
+    phone: Yup
+    .number("El telefono debe ser un numero")
       .positive("Por favor ingresa solo numeros")
       .integer("Por favor ingresa solo numeros")
       .min(10000000, "Debe ingresar un mínimo de 8 números")

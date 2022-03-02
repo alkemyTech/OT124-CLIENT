@@ -6,8 +6,8 @@ import Tel from "../../img/whatsapp.png";
 
 function ContactUsDetails({children}) {
     return ( 
-        <div className="flex bg-sky-500 text-white items-center py-3 text-justify sm:text-xl text-sm rounded-r-xl">
-          <div className="bg-white w-full text-sky-500 p-5 sm:rounded-r-xl rounded-xl">
+        <div className="flex bg-sky-500 items-center py-3 text-justify sm:text-xl text-sm rounded-r-xl">
+          <div className="bg-white w-full p-5 sm:rounded-r-xl rounded-xl">
             <div className=" mb-5 text-center">
               <strong>
                 <h2>Datos de contacto:</h2>

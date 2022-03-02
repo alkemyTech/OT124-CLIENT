@@ -4,7 +4,7 @@ import { API_BASE_URL } from "../../../services";
 import DeleteAlert from "../Alerts/DeleteAlert";
 
 function BodyTable(props) {
-  const { list, service, setIsLoad, isLoad, afterMessage, message, bodyName } =
+  const { list, service, setIsLoad, isLoad, afterMessage, message, bodyName, notBackOffice } =
     props;
   return (
     <tbody className=" bg-sky-50 max-h-[375px] overflow-y-auto overflow-x-hidden">
@@ -21,7 +21,9 @@ function BodyTable(props) {
                 { property !== "updatedAt" &&
                   property !== "deletedAt" &&
                   property !== "id" && (
-                    <td className="py-3 px-4 first:rounded-bl-md ">
+                    <td className={`py-3 px-4 first:rounded-bl-md ${
+                      count % 2 === 0 ? "bg-sky-100" : "bg-white"
+                    }`}>
                       {property === "image" ? (
                         <div className="w-full flex">
                         {item?.image?.key ? <img
@@ -44,12 +46,16 @@ function BodyTable(props) {
               </>
             );
           })}
-          <td className="py-3 px-4 text-center ">
+          {!notBackOffice &&
+          <>
+            <td className={`py-3 px-4 text-center ${
+                      count % 2 === 0 ? "bg-sky-100" : "bg-white"
+                    }`}>
             <DeleteAlert
               styles={
                 " bg-red-500 text-white shadow shadow-red-800 rounded-sm px-4 py-1  hover:bg-red-600"
               }
-              id={item.id}
+              id={item?.id}
               title={"ELIMINAR"}
               message={message}
               afterMessage={afterMessage}
@@ -58,12 +64,14 @@ function BodyTable(props) {
               isLoad={isLoad}
             />
           </td>
-          <td className="py-3 px-4 text-center rounded-br-md ">
+          <td className={`py-3 px-4 text-center ${
+                      count % 2 === 0 ? "bg-sky-100" : "bg-white"
+                    } rounded-br-md`}>
             {bodyName === "contacto" ? null 
             
             :
             <Link
-              to={`editar-${bodyName}/${item.id}`}
+              to={`editar-${bodyName}/${item?.id}`}
               className="hover:underline"
             >
               Editar
@@ -71,6 +79,7 @@ function BodyTable(props) {
             
             }
           </td>
+          </>}
         </tr>
       ))}
     </tbody>

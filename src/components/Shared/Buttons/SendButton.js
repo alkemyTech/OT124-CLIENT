@@ -8,13 +8,16 @@ const skeletonStyles =
   "bg-gray-200 text-transparent rounded py-2 mt-2 px-4 w-96 mx-auto my-4 animate-pulse";
 
 function SendButton(props) {
-  const { isSubmitting, isLoading ,click, text,idButton } = props;
+  const { isSubmitting, isLoading, click, text, idButton,img} = props;
+//   let {img} = props
+//  let { url, width, height } = img 
   return (
     <div className="flex justify-center my-4">
       {isLoading ? (
         <div className={skeletonStyles}>hidden</div>
       ) : (
         <button className={styles} type="submit" id={idButton} disabled={isSubmitting} onClick={click}>
+          {img && <img src={img.url} style={{marginRight:'12px'}} width={img.width} height={img.height}></img>}
           {isSubmitting && <SpinSVGButton />}
           {text}
         </button>

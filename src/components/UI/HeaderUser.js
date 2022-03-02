@@ -124,6 +124,16 @@ export default function HeaderUser() {
       <img src={usersIcon} alt="" className="h-5 md:h-5 mr-2 sm:hidden" />
       Usuarios
     </NavLink>,
+     <NavLink
+     className={({ isActive }) =>
+       isActive ? activeClassName + a : desactiveClassName + a
+     }
+     onClick={()=>setHamburguerOpened(false)}
+     to="/mi-perfil"
+   >
+     <img src={profile} alt="" className="h-5 md:h-5 mr-2 sm:hidden" />
+     Mi Perfil
+   </NavLink>,
   ];
 
   const openHamburguerMenu = () => {

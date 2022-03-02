@@ -41,7 +41,7 @@ export default function LastNews() {
       </div>
       <div className="flex mt-12 items-center justify-center">
         <Link to="/novedades">
-          <button className="bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white py-1.5 px-6 border border-sky-500 hover:border-transparent rounded m-auto">
+          <button className="bg-transparent transform ease-in-out duration-300 hover:scale-105 hover:bg-sky-500 text-sky-500 font-semibold hover:text-white py-1.5 px-6 border border-sky-500 hover:border-transparent rounded m-auto">
             Ver todas
           </button>
         </Link>

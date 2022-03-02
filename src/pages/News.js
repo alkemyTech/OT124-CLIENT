@@ -20,6 +20,7 @@ export default function News() {
 
   return (
     <CenterResponsiveContainer>
+      <div className="max-w-[1000px]">
       <h2 className="text-3xl font-bold text-center mb-10">Novedades</h2>
       <div className="flex flex-wrap gap-20 justify-center">
         {newsArray?.length ? (
@@ -27,6 +28,7 @@ export default function News() {
         ) : (
           <h1 className="text-center">No hay novedades</h1>
         )}
+      </div>
       </div>
     </CenterResponsiveContainer>
   );
