@@ -77,7 +77,9 @@ function CUOrganizationForm({ isEdit }) {
       .getOrganizationData(id)
       .then((res) => {
         if (res?.status === 200 || res?.status === 304) {
-          setOrg(res?.data?.organization);
+          let resItem= res?.data?.organization
+          resItem.key = resItem?.image?.key
+          setOrg(resItem);
         } else {
           setNotFound(true);
         }

@@ -67,7 +67,9 @@ function CUTestimonialsForm({ isEdit }) {
       getTestimonial(id)
         .then((res) => {
           if (res?.status === 200 || res?.status === 304) {
-            setTestimonial(res?.data.testimonial);
+            let resItem= res?.data?.testimonial
+            resItem.key = resItem?.image?.key
+            setTestimonial(resItem);
           } else {
             setNotFound(true);
           }

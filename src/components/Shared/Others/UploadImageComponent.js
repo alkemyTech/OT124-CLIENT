@@ -72,11 +72,6 @@ const UploadImageComponent = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [isDragReject]
   );
-  useEffect(()=>{
-    setTimeout(()=>{
-    setFieldValue("key", file?.key)}, 2000)
-    
-  },[file, setFieldValue])
  
   return (
     <>
