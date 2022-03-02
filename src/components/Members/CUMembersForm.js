@@ -33,7 +33,9 @@ function CUMembersForm(props) {
     getMember(id)
       .then((res) => {
         if (res.status === 200) {
-          setANew(res?.data?.member);
+          let resItem= res?.data?.member
+          resItem.key = resItem?.image?.key
+          setANew(resItem)
         } else {
           setNotFound(true);
         }

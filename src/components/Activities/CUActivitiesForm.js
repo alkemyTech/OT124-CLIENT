@@ -37,8 +37,9 @@ function CUActivitiesForm(props) {
     getActivity(id)
       .then((res) => {
         if (res.status === 200) {
-          let { activity: resActivity } = res.data;
-          setActivity(resActivity);
+          let resItem= res?.data?.activity
+          resItem.key = resItem?.image?.key
+          setActivity(resItem);
         } else {
           setNotFound(true);
         }
