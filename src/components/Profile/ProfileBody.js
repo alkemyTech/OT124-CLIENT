@@ -52,7 +52,7 @@ export default function ProfileBody () {
 
     return (
         <>
-        {(profile === undefined | profile === "error") ? <p>No se encuntra la informacion del usuario</p>  : 
+        {(profile === undefined | profile === "error") ? <p>No se encuentra la informacion del usuario</p>  : 
             editing ?  
                 <ProfileForm id = {profile.id} firstName= {profile.firstName} lastName= {profile.lastName} email={profile.email} editing = {editing} setEditing = {setEditing}/>
             :
@@ -76,7 +76,7 @@ export default function ProfileBody () {
                     <div className=" grid grid-cols-2 gap-5 col-start-1 col-end-3 my-4">
                         <DeleteAlert
                             styles={
-                                " bg-red-500 text-white shadow shadow-red-800 rounded-sm px-4 py-1  hover:bg-red-600"
+                                " bg-red-500 text-white shadow shadow-red-800 rounded-sm px-4 py-1 hover:bg-red-600 transform ease-in-out duration-300 hover:scale-105"
                             }
                             id={profile.id}
                             title={"ELIMINAR"}
@@ -86,7 +86,7 @@ export default function ProfileBody () {
                             setIsLoad={setIsLoad}
                             isLoad={isLoad}
                         />
-                        <button onClick={() => setEditing(true)} className=" bg-sky-500 text-white shadow shadow-sky-800 rounded-sm px-4 py-1  hover:bg-sky-600">Editar</button>
+                        <button onClick={() => setEditing(true)} className=" bg-sky-500 text-white shadow shadow-sky-800 rounded-sm px-4 py-1  hover:bg-sky-600 transform ease-in-out duration-300 hover:scale-105">Editar</button>
                     </div>
                 </div>
         }

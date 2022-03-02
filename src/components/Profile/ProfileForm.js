@@ -113,10 +113,10 @@ export default function ProfileForm(params) {
                 />
                 <ErrorMessage component={ErrorComponent} name="email" />
                 <div className="flex flex-row">
-                    <button onClick={() => setEditing(false)} className=" bg-transparent font-semibold hover:text-white border hover:border-transparent rounded py-2 mt-2 w-80 transform hover:scale-102 easy-in duration-300 mx-4 hover:bg-red-500 text-red-500 border-red-500">
+                    <button onClick={() => setEditing(false)} className=" bg-transparent font-semibold hover:text-white border ease-in-out hover:scale-105 hover:border-transparent rounded py-2 mt-2 w-80 transform hover:scale-102 easy-in duration-300 mx-4 hover:bg-red-500 text-red-500 border-red-500 ">
                         Volver
                     </button>
-                    <button className=" bg-transparent font-semibold hover:text-white border hover:border-transparent rounded py-2 mt-2 w-80 transform hover:scale-102 easy-in duration-300 mx-4 hover:bg-sky-500 text-sky-500 border-sky-500" type="submit" disabled={isSubmitting}>
+                    <button className=" bg-transparent font-semibold hover:text-white border hover:border-transparent ease-in-out hover:scale-105 rounded py-2 mt-2 w-80 transform hover:scale-102 easy-in duration-300 mx-4 hover:bg-sky-500 text-sky-500 border-sky-500 " type="submit" disabled={isSubmitting}>
                         Confirmar
                     </button>
 
