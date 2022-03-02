@@ -4,7 +4,7 @@ import { API_BASE_URL } from "../../../services";
 import DeleteAlert from "../Alerts/DeleteAlert";
 
 function BodyTable(props) {
-  const { list, service, setIsLoad, isLoad, afterMessage, message, bodyName } =
+  const { list, service, setIsLoad, isLoad, afterMessage, message, bodyName, notBackOffice } =
     props;
   return (
     <tbody className=" bg-sky-50 max-h-[375px] overflow-y-auto overflow-x-hidden">
@@ -44,12 +44,14 @@ function BodyTable(props) {
               </>
             );
           })}
-          <td className="py-3 px-4 text-center ">
+          {!notBackOffice &&
+          <>
+            <td className="py-3 px-4 text-center ">
             <DeleteAlert
               styles={
                 " bg-red-500 text-white shadow shadow-red-800 rounded-sm px-4 py-1  hover:bg-red-600"
               }
-              id={item.id}
+              id={item?.id}
               title={"ELIMINAR"}
               message={message}
               afterMessage={afterMessage}
@@ -63,7 +65,7 @@ function BodyTable(props) {
             
             :
             <Link
-              to={`editar-${bodyName}/${item.id}`}
+              to={`editar-${bodyName}/${item?.id}`}
               className="hover:underline"
             >
               Editar
@@ -71,6 +73,7 @@ function BodyTable(props) {
             
             }
           </td>
+          </>}
         </tr>
       ))}
     </tbody>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { Formik, Form } from 'formik';
 import * as yup from 'yup';
@@ -182,6 +183,22 @@ export default function BackofficeSlides() {
                     </Form>
                 )}
             </Formik> }
+=======
+import React from "react";
+import HeaderList from "../../../components/Shared/Containers/HeaderList";
+import CenterResponsiveContainer from "../../../components/Shared/Containers/CenterResponsiveContainer";
+import SlidesList from "../../../components/Slides/ListSlides";
+
+export default function BackofficeSlides() {
+    return (
+        <CenterResponsiveContainer>
+            <HeaderList
+                title={"Slides"}
+                name={"slide"}
+                addTitle={"Añadir un nuevo slide"}
+            />
+            <SlidesList />
+>>>>>>> 1a1f7384444967580b8f57541fc46bdf65bbc6dc
         </CenterResponsiveContainer>
     )
 }

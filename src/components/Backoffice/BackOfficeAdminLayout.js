@@ -8,6 +8,7 @@ import slidesIcon from "../../img/icons/slides.png";
 import testimonialsIcon from "../../img/icons/testimonials.png";
 import usersIcon from "../../img/icons/users.png";
 import contactsIcon from "../../img/icons/contacts.png";
+import profile from "../../img/icons/profile.png";
 import BackOfficeCard from "./BackOfficeCard";
 import CenterResponsiveContainer from "../Shared/Containers/CenterResponsiveContainer";
 
@@ -58,6 +59,11 @@ export default function BackOfficeAdminLayout() {
       image: contactsIcon,
       navlink: "/contactos",
     },
+    {
+      title: "Mi Perfil",
+      image: profile,
+      navlink: "/mi-perfil",
+    },
   ];
 
   return (
@@ -70,7 +76,7 @@ export default function BackOfficeAdminLayout() {
             key={item.title}
             title={item.title}
             image={item.image}
-            navlink={"/backoffice" + item.navlink}
+            navlink={item.navlink}
           />
         );
       })}
