@@ -72,6 +72,11 @@ const UploadImageComponent = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [isDragReject]
   );
+  useEffect(()=>{
+    setTimeout(()=>{
+    setFieldValue("key", file?.key)}, 2000)
+    
+  },[file, setFieldValue])
  
   return (
     <>
@@ -93,7 +98,7 @@ const UploadImageComponent = (props) => {
         >
           {file && (
             <button
-              className="bg-red-500 text-white rounded-full px-2 transform hover:scale-110 mx-3 right-0 top-0 absolute z-10"
+              className="bg-red-500 text-white rounded-xl px-2 transform hover:scale-110 mx-3 right-0 top-0 absolute z-10"
               onClick={(e) => {
                 e.stopPropagation();
                 setFieldValue("image", null);

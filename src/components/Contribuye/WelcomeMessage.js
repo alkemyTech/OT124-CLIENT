@@ -13,7 +13,6 @@ function WelcomeMessage({ onClickActive }) {
     useEffect(() => {
         async function fetchData() {
             let donateRes = await getDonate();
-            console.log(donate);
             setDonate(donateRes?.data);
         }
         fetchData();
@@ -40,7 +39,7 @@ function WelcomeMessage({ onClickActive }) {
             <div className="flex flex-row bg-transparent  text-sky-500 rounded py-4 my-8  border border-sky-500 justify-evenly">
                 {donate ? (
                     <>
-                        <h4 className={styles.title}>{donate?.award}</h4>
+                        <h4 className={styles.title}>{donate?.award.charAt(0).toUpperCase() + donate?.award.slice(1)}</h4>
                         <h4 className={styles.amounts}>Aportes: {donate?.amounts}</h4>
                     </>
                 ) : (

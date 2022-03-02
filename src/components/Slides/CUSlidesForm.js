@@ -70,9 +70,7 @@ function CUSlidesForm({isEdit}) {
       getSlide(id)
         .then((res) => {
           if (res?.status === 200 || res?.status === 304) {
-            let resItem= res?.data?.slide
-            resItem.key = resItem?.image?.key
-            setSlide(resItem);
+            setSlide(res?.data.slide);
           } else {
             setNotFound(true);
           }

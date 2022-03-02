@@ -6,7 +6,7 @@ import CenterResponsiveContainer from "../../../components/Shared/Containers/Cen
 import TableLayout from "../../../components/Shared/Table/TableLayout";
 import HeaderTable from "../../../components/Shared/Table/HeaderTable";
 import BodyTable from "../../../components/Shared/Table/BodyTable";
-import NotFoundComponent from "../../../components/Shared/Others/NotFoundComponent";
+import NotFoundComponent from "../../../components/Shared/Others/NotFoundComponent"
 import SearchBar from "../../../components/Shared/Others/SearchBar";
 import Pagination from "../../../components/Shared/Table/Pagination";
 import useQueries from "../../../hooks/useQueries";
@@ -14,7 +14,7 @@ import Spinner from "../../../components/Shared/Loaders/Spinner";
 
 function ContactsList() {
   const [contacts, setContacts] = useState([]);
-  const [isLoad, setIsLoad] = useState(false);
+  const [ isLoad, setIsLoad ] = useState(false)
   const [isLoading, setIsLoading] = useState(true);
 
   const queries = useQueries();
@@ -25,7 +25,7 @@ function ContactsList() {
     getContacts(queries)
       .then((response) => {
         setContacts(response?.data?.contactList);
-        setCantItems(response?.data?.count);
+        setCantItems(response?.data?.count)
         setTimeout(() => setIsLoading(false), 500);
       })
       .catch((err) => {
@@ -35,47 +35,38 @@ function ContactsList() {
 
   return (
     <CenterResponsiveContainer>
-      <header className="flex sm:flex-row flex-col  items-center justify-around ">
-        <h1 className="sm:text-5xl text-3xl text-center text-sky-500">
-          Contactos
-        </h1>
-      </header>
-      <>
+        <HeaderList
+          title={"Contactos"}
+          name={"contactos"}
+          addTitle={"Añadir una nueva novedad"}
+        />
+        <>
         <SearchBar />
-        {isLoading ? (
-          <Spinner />
-        ) : (
-          <>
-            {contacts?.length ? (
-              <TableLayout>
-                <HeaderTable
-                  columnsName={[
-                    "Nombre",
-                    "Telefono",
-                    "Email",
-                    "Mensaje",
-                    "Enviado",
-                  ]}
-                />
-                <BodyTable
-                  isLoad={isLoad}
-                  setIsLoad={setIsLoad}
-                  service={deleteContacts}
-                  list={contacts}
-                  bodyName={"contacto"}
-                  message={"¿Desea eliminar esta contacto?"}
-                  afterMessage={"Contacto eliminada con éxito"}
-                />
-              </TableLayout>
-            ) : (
-              <NotFoundComponent title={"No se encontraron contactos"} />
-            )}
-            <Pagination cantItems={cantItems} />
-          </>
-        )}
-      </>
+        {isLoading ? <Spinner /> : <>
+          {contacts?.length ? (
+            <TableLayout>
+              <HeaderTable columnsName={["Nombre", "Telefono","Email", "Mensaje", "Enviado"]} />
+              <BodyTable
+                isLoad={isLoad}
+                setIsLoad={setIsLoad}
+                service={deleteContacts}
+                list={contacts}
+                bodyName={"contacto"}
+                message={"¿Desea eliminar esta contacto?"}
+                afterMessage={"Contacto eliminada con éxito"}
+              />
+            </TableLayout>
+      ) : 
+      (
+        <NotFoundComponent title={"No se encontraron contactos"} />
+      )}
+      <Pagination cantItems={cantItems} />
+      </>}
+    </>
     </CenterResponsiveContainer>
+    
   );
 }
+
 
 export default ContactsList;

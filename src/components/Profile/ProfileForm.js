@@ -8,7 +8,6 @@ import * as Yup from "yup";
 
 import ErrorAlert from "../Shared/Alerts/ErrorAlert";
 import SuccessAlert from "../Shared/Alerts/SuccessAlert";
-import OneColForm from "../Shared/Containers/OneColForm";
 
 const styles = {
     field:
@@ -82,8 +81,7 @@ export default function ProfileForm(params) {
         }) => (
             <>
                 <h3 className=" font-semibold text-xl mx-4">Editar Usuario</h3>
-                <form onSubmit={handleSubmit}>
-                <OneColForm>
+                <form className="flex flex-col" onSubmit={handleSubmit}>
                 <input
                     className={styles.field}
                     type="text"
@@ -123,7 +121,6 @@ export default function ProfileForm(params) {
                     </button>
 
                 </div>
-                </OneColForm>
                 {error && <ErrorAlert setError={setError} />}
                 {successMsg && (
                     <SuccessAlert successMsg={successMsg} setSuccessMsg={setSuccessMsg} />
